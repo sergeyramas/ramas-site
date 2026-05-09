@@ -8,47 +8,61 @@ const kpis = [
 
 export function Hero() {
   return (
-    <section className="pt-20 pb-24 sm:pt-28 sm:pb-32">
-      <p className="eyebrow rise rise-1">Сергей Рамас · агентство · автономные агенты · UTC+3</p>
+    <section className="hero-mega min-h-[88vh] flex flex-col justify-center pt-24 pb-32 px-2">
+      <div className="hero-grid-bg" aria-hidden />
+      <div className="hero-particles" aria-hidden>
+        {Array.from({ length: 10 }).map((_, i) => (
+          <span key={i} className="hero-particle" />
+        ))}
+      </div>
+      <div className="scan-line" aria-hidden />
 
-      <h1 className="display rise rise-2 mt-6 text-5xl sm:text-7xl md:text-[88px]">
-        AI-операционные системы,
-        <br />
-        <span className="display-italic text-accent">лендинги</span> и автоматизация продаж.
-      </h1>
+      <div className="relative z-10 flex flex-col items-center text-center">
+        <p className="rise rise-1 inline-flex items-center gap-3 mb-10 font-mono text-[11px] sm:text-xs uppercase tracking-[0.2em]">
+          <span className="status-dot" aria-hidden />
+          <span className="text-accent font-bold">система активна · 2026</span>
+        </p>
 
-      <p className="rise rise-3 mt-8 max-w-2xl text-lg sm:text-xl text-muted leading-relaxed">
-        Веду агентство — Яндекс.Директ, сайты, внедрение ИИ. Делаю reseller-бизнес на eBay в США.
-        Здесь живут упакованные решения, проекты, которыми занят прямо сейчас, и идеи, до которых дойдут руки.
-      </p>
+        <h1
+          className="rise rise-2 display-mega glitch text-[clamp(3rem,11vw,9rem)] mb-2"
+          data-text="СЕРГЕЙ РАМА"
+        >
+          СЕРГЕЙ РАМА
+        </h1>
+        <h2
+          className="rise rise-3 display-mega text-accent text-[clamp(2.25rem,8.5vw,7rem)] mb-10 sm:mb-14"
+        >
+          AI HUB
+        </h2>
 
-      <div className="rise rise-4 mt-10 flex flex-wrap gap-x-8 gap-y-3 text-sm">
-        <Link href="/solutions" className="group inline-flex items-center gap-2 hover:text-accent">
-          <span>Solutions</span>
-          <span className="font-mono text-muted group-hover:text-accent transition-colors">→</span>
-        </Link>
-        <Link href="/projects" className="group inline-flex items-center gap-2 hover:text-accent">
-          <span>Projects</span>
-          <span className="font-mono text-muted group-hover:text-accent transition-colors">→</span>
-        </Link>
-        <Link href="/ideas" className="group inline-flex items-center gap-2 hover:text-accent">
-          <span>Ideas</span>
-          <span className="font-mono text-muted group-hover:text-accent transition-colors">→</span>
-        </Link>
-        <Link href="/about" className="group inline-flex items-center gap-2 hover:text-accent">
-          <span>About</span>
-          <span className="font-mono text-muted group-hover:text-accent transition-colors">→</span>
+        <p className="rise rise-4 max-w-[640px] font-mono text-[13px] sm:text-sm leading-[1.9] text-muted mb-10">
+          <strong className="text-accent">Промпты</strong>, гайды и схемы под каждое решение.<br />
+          Выбери карточку <span className="text-fg">→</span>{" "}
+          <strong className="text-fg">забери стек</strong>{" "}
+          <span className="text-fg">→</span> внедряй у себя.
+        </p>
+
+        <Link href="/solutions" className="rise rise-5 cta-btn">
+          <span className="bolt" aria-hidden>⚡</span>
+          <span>начать доминацию</span>
         </Link>
       </div>
 
-      <dl className="rise rise-5 mt-16 grid grid-cols-1 sm:grid-cols-3 gap-8 sm:gap-12 border-t border-border pt-10">
-        {kpis.map((k) => (
-          <div key={k.label} className="flex flex-col gap-2">
-            <dt className="display text-4xl sm:text-5xl">{k.value}</dt>
-            <dd className="text-sm text-muted leading-snug max-w-[28ch]">{k.label}</dd>
+      <dl className="relative z-10 mt-20 sm:mt-28 grid grid-cols-1 sm:grid-cols-3 gap-8 sm:gap-12 max-w-5xl mx-auto w-full border-t border-border pt-10">
+        {kpis.map((k, i) => (
+          <div key={k.label} className={`flex flex-col gap-2 rise rise-${i + 6}`}>
+            <dt className="display-mega text-3xl sm:text-4xl">{k.value}</dt>
+            <dd className="font-mono text-[11px] uppercase tracking-widest text-muted leading-snug max-w-[28ch]">
+              {k.label}
+            </dd>
           </div>
         ))}
       </dl>
+
+      <div className="scroll-arrow" aria-hidden>
+        <span>scroll</span>
+        <span>↓</span>
+      </div>
     </section>
   );
 }

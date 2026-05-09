@@ -1,15 +1,17 @@
 import type { Metadata } from "next";
-import { Inter, Playfair_Display, JetBrains_Mono } from "next/font/google";
+import { Inter, Playfair_Display, Unbounded, JetBrains_Mono } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import { SunTheme } from "@/components/SunTheme";
+import { CustomCursor } from "@/components/CustomCursor";
 import { Nav } from "@/components/Nav";
 import { Footer } from "@/components/Footer";
 import "./globals.css";
 
 const inter = Inter({ subsets: ["latin", "cyrillic"], variable: "--font-inter" });
 const serif = Playfair_Display({ subsets: ["latin", "cyrillic"], weight: ["400", "500", "600"], style: ["normal", "italic"], variable: "--font-serif" });
-const jetbrains = JetBrains_Mono({ subsets: ["latin"], variable: "--font-jetbrains" });
+const unbounded = Unbounded({ subsets: ["latin", "cyrillic"], weight: ["700", "800", "900"], variable: "--font-unbounded" });
+const jetbrains = JetBrains_Mono({ subsets: ["latin", "cyrillic"], variable: "--font-jetbrains" });
 
 export const metadata: Metadata = {
   title: { default: "Сергей Рамас — Solutions, Projects, Ideas", template: "%s · Сергей Рамас" },
@@ -30,10 +32,11 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="ru" suppressHydrationWarning className={`${inter.variable} ${serif.variable} ${jetbrains.variable}`}>
+    <html lang="ru" suppressHydrationWarning className={`${inter.variable} ${serif.variable} ${unbounded.variable} ${jetbrains.variable}`}>
       <body className="min-h-screen flex flex-col">
         <ThemeProvider attribute="class" defaultTheme="light" enableSystem>
           <SunTheme />
+          <CustomCursor />
           <div className="grain" aria-hidden />
           <Nav />
           <main className="flex-1">{children}</main>
