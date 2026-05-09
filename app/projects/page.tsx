@@ -1,5 +1,5 @@
 import { allByKind } from "@/lib/content";
-import { Grid } from "@/components/Grid";
+import { FilteredGrid } from "@/components/FilteredGrid";
 import { PageHeader } from "@/components/PageHeader";
 
 export const metadata = { title: "Projects" };
@@ -14,7 +14,7 @@ export default function ProjectsPage() {
         subtitle="Что-то — под клиентов агентства. Что-то — мои собственные продукты, на которых учусь и зарабатываю."
         count={items.length}
       />
-      <Grid items={items} />
+      <FilteredGrid items={items} />
     </div>
   );
 }

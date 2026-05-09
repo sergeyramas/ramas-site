@@ -1,5 +1,5 @@
 import { allByKind } from "@/lib/content";
-import { Grid } from "@/components/Grid";
+import { FilteredGrid } from "@/components/FilteredGrid";
 import { PageHeader } from "@/components/PageHeader";
 
 export const metadata = { title: "Solutions" };
@@ -14,7 +14,7 @@ export default function SolutionsPage() {
         subtitle="Гайды, скиллы для Claude Code, шаблоны и скрипты. Часть открывается прямо здесь, часть — на GitHub Pages в виде отдельных туториалов."
         count={items.length}
       />
-      <Grid items={items} />
+      <FilteredGrid items={items} />
     </div>
   );
 }

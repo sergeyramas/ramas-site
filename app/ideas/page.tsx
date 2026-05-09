@@ -1,5 +1,5 @@
 import { allByKind } from "@/lib/content";
-import { Grid } from "@/components/Grid";
+import { FilteredGrid } from "@/components/FilteredGrid";
 import { PageHeader } from "@/components/PageHeader";
 
 export const metadata = { title: "Ideas" };
@@ -14,7 +14,7 @@ export default function IdeasPage() {
         subtitle="Список идей, которые ждут своей очереди. Если что-то откликается и хочется обсудить — пишите."
         count={items.length}
       />
-      <Grid items={items} dense />
+      <FilteredGrid items={items} dense />
     </div>
   );
 }
