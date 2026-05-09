@@ -6,6 +6,7 @@ import { SunTheme } from "@/components/SunTheme";
 import { CustomCursorLazy } from "@/components/CustomCursorLazy";
 import { Nav } from "@/components/Nav";
 import { Footer } from "@/components/Footer";
+import { ContactCTA } from "@/components/ContactCTA";
 import "./globals.css";
 
 const inter = Inter({ subsets: ["latin", "cyrillic"], variable: "--font-inter" });
@@ -17,6 +18,15 @@ export const metadata: Metadata = {
   title: { default: "Сергей Рамас — Solutions, Projects, Ideas", template: "%s · Сергей Рамас" },
   description: "Сергей Рамас. AI-операционные системы, лендинги, автоматизация продаж. Упакованные решения и живые проекты.",
   metadataBase: new URL("https://sergeyramas.vercel.app"),
+  keywords: [
+    "Сергей Рамас", "Sergey Ramas", "AI", "автоматизация",
+    "Claude Code", "AI агенты", "Telegram бот", "Next.js",
+    "Яндекс Директ", "eBay automation", "AI продукты",
+  ],
+  authors: [{ name: "Сергей Рамас", url: "https://sergeyramas.vercel.app/about" }],
+  creator: "Сергей Рамас",
+  publisher: "Сергей Рамас",
+  alternates: { canonical: "/" },
   openGraph: {
     type: "website",
     locale: "ru_RU",
@@ -34,12 +44,35 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="ru" suppressHydrationWarning className={`${inter.variable} ${serif.variable} ${unbounded.variable} ${jetbrains.variable}`}>
       <body className="min-h-screen flex flex-col">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "WebSite",
+              name: "Сергей Рамас — AI Hub",
+              alternateName: "Sergey Ramas AI Hub",
+              url: "https://sergeyramas.vercel.app",
+              author: {
+                "@type": "Person",
+                name: "Сергей Рамас",
+                url: "https://sergeyramas.vercel.app/about",
+                sameAs: [
+                  "https://t.me/Sergeyramas",
+                  "https://github.com/sergeyramas",
+                ],
+              },
+              inLanguage: "ru-RU",
+            }),
+          }}
+        />
         <ThemeProvider attribute="class" defaultTheme="light" enableSystem>
           <SunTheme />
           <CustomCursorLazy />
           <div className="grain" aria-hidden />
           <Nav />
           <main className="flex-1">{children}</main>
+          <ContactCTA />
           <Footer />
           <Analytics />
         </ThemeProvider>
