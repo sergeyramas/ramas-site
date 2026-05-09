@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { featured, allByKind } from "@/lib/content";
 import { Hero } from "@/components/Hero";
+import { FounderCard } from "@/components/FounderCard";
 import { FeaturedBento } from "@/components/Grid";
 import { Reveal } from "@/components/Reveal";
 import Link from "next/link";
@@ -36,6 +37,10 @@ export default function HomePage() {
   return (
     <div className="max-w-6xl mx-auto px-6 sm:px-8">
       <Hero />
+
+      <Reveal as="div" delay={50}>
+        <FounderCard />
+      </Reveal>
 
       {featuredItems.length > 0 && (
         <Reveal as="section" delay={100} className="mt-12">

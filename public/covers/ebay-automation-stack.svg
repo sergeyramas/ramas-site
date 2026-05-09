@@ -1,0 +1,145 @@
+<svg viewBox="0 0 800 500" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <filter id="grain-ebay">
+      <feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="2" stitchTiles="stitch"/>
+      <feColorMatrix values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0.025 0"/>
+    </filter>
+    <linearGradient id="grad-ebay" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0a0a0b"/>
+      <stop offset="100%" stop-color="#16100a"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="800" height="500" fill="url(#grad-ebay)"/>
+
+  <!-- Light grid -->
+  <g stroke="#ffffff" stroke-width="1" opacity="0.025">
+    <line x1="80" y1="0" x2="80" y2="500"/>
+    <line x1="160" y1="0" x2="160" y2="500"/>
+    <line x1="240" y1="0" x2="240" y2="500"/>
+    <line x1="320" y1="0" x2="320" y2="500"/>
+    <line x1="400" y1="0" x2="400" y2="500"/>
+    <line x1="480" y1="0" x2="480" y2="500"/>
+    <line x1="560" y1="0" x2="560" y2="500"/>
+    <line x1="640" y1="0" x2="640" y2="500"/>
+    <line x1="720" y1="0" x2="720" y2="500"/>
+    <line x1="0" y1="80" x2="800" y2="80"/>
+    <line x1="0" y1="160" x2="800" y2="160"/>
+    <line x1="0" y1="240" x2="800" y2="240"/>
+    <line x1="0" y1="320" x2="800" y2="320"/>
+    <line x1="0" y1="400" x2="800" y2="400"/>
+  </g>
+
+  <!-- Soft glow -->
+  <ellipse cx="400" cy="260" rx="320" ry="180" fill="#e64a19" opacity="0.07"/>
+
+  <!-- Title group at top -->
+  <g>
+    <text x="60" y="78" fill="#9b9ba3" font-family="JetBrains Mono, monospace" font-size="11" letter-spacing="2.5" font-weight="500">[ E B A Y   D R O P S H I P P I N G ]</text>
+    <text x="60" y="135" fill="#ededed" font-family="Inter, sans-serif" font-size="46" font-weight="700" letter-spacing="-1.6">Automation Stack</text>
+    <line x1="60" y1="160" x2="160" y2="160" stroke="#e64a19" stroke-width="3"/>
+  </g>
+
+  <!-- Pipeline diagram center -->
+  <g transform="translate(60, 220)">
+
+    <!-- Node 1: Customer payment -->
+    <g>
+      <rect x="0" y="0" width="120" height="56" rx="8" fill="#111114" stroke="#e64a19" stroke-width="1.5"/>
+      <circle cx="20" cy="28" r="6" fill="#e64a19"/>
+      <text x="36" y="24" fill="#ededed" font-family="JetBrains Mono, monospace" font-size="11" font-weight="600">PAID</text>
+      <text x="36" y="40" fill="#5a5a63" font-family="JetBrains Mono, monospace" font-size="9">customer</text>
+    </g>
+
+    <!-- Arrow 1 -->
+    <g stroke="#e64a19" stroke-width="1.8" fill="none" opacity="0.9">
+      <line x1="125" y1="28" x2="155" y2="28" stroke-dasharray="4,3"/>
+      <polygon points="155,28 148,24 148,32" fill="#e64a19"/>
+    </g>
+
+    <!-- Node 2: Closing bot -->
+    <g>
+      <rect x="160" y="0" width="120" height="56" rx="8" fill="#111114" stroke="#d4ff3c" stroke-width="1.5"/>
+      <text x="170" y="22" fill="#d4ff3c" font-family="JetBrains Mono, monospace" font-size="9" font-weight="600">// BOT 1</text>
+      <text x="170" y="38" fill="#ededed" font-family="JetBrains Mono, monospace" font-size="11" font-weight="600">close()</text>
+      <text x="170" y="50" fill="#5a5a63" font-family="JetBrains Mono, monospace" font-size="8">trading API</text>
+    </g>
+
+    <!-- Arrow 2 -->
+    <g stroke="#d4ff3c" stroke-width="1.8" fill="none" opacity="0.9">
+      <line x1="285" y1="28" x2="315" y2="28" stroke-dasharray="4,3"/>
+      <polygon points="315,28 308,24 308,32" fill="#d4ff3c"/>
+    </g>
+
+    <!-- Node 3: Purchasing bot -->
+    <g>
+      <rect x="320" y="0" width="120" height="56" rx="8" fill="#111114" stroke="#d4ff3c" stroke-width="1.5"/>
+      <text x="330" y="22" fill="#d4ff3c" font-family="JetBrains Mono, monospace" font-size="9" font-weight="600">// BOT 2</text>
+      <text x="330" y="38" fill="#ededed" font-family="JetBrains Mono, monospace" font-size="11" font-weight="600">purchase()</text>
+      <text x="330" y="50" fill="#5a5a63" font-family="JetBrains Mono, monospace" font-size="8">supplier ↓</text>
+    </g>
+
+    <!-- Arrow 3 -->
+    <g stroke="#d4ff3c" stroke-width="1.8" fill="none" opacity="0.9">
+      <line x1="445" y1="28" x2="475" y2="28" stroke-dasharray="4,3"/>
+      <polygon points="475,28 468,24 468,32" fill="#d4ff3c"/>
+    </g>
+
+    <!-- Node 4: Tracking sync -->
+    <g>
+      <rect x="480" y="0" width="120" height="56" rx="8" fill="#111114" stroke="#d4ff3c" stroke-width="1.5"/>
+      <text x="490" y="22" fill="#d4ff3c" font-family="JetBrains Mono, monospace" font-size="9" font-weight="600">// BOT 3</text>
+      <text x="490" y="38" fill="#ededed" font-family="JetBrains Mono, monospace" font-size="11" font-weight="600">track()</text>
+      <text x="490" y="50" fill="#5a5a63" font-family="JetBrains Mono, monospace" font-size="8">sync to eBay</text>
+    </g>
+
+    <!-- Time label between nodes -->
+    <text x="350" y="-12" fill="#5a5a63" font-family="JetBrains Mono, monospace" font-size="10" text-anchor="middle">⏱ &lt; 60 sec</text>
+
+  </g>
+
+  <!-- Bottom row: 3 metrics -->
+  <g transform="translate(0, 360)">
+    <g transform="translate(60, 0)">
+      <text x="0" y="0" fill="#5a5a63" font-family="JetBrains Mono, monospace" font-size="10" letter-spacing="1.5">CONCURRENT</text>
+      <text x="0" y="36" fill="#ededed" font-family="Inter, sans-serif" font-size="34" font-weight="700" letter-spacing="-1">2</text>
+      <text x="36" y="34" fill="#9b9ba3" font-family="Inter, sans-serif" font-size="13">stores</text>
+    </g>
+    <g transform="translate(220, 0)">
+      <text x="0" y="0" fill="#5a5a63" font-family="JetBrains Mono, monospace" font-size="10" letter-spacing="1.5">DAILY PEAK</text>
+      <text x="0" y="36" fill="#ededed" font-family="Inter, sans-serif" font-size="34" font-weight="700" letter-spacing="-1">~40</text>
+      <text x="56" y="34" fill="#9b9ba3" font-family="Inter, sans-serif" font-size="13">orders</text>
+    </g>
+    <g transform="translate(400, 0)">
+      <text x="0" y="0" fill="#5a5a63" font-family="JetBrains Mono, monospace" font-size="10" letter-spacing="1.5">MANUAL TIME</text>
+      <text x="0" y="36" fill="#ededed" font-family="Inter, sans-serif" font-size="34" font-weight="700" letter-spacing="-1">15</text>
+      <text x="35" y="34" fill="#9b9ba3" font-family="Inter, sans-serif" font-size="13">min/day</text>
+    </g>
+    <g transform="translate(580, 0)">
+      <text x="0" y="0" fill="#5a5a63" font-family="JetBrains Mono, monospace" font-size="10" letter-spacing="1.5">STATUS</text>
+      <g transform="translate(0, 22)">
+        <circle cx="6" cy="6" r="4" fill="#d4ff3c">
+          <animate attributeName="opacity" values="1;0.3;1" dur="1.4s" repeatCount="indefinite"/>
+        </circle>
+        <text x="20" y="10" fill="#d4ff3c" font-family="JetBrains Mono, monospace" font-size="14" font-weight="600">LIVE</text>
+        <text x="0" y="34" fill="#9b9ba3" font-family="Inter, sans-serif" font-size="11">8+ months</text>
+      </g>
+    </g>
+  </g>
+
+  <!-- Bottom right tag -->
+  <g transform="translate(680, 80)">
+    <rect x="0" y="0" width="60" height="22" rx="11" fill="none" stroke="#e64a19" stroke-width="1.2"/>
+    <text x="30" y="15" fill="#e64a19" font-family="JetBrains Mono, monospace" font-size="9" text-anchor="middle" font-weight="600" letter-spacing="1">US</text>
+  </g>
+
+  <!-- Decorative bracket bottom-right -->
+  <g stroke="#5a5a63" stroke-width="1" fill="none" opacity="0.5">
+    <line x1="730" y1="450" x2="750" y2="450"/>
+    <line x1="750" y1="450" x2="750" y2="430"/>
+  </g>
+
+  <!-- Grain overlay -->
+  <rect width="800" height="500" filter="url(#grain-ebay)" opacity="0.5"/>
+</svg>
