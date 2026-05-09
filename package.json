@@ -3,10 +3,11 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev --turbopack",
-    "build": "next build",
+    "dev": "velite --watch & next dev --turbopack",
+    "build": "velite && next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "content": "velite"
   },
   "dependencies": {
     "@vercel/analytics": "^2.0.1",
