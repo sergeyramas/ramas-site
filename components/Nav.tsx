@@ -1,24 +1,43 @@
+"use client";
+
 import Link from "next/link";
 import { ThemeToggle } from "./ThemeToggle";
-
-const links = [
-  { href: "/solutions", label: "Solutions" },
-  { href: "/projects", label: "Projects" },
-  { href: "/ideas", label: "Ideas" },
-  { href: "/about", label: "About" },
-];
+import { LangToggle } from "./LangToggle";
+import { useT } from "@/lib/i18n";
 
 export function Nav() {
+  const t = useT();
+  const links = [
+    { href: "/solutions", label: t("nav.solutions") },
+    { href: "/projects", label: t("nav.projects") },
+    { href: "/ideas", label: t("nav.ideas") },
+    { href: "/about", label: t("nav.about") },
+  ];
+
   return (
     <header className="sticky top-0 z-20 backdrop-blur-md bg-bg/75 border-b border-border">
-      <div className="max-w-6xl mx-auto px-6 sm:px-8 h-16 flex items-center justify-between gap-3">
+      <div className="max-w-6xl mx-auto px-6 sm:px-8 h-20 flex items-center justify-between gap-3">
+        {/* BIG LOGO */}
         <Link
           href="/"
-          className="flex items-center gap-2 font-mono text-sm tracking-tight hover:text-accent transition-colors"
+          aria-label="Ramas — главная"
+          className="group flex items-baseline gap-3 hover:opacity-90 transition-opacity"
         >
-          <span className="inline-block w-2 h-2 rounded-full bg-accent" />
-          ramas
+          <span
+            aria-hidden
+            className="inline-block w-2.5 h-2.5 rounded-full bg-accent translate-y-[-3px] group-hover:scale-125 transition-transform"
+          />
+          <span className="display text-3xl sm:text-4xl tracking-[-0.04em] leading-none">
+            ramas
+          </span>
+          <span
+            aria-hidden
+            className="hidden sm:inline-block font-mono text-[10px] uppercase tracking-[0.22em] text-subtle pb-[2px]"
+          >
+            ai · hub
+          </span>
         </Link>
+
         <nav className="flex items-center gap-1 sm:gap-2">
           {links.map((l) => (
             <Link
@@ -38,7 +57,10 @@ export function Nav() {
             <span aria-hidden>tg</span>
             <span className="hidden sm:inline">@Sergeyramas</span>
           </Link>
-          <span className="ml-1 sm:ml-2">
+          <span className="ml-1">
+            <LangToggle />
+          </span>
+          <span className="ml-1">
             <ThemeToggle />
           </span>
         </nav>

@@ -10,6 +10,7 @@ const items = defineCollection({
       kind: s.enum(["solution", "project", "idea"]),
       summary: s.string().max(280),
       cover: s.string().optional(),
+      preview: s.string().optional(),
       externalUrl: s.string().url().nullable().optional(),
       tags: s.array(s.string()).default([]),
       status: s.enum(["live", "wip", "archived", "concept"]).default("live"),

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter, Playfair_Display, Unbounded, JetBrains_Mono } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import { ThemeProvider } from "@/components/ThemeProvider";
+import { I18nProvider } from "@/lib/i18n";
 import { SunTheme } from "@/components/SunTheme";
 import { CustomCursorLazy } from "@/components/CustomCursorLazy";
 import { Nav } from "@/components/Nav";
@@ -67,14 +68,16 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           }}
         />
         <ThemeProvider attribute="class" defaultTheme="light" enableSystem>
-          <SunTheme />
-          <CustomCursorLazy />
-          <div className="grain" aria-hidden />
-          <Nav />
-          <main className="flex-1">{children}</main>
-          <ContactCTA />
-          <Footer />
-          <Analytics />
+          <I18nProvider>
+            <SunTheme />
+            <CustomCursorLazy />
+            <div className="grain" aria-hidden />
+            <Nav />
+            <main className="flex-1">{children}</main>
+            <ContactCTA />
+            <Footer />
+            <Analytics />
+          </I18nProvider>
         </ThemeProvider>
       </body>
     </html>

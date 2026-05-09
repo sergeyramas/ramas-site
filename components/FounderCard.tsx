@@ -1,13 +1,17 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
-
-const stats = [
-  { value: "22", label: "решения, проекта и идеи" },
-  { value: "3929", label: "товаров на Next.js" },
-  { value: "2", label: "магазина на eBay автоматизированы" },
-];
+import { useT } from "@/lib/i18n";
 
 export function FounderCard() {
+  const t = useT();
+  const stats = [
+    { value: "22", label: t("founder.stat.solutions") },
+    { value: "3929", label: t("founder.stat.products") },
+    { value: "2", label: t("founder.stat.stores") },
+  ];
+
   return (
     <section className="founder-card relative mt-32 sm:mt-40 rounded-3xl border border-border bg-card overflow-hidden">
       {/* Subtle accent glow */}
@@ -40,15 +44,11 @@ export function FounderCard() {
               SERGEY <span className="display-italic text-accent">RAMAS</span>
             </h2>
             <p className="mt-3 font-mono text-[11px] sm:text-xs uppercase tracking-[0.18em] text-accent/90">
-              Founder · AI Operations Architect
+              {t("founder.role")}
             </p>
 
             <p className="mt-6 text-base sm:text-lg text-muted leading-relaxed max-w-[60ch]">
-              Веду <strong className="text-fg">агентство по Яндекс.Директу</strong>, разработке
-              сайтов и внедрению AI-систем в бизнес-процессы. Под капотом — мульти-агентные
-              системы, которые закрывают рутину быстрее людей. Параллельно строю в США{" "}
-              <strong className="text-fg">полностью автоматизированный reseller-бизнес на eBay</strong>.
-              Здесь, на хабе — упакованные решения, гайды и стэки. Бери и внедряй.
+              {t("founder.bio")}
             </p>
           </div>
 
@@ -70,7 +70,7 @@ export function FounderCard() {
               href="/about"
               className="inline-flex items-center gap-2 px-5 py-3 rounded-full border border-border bg-elevated hover:bg-card hover:border-accent transition-colors text-sm font-medium"
             >
-              <span>Подробнее</span>
+              <span>{t("founder.cta.more")}</span>
               <span className="text-accent">→</span>
             </Link>
             <Link
@@ -79,7 +79,7 @@ export function FounderCard() {
               rel="noopener"
               className="inline-flex items-center gap-2 px-5 py-3 rounded-full bg-accent text-bg hover:bg-accent/90 transition-colors text-sm font-bold"
             >
-              <span>Связаться в Telegram</span>
+              <span>{t("founder.cta.tg")}</span>
               <span>↗</span>
             </Link>
             <Link
@@ -96,7 +96,7 @@ export function FounderCard() {
       <div className="relative border-t border-border px-6 sm:px-10 lg:px-12 py-4 flex items-center justify-between text-[11px] font-mono uppercase tracking-[0.15em] text-subtle">
         <span className="inline-flex items-center gap-2">
           <span className="status-dot" aria-hidden />
-          <span className="text-accent">online · открыт к проектам · 2026</span>
+          <span className="text-accent">{t("founder.status")}</span>
         </span>
         <span className="hidden sm:inline">UTC+3 · RU · EN</span>
       </div>

@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation";
-import { ArrowUpRight } from "lucide-react";
 import { MDXContent } from "@/components/MDXContent";
+import { ExternalPreview } from "@/components/ExternalPreview";
 import { bySlug, allSlugs } from "@/lib/content";
 import Link from "next/link";
 
@@ -83,25 +83,7 @@ export default async function SolutionPage({ params }: { params: Promise<{ slug:
       </header>
 
       {item.externalUrl && (
-        <a
-          href={item.externalUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="rise rise-3 mt-10 group flex items-center justify-between gap-4 p-6 bg-card hover:bg-elevated rounded-2xl border border-border hover:border-accent transition-all"
-        >
-          <div className="flex flex-col gap-1">
-            <span className="eyebrow">Полный гайд</span>
-            <span className="font-medium text-base sm:text-lg">
-              {new URL(item.externalUrl).hostname.replace(/^www\./, "")}
-              <span className="text-muted"> {new URL(item.externalUrl).pathname.replace(/\/$/, "")}</span>
-            </span>
-          </div>
-          <ArrowUpRight
-            aria-hidden
-            className="w-5 h-5 text-muted group-hover:text-accent shrink-0 transition-all group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
-            strokeWidth={1.5}
-          />
-        </a>
+        <ExternalPreview url={item.externalUrl} preview={item.preview ?? null} />
       )}
 
       {hasBody && (
