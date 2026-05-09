@@ -2,7 +2,11 @@ import { allByKind } from "@/lib/content";
 import { FilteredGrid } from "@/components/FilteredGrid";
 import { PageHeader } from "@/components/PageHeader";
 
-export const metadata = { title: "Projects" };
+export const metadata = {
+  title: "Projects",
+  alternates: { canonical: "/projects" },
+  keywords: ["проекты", "AI продукты", "Next.js проекты", "BetaLine", "PiratEBay", "Сергей Рамас"],
+};
 
 export default function ProjectsPage() {
   const items = allByKind("project");

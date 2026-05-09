@@ -2,7 +2,11 @@ import Image from "next/image";
 import Link from "next/link";
 import { Reveal } from "@/components/Reveal";
 
-export const metadata = { title: "About" };
+export const metadata = {
+  title: "About",
+  alternates: { canonical: "/about" },
+  keywords: ["Сергей Рамас", "Sergey Ramas", "AI агентство", "автоматизация", "eBay", "Яндекс Директ"],
+};
 
 const facts = [
   { value: "UTC+3", label: "часовой пояс" },
@@ -22,6 +26,28 @@ export default function AboutPage() {
   return (
     <article className="max-w-3xl mx-auto px-6 sm:px-8 pt-16 sm:pt-20 pb-24">
       <p className="eyebrow rise rise-1">About · кто я и чем занят</p>
+
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Person",
+            name: "Сергей Рамас",
+            alternateName: "Sergey Ramas",
+            url: "https://sergeyramas.vercel.app/about",
+            image: "https://sergeyramas.vercel.app/portraits/sergey-rama.webp",
+            jobTitle: "AI Operations Architect · агентство · автоматизация продаж",
+            sameAs: [
+              "https://t.me/Sergeyramas",
+              "https://github.com/sergeyramas",
+              "mailto:fantroms@gmail.com",
+            ],
+            knowsAbout: ["Claude Code", "AI agents", "Next.js", "Telegram bots", "Yandex Direct", "eBay automation"],
+            worksFor: { "@type": "Organization", name: "Ramas Agency" },
+          }),
+        }}
+      />
 
       <div className="rise rise-2 mt-6 mb-10 w-40 h-48 sm:w-48 sm:h-60 overflow-hidden rounded-2xl border border-border">
         <Image

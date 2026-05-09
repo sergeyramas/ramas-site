@@ -12,7 +12,19 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const { slug } = await params;
   const item = bySlug("solution", slug);
   if (!item) return {};
-  return { title: item.title, description: item.summary };
+  return {
+    title: item.title,
+    description: item.summary,
+    keywords: item.tags,
+    alternates: { canonical: `/solutions/${item.slug}` },
+    openGraph: {
+      title: item.title,
+      description: item.summary,
+      type: "article",
+      publishedTime: new Date(item.date).toISOString(),
+      images: item.cover ? [{ url: item.cover }] : undefined,
+    },
+  };
 }
 
 export default async function SolutionPage({ params }: { params: Promise<{ slug: string }> }) {
@@ -24,6 +36,25 @@ export default async function SolutionPage({ params }: { params: Promise<{ slug:
 
   return (
     <article className="max-w-3xl mx-auto px-6 sm:px-8 pt-12 sm:pt-16 pb-24">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Article",
+            headline: item.title,
+            description: item.summary,
+            datePublished: new Date(item.date).toISOString(),
+            author: {
+              "@type": "Person",
+              name: "Сергей Рамас",
+              url: "https://sergeyramas.vercel.app/about",
+            },
+            image: item.cover ? `https://sergeyramas.vercel.app${item.cover}` : "https://sergeyramas.vercel.app/og-default.png",
+            mainEntityOfPage: `https://sergeyramas.vercel.app/solutions/${item.slug}`,
+          }),
+        }}
+      />
       <Link
         href="/solutions"
         className="rise rise-1 inline-flex items-center gap-2 font-mono text-xs uppercase tracking-widest text-muted hover:text-accent transition-colors"

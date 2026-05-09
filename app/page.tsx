@@ -1,8 +1,13 @@
+import type { Metadata } from "next";
 import { featured, allByKind } from "@/lib/content";
 import { Hero } from "@/components/Hero";
 import { FeaturedBento } from "@/components/Grid";
 import { Reveal } from "@/components/Reveal";
 import Link from "next/link";
+
+export const metadata: Metadata = {
+  alternates: { canonical: "/" },
+};
 
 const sections = [
   {
