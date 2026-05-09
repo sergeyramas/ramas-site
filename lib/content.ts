@@ -23,3 +23,7 @@ export function featured(limit = 4): Item[] {
 export function allInternalSlugs(kind: Kind): string[] {
   return items.filter((i) => i.kind === kind && !i.isExternal).map((i) => i.slug);
 }
+
+export function allSlugs(kind: Kind): string[] {
+  return items.filter((i) => i.kind === kind).map((i) => i.slug);
+}

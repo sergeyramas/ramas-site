@@ -11,6 +11,12 @@ const statusLabel: Record<string, string> = {
 };
 
 export function Card({ item, dense = false, large = false }: { item: Item; dense?: boolean; large?: boolean }) {
+  // Solutions always open their own internal step-doc page; external URL is shown
+  // there as a "full guide" CTA. Projects/ideas keep their existing behaviour.
+  const useInternal = item.kind === "solution" || !item.isExternal;
+  const href = useInternal ? `/${item.kind}s/${item.slug}` : item.url;
+  const showExternalIndicator = item.isExternal;
+
   const inner = (
     <article
       className={cn(
@@ -42,7 +48,7 @@ export function Card({ item, dense = false, large = false }: { item: Item; dense
             {item.title}
           </h3>
         </div>
-        {item.isExternal && (
+        {showExternalIndicator && (
           <ArrowUpRight
             aria-hidden
             className="w-4 h-4 text-subtle group-hover:text-accent shrink-0 mt-1 transition-all duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
@@ -72,13 +78,13 @@ export function Card({ item, dense = false, large = false }: { item: Item; dense
     </article>
   );
 
-  return item.isExternal ? (
-    <a href={item.url} target="_blank" rel="noopener noreferrer" className="group block h-full">
-      {inner}
-    </a>
-  ) : (
-    <Link href={item.url} className="group block h-full">
+  return useInternal ? (
+    <Link href={href} className="group block h-full">
       {inner}
     </Link>
+  ) : (
+    <a href={href} target="_blank" rel="noopener noreferrer" className="group block h-full">
+      {inner}
+    </a>
   );
 }
