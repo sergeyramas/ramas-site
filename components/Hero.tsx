@@ -23,17 +23,17 @@ export function Hero() {
           <span className="text-accent font-bold">система активна · 2026</span>
         </p>
 
-        <h1
-          className="rise rise-2 display-mega glitch text-[clamp(3rem,11vw,9rem)] mb-2"
-          data-text="СЕРГЕЙ РАМА"
+        <p
+          className="rise rise-2 display-mega text-[clamp(1.5rem,3.6vw,2.75rem)] text-fg/85 mb-3 sm:mb-4 tracking-[-0.02em]"
         >
-          СЕРГЕЙ РАМА
-        </h1>
-        <h2
-          className="rise rise-3 display-mega text-accent text-[clamp(2.25rem,8.5vw,7rem)] mb-10 sm:mb-14"
+          Sergey Ramas
+        </p>
+        <h1
+          className="rise rise-3 display-mega glitch text-accent text-[clamp(3.5rem,13vw,11rem)] mb-10 sm:mb-14 leading-[0.88]"
+          data-text="AI HUB"
         >
           AI HUB
-        </h2>
+        </h1>
 
         <p className="rise rise-4 max-w-[640px] font-mono text-[13px] sm:text-sm leading-[1.9] text-muted mb-10">
           <strong className="text-accent">Промпты</strong>, гайды и схемы под каждое решение.<br />
@@ -44,7 +44,7 @@ export function Hero() {
 
         <Link href="/solutions" className="rise rise-5 cta-btn">
           <span className="bolt" aria-hidden>⚡</span>
-          <span>начать доминацию</span>
+          <span>забрать стек</span>
         </Link>
       </div>
 
