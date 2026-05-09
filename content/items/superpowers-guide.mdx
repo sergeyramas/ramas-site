@@ -1,0 +1,41 @@
+---
+title: "Superpowers — методология для AI-агентов"
+slug: "superpowers-guide"
+kind: solution
+summary: "Полная методология разработки для Claude Code / Codex / Gemini: 14 поведенческих skills, которые срабатывают автоматически на каждой фазе работы — brainstorm → plan → TDD → ship. От Jesse Vincent (obra), MIT. Гайд на русском."
+externalUrl: "https://github.com/sergeyramas/superpowers-guide"
+tags: [claude-code, methodology, skills, agents, tdd]
+cover: /covers/superpowers-guide.svg
+status: live
+date: 2026-05-09
+featured: true
+---
+
+## Зачем нужна методология поверх агента
+
+Дефолтный Claude Code на запрос «сделай X» сразу пишет код. Без брейнсторма, без плана, без падающего теста, без верификации. В реальной работе это означает кучу итераций, регрессии и бесконечные правки.
+
+Superpowers закрывает эту дыру 14-ю поведенческими skills. Каждый срабатывает **автоматически** на свою фазу:
+
+* `brainstorming` — перед любой creative work, агент сначала **уточняет**, что ты хочешь
+* `writing-plans` — превращает спеку в пошаговый план с TDD
+* `subagent-driven-development` — раздаёт задачи параллельным агентам
+* `verification-before-completion` — требует evidence перед заявлением «готово»
+* `receiving-code-review` — обрабатывает фидбек технически, без performative agreement
+
+И ещё 9 skills на debug, worktrees, ship-and-merge.
+
+## Что в гайде
+
+* Все 14 skills с описанием **на русском**, сгруппированы по фазам (Discovery / Execution / Quality / Ship)
+* 4 пути установки: official Anthropic marketplace / superpowers-marketplace / Codex / Gemini CLI
+* 3 типичных сценария: «лендинг с нуля», «баг в проде», «4 фичи параллельно»
+* FAQ: про токены, совместимость, кастомизацию
+
+## Кредиты
+
+Сам Superpowers — open-source MIT от **Jesse Vincent (obra)**. Этот репо — гайд на русском, не форк.
+
+* **Upstream:** https://github.com/obra/superpowers-marketplace
+* **Этот гайд:** https://github.com/sergeyramas/superpowers-guide
+* **Поддержать автора:** https://github.com/sponsors/obra

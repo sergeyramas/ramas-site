@@ -1,0 +1,160 @@
+<svg viewBox="0 0 800 500" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <filter id="grain-sp">
+      <feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="2" stitchTiles="stitch"/>
+      <feColorMatrix values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0.025 0"/>
+    </filter>
+    <linearGradient id="grad-sp" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0a0a0b"/>
+      <stop offset="100%" stop-color="#0d0a18"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="800" height="500" fill="url(#grad-sp)"/>
+
+  <!-- Grid -->
+  <g stroke="#ffffff" stroke-width="1" opacity="0.025">
+    <line x1="80" y1="0" x2="80" y2="500"/>
+    <line x1="160" y1="0" x2="160" y2="500"/>
+    <line x1="240" y1="0" x2="240" y2="500"/>
+    <line x1="320" y1="0" x2="320" y2="500"/>
+    <line x1="400" y1="0" x2="400" y2="500"/>
+    <line x1="480" y1="0" x2="480" y2="500"/>
+    <line x1="560" y1="0" x2="560" y2="500"/>
+    <line x1="640" y1="0" x2="640" y2="500"/>
+    <line x1="720" y1="0" x2="720" y2="500"/>
+    <line x1="0" y1="80" x2="800" y2="80"/>
+    <line x1="0" y1="160" x2="800" y2="160"/>
+    <line x1="0" y1="240" x2="800" y2="240"/>
+    <line x1="0" y1="320" x2="800" y2="320"/>
+    <line x1="0" y1="400" x2="800" y2="400"/>
+  </g>
+
+  <!-- Soft glow -->
+  <ellipse cx="400" cy="260" rx="320" ry="200" fill="#7c4dff" opacity="0.08"/>
+
+  <!-- Title block top -->
+  <g>
+    <text x="60" y="72" fill="#9b9ba3" font-family="JetBrains Mono, monospace" font-size="11" letter-spacing="2.5" font-weight="500">[ A I   M E T H O D O L O G Y ]</text>
+    <text x="60" y="128" fill="#ededed" font-family="Inter, sans-serif" font-size="56" font-weight="700" letter-spacing="-2">Superpowers</text>
+    <text x="60" y="155" fill="#9b9ba3" font-family="Inter, sans-serif" font-size="14">14 skills · automatic triggers · zero config</text>
+    <line x1="60" y1="175" x2="180" y2="175" stroke="#7c4dff" stroke-width="3"/>
+  </g>
+
+  <!-- Phases visualization: 4 columns of skill chips -->
+  <g transform="translate(60, 220)">
+
+    <!-- Column 1: Discovery -->
+    <g>
+      <text x="0" y="0" fill="#7c4dff" font-family="JetBrains Mono, monospace" font-size="9" letter-spacing="1.2" font-weight="600">// DISCOVERY</text>
+      <g transform="translate(0, 14)">
+        <rect x="0" y="0" width="155" height="22" rx="11" fill="#111114" stroke="#7c4dff" stroke-width="1"/>
+        <text x="10" y="15" fill="#ededed" font-family="JetBrains Mono, monospace" font-size="10">brainstorming</text>
+      </g>
+      <g transform="translate(0, 42)">
+        <rect x="0" y="0" width="155" height="22" rx="11" fill="#111114" stroke="#7c4dff" stroke-width="1"/>
+        <text x="10" y="15" fill="#ededed" font-family="JetBrains Mono, monospace" font-size="10">writing-plans</text>
+      </g>
+      <g transform="translate(0, 70)">
+        <rect x="0" y="0" width="155" height="22" rx="11" fill="#111114" stroke="#7c4dff" stroke-width="1" opacity="0.6"/>
+        <text x="10" y="15" fill="#9b9ba3" font-family="JetBrains Mono, monospace" font-size="10">using-superpowers</text>
+      </g>
+    </g>
+
+    <!-- Arrow between cols -->
+    <g stroke="#7c4dff" stroke-width="1.5" fill="none" opacity="0.6">
+      <line x1="160" y1="50" x2="180" y2="50" stroke-dasharray="3,3"/>
+      <polygon points="180,50 175,47 175,53" fill="#7c4dff"/>
+    </g>
+
+    <!-- Column 2: Execution -->
+    <g transform="translate(185, 0)">
+      <text x="0" y="0" fill="#d4ff3c" font-family="JetBrains Mono, monospace" font-size="9" letter-spacing="1.2" font-weight="600">// EXECUTION</text>
+      <g transform="translate(0, 14)">
+        <rect x="0" y="0" width="155" height="22" rx="11" fill="#111114" stroke="#d4ff3c" stroke-width="1"/>
+        <text x="10" y="15" fill="#ededed" font-family="JetBrains Mono, monospace" font-size="10">executing-plans</text>
+      </g>
+      <g transform="translate(0, 42)">
+        <rect x="0" y="0" width="155" height="22" rx="11" fill="#111114" stroke="#d4ff3c" stroke-width="1"/>
+        <text x="10" y="15" fill="#ededed" font-family="JetBrains Mono, monospace" font-size="10">subagent-driven</text>
+      </g>
+      <g transform="translate(0, 70)">
+        <rect x="0" y="0" width="155" height="22" rx="11" fill="#111114" stroke="#d4ff3c" stroke-width="1"/>
+        <text x="10" y="15" fill="#ededed" font-family="JetBrains Mono, monospace" font-size="10">parallel-agents</text>
+      </g>
+      <g transform="translate(0, 98)">
+        <rect x="0" y="0" width="155" height="22" rx="11" fill="#111114" stroke="#d4ff3c" stroke-width="1" opacity="0.6"/>
+        <text x="10" y="15" fill="#9b9ba3" font-family="JetBrains Mono, monospace" font-size="10">git-worktrees</text>
+      </g>
+    </g>
+
+    <!-- Arrow -->
+    <g stroke="#d4ff3c" stroke-width="1.5" fill="none" opacity="0.6">
+      <line x1="345" y1="50" x2="365" y2="50" stroke-dasharray="3,3"/>
+      <polygon points="365,50 360,47 360,53" fill="#d4ff3c"/>
+    </g>
+
+    <!-- Column 3: Quality -->
+    <g transform="translate(370, 0)">
+      <text x="0" y="0" fill="#ff9f43" font-family="JetBrains Mono, monospace" font-size="9" letter-spacing="1.2" font-weight="600">// QUALITY</text>
+      <g transform="translate(0, 14)">
+        <rect x="0" y="0" width="155" height="22" rx="11" fill="#111114" stroke="#ff9f43" stroke-width="1"/>
+        <text x="10" y="15" fill="#ededed" font-family="JetBrains Mono, monospace" font-size="10">test-driven-dev</text>
+      </g>
+      <g transform="translate(0, 42)">
+        <rect x="0" y="0" width="155" height="22" rx="11" fill="#111114" stroke="#ff9f43" stroke-width="1"/>
+        <text x="10" y="15" fill="#ededed" font-family="JetBrains Mono, monospace" font-size="10">systematic-debug</text>
+      </g>
+      <g transform="translate(0, 70)">
+        <rect x="0" y="0" width="155" height="22" rx="11" fill="#111114" stroke="#ff9f43" stroke-width="1"/>
+        <text x="10" y="15" fill="#ededed" font-family="JetBrains Mono, monospace" font-size="10">verify-completion</text>
+      </g>
+    </g>
+
+    <!-- Arrow -->
+    <g stroke="#ff9f43" stroke-width="1.5" fill="none" opacity="0.6">
+      <line x1="530" y1="50" x2="550" y2="50" stroke-dasharray="3,3"/>
+      <polygon points="550,50 545,47 545,53" fill="#ff9f43"/>
+    </g>
+
+    <!-- Column 4: Review & Ship -->
+    <g transform="translate(555, 0)">
+      <text x="0" y="0" fill="#42a5f5" font-family="JetBrains Mono, monospace" font-size="9" letter-spacing="1.2" font-weight="600">// SHIP</text>
+      <g transform="translate(0, 14)">
+        <rect x="0" y="0" width="155" height="22" rx="11" fill="#111114" stroke="#42a5f5" stroke-width="1"/>
+        <text x="10" y="15" fill="#ededed" font-family="JetBrains Mono, monospace" font-size="10">request-review</text>
+      </g>
+      <g transform="translate(0, 42)">
+        <rect x="0" y="0" width="155" height="22" rx="11" fill="#111114" stroke="#42a5f5" stroke-width="1"/>
+        <text x="10" y="15" fill="#ededed" font-family="JetBrains Mono, monospace" font-size="10">receive-review</text>
+      </g>
+      <g transform="translate(0, 70)">
+        <rect x="0" y="0" width="155" height="22" rx="11" fill="#111114" stroke="#42a5f5" stroke-width="1"/>
+        <text x="10" y="15" fill="#ededed" font-family="JetBrains Mono, monospace" font-size="10">finish-branch</text>
+      </g>
+      <g transform="translate(0, 98)">
+        <rect x="0" y="0" width="155" height="22" rx="11" fill="#111114" stroke="#42a5f5" stroke-width="1" opacity="0.6"/>
+        <text x="10" y="15" fill="#9b9ba3" font-family="JetBrains Mono, monospace" font-size="10">writing-skills</text>
+      </g>
+    </g>
+  </g>
+
+  <!-- Bottom info row -->
+  <g transform="translate(60, 430)">
+    <circle cx="6" cy="6" r="4" fill="#d4ff3c">
+      <animate attributeName="opacity" values="1;0.3;1" dur="1.6s" repeatCount="indefinite"/>
+    </circle>
+    <text x="20" y="10" fill="#d4ff3c" font-family="JetBrains Mono, monospace" font-size="11" font-weight="600">AUTO-TRIGGER</text>
+    <text x="120" y="10" fill="#5a5a63" font-family="Inter, sans-serif" font-size="13">no config — skills fire on the right phase</text>
+  </g>
+
+  <!-- Right corner badge -->
+  <g transform="translate(680, 80)">
+    <rect x="0" y="0" width="60" height="22" rx="11" fill="none" stroke="#7c4dff" stroke-width="1.2"/>
+    <text x="30" y="15" fill="#7c4dff" font-family="JetBrains Mono, monospace" font-size="9" text-anchor="middle" font-weight="600" letter-spacing="1">MIT</text>
+  </g>
+
+  <!-- Grain overlay -->
+  <rect width="800" height="500" filter="url(#grain-sp)" opacity="0.5"/>
+</svg>
