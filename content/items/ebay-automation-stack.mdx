@@ -42,7 +42,7 @@ featured: true
 ### 2. Purchasing bot
 
 Самая нетривиальная часть. По SKU из заказа знает, у какого поставщика брать товар (карта `SKU_CATALOG` в Google Sheets — про неё ниже). Бот:
-- Открывает сайт поставщика (DirectHomeMedical, CPAPXchange, ResmedDirect, Shopify-магазины)
+- Открывает сайт поставщика (несколько B2B-каталогов + Shopify-магазины — конкретный список под NDA)
 - Логинится сохранёнными credentials
 - Кладёт товар в корзину
 - **Подменяет shipping-адрес на адрес покупателя eBay** (ключевая dropshipping-механика)
@@ -102,7 +102,7 @@ featured: true
                 │
        ┌────────┼────────┬────────┐
        ▼        ▼        ▼        ▼
-     DHM     CPAPX    Resmed   Shopify
+   Supplier A   B       C        D
                 │
         ┌───────▼─────────┐    ┌──────────────────┐
         │ Price/stock     │    │ Buyer messaging  │
@@ -122,7 +122,7 @@ featured: true
 - **VPS** (Hetzner / DigitalOcean, ~$10/мес) — все процессы крутятся одним systemd-юнитом
 - **Google Sheets API** — каталог SKU↔источник, статусы заказов, audit log
 - **eBay Trading API** + Inventory API
-- **Playwright** — для поставщиков без API (Shopify-магазины, DirectHomeMedical-чат)
+- **Playwright** — для поставщиков без API (live-чаты, Shopify-витрины)
 - **Telegram Bot API** — алерты в реальном времени
 - **Redis** — координация между ботами, дедупликация событий
 - **Postgres** — persistent state, retry queue для падающих закупок
@@ -176,7 +176,7 @@ featured: true
 
 - ✅ Установка и настройка всех 5 ботов на ваш VPS
 - ✅ Подключение к **двум** eBay-аккаунтам (Trading + Inventory API)
-- ✅ Адаптеры для **до 4 поставщиков** (стандартные — DHM, CPAPX, Resmed, Shopify-генерик)
+- ✅ Адаптеры для **до 4 поставщиков** (B2B-каталоги, Shopify-витрины, live-чаты — пишутся под ваш список)
 - ✅ Настройка SKU_CATALOG в Google Sheets
 - ✅ Telegram-бот с алертами
 - ✅ Documentation на русском + видео-онбординг
