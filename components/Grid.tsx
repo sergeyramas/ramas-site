@@ -1,5 +1,6 @@
 import type { Item } from "@/lib/content";
 import { Card } from "./Card";
+import { Reveal } from "./Reveal";
 import { cn } from "@/lib/utils";
 
 export function Grid({ items, dense = false }: { items: Item[]; dense?: boolean }) {
@@ -14,9 +15,9 @@ export function Grid({ items, dense = false }: { items: Item[]; dense?: boolean 
       )}
     >
       {items.map((item, i) => (
-        <li key={`${item.kind}-${item.slug}`} className={`rise rise-${Math.min(i + 1, 8)}`}>
+        <Reveal as="li" key={`${item.kind}-${item.slug}`} delay={Math.min(i * 60, 480)}>
           <Card item={item} dense={dense} />
-        </li>
+        </Reveal>
       ))}
     </ul>
   );

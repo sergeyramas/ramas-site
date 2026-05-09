@@ -3,7 +3,7 @@ import { Inter, Playfair_Display, Unbounded, JetBrains_Mono } from "next/font/go
 import { Analytics } from "@vercel/analytics/next";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import { SunTheme } from "@/components/SunTheme";
-import { CustomCursor } from "@/components/CustomCursor";
+import { CustomCursorLazy } from "@/components/CustomCursorLazy";
 import { Nav } from "@/components/Nav";
 import { Footer } from "@/components/Footer";
 import "./globals.css";
@@ -36,7 +36,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body className="min-h-screen flex flex-col">
         <ThemeProvider attribute="class" defaultTheme="light" enableSystem>
           <SunTheme />
-          <CustomCursor />
+          <CustomCursorLazy />
           <div className="grain" aria-hidden />
           <Nav />
           <main className="flex-1">{children}</main>

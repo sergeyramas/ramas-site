@@ -1,4 +1,6 @@
+import Image from "next/image";
 import Link from "next/link";
+import { Reveal } from "@/components/Reveal";
 
 export const metadata = { title: "About" };
 
@@ -21,6 +23,17 @@ export default function AboutPage() {
     <article className="max-w-3xl mx-auto px-6 sm:px-8 pt-16 sm:pt-20 pb-24">
       <p className="eyebrow rise rise-1">About · кто я и чем занят</p>
 
+      <div className="rise rise-2 mt-6 mb-10 w-40 h-48 sm:w-48 sm:h-60 overflow-hidden rounded-2xl border border-border">
+        <Image
+          src="/portraits/sergey-rama.webp"
+          alt="Сергей Рамас — портрет"
+          width={480}
+          height={600}
+          className="w-full h-full object-cover"
+          priority
+        />
+      </div>
+
       <h1 className="display rise rise-2 mt-6 text-5xl sm:text-7xl">
         Сергей <span className="display-italic text-accent">Рамас</span>.
       </h1>
@@ -40,7 +53,7 @@ export default function AboutPage() {
         ))}
       </dl>
 
-      <section className="mt-16">
+      <Reveal as="section" delay={0} className="mt-16">
         <p className="eyebrow">Свои продукты</p>
         <p className="display-italic mt-4 text-2xl sm:text-3xl leading-snug max-w-2xl">
           «Каждый продукт — это эксперимент: проверить гипотезу, выкатить за неделю,
@@ -66,18 +79,18 @@ export default function AboutPage() {
             <span className="text-muted"> — SaaS-лендинг для eBay-агентов.</span>
           </li>
         </ul>
-      </section>
+      </Reveal>
 
-      <section className="mt-16">
+      <Reveal as="section" delay={80} className="mt-16">
         <p className="eyebrow">eBay в США</p>
         <p className="mt-4 leading-relaxed text-muted">
           Два аккаунта (грузинский и перуанский), полностью автоматизированы: closing, purchasing,
           sync треков, мониторинг цен и стока. Вся ручная работа — это решения о том, что добавить
           в каталог.
         </p>
-      </section>
+      </Reveal>
 
-      <section className="mt-16">
+      <Reveal as="section" delay={160} className="mt-16">
         <p className="eyebrow">AI-стек и память</p>
         <p className="mt-4 leading-relaxed text-muted">
           OpenClaw (autonomous agent на VPS) + ClaudeClaw (бэкап на Mac). Память построена по
@@ -86,9 +99,9 @@ export default function AboutPage() {
             в Solutions
           </Link>.
         </p>
-      </section>
+      </Reveal>
 
-      <section className="mt-16">
+      <Reveal as="section" delay={240} className="mt-16">
         <p className="eyebrow">Текущий стек</p>
         <ul className="mt-6 space-y-2 font-mono text-sm text-muted">
           {stack.map((s) => (
@@ -98,16 +111,16 @@ export default function AboutPage() {
             </li>
           ))}
         </ul>
-      </section>
+      </Reveal>
 
-      <section className="mt-16">
+      <Reveal as="section" delay={320} className="mt-16">
         <p className="eyebrow">Вне работы</p>
         <p className="mt-4 leading-relaxed text-muted">
           Путешествия, йога, гири, велоспорт. В 2025 прошёл полумарафон на Филиппинах.
         </p>
-      </section>
+      </Reveal>
 
-      <section className="mt-20 border-t border-border pt-10">
+      <Reveal as="section" delay={400} className="mt-20 border-t border-border pt-10">
         <p className="eyebrow">Связь</p>
         <p className="display mt-4 text-3xl sm:text-4xl">
           <Link href="mailto:fantroms@gmail.com" className="hover:text-accent">
@@ -124,7 +137,7 @@ export default function AboutPage() {
             github.com/sergeyramas
           </Link>
         </p>
-      </section>
+      </Reveal>
     </article>
   );
 }

@@ -1,6 +1,7 @@
 import { featured, allByKind } from "@/lib/content";
 import { Hero } from "@/components/Hero";
 import { FeaturedBento } from "@/components/Grid";
+import { Reveal } from "@/components/Reveal";
 import Link from "next/link";
 
 const sections = [
@@ -32,7 +33,7 @@ export default function HomePage() {
       <Hero />
 
       {featuredItems.length > 0 && (
-        <section className="mt-12">
+        <Reveal as="section" delay={100} className="mt-12">
           <div className="flex items-end justify-between mb-8">
             <p className="eyebrow">Featured · избранное</p>
             <Link href="/solutions" className="font-mono text-xs text-subtle hover:text-accent transition-colors">
@@ -40,10 +41,10 @@ export default function HomePage() {
             </Link>
           </div>
           <FeaturedBento items={featuredItems} />
-        </section>
+        </Reveal>
       )}
 
-      <section className="mt-32 sm:mt-40">
+      <Reveal as="section" delay={150} className="mt-32 sm:mt-40">
         <p className="eyebrow mb-8">Browse by kind</p>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-px bg-border rounded-2xl overflow-hidden">
           {sections.map((s, i) => {
@@ -69,7 +70,7 @@ export default function HomePage() {
             );
           })}
         </div>
-      </section>
+      </Reveal>
     </div>
   );
 }
