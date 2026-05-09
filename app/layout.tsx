@@ -12,7 +12,7 @@ const jetbrains = JetBrains_Mono({ subsets: ["latin"], variable: "--font-jetbrai
 export const metadata: Metadata = {
   title: { default: "Ramas — Solutions, Projects, Ideas", template: "%s · Ramas" },
   description: "Сергей Рамас. AI-операционные системы, лендинги, автоматизация продаж. Упакованные решения и живые проекты.",
-  metadataBase: new URL("https://ramas.vercel.app"),
+  metadataBase: new URL("https://ramas-site.vercel.app"),
   openGraph: {
     type: "website",
     locale: "ru_RU",
