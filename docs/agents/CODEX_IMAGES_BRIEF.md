@@ -50,7 +50,7 @@ public/
 │   ├── fundament21.webp
 │   ├── piratebay-landing.webp
 │   ├── betaline-ai.webp
-│   ├── gowinit-landing.webp
+│   ├── gowindoit-landing.webp
 │   ├── paintshop-proposal.webp
 │   ├── ebay-automation-stack.webp
 │   ├── seo-geo-autopilot.webp
@@ -183,7 +183,7 @@ These are optional but high-impact. Execute only if T1 is fully done.
 09  fundament21                     a rectangular foundation block grid, 4 columns × 3 rows, monochrome
 10  piratebay-landing               a minimalist sailboat silhouette over horizontal scan lines
 11  betaline-ai                     a chat bubble with a tiny gear inside it
-12  gowinit-landing                 a single upward arrow piercing a thin horizon line
+12  gowindoit-landing               a single upward arrow piercing a thin horizon line
 13  paintshop-proposal              a paint-spray nozzle outline emitting three dotted lines
 14  ebay-automation-stack           three stacked boxes with a rotating arrow on the side (pipeline)
 15  seo-geo-autopilot               a compass needle over a faint world-map outline
