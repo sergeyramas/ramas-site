@@ -28,6 +28,10 @@ export const metadata: Metadata = {
   creator: "Сергей Рамас",
   publisher: "Сергей Рамас",
   alternates: { canonical: "/" },
+  verification: {
+    google: process.env.GOOGLE_SITE_VERIFICATION,
+    yandex: process.env.YANDEX_VERIFICATION,
+  },
   openGraph: {
     type: "website",
     locale: "ru_RU",
