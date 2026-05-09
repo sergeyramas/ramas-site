@@ -71,8 +71,9 @@ export default function AboutPage() {
       <section className="mt-16">
         <p className="eyebrow">eBay в США</p>
         <p className="mt-4 leading-relaxed text-muted">
-          Два магазина (GE1 + PE12), полностью автоматизированы: closing, purchasing, sync треков,
-          мониторинг цен и стока. Вся ручная работа — это решения о том, что добавить в каталог.
+          Два аккаунта (грузинский и перуанский), полностью автоматизированы: closing, purchasing,
+          sync треков, мониторинг цен и стока. Вся ручная работа — это решения о том, что добавить
+          в каталог.
         </p>
       </section>
 
