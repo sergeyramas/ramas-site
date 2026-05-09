@@ -114,19 +114,13 @@ function writeCookie(lang: Lang) {
 }
 
 export function I18nProvider({ children }: { children: ReactNode }) {
-  const [lang, setLangState] = useState<Lang>("ru");
-  const [hydrated, setHydrated] = useState(false);
+  const [lang, setLangState] = useState<Lang>(() => readCookie());
 
   useEffect(() => {
-    setLangState(readCookie());
-    setHydrated(true);
-  }, []);
-
-  useEffect(() => {
-    if (typeof document !== "undefined" && hydrated) {
+    if (typeof document !== "undefined") {
       document.documentElement.lang = lang;
     }
-  }, [lang, hydrated]);
+  }, [lang]);
 
   const setLang = (l: Lang) => {
     writeCookie(l);
