@@ -11,7 +11,7 @@ const links = [
 export function Nav() {
   return (
     <header className="sticky top-0 z-20 backdrop-blur-md bg-bg/75 border-b border-border">
-      <div className="max-w-6xl mx-auto px-6 sm:px-8 h-16 flex items-center justify-between">
+      <div className="max-w-6xl mx-auto px-6 sm:px-8 h-16 flex items-center justify-between gap-3">
         <Link
           href="/"
           className="flex items-center gap-2 font-mono text-sm tracking-tight hover:text-accent transition-colors"
@@ -24,11 +24,20 @@ export function Nav() {
             <Link
               key={l.href}
               href={l.href}
-              className="px-3 py-1.5 rounded-md text-sm text-muted hover:text-fg hover:bg-elevated transition-colors"
+              className="hidden sm:inline-block px-3 py-1.5 rounded-md text-sm text-muted hover:text-fg hover:bg-elevated transition-colors"
             >
               {l.label}
             </Link>
           ))}
+          <Link
+            href="https://t.me/Sergeyramas"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="ml-1 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md text-xs font-mono uppercase tracking-wider text-fg border border-border hover:border-accent hover:text-accent hover:bg-elevated transition-colors"
+          >
+            <span aria-hidden>tg</span>
+            <span className="hidden sm:inline">@Sergeyramas</span>
+          </Link>
           <span className="ml-1 sm:ml-2">
             <ThemeToggle />
           </span>

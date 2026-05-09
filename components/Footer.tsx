@@ -18,6 +18,9 @@ export function Footer() {
             <p className="eyebrow">Каналы</p>
             <ul className="space-y-1.5">
               <li>
+                <Link href="https://t.me/Sergeyramas" className="hover:text-accent">Telegram · @Sergeyramas</Link>
+              </li>
+              <li>
                 <Link href="https://github.com/sergeyramas" className="hover:text-accent">GitHub</Link>
               </li>
               <li>

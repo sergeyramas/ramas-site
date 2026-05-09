@@ -115,6 +115,10 @@ export default function AboutPage() {
         </p>
         <p className="mt-3 text-sm text-muted">
           Также:{" "}
+          <Link href="https://t.me/Sergeyramas" className="underline decoration-subtle underline-offset-4 hover:text-accent hover:decoration-accent">
+            Telegram · @Sergeyramas
+          </Link>
+          {" "}·{" "}
           <Link href="https://github.com/sergeyramas" className="underline decoration-subtle underline-offset-4 hover:text-accent hover:decoration-accent">
             github.com/sergeyramas
           </Link>
