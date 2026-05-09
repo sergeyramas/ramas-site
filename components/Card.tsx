@@ -2,6 +2,7 @@ import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import type { Item } from "@/lib/content";
 import { cn } from "@/lib/utils";
+import Image from "next/image";
 
 const statusLabel: Record<string, string> = {
   live: "Live",
@@ -29,6 +30,18 @@ export function Card({ item, dense = false, large = false }: { item: Item; dense
             : "p-6 sm:p-7 rounded-xl"
       )}
     >
+      {item.cover && !dense && (
+        <div className="relative -mx-5 sm:-mx-7 -mt-5 sm:-mt-7 mb-5 aspect-[16/10] overflow-hidden rounded-t-xl bg-bg">
+          <Image
+            src={item.cover}
+            alt={item.title}
+            fill
+            sizes="(min-width: 1024px) 33vw, 100vw"
+            className="object-cover transition-transform duration-500 group-hover:scale-[1.02]"
+            unoptimized
+          />
+        </div>
+      )}
       <header className="flex items-start justify-between gap-4">
         <div className="flex flex-col gap-2">
           <span className="eyebrow">
