@@ -1,0 +1,72 @@
+---
+title: "NotebookLM × Claude Code"
+slug: "notebooklm-claude-memory"
+kind: solution
+summary: "Бесплатная research-память для AI-агентов. 1M токенов на ноутбук, source-grounded ответы, ноль затрат на векторные базы. Ставится за 10 минут."
+externalUrl: "https://notebooklm-claude-memory.vercel.app"
+tags: [memory, claude-code, notebooklm, rag]
+cover: /covers/notebooklm-claude-memory.svg
+status: live
+date: 2026-05-09
+featured: true
+---
+
+## Зачем нужна ещё одна память
+
+У зрелого пользователя Claude Code память — слоёная: auto-memory, vault, daily logs, skills. Не хватает одного — **research-слоя**: тонны источников (PDF, видео, статьи), к которым агент может ходить за цитатами. Стандартный путь — Pinecone + Supabase + RAG-сервер. Дорого, тяжело, медленно ставится.
+
+## Решение в одной картинке
+
+* **Хранилище** — Google NotebookLM. Бесплатно, 1M токенов на ноутбук, ест видео/PDF/аудио.
+* **Канал** — open-source skill (PleasePrompto/notebooklm-skill) под Claude Code. Browser automation + cookies.
+* **Compute** — сам Claude Code. NotebookLM отвечает текстом, Claude складывает поверх SQL/агрегации.
+
+## Что снимается
+
+NotebookLM в стандарте имеет две дыры:
+* **Locked data** — нет публичного API, нет экспорта, нет cross-notebook поиска
+* **No compute** — текстовый предсказатель, не калькулятор
+
+Skill закрывает обе. Через headless-браузер ходит в твои ноутбуки, возвращает source-grounded ответы. Cross-notebook синтез делает уже Claude поверх.
+
+## Главные преимущества
+
+* **$0** — Google NotebookLM бесплатен, skill open-source MIT
+* **Не жжёт токены Claude** — research живёт в NotebookLM, не в контексте Claude
+* **1M токенов** на один ноутбук, ~300 документов
+* **Source-grounded** — каждый факт с цитатой на исходный документ
+* **Cross-notebook синтез** — то, чего сам NotebookLM не умеет
+* **Полный экспорт на диск** — данные становятся твоими
+
+## Установка
+
+```bash
+# 1. Клонировать в ~/.claude/skills/
+git clone https://github.com/PleasePrompto/notebooklm-skill ~/.claude/skills/notebooklm
+
+# 2. Bootstrap (создаст venv + поставит patchright + скачает Chromium ~150MB)
+cd ~/.claude/skills/notebooklm
+python3 scripts/run.py auth_manager.py status
+
+# 3. Один Google-логин (откроется видимый Chrome)
+python3 scripts/run.py auth_manager.py setup
+
+# 4. Готово — рестарт Claude Code, дальше работает в чате
+```
+
+## Use cases
+
+* **Дистилляция research → vault** — прогнать N ноутбуков, переработать в wiki-страницы
+* **Cross-notebook синтез** — *"сравни юр-риски в моих 3 ноутбуках про чатботы"*
+* **Bulk-ingest** — *"создай ноутбук, залей эти 30 видео"* за 5 минут вместо часа кликов
+* **Live research для других skill'ов** — code-review проверяет источники до ответа
+* **Подготовка к разговору** — за 30 секунд получить факты с цитатами
+
+## Альтернативы
+
+Если PleasePrompto сломается из-за UI-изменений Google — есть запасные:
+* `teng-lin/notebooklm-py` — Python API + CLI с имитацией человека
+* `jacob-bd/notebooklm-cli` + `notebooklm-mcp-cli` — полное покрытие через CDP
+* `lfnovo/open-notebook` — self-hosted замена NotebookLM (для multi-tenant продуктов)
+
+В лендинге — полная сравнительная таблица, FAQ и memory-map в 5 слоёв.
