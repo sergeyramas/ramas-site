@@ -1,47 +1,74 @@
 import { featured, allByKind } from "@/lib/content";
 import { Hero } from "@/components/Hero";
-import { Grid } from "@/components/Grid";
+import { FeaturedBento } from "@/components/Grid";
 import Link from "next/link";
+
+const sections = [
+  {
+    kind: "solution" as const,
+    title: "Solutions",
+    href: "/solutions",
+    desc: "Упакованные гайды, скиллы и скрипты — то, что можно унести в свой проект уже сегодня.",
+  },
+  {
+    kind: "project" as const,
+    title: "Projects",
+    href: "/projects",
+    desc: "Живые сайты и продукты. Что-то под клиентов, что-то моё собственное.",
+  },
+  {
+    kind: "idea" as const,
+    title: "Ideas",
+    href: "/ideas",
+    desc: "Что хочется сделать, но руки пока не дошли. Открыто к обсуждению.",
+  },
+];
 
 export default function HomePage() {
   const featuredItems = featured(4);
-  const sections = [
-    { kind: "solution", title: "Solutions", href: "/solutions", desc: "Упакованные гайды, скиллы, скрипты." },
-    { kind: "project", title: "Projects", href: "/projects", desc: "Живые сайты и продукты." },
-    { kind: "idea", title: "Ideas", href: "/ideas", desc: "Что хочется сделать." },
-  ] as const;
 
   return (
-    <div className="max-w-5xl mx-auto px-6">
+    <div className="max-w-6xl mx-auto px-6 sm:px-8">
       <Hero />
 
       {featuredItems.length > 0 && (
-        <section className="mt-8">
-          <h2 className="font-mono text-xs uppercase tracking-widest text-muted">Featured</h2>
-          <div className="mt-6">
-            <Grid items={featuredItems} />
+        <section className="mt-12">
+          <div className="flex items-end justify-between mb-8">
+            <p className="eyebrow">Featured · избранное</p>
+            <Link href="/solutions" className="font-mono text-xs text-subtle hover:text-accent transition-colors">
+              all →
+            </Link>
           </div>
+          <FeaturedBento items={featuredItems} />
         </section>
       )}
 
-      <section className="mt-24 grid grid-cols-1 sm:grid-cols-3 gap-6">
-        {sections.map((s) => {
-          const count = allByKind(s.kind).length;
-          return (
-            <Link
-              key={s.kind}
-              href={s.href}
-              className="block border border-border rounded-lg p-6 hover:border-accent transition-colors"
-            >
-              <div className="flex items-baseline justify-between">
-                <h3 className="text-xl font-medium">{s.title}</h3>
-                <span className="font-mono text-sm text-muted">{count}</span>
-              </div>
-              <p className="mt-2 text-sm text-muted">{s.desc}</p>
-              <p className="mt-6 text-sm text-accent">Все →</p>
-            </Link>
-          );
-        })}
+      <section className="mt-32 sm:mt-40">
+        <p className="eyebrow mb-8">Browse by kind</p>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-px bg-border rounded-2xl overflow-hidden">
+          {sections.map((s, i) => {
+            const count = allByKind(s.kind).length;
+            return (
+              <Link
+                key={s.kind}
+                href={s.href}
+                className={`group block bg-card hover:bg-elevated p-8 sm:p-10 transition-colors rise rise-${i + 1}`}
+              >
+                <div className="flex items-baseline justify-between">
+                  <h3 className="display text-3xl sm:text-4xl">{s.title}</h3>
+                  <span className="font-mono text-sm text-subtle group-hover:text-accent transition-colors">
+                    {String(count).padStart(2, "0")}
+                  </span>
+                </div>
+                <p className="mt-4 text-sm text-muted leading-relaxed">{s.desc}</p>
+                <p className="mt-10 font-mono text-xs uppercase tracking-widest text-accent inline-flex items-center gap-2">
+                  Открыть
+                  <span className="group-hover:translate-x-1 transition-transform">→</span>
+                </p>
+              </Link>
+            );
+          })}
+        </div>
       </section>
     </div>
   );

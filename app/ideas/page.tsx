@@ -7,10 +7,12 @@ export const metadata = { title: "Ideas" };
 export default function IdeasPage() {
   const items = allByKind("idea");
   return (
-    <div className="max-w-5xl mx-auto px-6 py-16">
+    <div className="max-w-6xl mx-auto px-6 sm:px-8 pt-16 sm:pt-20 pb-24">
       <PageHeader
-        title="Ideas"
-        subtitle="Что хочется сделать. Wishlist, открытый для обсуждения."
+        eyebrow="Ideas · wishlist"
+        title="Что хочется сделать."
+        subtitle="Список идей, которые ждут своей очереди. Если что-то откликается и хочется обсудить — пишите."
+        count={items.length}
       />
       <Grid items={items} dense />
     </div>

@@ -3,28 +3,68 @@ import { ArrowUpRight } from "lucide-react";
 import type { Item } from "@/lib/content";
 import { cn } from "@/lib/utils";
 
-export function Card({ item, dense = false }: { item: Item; dense?: boolean }) {
+const statusLabel: Record<string, string> = {
+  live: "Live",
+  wip: "В работе",
+  archived: "Архив",
+  concept: "Идея",
+};
+
+export function Card({ item, dense = false, large = false }: { item: Item; dense?: boolean; large?: boolean }) {
   const inner = (
     <article
       className={cn(
-        "h-full border border-border bg-card p-5 transition-colors group-hover:border-accent",
-        dense ? "rounded-md" : "rounded-lg p-6"
+        "edge h-full bg-card transition-all duration-300",
+        "group-hover:bg-elevated group-hover:-translate-y-0.5",
+        large
+          ? "p-8 sm:p-10 rounded-2xl flex flex-col justify-between min-h-[280px]"
+          : dense
+            ? "p-5 rounded-xl"
+            : "p-6 sm:p-7 rounded-xl"
       )}
     >
-      <header className="flex items-start justify-between gap-3">
-        <h3 className={cn("font-medium leading-tight", dense ? "text-base" : "text-lg")}>
-          {item.title}
-        </h3>
+      <header className="flex items-start justify-between gap-4">
+        <div className="flex flex-col gap-2">
+          <span className="eyebrow">
+            {item.kind === "solution" ? "Solution" : item.kind === "project" ? "Project" : "Idea"}
+            <span className="text-subtle"> · {statusLabel[item.status] ?? item.status}</span>
+          </span>
+          <h3
+            className={cn(
+              "leading-[1.15]",
+              large
+                ? "display text-3xl sm:text-4xl pr-4"
+                : dense
+                  ? "text-base font-medium"
+                  : "text-lg sm:text-xl font-medium tracking-tight"
+            )}
+          >
+            {item.title}
+          </h3>
+        </div>
         {item.isExternal && (
-          <ArrowUpRight className="w-4 h-4 text-muted group-hover:text-accent shrink-0 mt-1" />
+          <ArrowUpRight
+            aria-hidden
+            className="w-4 h-4 text-subtle group-hover:text-accent shrink-0 mt-1 transition-all duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
+            strokeWidth={1.5}
+          />
         )}
       </header>
-      <p className="mt-2 text-sm text-muted leading-relaxed">{item.summary}</p>
+
+      <p
+        className={cn(
+          "text-muted leading-relaxed",
+          large ? "mt-6 text-base sm:text-lg max-w-prose" : "mt-3 text-sm",
+        )}
+      >
+        {item.summary}
+      </p>
+
       {item.tags.length > 0 && !dense && (
-        <ul className="mt-4 flex flex-wrap gap-2">
+        <ul className={cn("flex flex-wrap gap-x-3 gap-y-1", large ? "mt-8" : "mt-5")}>
           {item.tags.slice(0, 4).map((t) => (
-            <li key={t} className="font-mono text-xs text-muted">
-              #{t}
+            <li key={t} className="font-mono text-[11px] tracking-wider text-subtle uppercase">
+              {t}
             </li>
           ))}
         </ul>

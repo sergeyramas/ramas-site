@@ -2,7 +2,7 @@
 
 Personal site of Сергей Рамас. Solutions · Projects · Ideas.
 
-**Live:** https://ramas-site.vercel.app
+**Live:** https://sergeyramas.vercel.app
 
 ## Stack
 

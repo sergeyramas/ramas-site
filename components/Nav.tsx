@@ -10,18 +10,28 @@ const links = [
 
 export function Nav() {
   return (
-    <header className="border-b border-border">
-      <div className="max-w-5xl mx-auto px-6 h-16 flex items-center justify-between">
-        <Link href="/" className="font-mono text-sm tracking-tight hover:text-accent">
+    <header className="sticky top-0 z-20 backdrop-blur-md bg-bg/75 border-b border-border">
+      <div className="max-w-6xl mx-auto px-6 sm:px-8 h-16 flex items-center justify-between">
+        <Link
+          href="/"
+          className="flex items-center gap-2 font-mono text-sm tracking-tight hover:text-accent transition-colors"
+        >
+          <span className="inline-block w-2 h-2 rounded-full bg-accent" />
           ramas
         </Link>
-        <nav className="flex items-center gap-6">
+        <nav className="flex items-center gap-1 sm:gap-2">
           {links.map((l) => (
-            <Link key={l.href} href={l.href} className="text-sm hover:text-accent">
+            <Link
+              key={l.href}
+              href={l.href}
+              className="px-3 py-1.5 rounded-md text-sm text-muted hover:text-fg hover:bg-elevated transition-colors"
+            >
               {l.label}
             </Link>
           ))}
-          <ThemeToggle />
+          <span className="ml-1 sm:ml-2">
+            <ThemeToggle />
+          </span>
         </nav>
       </div>
     </header>

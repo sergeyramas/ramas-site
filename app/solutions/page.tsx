@@ -7,10 +7,12 @@ export const metadata = { title: "Solutions" };
 export default function SolutionsPage() {
   const items = allByKind("solution");
   return (
-    <div className="max-w-5xl mx-auto px-6 py-16">
+    <div className="max-w-6xl mx-auto px-6 sm:px-8 pt-16 sm:pt-20 pb-24">
       <PageHeader
-        title="Solutions"
-        subtitle="Упакованные гайды, скиллы и скрипты. Что-то ведёт на GitHub Pages, что-то открывается прямо здесь."
+        eyebrow="Solutions · упакованные знания"
+        title="Решения, которые можно унести с собой."
+        subtitle="Гайды, скиллы для Claude Code, шаблоны и скрипты. Часть открывается прямо здесь, часть — на GitHub Pages в виде отдельных туториалов."
+        count={items.length}
       />
       <Grid items={items} />
     </div>
