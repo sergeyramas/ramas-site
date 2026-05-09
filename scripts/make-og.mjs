@@ -8,14 +8,14 @@ const svg = `
       <feColorMatrix values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0   0 0 0 0.04 0"/>
     </filter>
   </defs>
-  <rect width="1200" height="630" fill="#F4EFE6"/>
+  <rect width="1200" height="630" fill="#16130F"/>
   <rect width="1200" height="630" filter="url(#noise)"/>
-  <rect x="80" y="80" width="6" height="6" fill="#B85A2E"/>
-  <text x="100" y="92" font-family="ui-monospace, monospace" font-size="16" fill="#6B6258" letter-spacing="2">SERGEYRAMAS.VERCEL.APP</text>
-  <text x="80" y="300" font-family="Georgia, serif" font-size="120" font-weight="400" fill="#1A1714" letter-spacing="-3">Сергей Рамас.</text>
-  <text x="80" y="420" font-family="Georgia, serif" font-style="italic" font-size="92" font-weight="400" fill="#B85A2E" letter-spacing="-2">Solutions, Projects,</text>
-  <text x="80" y="510" font-family="Georgia, serif" font-style="italic" font-size="92" font-weight="400" fill="#B85A2E" letter-spacing="-2">Ideas.</text>
-  <text x="80" y="570" font-family="ui-monospace, monospace" font-size="20" fill="#6B6258">AI · Lендинги · Автоматизация</text>
+  <rect x="80" y="78" width="8" height="8" fill="#DC7A4F"/>
+  <text x="108" y="102" font-family="Unbounded, Arial Black, system-ui, sans-serif" font-size="64" font-weight="900" fill="#F2EDE3" letter-spacing="1">SERGEY RAMAS ·</text>
+  <text x="76" y="318" font-family="Unbounded, Arial Black, system-ui, sans-serif" font-size="180" font-weight="900" fill="#DC7A4F" letter-spacing="-6">AI HUB</text>
+  <rect x="84" y="360" width="600" height="1" fill="#DC7A4F"/>
+  <text x="84" y="512" font-family="JetBrains Mono, ui-monospace, SFMono-Regular, Menlo, monospace" font-size="28" font-weight="700" fill="#948A7E" letter-spacing="5">SOLUTIONS · PROJECTS · IDEAS</text>
+  <text x="84" y="570" font-family="JetBrains Mono, ui-monospace, SFMono-Regular, Menlo, monospace" font-size="22" font-weight="700" fill="#F2EDE3" letter-spacing="2">sergeyramas.vercel.app</text>
 </svg>
 `;
 
