@@ -1,0 +1,38 @@
+---
+title: "Session Handoff — перенос контекста между сессиями"
+slug: "session-handoff"
+kind: solution
+summary: "Claude Code skill: переносит любую сессию в новый чат за 30 секунд. Dev-режим — навигационный указатель на файлы + решения. Research-режим — полный структурированный дамп. Промт для старта копируется в буфер автоматически."
+externalUrl: "https://github.com/sergeyramas/session-handoff-skill"
+tags: [skills, claude-code, context, handoff, productivity]
+status: live
+date: 2026-05-11
+featured: false
+---
+
+## Проблема
+
+Каждый раз когда заканчиваешь Claude-сессию — контекст теряется. Следующая сессия начинается с нуля: надо объяснять проект, решения, что пробовали, что не сработало.
+
+**До:** тратишь 5-10 минут на восстановление контекста. Решения и отброшенные варианты теряются навсегда.
+
+**После:** один вызов — готовый handoff файл + промт скопирован в буфер. Следующая сессия стартует за 30 секунд.
+
+## Два режима
+
+**Dev-режим** (есть git / план / CLAUDE.md) — короткий навигационный указатель на файлы + решения принятые в этой сессии с обоснованием и отброшенными вариантами.
+
+**Research-режим** (brainstorm, анализ, идеи) — полный структурированный дамп: TL;DR, key findings, decisions + reasoning, rejected alternatives, open questions.
+
+## Установка
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/sergeyramas/session-handoff-skill/main/install.sh | bash
+```
+
+## Триггеры
+
+- "продолжим в новом чате", "упакуй контекст", "хэндофф"
+- "handoff", "transfer to new session", "summarize chat"
+
+[Полная инструкция и исходники →](https://github.com/sergeyramas/session-handoff-skill)
