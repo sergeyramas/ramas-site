@@ -1,0 +1,33 @@
+---
+title: "Scroll-Scrub Hero"
+slug: "scroll-scrub-hero"
+kind: solution
+summary: "Claude Code скилл: 2 AI-кадра → 7-секундное видео (lumalabs.ai / Kling 3.0) → scroll-scrub hero в Next.js через GSAP ScrollTrigger. Полный пайплайн премиального вау-эффекта."
+externalUrl: "https://github.com/sergeyramas/scroll-scrub-hero-skill"
+tags: [skills, claude-code, gsap, scroll-animation, next-js, ai-video]
+status: live
+date: 2026-05-11
+featured: false
+---
+
+## Что делает
+
+Проводит через полный пайплайн «вау» hero-эффекта: скролл управляет `video.currentTime`, объект разбирается или собирается перед глазами пользователя. Sticky-scroll секция 300vh, GSAP ScrollTrigger scrub, mobile autoplay fallback.
+
+Охватывает генерацию START + END кадров в Nano Banana 2 (batch=4, 2K, 16:9, белый фон), создание 7-секундного видео через **lumalabs.ai** (режим start/end image) или Higsfield Kling 3.0, и полную реализацию в Next.js 16 с тултипами компонентов.
+
+Паттерн из пайплайна Джека («$10K сайты»), отработан на проекте ROCKMESH (лендинг стеклопластиковой сетки).
+
+## Установка
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/sergeyramas/scroll-scrub-hero-skill/main/install.sh | bash
+```
+
+## Триггеры
+
+- «вау эффект на скролле / scroll-scrub hero / привяжи видео к скроллу»
+- «3D hero / две картинки в видео / lumalabs / Kling hero»
+- «сделай анимацию при скролле»
+
+[Полная инструкция и исходники →](https://github.com/sergeyramas/scroll-scrub-hero-skill)
