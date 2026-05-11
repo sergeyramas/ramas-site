@@ -1,0 +1,42 @@
+---
+title: "Publish Skill — упаковка процессов в скиллы"
+slug: "publish-skill"
+kind: solution
+summary: "Мета-скилл для Claude Code: превращает удачный процесс из чата в локальный SKILL.md + публичный GitHub-репо с README/installer + карточку на твоём сайте. Одной фразой 'упакуй это в скилл'. Этим скиллом сделаны все остальные карточки."
+externalUrl: "https://github.com/sergeyramas/publish-skill"
+tags: [skills, claude-code, meta, automation, productivity]
+status: live
+date: 2026-05-11
+featured: true
+---
+
+## Проблема
+
+Каждый день в чатах с Claude рождаются полезные процессы. Но они умирают вместе с сессией: заново объясняешь шаги, забываешь edge-cases, не помнишь какие MCP и API-ключи были нужны.
+
+**До:** процесс остаётся в чате, теряется при компакте. Чтобы поделиться — копируешь промт в Notion, теряется форматирование, нет установки.
+
+**После:** одна фраза — и получаешь установленный локальный skill + публичный репо + карточку на сайте.
+
+## Что делает за один вызов
+
+1. **Локальный SKILL.md** в `~/.claude/skills/<slug>/` — сразу триггерится у тебя
+2. **GitHub-репо** `sergeyramas/<slug>-skill` с README (проблема → до/после → требования → install → триггеры)
+3. **GitHub Pages landing** — красивая ссылка для шаринга
+4. **MDX-карточка** на этом сайте — Vercel автодеплоит
+5. **One-line installer** для друзей: `curl -fsSL .../install.sh | bash`
+
+## Установка
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/sergeyramas/publish-skill/main/install.sh | bash
+```
+
+После установки нужно один раз отредактировать `SKILL.md` — заменить мой GitHub username и путь к сайту на свои.
+
+## Триггеры
+
+- "упакуй это в скилл", "опубликуй процесс", "сделай из этого навык"
+- "publish skill", "ship this as a skill"
+
+[Полная инструкция и исходники →](https://github.com/sergeyramas/publish-skill)
