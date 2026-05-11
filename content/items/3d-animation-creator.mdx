@@ -1,0 +1,33 @@
+---
+title: "3D Animation Creator"
+slug: "3d-animation-creator"
+kind: solution
+summary: "Claude Code скилл: видео → FFmpeg кадры → Apple-style canvas scroll-animation сайт. Annotation snap-stop, starscape, navbar pill, specs count-up, glassmorphism cards. Без фреймворков."
+externalUrl: "https://github.com/sergeyramas/3d-animation-creator-skill"
+tags: [skills, claude-code, scroll-animation, ffmpeg, apple-style, canvas]
+status: live
+date: 2026-05-11
+featured: false
+---
+
+## Что делает
+
+Берёт готовый .mp4 файл, извлекает кадры через FFmpeg и строит полный Apple-style сайт где скролл управляет анимацией через `<canvas>`. Эффект как у Apple iPhone teardown — объект разбирается/собирается при прокрутке.
+
+Автоматически включает: animated starscape, annotation cards со snap-stop (скролл замирает на каждой карточке), specs с count-up анимацией, navbar → pill transform, glassmorphism feature cards, loader с progress bar.
+
+**Нужен FFmpeg:** `brew install ffmpeg`
+
+## Установка
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/sergeyramas/3d-animation-creator-skill/main/install.sh | bash
+```
+
+## Триггеры
+
+- «3D анимация сайта / Apple-style scroll / build scroll animation site»
+- «привяжи видео к скроллу / scroll-stop build»
+- предоставил .mp4 и говорит «сделай из этого сайт»
+
+[Исходники и README →](https://github.com/sergeyramas/3d-animation-creator-skill)

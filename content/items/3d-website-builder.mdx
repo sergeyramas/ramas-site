@@ -1,0 +1,31 @@
+---
+title: "3D Website Builder"
+slug: "3d-website-builder"
+kind: solution
+summary: "Claude Code скилл: готовый .mp4 → vanilla HTML/CSS/JS MVP сайт с GSAP scroll-driven hero. 5 вопросов → полная структура проекта. Без FFmpeg, без фреймворков."
+externalUrl: "https://github.com/sergeyramas/3d-website-builder-skill"
+tags: [skills, claude-code, scroll-animation, gsap, vanilla-js, landing-page]
+status: live
+date: 2026-05-11
+featured: false
+---
+
+## Что делает
+
+Берёт готовый .mp4 (7 секунд, от lumalabs.ai или Kling 3.0), задаёт 5 вопросов (бренд, логотип, цвета, путь к видео, CTA) и строит MVP-лендинг на чистом HTML/CSS/JS.
+
+Скролл управляет `video.currentTime` через GSAP ScrollTrigger — без FFmpeg, без фреймворков. Выдаёт: `index.html` + `css/style.css` + `js/scroll.js` + README. Готово к деплою на Vercel за минуты.
+
+## Установка
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/sergeyramas/3d-website-builder-skill/main/install.sh | bash
+```
+
+## Триггеры
+
+- «собери MVP сайта / привяжи видео к скроллу / scroll stop builder»
+- «hero с этим видео / build 3D site»
+- есть готовое .mp4, нужен быстрый лендинг
+
+[Исходники и README →](https://github.com/sergeyramas/3d-website-builder-skill)
