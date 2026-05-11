@@ -1,0 +1,37 @@
+---
+title: "Start Goal — исполняемые цели для Codex"
+slug: "start-goal"
+kind: solution
+summary: "Codex skill: превращает фразу «стартуем цель» в goal brief с опросом, brainstorming, критериями Done when и безопасным запуском /goal."
+externalUrl: "https://github.com/sergeyramas/start-goal-skill"
+tags: [skills, codex, claude-code, agents, productivity]
+status: live
+date: 2026-05-11
+featured: false
+---
+
+## Проблема
+
+Долгие агентские задачи нельзя стартовать из мутной фразы. Если написать «сделай сайт» или «проведи GAP-анализ», агент может начать выполнять раньше, чем понял рынок, критерии готовности и стоп-условия.
+
+**До:** цель живёт в голове, агент сам додумывает детали, результат трудно проверить.
+
+**После:** одна фраза вроде «стартуем цель» запускает intake: допущение, опрос, brainstorming при необходимости, goal brief и проверяемый блок Done when.
+
+## Что делает
+
+Start Goal превращает сырой запрос в исполняемую цель для Codex Goals. Скилл собирает контекст, ограничения, deliverables, критерии готовности и условия остановки. Для творческих и продуктовых задач он сначала ведёт через brainstorming, а уже потом готовит безопасный запуск `/goal`.
+
+## Установка
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/sergeyramas/start-goal-skill/main/install.sh | bash
+```
+
+## Триггеры
+
+- "стартуем цель - GAP анализ для нового сайта"
+- "запусти цель и сначала проведи опрос"
+- "start goal: implement this plan"
+
+[Полная инструкция и исходники →](https://github.com/sergeyramas/start-goal-skill)
