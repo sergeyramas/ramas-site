@@ -1,0 +1,84 @@
+<svg viewBox="0 0 800 500" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Competitive intelligence to conversion site cover">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#141414"/>
+      <stop offset="0.52" stop-color="#202426"/>
+      <stop offset="1" stop-color="#351f18"/>
+    </linearGradient>
+    <linearGradient id="paper" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#f3eee4"/>
+      <stop offset="1" stop-color="#d8cdbd"/>
+    </linearGradient>
+    <filter id="grain">
+      <feTurbulence type="fractalNoise" baseFrequency="0.78" numOctaves="3" stitchTiles="stitch"/>
+      <feColorMatrix values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0.03 0"/>
+    </filter>
+    <filter id="softShadow" x="-30%" y="-30%" width="160%" height="160%">
+      <feDropShadow dx="0" dy="18" stdDeviation="18" flood-color="#000000" flood-opacity="0.32"/>
+    </filter>
+  </defs>
+
+  <rect width="800" height="500" fill="url(#bg)"/>
+  <rect width="800" height="500" filter="url(#grain)" opacity="0.9"/>
+
+  <g opacity="0.09" stroke="#f2ede3" stroke-width="1">
+    <path d="M80 80H720"/>
+    <path d="M80 160H720"/>
+    <path d="M80 240H720"/>
+    <path d="M80 320H720"/>
+    <path d="M80 400H720"/>
+    <path d="M160 54V440"/>
+    <path d="M320 54V440"/>
+    <path d="M480 54V440"/>
+    <path d="M640 54V440"/>
+  </g>
+
+  <g transform="translate(72 64)">
+    <text x="0" y="0" fill="#dc7a4f" font-family="Menlo, Monaco, monospace" font-size="12" letter-spacing="3">MARKET SIGNALS</text>
+    <text x="0" y="50" fill="#f2ede3" font-family="Georgia, serif" font-size="48">Pain-driven</text>
+    <text x="0" y="96" fill="#f2ede3" font-family="Georgia, serif" font-size="48">conversion site</text>
+  </g>
+
+  <g transform="translate(76 190)" filter="url(#softShadow)">
+    <rect x="0" y="0" width="220" height="196" rx="6" fill="url(#paper)"/>
+    <rect x="20" y="26" width="92" height="10" rx="5" fill="#dc7a4f"/>
+    <rect x="20" y="54" width="170" height="8" rx="4" fill="#5b544b" opacity="0.5"/>
+    <rect x="20" y="78" width="138" height="8" rx="4" fill="#5b544b" opacity="0.35"/>
+    <rect x="20" y="120" width="180" height="42" rx="4" fill="#ffffff" opacity="0.58"/>
+    <path d="M36 142L66 124L96 150L132 112L174 138" fill="none" stroke="#dc7a4f" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+    <text x="20" y="181" fill="#1f1a16" font-family="Menlo, Monaco, monospace" font-size="10">01 SERP + COMPETITORS</text>
+  </g>
+
+  <g transform="translate(318 164)" filter="url(#softShadow)">
+    <rect x="0" y="0" width="176" height="248" rx="6" fill="#f2ede3"/>
+    <text x="24" y="36" fill="#1f1a16" font-family="Georgia, serif" font-size="30">buyer</text>
+    <text x="24" y="69" fill="#1f1a16" font-family="Georgia, serif" font-size="30">pains</text>
+    <g transform="translate(24 100)">
+      <rect width="128" height="28" rx="14" fill="#dc7a4f"/>
+      <rect y="44" width="110" height="10" rx="5" fill="#1f1a16" opacity="0.55"/>
+      <rect y="66" width="126" height="10" rx="5" fill="#1f1a16" opacity="0.35"/>
+      <rect y="88" width="92" height="10" rx="5" fill="#1f1a16" opacity="0.35"/>
+    </g>
+    <text x="24" y="220" fill="#1f1a16" font-family="Menlo, Monaco, monospace" font-size="10">03 REVIEWS</text>
+  </g>
+
+  <g transform="translate(524 194)" filter="url(#softShadow)">
+    <rect x="0" y="0" width="204" height="184" rx="6" fill="#f2ede3"/>
+    <rect x="22" y="24" width="160" height="18" rx="9" fill="#1f1a16"/>
+    <rect x="22" y="62" width="48" height="80" rx="4" fill="#dc7a4f"/>
+    <rect x="82" y="88" width="48" height="54" rx="4" fill="#716a5f"/>
+    <rect x="142" y="46" width="40" height="96" rx="4" fill="#2d6a4f"/>
+    <path d="M22 158H182" stroke="#1f1a16" stroke-width="2" opacity="0.35"/>
+    <text x="22" y="175" fill="#1f1a16" font-family="Menlo, Monaco, monospace" font-size="10">06 SITE STRUCTURE</text>
+  </g>
+
+  <g fill="none" stroke="#dc7a4f" stroke-width="2.2" stroke-linecap="round" stroke-dasharray="6 8" opacity="0.9">
+    <path d="M296 288C314 282 318 276 332 268"/>
+    <path d="M494 282C512 282 518 284 532 286"/>
+  </g>
+
+  <g transform="translate(72 440)">
+    <circle cx="6" cy="-4" r="5" fill="#dc7a4f"/>
+    <text x="22" y="0" fill="#f2ede3" font-family="Menlo, Monaco, monospace" font-size="12">evidence -> gaps -> structure -> copy -> HTML report</text>
+  </g>
+</svg>

@@ -1,0 +1,40 @@
+---
+title: "Competitive Intel -> Conversion Site"
+slug: "competitive-intel-to-html"
+kind: solution
+summary: "Claude Code skill: превращает конкурентную разведку, отзывы и GAP-анализ в структуру продающего сайта, wireframe, copy pack и клиентский HTML-отчёт."
+cover: /covers/competitive-intel-to-html.svg
+externalUrl: "https://github.com/sergeyramas/competitive-intel-to-html-skill"
+tags: [skills, claude-code, competitive-research, landing-page, conversion]
+status: live
+date: 2026-05-11
+featured: false
+---
+
+## Проблема
+
+Конкурентный анализ часто заканчивается таблицей и красивым отчётом, но сайт потом всё равно собирается на вкусе: секции появляются потому что "так обычно делают", а не потому что они закрывают конкретный страх покупателя.
+
+**До:** есть SERP, конкуренты и отзывы, но нет понятного маршрута от боли клиента к структуре страницы.
+
+**После:** каждая секция будущего сайта получает buyer job, боль или возражение, источник доказательства, место в воронке и роль в конверсии.
+
+## Что делает
+
+Skill ведёт агента через полный research-to-site pipeline: SERP discovery, scraping конкурентов, review mining, scoring, GAP-анализ, стратегию структуры сайта, wireframe, copy pack и HTML-отчёт для клиента.
+
+Главный добавленный слой — `06-site-structure.md`. Он не даёт перескочить из аналитики сразу в дизайн: сначала агент обязан объяснить, почему сайт устроен именно в таком порядке и какую боль закрывает каждая секция.
+
+## Установка
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/sergeyramas/competitive-intel-to-html-skill/main/install.sh | bash
+```
+
+## Триггеры
+
+- "Сделай конкурентный анализ и структуру сайта по болям клиентов."
+- "Упакуй research в продающий лендинг."
+- "Собери HTML-отчёт по конкурентам и wireframe сайта."
+
+[Полная инструкция и исходники ->](https://github.com/sergeyramas/competitive-intel-to-html-skill)
