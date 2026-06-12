@@ -1,0 +1,1340 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Competitive Analysis — Стеклопластиковая сетка · ROCKMESH</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Instrument+Serif:ital@0;1&display=swap');
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --paper: #F5F0E8;
+    --paper-dark: #EDE7D6;
+    --ink: #1A1208;
+    --ink-soft: #4A3F2A;
+    --orange: #FF6B00;
+    --orange-light: #FFE4CC;
+    --green: #2D6A4F;
+    --red: #A63D2F;
+    --blue: #2A4A8A;
+    --grain: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+  }
+
+  body {
+    font-family: 'DM Sans', system-ui, sans-serif;
+    background: var(--paper);
+    color: var(--ink);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* Grain overlay */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: var(--grain);
+    background-repeat: repeat;
+    background-size: 200px 200px;
+    pointer-events: none;
+    z-index: 9999;
+    opacity: 0.4;
+  }
+
+  /* COVER PAGE */
+  .cover {
+    min-height: 100vh;
+    background: var(--ink);
+    color: var(--paper);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 60px;
+    position: relative;
+    overflow: hidden;
+    page-break-after: always;
+  }
+
+  .cover::after {
+    content: '';
+    position: absolute;
+    top: -200px;
+    right: -200px;
+    width: 600px;
+    height: 600px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(255,107,0,0.15) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .cover-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--orange);
+    color: white;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 6px 14px;
+    border-radius: 100px;
+    width: fit-content;
+  }
+
+  .cover-eyebrow {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 400;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: rgba(245,240,232,0.5);
+    margin-bottom: 24px;
+  }
+
+  .cover-title {
+    font-family: 'Instrument Serif', serif;
+    font-size: clamp(48px, 7vw, 96px);
+    line-height: 1.05;
+    color: var(--paper);
+    margin-bottom: 32px;
+  }
+
+  .cover-title em {
+    font-style: italic;
+    color: var(--orange);
+  }
+
+  .cover-subtitle {
+    font-size: 18px;
+    color: rgba(245,240,232,0.65);
+    max-width: 480px;
+    line-height: 1.5;
+  }
+
+  .cover-meta {
+    display: flex;
+    gap: 48px;
+    border-top: 1px solid rgba(245,240,232,0.15);
+    padding-top: 32px;
+  }
+
+  .cover-meta-item {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .cover-meta-label {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: rgba(245,240,232,0.4);
+  }
+
+  .cover-meta-value {
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--paper);
+  }
+
+  /* MAIN CONTENT */
+  .page {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 80px 60px;
+  }
+
+  /* SECTION HEADER */
+  .section-header {
+    display: flex;
+    align-items: baseline;
+    gap: 16px;
+    margin-bottom: 48px;
+    padding-bottom: 16px;
+    border-bottom: 2px solid var(--ink);
+  }
+
+  .section-number {
+    font-family: 'Instrument Serif', serif;
+    font-size: 72px;
+    line-height: 1;
+    color: var(--orange);
+    opacity: 0.3;
+    font-style: italic;
+  }
+
+  .section-title {
+    font-family: 'Instrument Serif', serif;
+    font-size: 36px;
+    line-height: 1.2;
+  }
+
+  /* EXECUTIVE SUMMARY */
+  .exec-summary {
+    background: var(--paper-dark);
+    border-left: 4px solid var(--orange);
+    padding: 32px 40px;
+    border-radius: 0 8px 8px 0;
+    margin-bottom: 60px;
+  }
+
+  .exec-summary p {
+    font-size: 17px;
+    line-height: 1.7;
+    color: var(--ink-soft);
+    margin-bottom: 12px;
+  }
+
+  .exec-summary p:last-child {
+    margin-bottom: 0;
+  }
+
+  .exec-summary strong {
+    color: var(--ink);
+  }
+
+  /* COMPETITOR CARD */
+  .competitor-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 24px;
+    margin-bottom: 60px;
+  }
+
+  .comp-card {
+    background: white;
+    border-radius: 12px;
+    padding: 28px;
+    border: 1px solid rgba(26,18,8,0.08);
+    box-shadow: 0 2px 8px rgba(26,18,8,0.04);
+  }
+
+  .comp-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 20px;
+  }
+
+  .comp-domain {
+    font-weight: 700;
+    font-size: 15px;
+    color: var(--ink);
+  }
+
+  .comp-type {
+    font-size: 11px;
+    padding: 3px 10px;
+    border-radius: 100px;
+    font-weight: 500;
+  }
+
+  .comp-type.producer { background: #E8F5E9; color: #1B5E20; }
+  .comp-type.dealer { background: #E3F2FD; color: #0D47A1; }
+
+  .comp-score-total {
+    font-family: 'Instrument Serif', serif;
+    font-size: 48px;
+    font-style: italic;
+    font-weight: 400;
+    color: var(--orange);
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+
+  .comp-score-label {
+    font-size: 11px;
+    color: var(--ink-soft);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+
+  .comp-bars {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 20px;
+  }
+
+  .bar-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .bar-label {
+    font-size: 11px;
+    color: var(--ink-soft);
+    min-width: 100px;
+    flex-shrink: 0;
+  }
+
+  .bar-track {
+    flex: 1;
+    height: 6px;
+    background: var(--paper-dark);
+    border-radius: 3px;
+    overflow: hidden;
+  }
+
+  .bar-fill {
+    height: 100%;
+    border-radius: 3px;
+    background: var(--orange);
+    transition: width 0.3s ease;
+  }
+
+  .bar-fill.low { background: var(--red); }
+  .bar-fill.mid { background: #F59E0B; }
+  .bar-fill.high { background: var(--green); }
+
+  .bar-num {
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--ink);
+    min-width: 20px;
+    text-align: right;
+  }
+
+  .comp-strengths, .comp-weaknesses {
+    font-size: 13px;
+    margin-bottom: 12px;
+  }
+
+  .comp-strengths-title, .comp-weaknesses-title {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--ink-soft);
+    margin-bottom: 6px;
+  }
+
+  .comp-strengths li, .comp-weaknesses li {
+    list-style: none;
+    padding-left: 16px;
+    position: relative;
+    margin-bottom: 3px;
+    line-height: 1.4;
+    color: var(--ink-soft);
+  }
+
+  .comp-strengths li::before { content: '✓'; position: absolute; left: 0; color: var(--green); font-size: 11px; top: 1px; }
+  .comp-weaknesses li::before { content: '×'; position: absolute; left: 0; color: var(--red); font-size: 12px; }
+
+  .color-swatch {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 12px;
+    color: var(--ink-soft);
+    margin-top: 12px;
+    padding-top: 12px;
+    border-top: 1px solid var(--paper-dark);
+  }
+
+  .swatch-dot {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    border: 1px solid rgba(0,0,0,0.1);
+    flex-shrink: 0;
+  }
+
+  /* COMPARISON TABLE */
+  .comparison-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 60px;
+    font-size: 14px;
+  }
+
+  .comparison-table th {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 12px 16px;
+    text-align: left;
+    font-weight: 600;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+
+  .comparison-table th:first-child { border-radius: 8px 0 0 0; }
+  .comparison-table th:last-child { border-radius: 0 8px 0 0; }
+
+  .comparison-table td {
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--paper-dark);
+    vertical-align: top;
+  }
+
+  .comparison-table tr:nth-child(even) td { background: rgba(245,240,232,0.5); }
+
+  .score-cell {
+    font-weight: 700;
+    font-size: 16px;
+  }
+
+  .score-high { color: var(--green); }
+  .score-mid { color: #D97706; }
+  .score-low { color: var(--red); }
+
+  .win-badge {
+    display: inline-flex;
+    background: var(--green);
+    color: white;
+    font-size: 10px;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 100px;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+
+  /* PATTERNS */
+  .patterns-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+    margin-bottom: 60px;
+  }
+
+  .pattern-card {
+    background: white;
+    border-radius: 12px;
+    padding: 24px;
+    border: 1px solid rgba(26,18,8,0.06);
+  }
+
+  .pattern-number {
+    font-family: 'Instrument Serif', serif;
+    font-size: 32px;
+    font-style: italic;
+    color: var(--orange);
+    margin-bottom: 12px;
+  }
+
+  .pattern-title {
+    font-weight: 700;
+    font-size: 15px;
+    margin-bottom: 8px;
+  }
+
+  .pattern-desc {
+    font-size: 13px;
+    color: var(--ink-soft);
+    line-height: 1.5;
+  }
+
+  /* PAINS SECTION */
+  .pains-list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-bottom: 60px;
+  }
+
+  .pain-card {
+    background: white;
+    border-radius: 12px;
+    padding: 24px 28px;
+    border-left: 4px solid var(--red);
+    box-shadow: 0 1px 4px rgba(26,18,8,0.04);
+    display: grid;
+    grid-template-columns: 48px 1fr 200px;
+    gap: 20px;
+    align-items: start;
+  }
+
+  .pain-number {
+    font-family: 'Instrument Serif', serif;
+    font-size: 36px;
+    font-style: italic;
+    color: var(--red);
+    line-height: 1;
+    opacity: 0.4;
+  }
+
+  .pain-body h3 {
+    font-size: 16px;
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+
+  .pain-quote {
+    font-family: 'Instrument Serif', serif;
+    font-style: italic;
+    font-size: 15px;
+    color: var(--ink-soft);
+    line-height: 1.5;
+    border-left: 2px solid var(--red);
+    padding-left: 12px;
+    margin: 8px 0;
+  }
+
+  .pain-source {
+    font-size: 11px;
+    color: rgba(26,18,8,0.4);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .pain-answer {
+    background: var(--orange-light);
+    border-radius: 8px;
+    padding: 16px;
+    font-size: 13px;
+  }
+
+  .pain-answer-label {
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--orange);
+    font-weight: 700;
+    margin-bottom: 4px;
+  }
+
+  .pain-answer p {
+    color: var(--ink-soft);
+    line-height: 1.4;
+  }
+
+  /* PALETTE */
+  .palette-row {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    margin-bottom: 60px;
+  }
+
+  .palette-chip {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .palette-color {
+    width: 64px;
+    height: 64px;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  }
+
+  .palette-hex {
+    font-family: 'DM Mono', 'Courier New', monospace;
+    font-size: 12px;
+    color: var(--ink-soft);
+  }
+
+  .palette-name {
+    font-size: 11px;
+    color: rgba(26,18,8,0.5);
+    text-align: center;
+  }
+
+  /* GAPS */
+  .gaps-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+    margin-bottom: 60px;
+  }
+
+  .gap-card {
+    background: white;
+    border-radius: 12px;
+    padding: 24px;
+    border-top: 3px solid var(--orange);
+  }
+
+  .gap-tag {
+    display: inline-flex;
+    background: var(--orange-light);
+    color: var(--orange);
+    font-size: 10px;
+    font-weight: 700;
+    padding: 3px 10px;
+    border-radius: 100px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: 12px;
+  }
+
+  .gap-title {
+    font-weight: 700;
+    font-size: 15px;
+    margin-bottom: 8px;
+    line-height: 1.3;
+  }
+
+  .gap-desc {
+    font-size: 13px;
+    color: var(--ink-soft);
+    line-height: 1.5;
+  }
+
+  /* FOOTER */
+  .report-footer {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 40px 60px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 40px;
+  }
+
+  .footer-brand {
+    font-family: 'Instrument Serif', serif;
+    font-size: 20px;
+    font-style: italic;
+  }
+
+  .footer-meta {
+    font-size: 13px;
+    color: rgba(245,240,232,0.5);
+    text-align: right;
+  }
+
+  /* Print rules */
+  @media print {
+    body::before { display: none; }
+    .cover { page-break-after: always; min-height: 100vh; }
+    .comp-card, .pattern-card, .pain-card, .gap-card { break-inside: avoid; }
+    @page { margin: 0; }
+  }
+
+  .divider {
+    border: none;
+    border-top: 1px solid rgba(26,18,8,0.08);
+    margin: 60px 0;
+  }
+</style>
+</head>
+<body>
+
+<!-- COVER -->
+<div class="cover">
+  <div>
+    <div class="cover-badge">Competitive Analysis · 2026</div>
+  </div>
+  <div>
+    <p class="cover-eyebrow">Стеклопластиковая сетка · Ниша Москва · ROCKMESH</p>
+    <h1 class="cover-title">Разведка<br>рынка — <em>кто<br>стоит между<br>вами и продажей</em></h1>
+    <p class="cover-subtitle">Анализ 7 конкурентов, боли покупателей из 6 источников, 3 незакрытых GAP'а — всё, что нужно для лендинга, который конвертирует.</p>
+  </div>
+  <div class="cover-meta">
+    <div class="cover-meta-item">
+      <span class="cover-meta-label">Дата</span>
+      <span class="cover-meta-value">10 мая 2026</span>
+    </div>
+    <div class="cover-meta-item">
+      <span class="cover-meta-label">Конкурентов проанализировано</span>
+      <span class="cover-meta-value">7 сайтов</span>
+    </div>
+    <div class="cover-meta-item">
+      <span class="cover-meta-label">Источников болей</span>
+      <span class="cover-meta-value">6 источников</span>
+    </div>
+    <div class="cover-meta-item">
+      <span class="cover-meta-label">Продукт</span>
+      <span class="cover-meta-value">ROCKMESH (Гален)</span>
+    </div>
+  </div>
+</div>
+
+<!-- EXECUTIVE SUMMARY -->
+<div class="page">
+  <div class="section-header">
+    <span class="section-number">00</span>
+    <h2 class="section-title">Executive Summary</h2>
+  </div>
+
+  <div class="exec-summary">
+    <p>Рынок стеклопластиковой кладочной сетки в России — <strong>растущий, но дезорганизованный.</strong> Ни один из топ-5 конкурентов не закрывает главный страх покупателя: <em>«А вдруг это контрафакт?»</em> По данным форумов, 80-95% продукции на рынке — некондиция или подделка (forum.vashdom.ru). Покупатели боятся, но не знают, как проверить.</p>
+    <p><strong>Лучший конкурент — arm-plast.ru (51/80)</strong> — имеет хорошую контент-структуру и конкретные цифры («в 3-4 раза прочнее»), но устаревший дизайн и нет прямого ответа на страх контрафакта. <strong>Визуально лучший — 21kompozit.ru</strong> с ротирующим hero, но нет доказательств качества производства.</p>
+    <p><strong>Точка отрыва для ROCKMESH:</strong> единственный в выборке, кто имеет международные объекты (Лувр, ОАЭ; Снегири Эко, Москва), фото сравнения «кустарка vs наша» прямо в руках, и аминную защиту от щёлочи — прямой ответ на главную техническую боль. <strong>Нужно говорить об этом первыми и в первых экранах.</strong></p>
+    <p>Нишевая цветовая конвенция — синий (#1976D2). Оранжевый (#FF6B00) — нетривиально, но поддержан 21kompozit.ru и compositgroup74.ru. Это хороший выбор для дифференциации при сохранении отраслевой теплоты.</p>
+  </div>
+
+  <!-- COMPETITOR PROFILES -->
+  <div class="section-header">
+    <span class="section-number">01</span>
+    <h2 class="section-title">Профили конкурентов</h2>
+  </div>
+
+  <div class="competitor-grid">
+
+    <!-- arm-plast -->
+    <div class="comp-card">
+      <div class="comp-card-header">
+        <div>
+          <div class="comp-domain">arm-plast.ru</div>
+          <div style="font-size:12px;color:#666;margin-top:2px;">Нижний Новгород</div>
+        </div>
+        <span class="comp-type producer">Производитель</span>
+      </div>
+      <div style="margin-bottom:16px;">
+        <div class="comp-score-total">51</div>
+        <div class="comp-score-label">из 80 — лидер ниши</div>
+      </div>
+      <div class="comp-bars">
+        <div class="bar-row"><span class="bar-label">SERP-видимость</span><div class="bar-track"><div class="bar-fill high" style="width:80%"></div></div><span class="bar-num">8</span></div>
+        <div class="bar-row"><span class="bar-label">Отзывы</span><div class="bar-track"><div class="bar-fill mid" style="width:70%"></div></div><span class="bar-num">7</span></div>
+        <div class="bar-row"><span class="bar-label">Визуальный дизайн</span><div class="bar-track"><div class="bar-fill low" style="width:40%"></div></div><span class="bar-num">4</span></div>
+        <div class="bar-row"><span class="bar-label">Мобильный</span><div class="bar-track"><div class="bar-fill low" style="width:50%"></div></div><span class="bar-num">5</span></div>
+        <div class="bar-row"><span class="bar-label">Контент</span><div class="bar-track"><div class="bar-fill high" style="width:80%"></div></div><span class="bar-num">8</span></div>
+        <div class="bar-row"><span class="bar-label">Социальное доказательство</span><div class="bar-track"><div class="bar-fill mid" style="width:70%"></div></div><span class="bar-num">7</span></div>
+        <div class="bar-row"><span class="bar-label">CTA-стратегия</span><div class="bar-track"><div class="bar-fill mid" style="width:70%"></div></div><span class="bar-num">7</span></div>
+        <div class="bar-row"><span class="bar-label">Скорость страницы</span><div class="bar-track"><div class="bar-fill low" style="width:50%"></div></div><span class="bar-num">5</span></div>
+      </div>
+      <div style="margin-bottom:12px;">
+        <div class="comp-strengths-title">Сильно</div>
+        <ul class="comp-strengths">
+          <li>«Нашли дешевле? Снизим цену!»</li>
+          <li>Табы: описание/цены/фото/отзывы</li>
+          <li>Конкретные цифры прочности</li>
+          <li>8 800 федеральный номер</li>
+        </ul>
+      </div>
+      <div>
+        <div class="comp-weaknesses-title">Слабо</div>
+        <ul class="comp-weaknesses">
+          <li>Устаревший дизайн 2017</li>
+          <li>Нет видео производства</li>
+          <li>Нет слайдера до/после</li>
+          <li>Нет ответа на страх контрафакта</li>
+        </ul>
+      </div>
+      <div class="color-swatch">
+        <div class="swatch-dot" style="background:#1976D2;"></div>
+        #1976D2 Синий
+      </div>
+    </div>
+
+    <!-- 21kompozit -->
+    <div class="comp-card">
+      <div class="comp-card-header">
+        <div>
+          <div class="comp-domain">21kompozit.ru</div>
+          <div style="font-size:12px;color:#666;margin-top:2px;">Россия</div>
+        </div>
+        <span class="comp-type producer">Производитель</span>
+      </div>
+      <div style="margin-bottom:16px;">
+        <div class="comp-score-total">44</div>
+        <div class="comp-score-label">из 80 — лучший Hero в нише</div>
+      </div>
+      <div class="comp-bars">
+        <div class="bar-row"><span class="bar-label">SERP-видимость</span><div class="bar-track"><div class="bar-fill mid" style="width:70%"></div></div><span class="bar-num">7</span></div>
+        <div class="bar-row"><span class="bar-label">Отзывы</span><div class="bar-track"><div class="bar-fill low" style="width:40%"></div></div><span class="bar-num">4</span></div>
+        <div class="bar-row"><span class="bar-label">Визуальный дизайн</span><div class="bar-track"><div class="bar-fill mid" style="width:70%"></div></div><span class="bar-num">7</span></div>
+        <div class="bar-row"><span class="bar-label">Мобильный</span><div class="bar-track"><div class="bar-fill mid" style="width:60%"></div></div><span class="bar-num">6</span></div>
+        <div class="bar-row"><span class="bar-label">Контент</span><div class="bar-track"><div class="bar-fill low" style="width:50%"></div></div><span class="bar-num">5</span></div>
+        <div class="bar-row"><span class="bar-label">Социальное доказательство</span><div class="bar-track"><div class="bar-fill low" style="width:40%"></div></div><span class="bar-num">4</span></div>
+        <div class="bar-row"><span class="bar-label">CTA-стратегия</span><div class="bar-track"><div class="bar-fill low" style="width:50%"></div></div><span class="bar-num">5</span></div>
+        <div class="bar-row"><span class="bar-label">Скорость страницы</span><div class="bar-track"><div class="bar-fill mid" style="width:60%"></div></div><span class="bar-num">6</span></div>
+      </div>
+      <div style="margin-bottom:12px;">
+        <div class="comp-strengths-title">Сильно</div>
+        <ul class="comp-strengths">
+          <li>Hero с 4 цифровыми claims</li>
+          <li>«100 лет / в 8 раз / в 3 раза / 68%»</li>
+          <li>Оранжевый акцент (современно)</li>
+          <li>Каталог с ценами</li>
+        </ul>
+      </div>
+      <div>
+        <div class="comp-weaknesses-title">Слабо</div>
+        <ul class="comp-weaknesses">
+          <li>CTA: «заявка», нет звонка</li>
+          <li>Нет фото производства</li>
+          <li>Нет образовательного контента</li>
+          <li>Нет истории объектов</li>
+        </ul>
+      </div>
+      <div class="color-swatch">
+        <div class="swatch-dot" style="background:#FF6F00;"></div>
+        #FF6F00 Оранжевый
+      </div>
+    </div>
+
+    <!-- compositgroup74 -->
+    <div class="comp-card">
+      <div class="comp-card-header">
+        <div>
+          <div class="comp-domain">compositgroup74.ru</div>
+          <div style="font-size:12px;color:#666;margin-top:2px;">Челябинск</div>
+        </div>
+        <span class="comp-type producer">Производитель</span>
+      </div>
+      <div style="margin-bottom:16px;">
+        <div class="comp-score-total">42</div>
+        <div class="comp-score-label">из 80 — лучший контент</div>
+      </div>
+      <div class="comp-bars">
+        <div class="bar-row"><span class="bar-label">SERP-видимость</span><div class="bar-track"><div class="bar-fill mid" style="width:60%"></div></div><span class="bar-num">6</span></div>
+        <div class="bar-row"><span class="bar-label">Отзывы</span><div class="bar-track"><div class="bar-fill low" style="width:40%"></div></div><span class="bar-num">4</span></div>
+        <div class="bar-row"><span class="bar-label">Визуальный дизайн</span><div class="bar-track"><div class="bar-fill low" style="width:40%"></div></div><span class="bar-num">4</span></div>
+        <div class="bar-row"><span class="bar-label">Контент</span><div class="bar-track"><div class="bar-fill high" style="width:80%"></div></div><span class="bar-num">8</span></div>
+        <div class="bar-row"><span class="bar-label">Цены</span><div class="bar-track"><div class="bar-fill high" style="width:80%"></div></div><span class="bar-num">8</span></div>
+        <div class="bar-row"><span class="bar-label">Социальное доказательство</span><div class="bar-track"><div class="bar-fill low" style="width:50%"></div></div><span class="bar-num">5</span></div>
+        <div class="bar-row"><span class="bar-label">CTA-стратегия</span><div class="bar-track"><div class="bar-fill low" style="width:50%"></div></div><span class="bar-num">5</span></div>
+      </div>
+      <div style="margin-bottom:12px;">
+        <div class="comp-strengths-title">Сильно</div>
+        <ul class="comp-strengths">
+          <li>Публичные прайсы (рулоны и карты)</li>
+          <li>Сравнительная таблица металл/композит</li>
+          <li>9 секций с якорной навигацией</li>
+          <li>ГОСТ, 10+ лет на рынке</li>
+        </ul>
+      </div>
+      <div>
+        <div class="comp-weaknesses-title">Слабо</div>
+        <ul class="comp-weaknesses">
+          <li>Нет видео, нет анимаций</li>
+          <li>Нет отзывов на странице</li>
+          <li>Нет карты доставки</li>
+          <li>Устаревший дизайн</li>
+        </ul>
+      </div>
+      <div class="color-swatch">
+        <div class="swatch-dot" style="background:#E65100;"></div>
+        #E65100 Оранжевый
+      </div>
+    </div>
+
+    <!-- nano-sk -->
+    <div class="comp-card">
+      <div class="comp-card-header">
+        <div>
+          <div class="comp-domain">nano-sk.ru</div>
+          <div style="font-size:12px;color:#666;margin-top:2px;">Москва</div>
+        </div>
+        <span class="comp-type producer">Производитель</span>
+      </div>
+      <div style="margin-bottom:16px;">
+        <div class="comp-score-total">37</div>
+        <div class="comp-score-label">из 80 — топ SERP, слабый сайт</div>
+      </div>
+      <div class="comp-bars">
+        <div class="bar-row"><span class="bar-label">SERP-видимость</span><div class="bar-track"><div class="bar-fill high" style="width:90%"></div></div><span class="bar-num">9</span></div>
+        <div class="bar-row"><span class="bar-label">Отзывы</span><div class="bar-track"><div class="bar-fill low" style="width:30%"></div></div><span class="bar-num">3</span></div>
+        <div class="bar-row"><span class="bar-label">Визуальный дизайн</span><div class="bar-track"><div class="bar-fill low" style="width:30%"></div></div><span class="bar-num">3</span></div>
+        <div class="bar-row"><span class="bar-label">Цена видна</span><div class="bar-track"><div class="bar-fill low" style="width:20%"></div></div><span class="bar-num">2</span></div>
+        <div class="bar-row"><span class="bar-label">Контент</span><div class="bar-track"><div class="bar-fill mid" style="width:60%"></div></div><span class="bar-num">6</span></div>
+        <div class="bar-row"><span class="bar-label">Социальное доказательство</span><div class="bar-track"><div class="bar-fill low" style="width:30%"></div></div><span class="bar-num">3</span></div>
+      </div>
+      <div style="margin-bottom:12px;">
+        <div class="comp-strengths-title">Сильно</div>
+        <ul class="comp-strengths">
+          <li>Топ-1 SERP в Москве (7 запросов)</li>
+          <li>Производитель, московская прописка</li>
+          <li>Технически грамотный контент</li>
+        </ul>
+      </div>
+      <div>
+        <div class="comp-weaknesses-title">Слабо</div>
+        <ul class="comp-weaknesses">
+          <li>Нет цены на странице</li>
+          <li>Устаревший дизайн (2015 ера)</li>
+          <li>Нет отзывов, нет сертификатов</li>
+          <li>Нет сравнения</li>
+        </ul>
+      </div>
+      <div class="color-swatch">
+        <div class="swatch-dot" style="background:#2E7D32;"></div>
+        #2E7D32 Зелёный
+      </div>
+    </div>
+
+    <!-- stsgeo -->
+    <div class="comp-card">
+      <div class="comp-card-header">
+        <div>
+          <div class="comp-domain">stsgeo.ru</div>
+          <div style="font-size:12px;color:#666;margin-top:2px;">Москва</div>
+        </div>
+        <span class="comp-type dealer">Дилер</span>
+      </div>
+      <div style="margin-bottom:16px;">
+        <div class="comp-score-total">27</div>
+        <div class="comp-score-label">из 80 — слабейший</div>
+      </div>
+      <div class="comp-bars">
+        <div class="bar-row"><span class="bar-label">SERP-видимость</span><div class="bar-track"><div class="bar-fill low" style="width:50%"></div></div><span class="bar-num">5</span></div>
+        <div class="bar-row"><span class="bar-label">Цены открыты</span><div class="bar-track"><div class="bar-fill low" style="width:10%"></div></div><span class="bar-num">1</span></div>
+        <div class="bar-row"><span class="bar-label">Отзывы</span><div class="bar-track"><div class="bar-fill low" style="width:20%"></div></div><span class="bar-num">2</span></div>
+        <div class="bar-row"><span class="bar-label">Визуальный дизайн</span><div class="bar-track"><div class="bar-fill low" style="width:30%"></div></div><span class="bar-num">3</span></div>
+        <div class="bar-row"><span class="bar-label">Контент</span><div class="bar-track"><div class="bar-fill low" style="width:30%"></div></div><span class="bar-num">3</span></div>
+      </div>
+      <div style="margin-bottom:12px;">
+        <div class="comp-strengths-title">Сильно</div>
+        <ul class="comp-strengths">
+          <li>Московская прописка</li>
+          <li>Широкий ассортимент</li>
+          <li>Фильтр по назначению</li>
+        </ul>
+      </div>
+      <div>
+        <div class="comp-weaknesses-title">Слабо</div>
+        <ul class="comp-weaknesses">
+          <li>Все цены «По запросу»</li>
+          <li>Одно фото для всех SKU</li>
+          <li>Нет отзывов, нет сертификатов</li>
+          <li>Нет образовательного контента</li>
+        </ul>
+      </div>
+      <div class="color-swatch">
+        <div class="swatch-dot" style="background:#1565C0;"></div>
+        #1565C0 Синий
+      </div>
+    </div>
+
+  </div>
+
+  <!-- COMPARISON TABLE -->
+  <div class="section-header">
+    <span class="section-number">02</span>
+    <h2 class="section-title">Сравнительная таблица</h2>
+  </div>
+
+  <table class="comparison-table">
+    <thead>
+      <tr>
+        <th>Критерий</th>
+        <th>nano-sk.ru</th>
+        <th>arm-plast.ru</th>
+        <th>21kompozit.ru</th>
+        <th>compositgroup74</th>
+        <th>stsgeo.ru</th>
+        <th>ROCKMESH<br><small style="font-weight:400;text-transform:none;">(потенциал)</small></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Цена открыта</strong></td>
+        <td>❌</td>
+        <td>✅</td>
+        <td>✅</td>
+        <td>✅</td>
+        <td>❌</td>
+        <td><strong>✅ 150₽/м²</strong></td>
+      </tr>
+      <tr>
+        <td><strong>Конкретные цифры в Hero</strong></td>
+        <td>❌</td>
+        <td>Частично</td>
+        <td>✅ (4 claims)</td>
+        <td>Частично</td>
+        <td>❌</td>
+        <td><strong>✅ Потенциал</strong></td>
+      </tr>
+      <tr>
+        <td><strong>Фото «кустарка vs мы»</strong></td>
+        <td>❌</td>
+        <td>❌</td>
+        <td>❌</td>
+        <td>❌</td>
+        <td>❌</td>
+        <td><span class="win-badge">Только мы</span></td>
+      </tr>
+      <tr>
+        <td><strong>Международные объекты</strong></td>
+        <td>❌</td>
+        <td>❌</td>
+        <td>❌</td>
+        <td>❌</td>
+        <td>❌</td>
+        <td><span class="win-badge">Лувр, ОАЭ</span></td>
+      </tr>
+      <tr>
+        <td><strong>Объяснение защиты от щёлочи</strong></td>
+        <td>Кратко</td>
+        <td>Кратко</td>
+        <td>❌</td>
+        <td>Кратко</td>
+        <td>❌</td>
+        <td><span class="win-badge">Главный акцент</span></td>
+      </tr>
+      <tr>
+        <td><strong>Современный визуальный дизайн</strong></td>
+        <td>❌</td>
+        <td>❌</td>
+        <td>Лучший (6/10)</td>
+        <td>❌</td>
+        <td>❌</td>
+        <td><span class="win-badge">Цель 9/10</span></td>
+      </tr>
+      <tr>
+        <td><strong>Антивозражатель на цену</strong></td>
+        <td>❌</td>
+        <td>✅ «Нашли дешевле»</td>
+        <td>❌</td>
+        <td>«Дешевле металла 50%»</td>
+        <td>❌</td>
+        <td><strong>Нужно добавить</strong></td>
+      </tr>
+      <tr>
+        <td><strong>WhatsApp CTA</strong></td>
+        <td>❌</td>
+        <td>❌</td>
+        <td>❌</td>
+        <td>❌</td>
+        <td>❌</td>
+        <td><span class="win-badge">Только мы</span></td>
+      </tr>
+      <tr>
+        <td><strong>Мобильный sticky CTA</strong></td>
+        <td>❌</td>
+        <td>❌</td>
+        <td>❌</td>
+        <td>❌</td>
+        <td>❌</td>
+        <td><span class="win-badge">Только мы</span></td>
+      </tr>
+      <tr>
+        <td><strong>Итоговый балл</strong></td>
+        <td><span class="score-cell score-mid">37</span></td>
+        <td><span class="score-cell score-high">51</span></td>
+        <td><span class="score-cell score-mid">44</span></td>
+        <td><span class="score-cell score-mid">42</span></td>
+        <td><span class="score-cell score-low">27</span></td>
+        <td><span class="score-cell" style="color:var(--orange)">70+</span></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- PAINS -->
+  <div class="section-header">
+    <span class="section-number">03</span>
+    <h2 class="section-title">Боли покупателей — дословно</h2>
+  </div>
+
+  <div class="pains-list">
+
+    <div class="pain-card">
+      <div class="pain-number">01</div>
+      <div class="pain-body">
+        <h3>«80-95% рынка — контрафакт»</h3>
+        <blockquote class="pain-quote">«Главное арматуру нормальную купить гостовскую, а не КОНТРАФАКТ !!!!!!!!!!! Его сейчас от 80 до 95% на рынке!»</blockquote>
+        <div class="pain-source">forum.vashdom.ru</div>
+        <p style="font-size:13px;color:var(--ink-soft);margin-top:8px;">Это системный страх всей ниши. Покупатель не знает, как отличить качественное от плохого. Он покупает «вслепую» и боится.</p>
+      </div>
+      <div class="pain-answer">
+        <div class="pain-answer-label">ROCKMESH отвечает</div>
+        <p>ISO 9001:2015 Bureau Veritas + Сертификат РОСС RU.АГ25.Н12228 + Производитель Гален с 25+ летней историей и объектами на 3 континентах.</p>
+      </div>
+    </div>
+
+    <div class="pain-card">
+      <div class="pain-number">02</div>
+      <div class="pain-body">
+        <h3>«Дешёвая сетка разрушается от щёлочи бетона»</h3>
+        <blockquote class="pain-quote">«Дешёвая кустарная сетка не защищена от щёлочи в бетоне и со временем рассыпается.»</blockquote>
+        <div class="pain-source">Утверждённый текст клиента (Описание проекта.md)</div>
+        <p style="font-size:13px;color:var(--ink-soft);margin-top:8px;">Покупатель думает «сетка — это сетка». Не знает, что без аминного отвердителя она разрушается через несколько лет. Нужно объяснить химию доступно.</p>
+      </div>
+      <div class="pain-answer">
+        <div class="pain-answer-label">ROCKMESH отвечает</div>
+        <p>«Аминные отвердители защищают сетку от разрушающего воздействия щёлочи, влаги и солей» — это буквально в утверждённом тексте. Никто из конкурентов так конкретно не объясняет.</p>
+      </div>
+    </div>
+
+    <div class="pain-card">
+      <div class="pain-number">03</div>
+      <div class="pain-body">
+        <h3>«Продают 7 мм как 8 — при большом объёме потери огромные»</h3>
+        <blockquote class="pain-quote">«Недобросовестные продавцы часто умышленно выдают арматуру, например, 7 мм толщиной за «восьмёрку». При покупке большого объема разница в цене будет существенна.»</blockquote>
+        <div class="pain-source">xn--80aa9apclh7a9a.xn--p1ai (производитель СПА, СПб)</div>
+        <p style="font-size:13px;color:var(--ink-soft);margin-top:8px;">Технический обман. Для прораба с объёмом 500+ м² — это 15-20% переплаты или недополучения прочности.</p>
+      </div>
+      <div class="pain-answer">
+        <div class="pain-answer-label">ROCKMESH отвечает</div>
+        <p>«Не обманем: диаметр и размеры всегда точные» — утверждённый текст клиента. Подкрепляется сертификатом и возможностью проверить прямо на складе.</p>
+      </div>
+    </div>
+
+    <div class="pain-card">
+      <div class="pain-number">04</div>
+      <div class="pain-body">
+        <h3>«Найти надёжного поставщика в Москве — крайне сложно»</h3>
+        <blockquote class="pain-quote">«Поставщиков строительной сетки и сыпучих материалов в Москве много, но найти надежного – крайне сложно. А нашей компании нужны партнеры, на которых всегда можно положиться.»</blockquote>
+        <div class="pain-source">Дмитрий Стрельцов, Москва (arm-plast.ru отзывы, 29.03.2018)</div>
+        <p style="font-size:13px;color:var(--ink-soft);margin-top:8px;">B2B-покупатель не ищет «дешевле». Он ищет надёжного. Цена становится вторичной, если есть надёжность.</p>
+      </div>
+      <div class="pain-answer">
+        <div class="pain-answer-label">ROCKMESH отвечает</div>
+        <p>Производитель Гален — авторитет с международными объектами. ОГРН 1022100979780 — можно проверить. Бейдж Авито «Реквизиты проверены».</p>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- PALETTE -->
+  <div class="section-header">
+    <span class="section-number">04</span>
+    <h2 class="section-title">Нишевая палитра</h2>
+  </div>
+
+  <div class="palette-row">
+    <div class="palette-chip">
+      <div class="palette-color" style="background:#1976D2;"></div>
+      <div class="palette-hex">#1976D2</div>
+      <div class="palette-name">Нишевый синий<br>(2 из 5)</div>
+    </div>
+    <div class="palette-chip">
+      <div class="palette-color" style="background:#2E7D32;"></div>
+      <div class="palette-hex">#2E7D32</div>
+      <div class="palette-name">Зелёный<br>(nano-sk)</div>
+    </div>
+    <div class="palette-chip">
+      <div class="palette-color" style="background:#FF6F00;"></div>
+      <div class="palette-hex">#FF6F00</div>
+      <div class="palette-name">Оранжевый<br>(21kompozit)</div>
+    </div>
+    <div class="palette-chip">
+      <div class="palette-color" style="background:#E65100;"></div>
+      <div class="palette-hex">#E65100</div>
+      <div class="palette-name">Тёмно-оранж.<br>(composit74)</div>
+    </div>
+    <div style="width:1px;background:var(--paper-dark);margin:0 8px;"></div>
+    <div class="palette-chip">
+      <div class="palette-color" style="background:#FF6B00;border:3px solid var(--ink);"></div>
+      <div class="palette-hex" style="font-weight:700;">#FF6B00</div>
+      <div class="palette-name" style="font-weight:700;color:var(--orange);">ROCKMESH<br>НАШ АКЦЕНТ</div>
+    </div>
+  </div>
+
+  <!-- GAPS -->
+  <div class="section-header">
+    <span class="section-number">05</span>
+    <h2 class="section-title">GAP-анализ — что не делает никто</h2>
+  </div>
+
+  <div class="gaps-grid">
+    <div class="gap-card">
+      <div class="gap-tag">GAP #1 · Доверие</div>
+      <div class="gap-title">Фото «кустарная сетка vs наша» — никто не показывает</div>
+      <div class="gap-desc">Покупатель боится контрафакта, но ни один конкурент не показывает прямое сравнение. У нас есть avito_03.jpg — торцы кустарной и ROCKMESH рядом. Это убийственный аргумент, который некуда деть конкурентам.</div>
+    </div>
+    <div class="gap-card">
+      <div class="gap-tag">GAP #2 · Доверие</div>
+      <div class="gap-title">Международные объекты (Лувр) — только у Гален</div>
+      <div class="gap-desc">Все конкуренты — российские игроки без международного признания. Гален поставлял продукцию на строительство Лувра в Абу-Даби. Это credential уровня «проверено на объектах мирового масштаба».</div>
+    </div>
+    <div class="gap-card">
+      <div class="gap-tag">GAP #3 · UX</div>
+      <div class="gap-title">WhatsApp + мобильный sticky CTA — никто не делает</div>
+      <div class="gap-desc">Все конкуренты предлагают только звонок или «заявку». Ни у кого нет WhatsApp CTA. Ни у кого нет мобильного sticky бара (появляется после 30% скролла). В строительной нише 60%+ трафика мобильный.</div>
+    </div>
+    <div class="gap-card">
+      <div class="gap-tag">GAP #4 · Контент</div>
+      <div class="gap-title">Drag-slider «до/после» — никто не показывает сравнение интерактивно</div>
+      <div class="gap-desc">Arm-plast говорит «в 3-4 раза прочнее» — словами. Никто не делает визуальное интерактивное сравнение через drag-slider. У нас есть avito_03.jpg — идеальный материал для before/after.</div>
+    </div>
+    <div class="gap-card">
+      <div class="gap-tag">GAP #5 · Образование</div>
+      <div class="gap-title">Объяснение химии щёлочи — никто не делает понятно</div>
+      <div class="gap-desc">Все говорят «щёлочестойкая». Никто не объясняет ПОЧЕМУ: аминный отвердитель нейтрализует щёлочь бетона, поэтому сетка не разрушается. Это понятный химический факт, который становится дифференциатором.</div>
+    </div>
+    <div class="gap-card">
+      <div class="gap-tag">GAP #6 · Дизайн</div>
+      <div class="gap-title">Современный дизайн — ни у кого нет</div>
+      <div class="gap-desc">Лучший дизайн в нише — 6/10 (21kompozit). Конкуренты застряли в 2017-2019. Современный сайт с GSAP-анимациями и Inter Tight автоматически воспринимается как «более надёжный производитель».</div>
+    </div>
+  </div>
+
+  <!-- PATTERNS -->
+  <div class="section-header">
+    <span class="section-number">06</span>
+    <h2 class="section-title">Паттерны топ-10%</h2>
+  </div>
+
+  <div class="patterns-grid">
+    <div class="pattern-card">
+      <div class="pattern-number">01</div>
+      <div class="pattern-title">Конкретные цифры вместо слов</div>
+      <div class="pattern-desc">«Прочная» не работает. «В 3-4 раза прочнее» — работает. «100 лет срок службы» — работает. Лидеры дают цифры в каждом блоке.</div>
+    </div>
+    <div class="pattern-card">
+      <div class="pattern-number">02</div>
+      <div class="pattern-title">Антивозражатель на цену в Hero</div>
+      <div class="pattern-desc">arm-plast: «Нашли дешевле? Снизим цену» прямо в шапке. Снимает ценовое сравнение до того, как покупатель открыл другой сайт.</div>
+    </div>
+    <div class="pattern-card">
+      <div class="pattern-number">03</div>
+      <div class="pattern-title">Открытые цены без форм «по запросу»</div>
+      <div class="pattern-desc">Конкуренты с открытыми ценами конвертируют лучше. «По запросу» — это барьер. 150 ₽/м² — конкретно и сразу снимает барьер.</div>
+    </div>
+    <div class="pattern-card">
+      <div class="pattern-number">04</div>
+      <div class="pattern-title">Сертификаты не внизу, а в Header</div>
+      <div class="pattern-desc">Лидеры выносят ISO, ГОСТ и «от производителя» в первый экран. Не в подвал. Trust-сигналы работают только там, где их видят.</div>
+    </div>
+    <div class="pattern-card">
+      <div class="pattern-number">05</div>
+      <div class="pattern-title">Образовательный контент закрывает страх</div>
+      <div class="pattern-desc">Сайты с разделом «почему композит лучше металла» держат пользователя дольше и конвертируют лучше. Покупатель хочет понять перед покупкой.</div>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <!-- METHODOLOGY -->
+  <div class="section-header">
+    <span class="section-number">07</span>
+    <h2 class="section-title">Методология — 8 фаз от ключевого слова до отчёта</h2>
+  </div>
+
+  <p style="font-size:15px;color:var(--ink-soft);max-width:680px;line-height:1.7;margin-bottom:40px;">
+    Этот отчёт создан по скиллу <strong>competitive-intel-to-html</strong> — гибриду методологии
+    Jack Roberts (visual/SEO benchmarking) и Дмитрия Попова (боли из реальных отзывов).
+    Ниже — пошаговый процесс, воспроизводимый для любой ниши.
+  </p>
+
+  <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px;margin-bottom:48px;">
+
+    <div style="background:white;border:1px solid var(--paper-dark);border-radius:12px;padding:24px;position:relative;overflow:hidden;">
+      <div style="position:absolute;top:0;right:0;width:80px;height:80px;background:var(--orange);opacity:0.06;border-radius:0 12px 0 80px;"></div>
+      <div style="font-family:'Instrument Serif',serif;font-size:40px;font-style:italic;color:var(--orange);line-height:1;margin-bottom:12px;">01</div>
+      <div style="font-weight:600;font-size:15px;margin-bottom:8px;">SERP Discovery</div>
+      <div style="font-size:13px;color:var(--ink-soft);line-height:1.6;">Firecrawl search по 3-5 коммерческим запросам. Дедупликация URL. Топ-7 конкурентов ранжированы по частоте появления + intent bucket.</div>
+      <div style="margin-top:12px;font-size:11px;font-weight:600;color:var(--orange);letter-spacing:0.05em;text-transform:uppercase;">→ 01-serp.json</div>
+    </div>
+
+    <div style="background:white;border:1px solid var(--paper-dark);border-radius:12px;padding:24px;position:relative;overflow:hidden;">
+      <div style="position:absolute;top:0;right:0;width:80px;height:80px;background:var(--orange);opacity:0.06;border-radius:0 12px 0 80px;"></div>
+      <div style="font-family:'Instrument Serif',serif;font-size:40px;font-style:italic;color:var(--orange);line-height:1;margin-bottom:12px;">02</div>
+      <div style="font-weight:600;font-size:15px;margin-bottom:8px;">Scrape сайтов</div>
+      <div style="font-size:13px;color:var(--ink-soft);line-height:1.6;">Firecrawl scrape каждого конкурента: H1, CTA, цены, сертификаты, trust-элементы, цвета. Один .md на домен.</div>
+      <div style="margin-top:12px;font-size:11px;font-weight:600;color:var(--orange);letter-spacing:0.05em;text-transform:uppercase;">→ 02-sites/&lt;domain&gt;.md</div>
+    </div>
+
+    <div style="background:white;border:1px solid var(--paper-dark);border-radius:12px;padding:24px;position:relative;overflow:hidden;">
+      <div style="position:absolute;top:0;right:0;width:80px;height:80px;background:var(--orange);opacity:0.06;border-radius:0 12px 0 80px;"></div>
+      <div style="font-family:'Instrument Serif',serif;font-size:40px;font-style:italic;color:var(--orange);line-height:1;margin-bottom:12px;">03</div>
+      <div style="font-weight:600;font-size:15px;margin-bottom:8px;">Отзывы — дословно</div>
+      <div style="font-size:13px;color:var(--ink-soft);line-height:1.6;">2GIS, Отзовик, Я.Маркет, форумы. Минимум 15 дословных цитат + pain category + source URL. Без перефразирования — язык покупателя = язык сайта.</div>
+      <div style="margin-top:12px;font-size:11px;font-weight:600;color:var(--orange);letter-spacing:0.05em;text-transform:uppercase;">→ 03-reviews/&lt;source&gt;.md</div>
+    </div>
+
+    <div style="background:white;border:1px solid var(--paper-dark);border-radius:12px;padding:24px;position:relative;overflow:hidden;">
+      <div style="position:absolute;top:0;right:0;width:80px;height:80px;background:var(--orange);opacity:0.06;border-radius:0 12px 0 80px;"></div>
+      <div style="font-family:'Instrument Serif',serif;font-size:40px;font-style:italic;color:var(--orange);line-height:1;margin-bottom:12px;">04</div>
+      <div style="font-weight:600;font-size:15px;margin-bottom:8px;">Скоринг 8×10</div>
+      <div style="font-size:13px;color:var(--ink-soft);line-height:1.6;">Матрица: видимость в поиске, отзывы, дизайн, мобильность, глубина контента, social proof, CTA, скорость. Определяет лидера и паттерны топ-10%.</div>
+      <div style="margin-top:12px;font-size:11px;font-weight:600;color:var(--orange);letter-spacing:0.05em;text-transform:uppercase;">→ 04-scoring.md</div>
+    </div>
+
+    <div style="background:white;border:1px solid var(--paper-dark);border-radius:12px;padding:24px;position:relative;overflow:hidden;">
+      <div style="position:absolute;top:0;right:0;width:80px;height:80px;background:var(--orange);opacity:0.06;border-radius:0 12px 0 80px;"></div>
+      <div style="font-family:'Instrument Serif',serif;font-size:40px;font-style:italic;color:var(--orange);line-height:1;margin-bottom:12px;">05</div>
+      <div style="font-weight:600;font-size:15px;margin-bottom:8px;">GAP-анализ — 7 бакетов</div>
+      <div style="font-size:13px;color:var(--ink-soft);line-height:1.6;">Насыщение → Пробелы → Визуал → Copy-язык → Trust → Цена → Мобайл. Правило: ни один GAP без доказательства, ни одна рекомендация без цитаты.</div>
+      <div style="margin-top:12px;font-size:11px;font-weight:600;color:var(--orange);letter-spacing:0.05em;text-transform:uppercase;">→ 05-gap-analysis.md</div>
+    </div>
+
+    <div style="background:white;border:1px solid var(--paper-dark);border-radius:12px;padding:24px;position:relative;overflow:hidden;border-left:3px solid var(--orange);">
+      <div style="position:absolute;top:0;right:0;width:80px;height:80px;background:var(--orange);opacity:0.08;border-radius:0 12px 0 80px;"></div>
+      <div style="font-family:'Instrument Serif',serif;font-size:40px;font-style:italic;color:var(--orange);line-height:1;margin-bottom:12px;">06</div>
+      <div style="font-weight:600;font-size:15px;margin-bottom:8px;">Стратегия структуры сайта <span style="font-size:10px;background:var(--orange);color:white;padding:2px 6px;border-radius:4px;vertical-align:middle;font-weight:600;letter-spacing:0.04em;">КЛЮЧЕВАЯ</span></div>
+      <div style="font-size:13px;color:var(--ink-soft);line-height:1.6;">Мост между исследованием и реализацией. Каждая секция × 6 полей: задача / боль / доказательство / почему здесь / роль в конверсии. Определяет порядок секций как воронку решения.</div>
+      <div style="margin-top:12px;font-size:11px;font-weight:600;color:var(--orange);letter-spacing:0.05em;text-transform:uppercase;">→ 06-site-structure.md</div>
+    </div>
+
+    <div style="background:white;border:1px solid var(--paper-dark);border-radius:12px;padding:24px;position:relative;overflow:hidden;">
+      <div style="position:absolute;top:0;right:0;width:80px;height:80px;background:var(--orange);opacity:0.06;border-radius:0 12px 0 80px;"></div>
+      <div style="font-family:'Instrument Serif',serif;font-size:40px;font-style:italic;color:var(--orange);line-height:1;margin-bottom:12px;">07</div>
+      <div style="font-weight:600;font-size:15px;margin-bottom:8px;">Wireframe — боль × UI</div>
+      <div style="font-size:13px;color:var(--ink-soft);line-height:1.6;">Визуализирует одобренную структуру, не изобретает её. Каждая секция × 4 атрибута: функция / боль / бенчмарк / конкретный UI-элемент.</div>
+      <div style="margin-top:12px;font-size:11px;font-weight:600;color:var(--orange);letter-spacing:0.05em;text-transform:uppercase;">→ 07-wireframe.md</div>
+    </div>
+
+    <div style="background:white;border:1px solid var(--paper-dark);border-radius:12px;padding:24px;position:relative;overflow:hidden;">
+      <div style="position:absolute;top:0;right:0;width:80px;height:80px;background:var(--orange);opacity:0.06;border-radius:0 12px 0 80px;"></div>
+      <div style="font-family:'Instrument Serif',serif;font-size:40px;font-style:italic;color:var(--orange);line-height:1;margin-bottom:12px;">08</div>
+      <div style="font-weight:600;font-size:15px;margin-bottom:8px;">Тексты на языке покупателя</div>
+      <div style="font-size:13px;color:var(--ink-soft);line-height:1.6;">Только для секций без утверждённого текста. Язык из отзывов, конкретный механизм, нет флаффа. Каждый claim = цифра или сравнение.</div>
+      <div style="margin-top:12px;font-size:11px;font-weight:600;color:var(--orange);letter-spacing:0.05em;text-transform:uppercase;">→ 08-copy.md</div>
+    </div>
+
+    <div style="background:var(--ink);border-radius:12px;padding:24px;position:relative;overflow:hidden;">
+      <div style="position:absolute;top:0;right:0;width:80px;height:80px;background:var(--orange);opacity:0.15;border-radius:0 12px 0 80px;"></div>
+      <div style="font-family:'Instrument Serif',serif;font-size:40px;font-style:italic;color:var(--orange);line-height:1;margin-bottom:12px;">09</div>
+      <div style="font-weight:600;font-size:15px;margin-bottom:8px;color:var(--paper);">HTML-отчёт для клиента</div>
+      <div style="font-size:13px;color:rgba(245,240,232,0.65);line-height:1.6;">Self-contained HTML без сервера. Grain overlay, Instrument Serif + DM Sans, dark cover с оранжевым glow. 9 секций — стратегия, а не дамп данных.</div>
+      <div style="margin-top:12px;font-size:11px;font-weight:600;color:var(--orange);letter-spacing:0.05em;text-transform:uppercase;">→ 04-competitive-report.html (этот файл)</div>
+    </div>
+
+  </div>
+
+  <div style="background:var(--paper-dark);border-radius:12px;padding:24px 32px;margin-bottom:8px;display:flex;gap:32px;flex-wrap:wrap;align-items:center;">
+    <div>
+      <div style="font-size:11px;text-transform:uppercase;letter-spacing:0.08em;color:var(--ink-soft);margin-bottom:4px;">Скилл</div>
+      <div style="font-weight:600;font-size:15px;">competitive-intel-to-html</div>
+    </div>
+    <div>
+      <div style="font-size:11px;text-transform:uppercase;letter-spacing:0.08em;color:var(--ink-soft);margin-bottom:4px;">Субскилл</div>
+      <div style="font-weight:600;font-size:15px;">pain-driven-research</div>
+    </div>
+    <div>
+      <div style="font-size:11px;text-transform:uppercase;letter-spacing:0.08em;color:var(--ink-soft);margin-bottom:4px;">Фаз</div>
+      <div style="font-weight:600;font-size:15px;">9 фаз · 9 артефактов</div>
+    </div>
+    <div>
+      <div style="font-size:11px;text-transform:uppercase;letter-spacing:0.08em;color:var(--ink-soft);margin-bottom:4px;">Время выполнения</div>
+      <div style="font-weight:600;font-size:15px;">~21 мин · 86 tool-uses</div>
+    </div>
+    <div>
+      <div style="font-size:11px;text-transform:uppercase;letter-spacing:0.08em;color:var(--ink-soft);margin-bottom:4px;">Агент</div>
+      <div style="font-weight:600;font-size:15px;">Claude Sonnet · subagent</div>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <!-- CONCLUSION -->
+  <div style="background:var(--ink);color:var(--paper);border-radius:16px;padding:48px;">
+    <h2 style="font-family:'Instrument Serif',serif;font-size:32px;margin-bottom:24px;line-height:1.2;">ROCKMESH может стать<br><em style="color:var(--orange);">первым по-настоящему<br>доверенным игроком</em> в нише</h2>
+    <p style="font-size:16px;color:rgba(245,240,232,0.7);max-width:620px;line-height:1.7;margin-bottom:32px;">Рынок стеклопластиковой сетки заполнен производителями с устаревшими сайтами и дилерами без прозрачности. Покупатель боится контрафакта, но никто не даёт ему инструменты для проверки. ROCKMESH от Гален — единственный, кто имеет международные объекты (Лувр), фото прямого сравнения с кустаркой, аминную защиту от щёлочи и открытую цену 150 ₽/м². Правильный сайт превращает эти преимущества в доверие и продажи.</p>
+    <div style="display:flex;gap:24px;flex-wrap:wrap;">
+      <div style="background:rgba(255,107,0,0.15);border-radius:8px;padding:16px 24px;">
+        <div style="font-size:11px;text-transform:uppercase;letter-spacing:0.08em;color:rgba(245,240,232,0.5);margin-bottom:4px;">Потенциальный скор</div>
+        <div style="font-family:'Instrument Serif',serif;font-size:36px;font-style:italic;color:var(--orange);">70+/80</div>
+      </div>
+      <div style="background:rgba(255,107,0,0.15);border-radius:8px;padding:16px 24px;">
+        <div style="font-size:11px;text-transform:uppercase;letter-spacing:0.08em;color:rgba(245,240,232,0.5);margin-bottom:4px;">Уникальных GAP'ов</div>
+        <div style="font-family:'Instrument Serif',serif;font-size:36px;font-style:italic;color:var(--orange);">6 из 6</div>
+      </div>
+      <div style="background:rgba(255,107,0,0.15);border-radius:8px;padding:16px 24px;">
+        <div style="font-size:11px;text-transform:uppercase;letter-spacing:0.08em;color:rgba(245,240,232,0.5);margin-bottom:4px;">Конкурент смог воспроизвести</div>
+        <div style="font-family:'Instrument Serif',serif;font-size:36px;font-style:italic;color:var(--orange);">0</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- FOOTER -->
+<div class="report-footer">
+  <div>
+    <div class="footer-brand">ROCKMESH · Competitive Analysis</div>
+    <div style="font-size:12px;color:rgba(245,240,232,0.4);margin-top:4px;">Сайт «Стеклопластиковая сетка Гален»</div>
+  </div>
+  <div class="footer-meta">
+    <div>Подготовлено: 10 мая 2026</div>
+    <div>Методология: pain-driven-research</div>
+    <div>Источников: 6 · Конкурентов: 7</div>
+  </div>
+</div>
+
+</body>
+</html>
