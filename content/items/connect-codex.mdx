@@ -15,17 +15,115 @@ featured: false
 
 Скилл вшивает официальный плагин OpenAI Codex CLI в Claude Code, чтобы внутри одной сессии работали два LLM-агента. Claude предлагает, Codex ревьюит — diff-review, adversarial-критика плана, rescue-делегирование. Аутентификация идёт через подписку ChatGPT Plus/Pro/Business, отдельный API-ключ не нужен.
 
-Шесть проверенных шагов: установить Codex CLI, пройти `codex login`, добавить маркетплейс `openai/codex-plugin-cc`, поставить плагин `codex@openai-codex`, перезапустить Claude Code, проверить `/codex:status`. После этого появляются `/codex:review`, `/codex:adversarial-review`, `/codex:rescue`, `/codex:status`, `/codex:result`, `/codex:cancel`, `/codex:setup`.
+Шесть проверенных шагов: установить Codex CLI, пройти `codex login`, добавить маркетплейс `openai/codex-plugin-cc`, поставить плагин `codex@openai-codex`, перезапустить Claude Code, проверить `/codex:status`.
 
-## Установка
+## Быстрая установка (одной командой)
 
 ```bash
 curl -fsSL https://raw.githubusercontent.com/sergeyramas/connect-codex-skill/main/install.sh | bash
 ```
 
-После установки — перезапусти Claude Code.
+Эта команда ставит **только сам скилл-инструкцию** в `~/.claude/skills/connect-codex/`. Codex CLI и плагин ставятся уже внутри Claude-сессии — следующие 6 шагов скилл проведёт интерактивно. После установки скилла перезапусти Claude Code и скажи агенту: *"подключи кодекс"*.
 
-## Триггеры
+Хочешь сделать всё руками — следуй пошаговой инструкции ниже.
+
+---
+
+## Ручная установка — пошагово
+
+Готово к повторению на чистой машине с отдельным ChatGPT-аккаунтом для Codex.
+
+### Что должно стоять до начала
+
+- macOS с Homebrew (или Linux с npm).
+- Claude Code (`claude`) уже установлен и залогинен.
+- Активная подписка ChatGPT (Plus / Pro / Business) — Codex CLI авторизуется через ChatGPT OAuth, API-ключ не нужен.
+
+### Шаг 1. Установить Codex CLI
+
+```bash
+brew install codex
+codex --version   # должно показать 0.125.0 или новее
+```
+
+Альтернатива без brew:
+
+```bash
+npm install -g @openai/codex-cli
+```
+
+### Шаг 2. Залогинить Codex в отдельный кабинет ChatGPT
+
+```bash
+codex login
+```
+
+Откроется браузер → войти под **тем ChatGPT-аккаунтом, который выделен под Codex** (не путать с основным аккаунтом Claude).
+
+Токены лягут в `~/.codex/auth.json`. Проверка:
+
+```bash
+codex whoami
+```
+
+### Шаг 3. Добавить маркетплейс плагинов OpenAI в Claude Code
+
+В сессии `claude` выполнить:
+
+```
+/plugin marketplace add openai/codex-plugin-cc
+```
+
+Это подключает GitHub-репо [openai/codex-plugin-cc](https://github.com/openai/codex-plugin-cc) как источник плагинов.
+
+### Шаг 4. Установить сам плагин
+
+```
+/plugin install codex@openai-codex
+```
+
+Плагин ставится в `~/.claude/plugins/` и регистрируется в `~/.claude/settings.json` в секции `enabledPlugins` (scope=user — доступен во всех проектах).
+
+### Шаг 5. Перезапустить Claude Code
+
+**Обязательно.** Slash-команды `/codex:*` появляются только после рестарта сессии:
+
+```bash
+exit   # или Ctrl-D
+claude
+```
+
+### Шаг 6. Проверить связку
+
+В новой сессии:
+
+```
+/codex:status
+```
+
+Должен ответить, что Codex доступен и авторизован. Если просит логин — `/codex:setup`.
+
+---
+
+## Что получаешь после установки
+
+| Команда | Назначение |
+|---|---|
+| `/codex:review` | Read-only ревью текущего diff'а Codex'ом |
+| `/codex:adversarial-review` | Адвокат дьявола (вставлять текст плана прямо в команду) |
+| `/codex:rescue` | Делегировать задачу Codex как сабагенту (фикс, второй проход) |
+| `/codex:status` / `/codex:result` / `/codex:cancel` | Управление фоновыми джобами |
+| `/codex:setup` | Ре-авторизация |
+
+## Типичные грабли
+
+- **Команд не видно** — не перезапустили сессию после `/plugin install`.
+- **`codex login` зависает** — проверь, что в браузере залогинен нужный ChatGPT-аккаунт; иначе разлогинься в браузере и повтори.
+- **Codex говорит "not authenticated"** — `~/.codex/auth.json` отсутствует или истёк; `codex login` заново.
+- **Лимиты** — Codex CLI ест квоту ChatGPT-подписки, не Claude. Если у второго человека Free-план — связка не заработает.
+- **Codex не видит визуальные баги** — только тесты / линт / архитектура; UI-проверки оставлять Claude + preview-инструментам.
+
+## Триггер-фразы для скилла
 
 - "подключи кодекс"
 - "поставь codex в claude code"
