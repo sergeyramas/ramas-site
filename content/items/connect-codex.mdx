@@ -1,0 +1,36 @@
+---
+title: "Подключение Codex к Claude Code"
+slug: "connect-codex"
+kind: solution
+summary: "Подключает OpenAI Codex CLI к Claude Code вторым AI-агентом: ревью диффа, adversarial-критика, rescue. Авторизация через ChatGPT-подписку. В Claude Code появляются /codex:review и /codex:rescue."
+cover: /covers/connect-codex.svg
+externalUrl: "https://github.com/sergeyramas/connect-codex-skill"
+tags: [skills, claude-code, codex, openai]
+status: live
+date: 2026-06-16
+featured: false
+---
+
+## Что делает
+
+Скилл вшивает официальный плагин OpenAI Codex CLI в Claude Code, чтобы внутри одной сессии работали два LLM-агента. Claude предлагает, Codex ревьюит — diff-review, adversarial-критика плана, rescue-делегирование. Аутентификация идёт через подписку ChatGPT Plus/Pro/Business, отдельный API-ключ не нужен.
+
+Шесть проверенных шагов: установить Codex CLI, пройти `codex login`, добавить маркетплейс `openai/codex-plugin-cc`, поставить плагин `codex@openai-codex`, перезапустить Claude Code, проверить `/codex:status`. После этого появляются `/codex:review`, `/codex:adversarial-review`, `/codex:rescue`, `/codex:status`, `/codex:result`, `/codex:cancel`, `/codex:setup`.
+
+## Установка
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/sergeyramas/connect-codex-skill/main/install.sh | bash
+```
+
+После установки — перезапусти Claude Code.
+
+## Триггеры
+
+- "подключи кодекс"
+- "поставь codex в claude code"
+- "связка claude+codex"
+- "install codex plugin"
+- "connect codex to claude code"
+
+[Полная инструкция и исходники →](https://github.com/sergeyramas/connect-codex-skill)
