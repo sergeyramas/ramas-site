@@ -1,0 +1,39 @@
+---
+title: "Подключение Gemini к Claude Code"
+slug: "connect-gemini"
+kind: solution
+summary: "Подключает Google Gemini CLI к Claude Code вторым агентом: /gemini для второго мнения и Google-поиска, /gemini-review для ревью диффа, субагент gemini для параллельных задач. Картинки Nano Banana через CLI — нет."
+cover: /covers/connect-gemini.svg
+externalUrl: "https://github.com/sergeyramas/connect-gemini-skill"
+tags: [skills, claude-code, gemini, google]
+status: live
+date: 2026-06-16
+featured: false
+---
+
+## Что делает
+
+Скилл превращает локально установленный Google **Gemini CLI** во второй LLM-агент внутри Claude Code. Claude рулит, Gemini становится вызываемым «вторым мозгом»: независимое мнение, веб-поиск с Google-grounding, анализ огромного контекста (1M+ токенов), ревью диффа. Зеркало связки с OpenAI Codex — только официального плагина у Google нет, поэтому здесь лёгкая обёртка над уже залогиненным `gemini` CLI.
+
+Появляются `/gemini` (one-shot вопрос), `/gemini-review` (независимое ревью текущего `git diff`) и субагент `gemini`, которого Claude может диспатчить в фон/параллель.
+
+**Про картинки:** Gemini CLI — кодовый/текстовый агент, он не генерит картинки Nano Banana (читать и анализировать изображения умеет). Для генерации нужен отдельный image-API.
+
+## Установка — два способа
+
+**Способ 1 (простой) — скорми промпт Клоду, он сам поставит.** В сессии Claude Code попроси установить коннектор, дальше он сам проверит CLI и запустит установщик.
+
+**Способ 2 (ручной) — одной командой:**
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/sergeyramas/connect-gemini-skill/main/install.sh | bash
+```
+
+После установки перезапусти Claude Code и проверь: `/gemini Ответь: GEMINI CONNECTOR OK`.
+
+## Триггеры
+
+- "подключи гемини"
+- "связка claude+gemini"
+
+[Полная инструкция и исходники →](https://github.com/sergeyramas/connect-gemini-skill)
