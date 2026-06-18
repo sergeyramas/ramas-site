@@ -1,0 +1,61 @@
+---
+title: "Claude Code × DeepSeek"
+slug: "claude-code-deepseek"
+kind: solution
+summary: "Запуск обычного Claude Code на моделях DeepSeek V4 (Pro/Flash) в ~10 раз дешевле — без прокси. Только env-переменные на официальный Anthropic-эндпоинт DeepSeek. Команды cds (весь Claude на DeepSeek) и deepseek (делегирование задачи из Opus)."
+cover: /covers/claude-code-deepseek.svg
+externalUrl: "https://github.com/sergeyramas/claude-code-deepseek"
+tags: [claude-code, deepseek, llm, cli, cost-optimization]
+status: live
+tier: free
+date: 2026-06-18
+featured: false
+---
+
+## Что делает
+
+Запускает **обычный Claude Code** на моделях **DeepSeek V4** — тот же CLI, те же
+инструменты, tool calling работает (проверено), но в **~10 раз дешевле**. И всё
+это **без прокси-сервера**: только переменные окружения, указывающие на
+официальный Anthropic-совместимый эндпоинт DeepSeek (`https://api.deepseek.com/anthropic`).
+
+Это не прокси и не плагин — пара bash-лаунчеров рядом с вашим `claude`. Ваша
+обычная команда `claude` (подписка, Opus) **не затрагивается**.
+
+- **`cds`** — весь Claude Code на DeepSeek V4 Pro.
+- **`deepseek "..."`** — делегировать одну задачу в DeepSeek прямо из сессии Opus
+  (headless), как «дешёвым рукам». `-f` — на DeepSeek V4 Flash для мелочи.
+
+## Быстрая установка (одной командой)
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/sergeyramas/claude-code-deepseek/main/install.sh | bash
+```
+
+Установщик идемпотентен: кладёт оба скрипта в `~/.local/bin`, делает симлинк
+`cds`, создаёт `~/.deepseek/api_key` (chmod 600). После — вставить ключ DeepSeek
+скрытно:
+
+```bash
+read -rs DS_KEY && printf '%s' "$DS_KEY" > ~/.deepseek/api_key && chmod 600 ~/.deepseek/api_key && unset DS_KEY
+```
+
+## Прямой метод vs прокси-плагин
+
+В отличие от популярного прокси-плагина «Free Claude Code» (поднимает локальный
+proxy-сервер), прямой метод не держит фоновых процессов, сохраняет нативный кэш
+промптов и переживает обновления Claude Code. Прокси нужен только провайдерам
+**без** официального Anthropic-эндпоинта (Ollama, LM Studio, OpenRouter) или для
+авто-роутинга. У DeepSeek такой эндпоинт есть — поэтому прямой метод чище.
+
+## Делегирование Opus → DeepSeek
+
+`deepseek` превращает DeepSeek в «дешёвые руки» под управлением Opus-оркестратора:
+Opus планирует и ревьюит, DeepSeek делает рутину за копейки. Guardrails:
+рекомендовать, но вызывать только спросив; не делегировать проекты с секретами;
+всегда ревьюить результат. Готовый блок политики — в `CLAUDE.md.example`.
+
+> ⚠️ При использовании код уходит на серверы DeepSeek. Не для чувствительных и
+> клиентских проектов.
+
+[Исходники и полная инструкция →](https://github.com/sergeyramas/claude-code-deepseek)
