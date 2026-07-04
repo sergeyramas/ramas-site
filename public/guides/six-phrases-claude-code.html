@@ -299,8 +299,24 @@
     margin-top: 70px; padding-top: 26px; border-top: 1px solid var(--line);
     font-size: 13px; color: var(--ink-mute); font-family: var(--mono); text-align: center;
   }
+  .foot-back { color: var(--gold); text-decoration: none; }
+  .foot-back:hover { text-decoration: underline; }
+
+  .backlink {
+    position: fixed; top: 16px; left: 16px; z-index: 20;
+    display: inline-flex; align-items: center; gap: 8px;
+    font-family: var(--mono); font-size: 13px; letter-spacing: .02em;
+    color: var(--ink-soft); text-decoration: none;
+    background: rgba(14,17,32,.72); -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px);
+    border: 1px solid var(--line); border-radius: 999px; padding: 8px 14px 8px 12px;
+    transition: color .18s, border-color .18s, background .18s;
+  }
+  .backlink:hover { color: var(--ink); border-color: var(--ink-mute); background: rgba(23,29,56,.9); }
+  .backlink .arrow { color: var(--gold); font-size: 15px; line-height: 1; }
+  .backlink:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
 
   @media (max-width: 720px) {
+    .backlink { top: 12px; left: 12px; font-size: 12px; padding: 7px 12px 7px 10px; }
     .groups { grid-template-columns: 1fr; }
     .ab { grid-template-columns: 1fr; }
     .kv { grid-template-columns: 1fr; gap: 4px 0; }
@@ -313,6 +329,7 @@
 </style>
 
 <div class="page">
+<a class="backlink" href="https://sergeyramas.vercel.app/"><span class="arrow" aria-hidden="true">←</span> на сайт</a>
 <div class="wrap">
 
   <!-- HERO -->
@@ -527,7 +544,8 @@
   </section>
 
   <footer>
-    Разбор видео · порядок 6 фраз по Борису Чёрному и Андрею Карпатому · нажми на любую команду, чтобы скопировать
+    Разбор видео · порядок 6 фраз по Борису Чёрному и Андрею Карпатому · нажми на любую команду, чтобы скопировать<br>
+    <a class="foot-back" href="https://sergeyramas.vercel.app/">← вернуться на sergeyramas.vercel.app</a>
   </footer>
 
 </div>
