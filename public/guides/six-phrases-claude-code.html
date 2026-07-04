@@ -1,0 +1,563 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>6 фраз для Claude Code — порядок, который экономит токены</title>
+  <meta name="description" content="Краткий протокол из шести фраз для Claude Code: субагенты, спека, интервью, проверка, скиллы и аккуратная автоматизация.">
+  <meta property="og:title" content="6 фраз для Claude Code — порядок, который экономит токены">
+  <meta property="og:description" content="Шесть команд в правильном порядке: фундамент, самоулучшение и осторожная автоматизация для Claude Code.">
+  <meta property="og:type" content="article">
+  <meta property="og:image" content="https://sergeyramas.vercel.app/covers/six-phrases-claude-code.svg">
+  <meta property="og:url" content="https://sergeyramas.vercel.app/guides/six-phrases-claude-code.html">
+  <style>html,body{margin:0;padding:0;background:#0e1120}</style>
+</head>
+<body>
+<style>
+  :root {
+    --bg:        #0e1120;
+    --bg-2:      #141931;
+    --panel:     #171d38;
+    --panel-2:   #1d2444;
+    --line:      #2a3160;
+    --ink:       #ecebe3;
+    --ink-soft:  #b6bad4;
+    --ink-mute:  #7d84a8;
+    --gold:      #f2b134;   /* фундамент 1–4 */
+    --gold-dim:  #6a5320;
+    --violet:    #9b8cff;   /* самоулучшение 5 */
+    --violet-dim:#3a3470;
+    --coral:     #ff6a5c;   /* опасная 6 */
+    --coral-dim: #6e2f2c;
+    --teal:      #46d6a6;   /* success / проверка */
+    --sans: "SF Pro Display", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+    --mono: ui-monospace, "SF Mono", "JetBrains Mono", "Cascadia Code", Menlo, monospace;
+    --wrap: 860px;
+  }
+
+  * { box-sizing: border-box; }
+
+  .page {
+    background:
+      radial-gradient(1200px 600px at 80% -10%, #1a2142 0%, transparent 60%),
+      radial-gradient(900px 500px at -10% 20%, #201a3a 0%, transparent 55%),
+      var(--bg);
+    background-attachment: fixed;
+    color: var(--ink);
+    font-family: var(--sans);
+    line-height: 1.6;
+    font-size: 17px;
+    -webkit-font-smoothing: antialiased;
+    padding: 0 20px 100px;
+    position: relative;
+    overflow-x: hidden;
+  }
+  /* тонкая инженерная сетка на фоне */
+  .page::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(120,130,200,.05) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(120,130,200,.05) 1px, transparent 1px);
+    background-size: 48px 48px;
+    pointer-events: none;
+    z-index: 0;
+  }
+  .wrap { max-width: var(--wrap); margin: 0 auto; position: relative; z-index: 1; }
+
+  /* ---------- HERO ---------- */
+  .hero { padding: 92px 0 40px; }
+  .kicker {
+    font-family: var(--mono);
+    font-size: 12.5px;
+    letter-spacing: .28em;
+    text-transform: uppercase;
+    color: var(--gold);
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 26px;
+  }
+  .kicker::before {
+    content: "";
+    width: 26px; height: 1px; background: var(--gold);
+  }
+  h1 {
+    font-size: clamp(38px, 7vw, 68px);
+    line-height: 1.03;
+    letter-spacing: -.028em;
+    font-weight: 800;
+    margin: 0 0 22px;
+    text-wrap: balance;
+  }
+  h1 em { color: var(--gold); font-style: normal; }
+  .lede {
+    font-size: clamp(18px, 2.4vw, 21px);
+    color: var(--ink-soft);
+    max-width: 620px;
+    margin: 0 0 34px;
+  }
+  .lede b { color: var(--ink); font-weight: 600; }
+
+  .stat-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+    margin-bottom: 30px;
+  }
+  .stat {
+    flex: 1 1 180px;
+    background: linear-gradient(160deg, var(--panel), var(--bg-2));
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: 18px 20px;
+  }
+  .stat .n { font-size: 30px; font-weight: 800; letter-spacing: -.02em; font-variant-numeric: tabular-nums; }
+  .stat.bad .n { color: var(--coral); }
+  .stat.good .n { color: var(--teal); }
+  .stat .l { font-size: 13.5px; color: var(--ink-mute); margin-top: 2px; }
+
+  .byline {
+    font-family: var(--mono);
+    font-size: 13px;
+    color: var(--ink-mute);
+    border-left: 2px solid var(--line);
+    padding-left: 14px;
+  }
+  .byline b { color: var(--ink-soft); font-weight: 600; }
+
+  /* ---------- SECTION HEADS ---------- */
+  .sec { margin-top: 78px; }
+  .sec-eyebrow {
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: .22em;
+    text-transform: uppercase;
+    color: var(--ink-mute);
+    margin-bottom: 12px;
+  }
+  h2 {
+    font-size: clamp(26px, 4vw, 36px);
+    letter-spacing: -.022em;
+    line-height: 1.12;
+    font-weight: 800;
+    margin: 0 0 16px;
+    text-wrap: balance;
+  }
+  .sec > p { color: var(--ink-soft); max-width: 640px; }
+
+  /* ---------- MAP OF 3 GROUPS ---------- */
+  .groups { display: grid; grid-template-columns: repeat(3,1fr); gap: 14px; margin-top: 26px; }
+  .grp {
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: 18px 18px 20px;
+    background: var(--panel);
+    position: relative;
+    overflow: hidden;
+  }
+  .grp::after { content:""; position:absolute; left:0; top:0; width:100%; height:3px; }
+  .grp.g1::after { background: var(--gold); }
+  .grp.g2::after { background: var(--violet); }
+  .grp.g3::after { background: var(--coral); }
+  .grp .tag { font-family: var(--mono); font-size: 11.5px; letter-spacing:.14em; text-transform:uppercase; color: var(--ink-mute); }
+  .grp h3 { margin: 6px 0 6px; font-size: 17px; font-weight: 700; }
+  .grp.g1 h3 { color: var(--gold); }
+  .grp.g2 h3 { color: var(--violet); }
+  .grp.g3 h3 { color: var(--coral); }
+  .grp p { margin: 0; font-size: 14px; color: var(--ink-soft); }
+
+  /* ---------- PHRASE CARDS ---------- */
+  .cards { display: flex; flex-direction: column; gap: 22px; margin-top: 34px; }
+  .card {
+    border: 1px solid var(--line);
+    border-radius: 18px;
+    background: linear-gradient(170deg, var(--panel), var(--bg-2) 90%);
+    padding: 28px 28px 26px;
+    position: relative;
+    scroll-margin-top: 24px;
+  }
+  .card::before {
+    content: "";
+    position: absolute; left: 0; top: 22px; bottom: 22px;
+    width: 3px; border-radius: 3px;
+  }
+  .card.c-gold::before   { background: var(--gold); }
+  .card.c-violet::before { background: var(--violet); }
+  .card.c-coral::before  { background: var(--coral); }
+
+  .card-head { display: flex; align-items: baseline; gap: 16px; margin-bottom: 14px; }
+  .num {
+    font-family: var(--mono);
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: .05em;
+    padding: 4px 10px;
+    border-radius: 999px;
+    border: 1px solid var(--line);
+    color: var(--ink-mute);
+    white-space: nowrap;
+  }
+  .card.c-gold .num   { color: var(--gold); border-color: var(--gold-dim); }
+  .card.c-violet .num { color: var(--violet); border-color: var(--violet-dim); }
+  .card.c-coral .num  { color: var(--coral); border-color: var(--coral-dim); }
+  .card h3 { margin: 0; font-size: clamp(21px, 3vw, 26px); font-weight: 800; letter-spacing: -.02em; }
+
+  .card > p { color: var(--ink-soft); margin: 0 0 16px; }
+  .card b { color: var(--ink); font-weight: 600; }
+
+  /* copy command */
+  .cmd {
+    display: flex; align-items: flex-start; gap: 12px;
+    background: #0b0e1c;
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 14px 14px 14px 16px;
+    margin: 4px 0 18px;
+    cursor: pointer;
+    transition: border-color .18s, background .18s;
+  }
+  .cmd:hover { border-color: var(--ink-mute); }
+  .cmd .prompt { color: var(--teal); font-family: var(--mono); font-size: 14px; user-select: none; padding-top:1px; }
+  .cmd code { font-family: var(--mono); font-size: 14px; color: var(--ink); line-height: 1.5; flex: 1; }
+  .cmd .copy {
+    font-family: var(--mono); font-size: 11px; letter-spacing: .1em; text-transform: uppercase;
+    color: var(--ink-mute); border: 1px solid var(--line); border-radius: 7px;
+    padding: 4px 8px; white-space: nowrap; user-select: none; align-self: center;
+    transition: color .18s, border-color .18s;
+  }
+  .cmd:hover .copy { color: var(--ink-soft); }
+  .cmd.copied .copy { color: var(--teal); border-color: var(--teal); }
+
+  .kv { display: grid; grid-template-columns: 128px 1fr; gap: 10px 18px; margin-top: 4px; }
+  .kv dt {
+    font-family: var(--mono); font-size: 11.5px; letter-spacing: .12em; text-transform: uppercase;
+    color: var(--ink-mute); padding-top: 3px;
+  }
+  .kv dd { margin: 0; color: var(--ink-soft); font-size: 15.5px; }
+  .kv dd b { color: var(--ink); }
+
+  .chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 2px; }
+  .chip {
+    font-size: 13.5px; padding: 5px 12px; border-radius: 999px;
+    background: var(--panel-2); border: 1px solid var(--line); color: var(--ink-soft);
+  }
+  .chip b { color: var(--ink); }
+
+  .gotcha {
+    margin-top: 16px;
+    border-radius: 12px;
+    padding: 13px 16px;
+    font-size: 14.5px;
+    background: rgba(255,106,92,.07);
+    border: 1px solid var(--coral-dim);
+    color: var(--ink-soft);
+  }
+  .gotcha b { color: var(--coral); }
+
+  /* layered list for phrase 4/6 */
+  .layers { display: flex; flex-direction: column; gap: 10px; margin: 6px 0 4px; }
+  .layer { display: flex; gap: 14px; align-items: flex-start; background: var(--panel-2); border: 1px solid var(--line); border-radius: 12px; padding: 13px 16px; }
+  .layer .ln { font-family: var(--mono); font-size: 12px; color: var(--ink-mute); padding-top: 2px; min-width: 58px; }
+  .layer .lt { font-size: 15px; color: var(--ink-soft); }
+  .layer .lt b { color: var(--ink); }
+
+  /* ---------- A/B COMPARISON ---------- */
+  .ab { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 30px; }
+  .ab-col { border: 1px solid var(--line); border-radius: 16px; overflow: hidden; background: var(--panel); }
+  .ab-col .top { padding: 16px 20px; border-bottom: 1px solid var(--line); }
+  .ab-col.plain .top { background: var(--bg-2); }
+  .ab-col.skill .top { background: linear-gradient(120deg, rgba(242,177,52,.14), transparent); }
+  .ab-col .top .t { font-size: 12px; font-family: var(--mono); letter-spacing: .16em; text-transform: uppercase; color: var(--ink-mute); }
+  .ab-col .top .h { font-size: 19px; font-weight: 800; letter-spacing: -.01em; margin-top: 4px; }
+  .ab-col.skill .top .h { color: var(--gold); }
+  .ab-col ul { list-style: none; margin: 0; padding: 16px 20px 20px; display: flex; flex-direction: column; gap: 11px; }
+  .ab-col li { font-size: 14.5px; color: var(--ink-soft); padding-left: 24px; position: relative; }
+  .ab-col.plain li::before { content: "—"; position: absolute; left: 0; color: var(--ink-mute); }
+  .ab-col.skill li::before { content: "✓"; position: absolute; left: 0; color: var(--teal); font-weight: 700; }
+  .ab-col li b { color: var(--ink); }
+  .verdict {
+    margin-top: 18px; text-align: center; font-size: 15px; color: var(--ink-soft);
+    font-family: var(--mono); letter-spacing: .02em;
+  }
+  .verdict b { color: var(--gold); }
+
+  /* ---------- CHEAT SHEET ---------- */
+  .cheat { margin-top: 30px; border: 1px solid var(--line); border-radius: 18px; overflow: hidden; }
+  .cheat .row { display: grid; grid-template-columns: 44px 1fr; gap: 16px; padding: 15px 20px; border-bottom: 1px solid var(--line); align-items: baseline; }
+  .cheat .row:last-child { border-bottom: none; }
+  .cheat .row:nth-child(odd) { background: rgba(255,255,255,.012); }
+  .cheat .rn { font-family: var(--mono); font-weight: 700; font-size: 15px; }
+  .cheat .row.r1 .rn,.cheat .row.r2 .rn,.cheat .row.r3 .rn,.cheat .row.r4 .rn { color: var(--gold); }
+  .cheat .row.r5 .rn { color: var(--violet); }
+  .cheat .row.r6 .rn { color: var(--coral); }
+  .cheat .rc code { font-family: var(--mono); font-size: 14px; color: var(--ink); }
+  .cheat .rc span { display: block; font-size: 13px; color: var(--ink-mute); margin-top: 3px; }
+
+  footer {
+    margin-top: 70px; padding-top: 26px; border-top: 1px solid var(--line);
+    font-size: 13px; color: var(--ink-mute); font-family: var(--mono); text-align: center;
+  }
+
+  @media (max-width: 720px) {
+    .groups { grid-template-columns: 1fr; }
+    .ab { grid-template-columns: 1fr; }
+    .kv { grid-template-columns: 1fr; gap: 4px 0; }
+    .kv dt { padding-top: 8px; }
+    .card { padding: 24px 20px; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    * { transition: none !important; }
+  }
+</style>
+
+<div class="page">
+<div class="wrap">
+
+  <!-- HERO -->
+  <header class="hero">
+    <div class="kicker">Claude Code · протокол работы</div>
+    <h1>Шесть фраз. И весь секрет — в <em>порядке</em>.</h1>
+    <p class="lede">
+      Те же шесть команд, поданные не в том порядке, <b>сожгут до 40% лимита</b> — и на выходе всё равно не то.
+      В правильном порядке тот же проект выходит <b>в 4 раза дешевле и с первого раза</b>.
+      Этот порядок независимо вывели двое.
+    </p>
+
+    <div class="stat-row">
+      <div class="stat bad"><div class="n">−40%</div><div class="l">лимита впустую при неверном порядке</div></div>
+      <div class="stat good"><div class="n">×4</div><div class="l">дешевле при верном порядке</div></div>
+      <div class="stat good"><div class="n">1</div><div class="l">итерация вместо десятков правок</div></div>
+    </div>
+
+    <p class="byline">
+      Источники: <b>Борис Чёрный</b> — создатель Claude Code · <b>Андрей Карпатый</b> — сооснователь OpenAI.
+      Оба пришли к одной последовательности порознь.
+    </p>
+  </header>
+
+  <!-- ЛОГИКА ПОРЯДКА -->
+  <section class="sec">
+    <div class="sec-eyebrow">почему порядок важнее самих фраз</div>
+    <h2>Три слоя, а не список из шести пунктов</h2>
+    <p>Фразы не равнозначны. Первые четыре — фундамент: скорость и предсказуемость. Пятая заставляет систему улучшать саму себя. Шестая — самая мощная и одновременно самая опасная: её включают, только когда точно понимаешь, что делаешь.</p>
+
+    <div class="groups">
+      <div class="grp g1">
+        <div class="tag">Фразы 1–4</div>
+        <h3>Фундамент</h3>
+        <p>Скорость и предсказуемость. Задают, как Клод дробит, планирует, уточняет и проверяет ещё до первой строки кода.</p>
+      </div>
+      <div class="grp g2">
+        <div class="tag">Фраза 5</div>
+        <h3>Самоулучшение</h3>
+        <p>Система учится на собственных граблях. Один раз исправил руками — больше эта ошибка не повторится.</p>
+      </div>
+      <div class="grp g3">
+        <div class="tag">Фраза 6</div>
+        <h3>Мощь + риск</h3>
+        <p>Полная автоматизация. Даёт максимум рычага, но кривой автомат ухудшает процесс. Нужен трезвый расчёт.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- КАРТОЧКИ ФРАЗ -->
+  <section class="sec">
+    <div class="sec-eyebrow">разбор по одной · нажми на команду, чтобы скопировать</div>
+    <h2>Шесть фраз в рабочем порядке</h2>
+
+    <div class="cards">
+
+      <!-- 1 -->
+      <article class="card c-gold" id="p1">
+        <div class="card-head"><span class="num">01 · фундамент</span><h3>«Запускай субагентов»</h3></div>
+        <p>По умолчанию Клод тянет всё в один диалог. Большая задача перегружает контекст — качество падает, токены горят. Субагенты дробят её на <b>параллельные сессии</b>: у каждой свой контекст, свой промт, свои права и даже своя модель. Ничего настраивать не надо — достаточно попросить.</p>
+        <div class="cmd" data-copy="Запусти 5 субагентов на эту задачу в параллельные сессии, каждому — свою зону ответственности от начала и до конца.">
+          <span class="prompt">&gt;</span>
+          <code>Запусти 5 субагентов на эту задачу в параллельные сессии, каждому — свою зону ответственности.</code>
+          <span class="copy">copy</span>
+        </div>
+        <dl class="kv">
+          <dt>Когда</dt><dd>Только большие задачи. Мелкие — смысла нет.</dd>
+          <dt>3 сценария</dt>
+          <dd>
+            <div class="chips">
+              <span class="chip"><b>Перспективы:</b> 5 углов на одну проблему</span>
+              <span class="chip"><b>Масштаб:</b> 10 агентов проверяют 10 000 доменов</span>
+              <span class="chip"><b>Скорость:</b> параллель вместо очереди</span>
+            </div>
+          </dd>
+        </dl>
+        <div class="gotcha"><b>Ловушка:</b> из коробки Клод субагентов недоиспользует. Не скажешь явно — не запустит.</div>
+      </article>
+
+      <!-- 2 -->
+      <article class="card c-gold" id="p2">
+        <div class="card-head"><span class="num">02 · фундамент</span><h3>«Напиши implementation spec»</h3></div>
+        <p>Встроенный Plan Mode слабее ручной спеки — Карпатый его не любит: сначала вместе проектируешь детальную документацию, и только потом код. Спека выбирает <b>один путь</b> из облака вариантов реализации. Всё, что ты не прописал заранее, Клод выдумает за тебя.</p>
+        <div class="cmd" data-copy="Напиши implementation spec для [задача]. Разбей на шаги. Для каждого шага покажи ключевые решения, которые ты бы принял, чтобы я мог предопределить их до сборки.">
+          <span class="prompt">&gt;</span>
+          <code>Напиши implementation spec для [задача]. Разбей на шаги. Для каждого шага покажи ключевые решения, чтобы я мог предопределить их до сборки.</code>
+          <span class="copy">copy</span>
+        </div>
+        <dl class="kv">
+          <dt>Эффект</dt><dd>Детальная спека сводит догадки Клода к <b>0%</b>.</dd>
+          <dt>Без неё</dt><dd>С первого раза не попасть — переделывать по тысяче раз.</dd>
+        </dl>
+      </article>
+
+      <!-- 3 -->
+      <article class="card c-gold" id="p3">
+        <div class="card-head"><span class="num">03 · фундамент</span><h3>«Проинтервьюируй меня»</h3></div>
+        <p>Какой бы детальной ни была спека, что-то ты упустишь. Дай Клоду задать вопросы: очевидные для тебя, но неочевидные для него — и наоборот, о которых ты и не думал. Ответы резко улучшают спеку.</p>
+        <div class="cmd" data-copy="Проинтервьюируй меня по этой задаче: определи ядро (какую проблему решаем, для кого и для кого нет), пройди со мной ключевые решения, а потом суммируй всё обратно в implementation spec.">
+          <span class="prompt">&gt;</span>
+          <code>Проинтервьюируй меня: определи ядро (проблема, для кого, для кого нет), пройди ключевые решения, потом суммируй в implementation spec.</code>
+          <span class="copy">copy</span>
+        </div>
+        <dl class="kv">
+          <dt>Не знаешь ответ</dt><dd>Так и напиши: «не знаю, предложи на своё усмотрение».</dd>
+          <dt>Итог</dt><dd>Готовый spec / PRD для запуска субагентов (фраза 1).</dd>
+        </dl>
+      </article>
+
+      <!-- 4 -->
+      <article class="card c-gold" id="p4">
+        <div class="card-head"><span class="num">04 · фундамент</span><h3>«Проверяй до того, как строить»</h3></div>
+        <p>Ошибку дешевле поймать в тексте спеки, чем в готовом проекте. Чем дальше зашла сборка, тем дороже правка. Заставь Клода спланировать проверку заранее — на трёх слоях.</p>
+        <div class="layers">
+          <div class="layer"><span class="ln">CLAUDE.md</span><span class="lt"><b>Правило:</b> «перед любой работой опиши, как проверишь» → Клод сразу строит план проверки.</span></div>
+          <div class="layer"><span class="ln">Инструменты</span><span class="lt"><b>Чем проверить:</b> MCP для деплоя, skill-валидатор бренд-голоса, браузер — смотрит результат сам.</span></div>
+          <div class="layer"><span class="ln">Зоны</span><span class="lt"><b>Human-in-the-loop</b> там, где цена ошибки высока (платежи, бухгалтерия, юр. документы). Где низка (вёрстка) — быстро, не боясь сломать.</span></div>
+        </div>
+        <div class="gotcha"><b>Помни:</b> Клод даёт 99–99,5%, не ровно 100%. В критичных местах ставь человека в петлю.</div>
+      </article>
+
+      <!-- 5 -->
+      <article class="card c-violet" id="p5">
+        <div class="card-head"><span class="num">05 · самоулучшение</span><h3>«Сделай из этого скилл»</h3></div>
+        <p>Повторяешь одни и те же правила из диалога в диалог — это маркер: пора паковать в скилл. У Anthropic есть <b>Skill creator</b>, который собирает скилл прямо из истории диалога: <code>scripts</code> + <code>SKILL.md</code> (триггер + инструкция) + <code>examples</code>.</p>
+        <div class="cmd" data-copy="Сделай из этого диалога скилл: собери scripts, SKILL.md с триггером и инструкцией, и примеры «как надо / как не надо».">
+          <span class="prompt">&gt;</span>
+          <code>Сделай из этого диалога скилл: scripts, SKILL.md (триггер + инструкция) и примеры «как надо / как не надо».</code>
+          <span class="copy">copy</span>
+        </div>
+        <dl class="kv">
+          <dt>2 правила</dt>
+          <dd><b>Не выдумывай абстрактно</b> — строй из того, что есть. И <b>только из состоявшегося диалога</b> — кейс уже проверен руками.</dd>
+          <dt>Секция GOTCHAS</dt>
+          <dd>Грабли, на которые наступал, и правки, что делал. С каждым запуском скилл улучшает сам себя.</dd>
+        </dl>
+        <div class="cmd" data-copy="На основе нашего диалога дополни любой скилл, который я использовал, секцией GOTCHAS — чтобы мы больше не повторяли эту ошибку.">
+          <span class="prompt">&gt;</span>
+          <code>На основе нашего диалога дополни любой скилл, что я использовал, секцией GOTCHAS — чтобы не повторять эту ошибку.</code>
+          <span class="copy">copy</span>
+        </div>
+      </article>
+
+      <!-- 6 -->
+      <article class="card c-coral" id="p6">
+        <div class="card-head"><span class="num">06 · мощь + риск</span><h3>«Автоматизируй это»</h3></div>
+        <p>Самая мощная фраза — и самая опасная. Кривой автомат <b>ухудшает</b> рабочий процесс, а не улучшает. Многие автоматизируют то, что автоматизировать не нужно. Прежде чем автоматизировать — доведи процесс почти до идеала.</p>
+        <div class="cmd" data-copy="Автоматизируй это — но сначала прогони через два фильтра (тест на вкус и 80/20). Если процесс критичный, оставь human-in-the-loop и оставайся в контуре.">
+          <span class="prompt">&gt;</span>
+          <code>Автоматизируй это — но прогони через два фильтра, а в критичном оставь human-in-the-loop.</code>
+          <span class="copy">copy</span>
+        </div>
+        <dl class="kv">
+          <dt>Автоматизация</dt><dd>AI решает сам. Годится только для доведённого, измеримого процесса.</dd>
+          <dt>Аугментация</dt><dd>AI — ускоритель, <b>ты в контуре</b> и перепроверяешь. Меньше авто-решений, больше контроля, выше качество.</dd>
+        </dl>
+        <div class="layers">
+          <div class="layer"><span class="ln">Фильтр 1</span><span class="lt"><b>Тест на вкус:</b> нужен вкус, чтобы оценить результат? Да → аугментация. Измеримо цифрами → автоматизация.</span></div>
+          <div class="layer"><span class="ln">Фильтр 2</span><span class="lt"><b>80/20:</b> результат на 80% хорош — устроит? Да → автоматизируй. Нет → аугментируй, останься в контуре.</span></div>
+        </div>
+        <div class="gotcha"><b>Красная зона:</b> финансы, бухгалтерия, юр. документы — не доверять слепо. Только human-in-the-loop.</div>
+      </article>
+
+    </div>
+  </section>
+
+  <!-- A/B ТЕСТ -->
+  <section class="sec">
+    <div class="sec-eyebrow">A/B-тест из видео · один и тот же Telegram-бот для сбора заявок в Excel</div>
+    <h2>Голый Claude Code против скилла с шестью фразами</h2>
+    <p>Одинаково короткая задача: «Собери Telegram-бота, который собирает заявки клиентов и заносит их в Excel». Разница — в наличии скилла, который выстраивает те самые шесть фраз в правильном порядке.</p>
+
+    <div class="ab">
+      <div class="ab-col plain">
+        <div class="top"><div class="t">Без скилла</div><div class="h">Один промт — и сразу код</div></div>
+        <ul>
+          <li>Не задал <b>ни одного вопроса</b> — просто сделал</li>
+          <li>Бот примитивный: имя, телефон → строка в Excel</li>
+          <li>Пишет в таблицу <b>в той же папке</b>, новую не создаёт</li>
+          <li>Ничего не предложил добавить</li>
+          <li>Функционал ограничен ровно тем, что попросили</li>
+          <li>В таком виде запускать <b>сложновато</b></li>
+        </ul>
+      </div>
+      <div class="ab-col skill">
+        <div class="top"><div class="t">Со Spec Kit скиллом</div><div class="h">Интервью → спека → сборка → проверка</div></div>
+        <ul>
+          <li>Разбил работу на <b>этапы</b>, не ушёл в код без подтверждения спеки</li>
+          <li>Задал вопросы: поля, товары кнопками, уведомления в ТГ, библиотека</li>
+          <li>Прислал <b>спецификацию прямо в чат</b> на согласование</li>
+          <li>Запустил <b>4 параллельных субагента</b> на Opus 4.8</li>
+          <li>Guard-проверка: <b>сам нашёл и исправил баги</b></li>
+          <li>Готово с первого раза: корзина, живой пересчёт суммы, «поделиться контактом», полный заказ в Excel</li>
+        </ul>
+      </div>
+    </div>
+    <p class="verdict">Итог: рабочий бот <b>за один промт</b> + ответы на вопросы. Без единой ручной правки кода.</p>
+  </section>
+
+  <!-- ШПАРГАЛКА -->
+  <section class="sec">
+    <div class="sec-eyebrow">на один экран</div>
+    <h2>Шпаргалка порядка</h2>
+    <div class="cheat">
+      <div class="row r1"><span class="rn">01</span><div class="rc"><code>«Запускай субагентов»</code><span>Дроби большую задачу на параллельные сессии</span></div></div>
+      <div class="row r2"><span class="rn">02</span><div class="rc"><code>«Напиши implementation spec»</code><span>Спека выбирает один путь → 0% догадок</span></div></div>
+      <div class="row r3"><span class="rn">03</span><div class="rc"><code>«Проинтервьюируй меня»</code><span>Вопросы закрывают то, что ты упустил</span></div></div>
+      <div class="row r4"><span class="rn">04</span><div class="rc"><code>«Проверяй до того, как строить»</code><span>3 слоя: CLAUDE.md · инструменты · зоны с human-in-the-loop</span></div></div>
+      <div class="row r5"><span class="rn">05</span><div class="rc"><code>«Сделай из этого скилл»</code><span>Пакуй повторяющееся + секция GOTCHAS для самоулучшения</span></div></div>
+      <div class="row r6"><span class="rn">06</span><div class="rc"><code>«Автоматизируй это»</code><span>Два фильтра: тест на вкус + 80/20. Критичное — в петлю</span></div></div>
+    </div>
+  </section>
+
+  <footer>
+    Разбор видео · порядок 6 фраз по Борису Чёрному и Андрею Карпатому · нажми на любую команду, чтобы скопировать
+  </footer>
+
+</div>
+</div>
+
+<script>
+  document.querySelectorAll('.cmd').forEach(function (el) {
+    el.addEventListener('click', function () {
+      var text = el.getAttribute('data-copy') || el.querySelector('code').textContent;
+      var badge = el.querySelector('.copy');
+      var done = function () {
+        el.classList.add('copied');
+        badge.textContent = 'скопировано';
+        setTimeout(function () { el.classList.remove('copied'); badge.textContent = 'copy'; }, 1600);
+      };
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(done).catch(function () {
+          fallback(text); done();
+        });
+      } else { fallback(text); done(); }
+    });
+  });
+  function fallback(text) {
+    var ta = document.createElement('textarea');
+    ta.value = text; ta.style.position = 'fixed'; ta.style.opacity = '0';
+    document.body.appendChild(ta); ta.select();
+    try { document.execCommand('copy'); } catch (e) {}
+    document.body.removeChild(ta);
+  }
+</script>
+
+</body>
+</html>
