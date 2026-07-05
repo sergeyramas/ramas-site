@@ -571,11 +571,39 @@ html { cursor: auto; }
 
 /* === Filter bar — Mastodont-style category pills === */
 
+.filtered-grid-layout {
+  display: flex;
+  align-items: flex-start;
+  gap: 2rem;
+}
+
+.filtered-grid-content {
+  flex: 1;
+  min-width: 0;
+}
+
 .filter-bar {
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
+  flex-shrink: 0;
+  width: 200px;
   gap: 8px;
-  margin-bottom: 2rem;
+  position: sticky;
+  top: 1.5rem;
+}
+
+@media (max-width: 900px) {
+  .filtered-grid-layout {
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .filter-bar {
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+    position: static;
+  }
 }
 
 .filter-btn {

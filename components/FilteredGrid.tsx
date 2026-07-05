@@ -32,7 +32,7 @@ export function FilteredGrid({
   );
 
   return (
-    <>
+    <div className="filtered-grid-layout">
       <div className="filter-bar" role="tablist" aria-label="Фильтр по тегам">
         <button
           type="button"
@@ -59,7 +59,9 @@ export function FilteredGrid({
         ))}
       </div>
 
-      <Grid items={filtered} dense={dense} />
-    </>
+      <div className="filtered-grid-content">
+        <Grid items={filtered} dense={dense} />
+      </div>
+    </div>
   );
 }
