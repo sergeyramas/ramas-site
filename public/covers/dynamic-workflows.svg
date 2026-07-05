@@ -1,0 +1,66 @@
+<svg viewBox="0 0 800 500" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="t d">
+  <title id="t">Dynamic Workflows</title>
+  <desc id="d">Оркестратор раздаёт задачу рою субагентов и сводит результаты — тема гайда по Dynamic Workflows.</desc>
+  <defs>
+    <filter id="gn"><feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="2" stitchTiles="stitch"/><feColorMatrix values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0.03 0"/></filter>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0c1520"/><stop offset="100%" stop-color="#0a0f14"/>
+    </linearGradient>
+    <marker id="a" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto">
+      <path d="M0,0 L6,4 L0,8 Z" fill="#2f4351"/>
+    </marker>
+  </defs>
+
+  <rect width="800" height="500" fill="url(#bg)"/>
+  <!-- grid -->
+  <g stroke="#16232e" stroke-width="1">
+    <path d="M0 62.5H800M0 125H800M0 187.5H800M0 250H800M0 312.5H800M0 375H800M0 437.5H800"/>
+    <path d="M100 0V500M200 0V500M300 0V500M400 0V500M500 0V500M600 0V500M700 0V500"/>
+  </g>
+
+  <!-- eyebrow -->
+  <text x="64" y="92" fill="#34d6c4" font-family="ui-monospace,monospace" font-size="15" letter-spacing="5">CLAUDE CODE · ОРКЕСТРАЦИЯ</text>
+
+  <!-- title -->
+  <text x="62" y="182" fill="#e9eef2" font-family="'SF Pro Display',system-ui,sans-serif" font-size="76" font-weight="800" letter-spacing="-2">Dynamic</text>
+  <text x="62" y="256" fill="#34d6c4" font-family="'SF Pro Display',system-ui,sans-serif" font-size="76" font-weight="800" letter-spacing="-2">Workflows</text>
+  <text x="66" y="298" fill="#aebac5" font-family="ui-monospace,monospace" font-size="16">сила не в агентах — в JS-скрипте</text>
+
+  <!-- orchestration mini-diagram bottom -->
+  <g transform="translate(64,344)">
+    <rect x="0" y="24" width="120" height="44" rx="9" fill="#111a24" stroke="#34d6c4"/>
+    <text x="60" y="51" text-anchor="middle" fill="#34d6c4" font-family="ui-monospace,monospace" font-size="12" font-weight="700">orchestrator</text>
+
+    <g stroke="#2a3947" stroke-width="1.5" fill="none" marker-end="url(#a)">
+      <path d="M120,38 C165,38 175,8 215,8"/>
+      <path d="M120,44 C165,44 175,38 215,38"/>
+      <path d="M120,50 C165,50 175,68 215,68"/>
+      <path d="M120,56 C165,56 175,98 215,98"/>
+    </g>
+
+    <g font-family="ui-monospace,monospace" font-size="10.5">
+      <rect x="215" y="-6" width="120" height="26" rx="6" fill="#16212d" stroke="#253340"/><text x="275" y="11" text-anchor="middle" fill="#e9eef2">agent · 1</text>
+      <rect x="215" y="24" width="120" height="26" rx="6" fill="#16212d" stroke="#253340"/><text x="275" y="41" text-anchor="middle" fill="#e9eef2">agent · 2</text>
+      <rect x="215" y="54" width="120" height="26" rx="6" fill="#16212d" stroke="#253340"/><text x="275" y="71" text-anchor="middle" fill="#e9eef2">agent · 3</text>
+      <rect x="215" y="84" width="120" height="26" rx="6" fill="#16212d" stroke="#253340"/><text x="275" y="101" text-anchor="middle" fill="#6f8091">… 1000</text>
+    </g>
+
+    <g stroke="#2a3947" stroke-width="1.5" fill="none" marker-end="url(#a)">
+      <path d="M335,8 C395,8 395,44 435,44"/>
+      <path d="M335,38 C395,38 395,47 435,47"/>
+      <path d="M335,68 C395,68 395,50 435,50"/>
+      <path d="M335,98 C395,98 395,53 435,53"/>
+    </g>
+    <rect x="435" y="24" width="118" height="44" rx="9" fill="#111a24" stroke="#8f9dff"/>
+    <text x="494" y="45" text-anchor="middle" fill="#8f9dff" font-family="ui-monospace,monospace" font-size="12" font-weight="700">свод в JS</text>
+    <text x="494" y="60" text-anchor="middle" fill="#6f8091" font-family="ui-monospace,monospace" font-size="9.5">таблица</text>
+  </g>
+
+  <!-- limit chips -->
+  <g font-family="ui-monospace,monospace" font-size="12">
+    <rect x="636" y="70" width="104" height="30" rx="15" fill="#111a24" stroke="#253340"/><text x="688" y="90" text-anchor="middle" fill="#aebac5">~16 сразу</text>
+    <rect x="636" y="110" width="104" height="30" rx="15" fill="#111a24" stroke="#253340"/><text x="688" y="130" text-anchor="middle" fill="#aebac5">1000 всего</text>
+  </g>
+
+  <rect width="800" height="500" filter="url(#gn)"/>
+</svg>

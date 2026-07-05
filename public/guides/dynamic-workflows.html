@@ -1,0 +1,544 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Dynamic Workflows в Claude Code — гайд по оркестрации агентов</title>
+  <meta name="description" content="Когда, где и как применять Dynamic Workflows: детерминированный JS-скрипт вместо markdown-ТЗ, честные лимиты (конкурентность ~16, потолок 1000), agent/pipeline/parallel, паттерны качества и рабочий кейс на 400 документов.">
+  <meta property="og:title" content="Dynamic Workflows в Claude Code — гайд по оркестрации">
+  <meta property="og:description" content="Сила не в количестве агентов, а в JS-скрипте, который задаёт детерминированный порядок. Как, где и когда применять — честно, с лимитами и паттернами.">
+  <meta property="og:type" content="article">
+  <meta property="og:image" content="https://sergeyramas.vercel.app/covers/dynamic-workflows.svg">
+  <meta property="og:url" content="https://sergeyramas.vercel.app/guides/dynamic-workflows.html">
+  <style>html,body{margin:0;padding:0;background:#0a0f14}</style>
+</head>
+<body>
+<style>
+  :root {
+    --bg:        #0a0f14;
+    --bg-2:      #0e151d;
+    --panel:     #111a24;
+    --panel-2:   #16212d;
+    --line:      #253340;
+    --ink:       #e9eef2;
+    --ink-soft:  #aebac5;
+    --ink-mute:  #6f8091;
+    --flow:      #34d6c4;   /* оркестрация / поток */
+    --flow-dim:  #1c5a54;
+    --pipe:      #8f9dff;   /* pipeline */
+    --pipe-dim:  #3a3f78;
+    --warn:      #f4b53f;   /* честные оговорки */
+    --warn-dim:  #6b5320;
+    --danger:    #ff6f5e;   /* стоп / human-in-loop */
+    --ok:        #4fd18b;   /* verify / успех */
+    --sans: "SF Pro Display", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+    --mono: ui-monospace, "SF Mono", "JetBrains Mono", "Cascadia Code", Menlo, monospace;
+    --wrap: 900px;
+  }
+  * { box-sizing: border-box; }
+
+  .page {
+    background:
+      radial-gradient(1100px 560px at 82% -8%, #10222a 0%, transparent 60%),
+      radial-gradient(820px 480px at -8% 14%, #141a2c 0%, transparent 55%),
+      var(--bg);
+    background-attachment: fixed;
+    color: var(--ink);
+    font-family: var(--sans);
+    line-height: 1.62;
+    font-size: 17px;
+    -webkit-font-smoothing: antialiased;
+    padding: 0 20px 100px;
+    position: relative;
+    overflow-x: hidden;
+  }
+  .page::before {
+    content: "";
+    position: fixed; inset: 0;
+    background-image:
+      linear-gradient(rgba(90,140,150,.05) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(90,140,150,.05) 1px, transparent 1px);
+    background-size: 46px 46px;
+    pointer-events: none; z-index: 0;
+  }
+  .wrap { max-width: var(--wrap); margin: 0 auto; position: relative; z-index: 1; }
+
+  /* back to hub */
+  .backlink {
+    position: fixed; top: 16px; left: 16px; z-index: 20;
+    display: inline-flex; align-items: center; gap: 8px;
+    font-family: var(--mono); font-size: 13px; letter-spacing: .02em;
+    color: var(--ink-soft); text-decoration: none;
+    background: rgba(10,15,20,.72); -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px);
+    border: 1px solid var(--line); border-radius: 999px; padding: 8px 14px 8px 12px;
+    transition: color .18s, border-color .18s, background .18s;
+  }
+  .backlink:hover { color: var(--ink); border-color: var(--ink-mute); background: rgba(22,33,45,.9); }
+  .backlink .arrow { color: var(--flow); font-size: 15px; line-height: 1; }
+  .backlink:focus-visible { outline: 2px solid var(--flow); outline-offset: 2px; }
+
+  /* HERO */
+  .hero { padding: 92px 0 34px; }
+  .kicker {
+    font-family: var(--mono); font-size: 12.5px; letter-spacing: .26em; text-transform: uppercase;
+    color: var(--flow); display: inline-flex; align-items: center; gap: 10px; margin-bottom: 24px;
+  }
+  .kicker::before { content: ""; width: 26px; height: 1px; background: var(--flow); }
+  h1 {
+    font-size: clamp(38px, 7vw, 66px); line-height: 1.03; letter-spacing: -.028em;
+    font-weight: 800; margin: 0 0 20px; text-wrap: balance;
+  }
+  h1 em { color: var(--flow); font-style: normal; }
+  .lede { font-size: clamp(18px, 2.4vw, 21px); color: var(--ink-soft); max-width: 660px; margin: 0 0 30px; }
+  .lede b { color: var(--ink); font-weight: 600; }
+
+  .stat-row { display: flex; flex-wrap: wrap; gap: 14px; margin-bottom: 8px; }
+  .stat {
+    flex: 1 1 175px; background: linear-gradient(160deg, var(--panel), var(--bg-2));
+    border: 1px solid var(--line); border-radius: 14px; padding: 16px 18px;
+  }
+  .stat .n { font-size: 27px; font-weight: 800; letter-spacing: -.02em; font-variant-numeric: tabular-nums; color: var(--flow); }
+  .stat .l { font-size: 13px; color: var(--ink-mute); margin-top: 2px; }
+
+  /* SECTIONS */
+  .sec { margin-top: 70px; }
+  .sec-eyebrow {
+    font-family: var(--mono); font-size: 12px; letter-spacing: .2em; text-transform: uppercase;
+    color: var(--ink-mute); margin-bottom: 12px;
+  }
+  h2 { font-size: clamp(25px, 4vw, 34px); letter-spacing: -.02em; line-height: 1.14; font-weight: 800; margin: 0 0 14px; text-wrap: balance; }
+  .sec > p { color: var(--ink-soft); max-width: 680px; }
+  .sec > p b { color: var(--ink); font-weight: 600; }
+  h3.sub { font-size: 19px; margin: 26px 0 10px; font-weight: 700; letter-spacing: -.01em; }
+
+  /* diagram */
+  .diagram { margin: 26px 0 6px; border: 1px solid var(--line); border-radius: 16px; background: var(--panel); padding: 10px; overflow-x: auto; }
+  .diagram svg { display: block; width: 100%; height: auto; min-width: 560px; }
+
+  /* two-col compare */
+  .vs { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 22px; }
+  .vs-col { border: 1px solid var(--line); border-radius: 14px; padding: 20px; background: var(--panel); }
+  .vs-col .t { font-family: var(--mono); font-size: 11.5px; letter-spacing: .14em; text-transform: uppercase; margin-bottom: 8px; }
+  .vs-col.bad .t { color: var(--danger); }
+  .vs-col.good .t { color: var(--flow); }
+  .vs-col h4 { margin: 0 0 10px; font-size: 17px; font-weight: 700; }
+  .vs-col ul { margin: 0; padding-left: 18px; display: flex; flex-direction: column; gap: 7px; }
+  .vs-col li { font-size: 14.5px; color: var(--ink-soft); }
+  .vs-col li b { color: var(--ink); }
+
+  /* cards grid */
+  .grid3 { display: grid; grid-template-columns: repeat(3,1fr); gap: 14px; margin-top: 22px; }
+  .mini { border: 1px solid var(--line); border-radius: 14px; padding: 18px; background: var(--panel); position: relative; overflow: hidden; }
+  .mini::after { content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 3px; background: var(--flow); }
+  .mini.p::after { background: var(--pipe); }
+  .mini.w::after { background: var(--warn); }
+  .mini h4 { margin: 4px 0 6px; font-size: 16px; font-weight: 700; }
+  .mini p { margin: 0; font-size: 14px; color: var(--ink-soft); }
+  .mini .tag { font-family: var(--mono); font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: var(--ink-mute); }
+
+  /* code blocks */
+  .code {
+    position: relative; background: #070c11; border: 1px solid var(--line); border-radius: 12px;
+    margin: 14px 0; overflow-x: auto;
+  }
+  .code pre { margin: 0; padding: 16px 18px; font-family: var(--mono); font-size: 13.5px; line-height: 1.65; color: var(--ink); }
+  .code .cap {
+    font-family: var(--mono); font-size: 11px; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-mute);
+    padding: 9px 14px; border-bottom: 1px solid var(--line); display: flex; justify-content: space-between; align-items: center;
+  }
+  .k { color: var(--pipe); }
+  .fn { color: var(--flow); }
+  .s { color: var(--warn); }
+  .c { color: var(--ink-mute); font-style: italic; }
+  .n { color: #e88; }
+
+  /* prompt copy */
+  .promptbox {
+    background: linear-gradient(160deg, var(--panel), var(--bg-2)); border: 1px solid var(--flow-dim);
+    border-radius: 14px; padding: 4px; margin: 16px 0;
+  }
+  .promptbox .bar {
+    display: flex; justify-content: space-between; align-items: center; padding: 10px 14px;
+    font-family: var(--mono); font-size: 11.5px; letter-spacing: .1em; text-transform: uppercase; color: var(--flow);
+  }
+  .promptbox .copy {
+    cursor: pointer; font-family: var(--mono); font-size: 11px; letter-spacing: .08em; text-transform: uppercase;
+    color: var(--ink-mute); border: 1px solid var(--line); border-radius: 7px; padding: 5px 10px; user-select: none;
+    transition: color .18s, border-color .18s;
+  }
+  .promptbox .copy:hover { color: var(--ink-soft); border-color: var(--ink-mute); }
+  .promptbox.copied .copy { color: var(--ok); border-color: var(--ok); }
+  .promptbox pre {
+    margin: 0; padding: 4px 16px 16px; font-family: var(--mono); font-size: 13.5px; line-height: 1.6;
+    color: var(--ink-soft); white-space: pre-wrap; word-break: break-word;
+  }
+
+  /* limits table */
+  .lim { width: 100%; border-collapse: collapse; margin-top: 20px; font-size: 15px; }
+  .lim th, .lim td { text-align: left; padding: 12px 14px; border-bottom: 1px solid var(--line); vertical-align: top; }
+  .lim th { font-family: var(--mono); font-size: 11.5px; letter-spacing: .12em; text-transform: uppercase; color: var(--ink-mute); font-weight: 600; }
+  .lim td b { color: var(--flow); font-variant-numeric: tabular-nums; }
+  .lim .myth { color: var(--danger); }
+  .lim tr:last-child td { border-bottom: none; }
+  .lim-wrap { overflow-x: auto; border: 1px solid var(--line); border-radius: 14px; background: var(--panel); }
+  .lim th:first-child, .lim td:first-child { padding-left: 18px; }
+
+  /* callout */
+  .callout { border-radius: 12px; padding: 15px 18px; margin: 18px 0; font-size: 15px; color: var(--ink-soft); display: flex; gap: 12px; }
+  .callout .ic { font-family: var(--mono); font-weight: 700; flex-shrink: 0; }
+  .callout b { color: var(--ink); }
+  .callout.warn { background: rgba(244,181,63,.07); border: 1px solid var(--warn-dim); }
+  .callout.warn .ic { color: var(--warn); }
+  .callout.danger { background: rgba(255,111,94,.07); border: 1px solid #6e2f2c; }
+  .callout.danger .ic { color: var(--danger); }
+  .callout.flow { background: rgba(52,214,196,.06); border: 1px solid var(--flow-dim); }
+  .callout.flow .ic { color: var(--flow); }
+
+  /* usecase list */
+  .uses { display: grid; grid-template-columns: repeat(2,1fr); gap: 10px; margin-top: 20px; }
+  .use { display: flex; gap: 12px; align-items: flex-start; background: var(--panel); border: 1px solid var(--line); border-radius: 12px; padding: 13px 16px; }
+  .use .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--flow); margin-top: 8px; flex-shrink: 0; }
+  .use .txt { font-size: 14.5px; color: var(--ink-soft); }
+  .use .txt b { color: var(--ink); }
+
+  /* checklist */
+  .check { margin-top: 20px; border: 1px solid var(--line); border-radius: 14px; overflow: hidden; }
+  .check .row { display: grid; grid-template-columns: 26px 1fr; gap: 14px; padding: 14px 18px; border-bottom: 1px solid var(--line); align-items: baseline; }
+  .check .row:last-child { border-bottom: none; }
+  .check .row:nth-child(odd) { background: rgba(255,255,255,.012); }
+  .check .mk { color: var(--ok); font-weight: 700; }
+  .check .row.no .mk { color: var(--danger); }
+  .check .tx { font-size: 15px; color: var(--ink-soft); }
+  .check .tx b { color: var(--ink); }
+
+  footer {
+    margin-top: 66px; padding-top: 24px; border-top: 1px solid var(--line);
+    font-size: 13px; color: var(--ink-mute); font-family: var(--mono); text-align: center;
+  }
+  .foot-back { color: var(--flow); text-decoration: none; }
+  .foot-back:hover { text-decoration: underline; }
+
+  @media (max-width: 720px) {
+    .vs { grid-template-columns: 1fr; }
+    .grid3 { grid-template-columns: 1fr; }
+    .uses { grid-template-columns: 1fr; }
+    .backlink { top: 12px; left: 12px; font-size: 12px; padding: 7px 12px 7px 10px; }
+  }
+  @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+</style>
+
+<div class="page">
+<a class="backlink" href="https://sergeyramas.vercel.app/"><span class="arrow" aria-hidden="true">←</span> на сайт</a>
+<div class="wrap">
+
+  <header class="hero">
+    <div class="kicker">Claude Code · оркестрация</div>
+    <h1>Dynamic Workflows: сила не в агентах, а в <em>скрипте</em>.</h1>
+    <p class="lede">
+      Workflow — это <b>JS-скрипт, который детерминированно управляет роем субагентов</b>: кого поднять,
+      сколько, в каком порядке и с каким промптом у каждого. Не «много агентов ради количества», а
+      control flow — циклы, ветвления, fan-out — зашитый в код. Именно это держит точность там, где
+      объём убивает и обычный скрипт, и одного агента.
+    </p>
+    <div class="stat-row">
+      <div class="stat"><div class="n">~16</div><div class="l">агентов одновременно (конкурентность)</div></div>
+      <div class="stat"><div class="n">1000</div><div class="l">суммарный потолок за прогон</div></div>
+      <div class="stat"><div class="n">4096</div><div class="l">элементов на один pipeline/parallel</div></div>
+    </div>
+  </header>
+
+  <!-- ЧТО ЭТО -->
+  <section class="sec">
+    <div class="sec-eyebrow">суть за одну минуту</div>
+    <h2>Почему скрипт, а не markdown-ТЗ</h2>
+    <p>
+      Напиши ту же инструкцию как ТЗ в markdown — на 3–5 агентах сработает. Но на объёме модель-драйвен
+      подход рассыпается: у Клода нет жёсткой памяти состояния между шагами, он интерпретирует ТЗ «как по кайфу»
+      и часть шагов теряет по дороге. Workflow снимает это: <b>control flow исполняет движок, а не модель.</b>
+      Хоть 8, хоть 200 задач — каждая проходит ровно тот путь, что прописан в скрипте.
+    </p>
+
+    <div class="diagram" role="img" aria-label="Оркестратор раздаёт задачу рою субагентов и сводит результаты">
+      <svg viewBox="0 0 720 260" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <marker id="arr" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto">
+            <path d="M0,0 L6,4 L0,8 Z" fill="#3a4a58"/>
+          </marker>
+        </defs>
+        <!-- orchestrator -->
+        <rect x="24" y="104" width="150" height="52" rx="10" fill="#111a24" stroke="#34d6c4"/>
+        <text x="99" y="127" text-anchor="middle" fill="#34d6c4" font-family="ui-monospace,monospace" font-size="13" font-weight="700">orchestrator</text>
+        <text x="99" y="144" text-anchor="middle" fill="#6f8091" font-family="ui-monospace,monospace" font-size="10.5">JS-скрипт</text>
+        <!-- fan out lines -->
+        <g stroke="#2a3947" stroke-width="1.5" fill="none" marker-end="url(#arr)">
+          <path d="M174,120 C230,120 240,44 300,44"/>
+          <path d="M174,126 C230,126 240,102 300,102"/>
+          <path d="M174,134 C230,134 240,160 300,160"/>
+          <path d="M174,140 C230,140 240,218 300,218"/>
+        </g>
+        <!-- agents -->
+        <g font-family="ui-monospace,monospace" font-size="11">
+          <rect x="300" y="26" width="150" height="36" rx="8" fill="#16212d" stroke="#253340"/>
+          <text x="375" y="49" text-anchor="middle" fill="#e9eef2">agent · документ 1</text>
+          <rect x="300" y="84" width="150" height="36" rx="8" fill="#16212d" stroke="#253340"/>
+          <text x="375" y="107" text-anchor="middle" fill="#e9eef2">agent · документ 2</text>
+          <rect x="300" y="142" width="150" height="36" rx="8" fill="#16212d" stroke="#253340"/>
+          <text x="375" y="165" text-anchor="middle" fill="#e9eef2">agent · документ 3</text>
+          <rect x="300" y="200" width="150" height="36" rx="8" fill="#16212d" stroke="#253340"/>
+          <text x="375" y="223" text-anchor="middle" fill="#6f8091">… до 1000 всего</text>
+        </g>
+        <!-- converge -->
+        <g stroke="#2a3947" stroke-width="1.5" fill="none" marker-end="url(#arr)">
+          <path d="M450,44 C520,44 520,120 560,120"/>
+          <path d="M450,102 C520,102 520,124 560,124"/>
+          <path d="M450,160 C520,160 520,128 560,128"/>
+          <path d="M450,218 C520,218 520,132 560,132"/>
+        </g>
+        <rect x="560" y="102" width="136" height="52" rx="10" fill="#111a24" stroke="#8f9dff"/>
+        <text x="628" y="125" text-anchor="middle" fill="#8f9dff" font-family="ui-monospace,monospace" font-size="12" font-weight="700">свод в JS</text>
+        <text x="628" y="142" text-anchor="middle" fill="#6f8091" font-family="ui-monospace,monospace" font-size="10.5">таблица / отчёт</text>
+      </svg>
+    </div>
+
+    <div class="vs">
+      <div class="vs-col bad">
+        <div class="t">markdown-ТЗ · model-driven</div>
+        <h4>Модель решает, как исполнять</h4>
+        <ul>
+          <li>ок на <b>единицах</b> агентов</li>
+          <li>на объёме теряет шаги, «додумывает» порядок</li>
+          <li>нет гарантии, что все N задач пройдут одинаково</li>
+          <li>Клод может просто не поднять столько агентов</li>
+        </ul>
+      </div>
+      <div class="vs-col good">
+        <div class="t">workflow · script-driven</div>
+        <h4>Порядок исполняет движок</h4>
+        <ul>
+          <li>точность на <b>сотнях</b> задач</li>
+          <li>циклы, ветвления, fan-out — детерминированы</li>
+          <li>у каждого агента свой промпт, модель, инструменты</li>
+          <li>переиспользуется одной командой на новой партии</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- КОГДА -->
+  <section class="sec">
+    <div class="sec-eyebrow">когда включать — и когда точно нет</div>
+    <h2>Workflow — это осознанный опт-ин, а не автопилот</h2>
+    <p>
+      Важное, что теряют в комментариях: <b>workflow не запускается сам «потому что задача большая».</b>
+      Он может поднять десятки агентов и сжечь много токенов, поэтому включается только по явному запросу —
+      когда ты прямо просишь оркестрацию/workflow. Просто крупная задача — недостаточный повод.
+    </p>
+    <div class="grid3">
+      <div class="mini"><div class="tag">повод 1</div><h4>Охват</h4><p>Разложить задачу и параллельно покрыть широкий фронт — файлы, разделы, сущности.</p></div>
+      <div class="mini p"><div class="tag">повод 2</div><h4>Уверенность</h4><p>Несколько независимых мнений + состязательная проверка перед тем, как принять результат.</p></div>
+      <div class="mini w"><div class="tag">повод 3</div><h4>Масштаб</h4><p>Объём, который не влезает в один контекст: миграции, аудиты, сплошные проходы.</p></div>
+    </div>
+    <div class="callout flow"><span class="ic">→</span><div>Практика: сначала <b>разведай инлайн</b> (собери список файлов/каналов/диффа), а потом заворачивай в workflow-конвейер. Форму работы не обязательно знать заранее — достаточно знать её до шага оркестрации.</div></div>
+  </section>
+
+  <!-- БЛОКИ -->
+  <section class="sec">
+    <div class="sec-eyebrow">строительные блоки скрипта</div>
+    <h2>Из чего состоит workflow</h2>
+    <p>Скрипт — обычный JS. Начинается с блока <code>meta</code> (имя, описание, фазы), дальше — тело с примитивами:</p>
+
+    <div class="grid3">
+      <div class="mini"><div class="tag">fan-out</div><h4>agent()</h4><p>Поднять субагента. Со <b>schema</b> вернёт валидированный объект — без парсинга строк.</p></div>
+      <div class="mini p"><div class="tag">по умолчанию</div><h4>pipeline()</h4><p>Каждый элемент проходит все стадии независимо. <b>Без барьера</b> — элемент A уже на стадии 3, пока B на стадии 1.</p></div>
+      <div class="mini"><div class="tag">барьер</div><h4>parallel()</h4><p>Запустить пачку и <b>дождаться всех</b>. Только когда стадии реально нужны все результаты сразу.</p></div>
+    </div>
+
+    <div class="code">
+      <div class="cap"><span>meta + fan-out с валидацией</span></div>
+<pre><span class="k">export const</span> meta = {
+  name: <span class="s">'extract-docs'</span>,
+  description: <span class="s">'Распознать документы и свести в таблицу'</span>,
+  phases: [{ title: <span class="s">'Извлечение'</span> }, { title: <span class="s">'Сведение'</span> }],
+}
+
+<span class="c">// по субагенту на документ — но конкурентно бежит ~16, остальные в очереди</span>
+<span class="k">const</span> rows = <span class="k">await</span> <span class="fn">parallel</span>(files.<span class="fn">map</span>(f =&gt; () =&gt;
+  <span class="fn">agent</span>(<span class="s">`Извлеки из ${f} тип, номер, дату, сумму, контрагента, договор`</span>,
+    { schema: DOC_SCHEMA })          <span class="c">// вернёт объект, не текст</span>
+))</pre>
+    </div>
+
+    <h3 class="sub">pipeline vs parallel — главная развилка</h3>
+    <p>
+      По умолчанию бери <b>pipeline</b>: он не ставит барьер между стадиями, поэтому wall-clock = самая долгая
+      цепочка одного элемента, а не сумма самых долгих стадий. <b>parallel</b> нужен только когда следующая
+      стадия обязана видеть <i>все</i> результаты предыдущей — дедуп, слияние, ранний выход по нулю.
+    </p>
+  </section>
+
+  <!-- КЕЙС -->
+  <section class="sec">
+    <div class="sec-eyebrow">живой кейс · 400 документов</div>
+    <h2>Как сделать правильно: 200 актов × 200 счетов</h2>
+    <p>
+      Задача из видео: сопоставить акты и счёт-фактуры (PDF, Word, картинки, разное качество), найти
+      расхождения, дубли и пропуски. Обычный скрипт не разберёт форматы; один агент не влезет 400 файлов
+      в контекст. Workflow — да. <b>Но с одной поправкой, которую часто упускают.</b>
+    </p>
+
+    <div class="callout warn"><span class="ic">!</span><div>
+      Через агентов гоняется <b>только извлечение</b> (по агенту на файл — там нужен LLM для OCR и смысла).
+      А <b>сопоставление по договору и сумме — это обычный JS</b> поверх уже структурированных данных.
+      Гонять matching через LLM = лишние токены и новые галлюцинации на самом чувствительном шаге (деньги, договоры).
+    </div></div>
+
+    <div class="code">
+      <div class="cap"><span>извлечение — агенты · сведение — чистый JS</span></div>
+<pre><span class="c">// 1. Извлечение: fan-out, каждый агент — свой файл, строгая schema</span>
+<span class="k">const</span> docs = (<span class="k">await</span> <span class="fn">parallel</span>(files.<span class="fn">map</span>(f =&gt; () =&gt;
+  <span class="fn">agent</span>(<span class="s">`Распознай ${f}: тип, номер, дата, сумма, контрагент, договор`</span>,
+    { schema: DOC_SCHEMA, phase: <span class="s">'Извлечение'</span> })
+))).<span class="fn">filter</span>(<span class="fn">Boolean</span>)
+
+<span class="c">// 2. Сведение: детерминированно, БЕЗ агентов</span>
+<span class="k">const</span> acts = docs.<span class="fn">filter</span>(d =&gt; d.type === <span class="s">'акт'</span>)
+<span class="k">const</span> invoices = docs.<span class="fn">filter</span>(d =&gt; d.type === <span class="s">'счёт'</span>)
+<span class="k">const</span> table = acts.<span class="fn">map</span>(a =&gt; {
+  <span class="k">const</span> match = invoices.<span class="fn">find</span>(i =&gt; i.contract === a.contract &amp;&amp; i.sum === a.sum)
+  <span class="k">return</span> { act: a.num, invoice: match?.num ?? <span class="s">'—'</span>, contract: a.contract,
+           sum: a.sum, status: match ? <span class="s">'ок'</span> : <span class="s">'нет пары'</span> }
+})
+<span class="c">// дубли/пропуски — тоже обычными группировками по номеру</span></pre>
+    </div>
+
+    <div class="callout danger"><span class="ic">⛔</span><div>
+      <b>Деньги и договоры — зона человека.</b> На messy-сканах точность извлечения не 100%. Выход workflow —
+      это <b>черновик для бухгалтера на проверку</b>, а не финальный вердикт. Поставь human-in-the-loop на приёмку таблицы.
+    </div></div>
+
+    <h3 class="sub">И это переиспользуется</h3>
+    <p>
+      Собрал один раз — workflow лёг в <code>.claude/workflows/</code> отдельной сущностью. Прилетела новая
+      партия — ничего не переписываешь, запускаешь по имени одной командой (можно параметризовать через <code>args</code>).
+    </p>
+  </section>
+
+  <!-- ЛИМИТЫ -->
+  <section class="sec">
+    <div class="sec-eyebrow">честно про лимиты — чтобы не поймали в комментах</div>
+    <h2>Сколько агентов на самом деле</h2>
+    <p>Главное заблуждение: «200 агентов сразу». Нет — одновременно крутится порядка 16, остальные ждут очереди и идут волнами.</p>
+    <div class="lim-wrap">
+      <table class="lim">
+        <thead><tr><th>Параметр</th><th>Реальность</th><th>Частый миф</th></tr></thead>
+        <tbody>
+          <tr><td>Конкурентность</td><td><b>~16</b> одновременно (<code>min(16, ядра−2)</code>)</td><td class="myth">«сто-двести параллельно»</td></tr>
+          <tr><td>Всего за прогон</td><td><b>1000</b> агентов суммарно (не одновременно)</td><td class="myth">«1000 в параллель»</td></tr>
+          <tr><td>Один вызов</td><td><b>4096</b> элементов на pipeline/parallel</td><td class="myth">безлимитный вход</td></tr>
+          <tr><td>200 документов</td><td>≈ <b>13 волн</b> по 16 — не мгновенно</td><td class="myth">«всё сразу за секунды»</td></tr>
+          <tr><td>Токены/лимит</td><td>агенты жгут <b>тот же общий лимит</b></td><td class="myth">«бесплатное ускорение»</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="callout warn"><span class="ic">i</span><div>Кэш промптов живёт 5 минут — длинные паузы между волнами читают контекст заново, дороже. Это норма для больших прогонов, просто закладывай время.</div></div>
+  </section>
+
+  <!-- ПАТТЕРНЫ -->
+  <section class="sec">
+    <div class="sec-eyebrow">паттерны качества · компонуются свободно</div>
+    <h2>Не просто fan-out — а fan-out с проверкой</h2>
+    <div class="uses">
+      <div class="use"><span class="dot"></span><span class="txt"><b>Adversarial verify.</b> На каждую находку — N независимых скептиков с задачей опровергнуть. Убиваем, если большинство опровергло.</span></div>
+      <div class="use"><span class="dot"></span><span class="txt"><b>Judge panel.</b> Генеришь N решений под разными углами, судьи оценивают параллельно, синтез из победителя.</span></div>
+      <div class="use"><span class="dot"></span><span class="txt"><b>Loop-until-dry.</b> Для находок неизвестного размера: гоняем искателей, пока K раундов подряд не дадут ничего нового.</span></div>
+      <div class="use"><span class="dot"></span><span class="txt"><b>Multi-modal sweep.</b> Агенты ищут разными способами (по контейнеру, по контенту, по сущности, по времени) — каждый слеп к находкам других.</span></div>
+      <div class="use"><span class="dot"></span><span class="txt"><b>Completeness critic.</b> Финальный агент спрашивает «что упущено?» — и это становится следующим раундом работы.</span></div>
+      <div class="use"><span class="dot"></span><span class="txt"><b>Loop-until-budget.</b> Масштабируешь глубину под заданный бюджет токенов — цикл, пока есть остаток.</span></div>
+    </div>
+  </section>
+
+  <!-- ГДЕ -->
+  <section class="sec">
+    <div class="sec-eyebrow">где реально заходит</div>
+    <h2>Кейсы, где объём убивает обычный подход</h2>
+    <div class="uses">
+      <div class="use"><span class="dot"></span><span class="txt"><b>Рефакторинг большого проекта</b> за один заход — сайт трансформаций по файлам с изоляцией в worktree.</span></div>
+      <div class="use"><span class="dot"></span><span class="txt"><b>Код-ревью и security-аудит</b> всей базы — по измерениям, с состязательной проверкой каждой находки.</span></div>
+      <div class="use"><span class="dot"></span><span class="txt"><b>Конвертация пачки файлов</b> в другой формат — по агенту на файл.</span></div>
+      <div class="use"><span class="dot"></span><span class="txt"><b>Разбить огромный файл</b> на смысловые блоки под LLM.</span></div>
+      <div class="use"><span class="dot"></span><span class="txt"><b>Транскрипция и саммари</b> здоровенных проектов и библиотек.</span></div>
+      <div class="use"><span class="dot"></span><span class="txt"><b>Deep research / конкуренты</b> — список на входе, таблица «сильные / слабые / пробелы» на выходе.</span></div>
+    </div>
+  </section>
+
+  <!-- ПРОМПТ -->
+  <section class="sec">
+    <div class="sec-eyebrow">готовый промпт · исправленная версия</div>
+    <h2>Скопируй и подставь свои данные</h2>
+    <p>Версия из видео, но с двумя правками: сопоставление — детерминированным JS, а не агентами, и явная точка проверки человеком.</p>
+    <div class="promptbox" id="pbox">
+      <div class="bar"><span>workflow prompt</span><span class="copy" id="copybtn">copy</span></div>
+<pre id="ptext">Собери и запусти workflow. В папке ./docs лежат счёт-фактуры и акты в разных форматах (PDF, Word, картинки).
+
+1) Извлечение (агенты): подними по одному субагенту на каждый документ, пусть распознает тип, номер, дату, сумму, контрагента и номер договора и вернёт СТРОГО по schema (валидированный объект, не текст).
+
+2) Сопоставление (обычный JS, без агентов): сведи акты со счёт-фактурами по договору и сумме, найди несовпадения, дубли и пропуски детерминированной логикой поверх извлечённых данных — не гоняй matching через LLM.
+
+3) Свод: одна таблица — акт, фактура, договор, сумма, статус (ок / расхождение / дубль / нет пары).
+
+4) Приёмка: пометь строки с низкой уверенностью извлечения и выведи их отдельно на проверку человеком — это черновик для бухгалтера, не финальный вердикт.
+
+Заверни в переиспользуемый именованный workflow в .claude/workflows/, чтобы я гонял его на следующих партиях одной командой (партию передавать через args).</pre>
+    </div>
+  </section>
+
+  <!-- ЧЕКЛИСТ -->
+  <section class="sec">
+    <div class="sec-eyebrow">памятка перед запуском</div>
+    <h2>Чеклист</h2>
+    <div class="check">
+      <div class="row"><span class="mk">✓</span><span class="tx"><b>Явный запрос на оркестрацию</b> — не полагайся на «само включится».</span></div>
+      <div class="row"><span class="mk">✓</span><span class="tx"><b>Разведка инлайн до скрипта</b> — собери рабочий список, потом заворачивай в workflow.</span></div>
+      <div class="row"><span class="mk">✓</span><span class="tx"><b>pipeline по умолчанию</b>, parallel — только когда нужны все результаты сразу.</span></div>
+      <div class="row"><span class="mk">✓</span><span class="tx"><b>schema на agent()</b> — валидированные объекты вместо парсинга текста.</span></div>
+      <div class="row no"><span class="mk">✕</span><span class="tx"><b>Не гоняй через LLM то, что решается кодом</b> — matching, группировки, дедуп — обычный JS.</span></div>
+      <div class="row no"><span class="mk">✕</span><span class="tx"><b>Не жди «200 сразу»</b> — конкурентность ~16, потолок 1000 суммарно, идёт волнами.</span></div>
+      <div class="row no"><span class="mk">✕</span><span class="tx"><b>Не доверяй слепо на деньгах/договорах/проде</b> — human-in-the-loop на приёмку.</span></div>
+    </div>
+  </section>
+
+  <footer>
+    Гайд по Dynamic Workflows в Claude Code · факты по актуальному Workflow API, кейс и промпт из разбора<br>
+    <a class="foot-back" href="https://sergeyramas.vercel.app/">← вернуться на sergeyramas.vercel.app</a>
+  </footer>
+
+</div>
+</div>
+
+<script>
+  (function () {
+    var box = document.getElementById('pbox');
+    var btn = document.getElementById('copybtn');
+    var txt = document.getElementById('ptext');
+    if (!box || !btn || !txt) return;
+    function flash() {
+      box.classList.add('copied'); btn.textContent = 'скопировано';
+      setTimeout(function () { box.classList.remove('copied'); btn.textContent = 'copy'; }, 1600);
+    }
+    btn.addEventListener('click', function () {
+      var t = txt.textContent;
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(t).then(flash).catch(function () { fb(t); flash(); });
+      } else { fb(t); flash(); }
+    });
+    function fb(t) {
+      var ta = document.createElement('textarea');
+      ta.value = t; ta.style.position = 'fixed'; ta.style.opacity = '0';
+      document.body.appendChild(ta); ta.select();
+      try { document.execCommand('copy'); } catch (e) {}
+      document.body.removeChild(ta);
+    }
+  })();
+</script>
+</body>
+</html>
