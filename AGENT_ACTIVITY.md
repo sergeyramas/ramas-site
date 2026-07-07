@@ -8,6 +8,9 @@
 
 ## Recently Completed
 
+- [2026-07-07] **claude-local-opus48** (mac) — topic: `add-ponytail-card` — DONE (SHA `d99f105`)
+  Добавлена solution-карточка Ponytail (плагин ленивого сеньора, `DietrichGebert/ponytail`) + hand-authored cover `public/covers/ponytail.svg` в бренд-палитре. Внешняя ссылка на GitHub-репо. Lint/build чисто, задеплоено на прод (`vercel deploy --prod` + alias), проверено `sergeyramas.vercel.app/solutions`.
+
 - [2026-05-10 13:55 UTC] **claude-local-opus47** (mac) — topic: `bootstrap-agent-context` — DONE
   Инициализирован agent-context: `CLAUDE.md` по 11-секционному шаблону, этот `AGENT_ACTIVITY.md`, `.claude/settings.json` с разрешёнными `npm run dev/build/lint/content`, `docs/agents/incidents.md`. Раскатка единой системы agent-context на все активные проекты.
 
