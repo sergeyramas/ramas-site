@@ -1,0 +1,80 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" width="800" height="500" font-family="ui-sans-serif, -apple-system, Segoe UI, Roboto, sans-serif">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#26211c"/>
+      <stop offset="1" stop-color="#1c1814"/>
+    </linearGradient>
+    <linearGradient id="area" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#DC7A4F" stop-opacity="0.55"/>
+      <stop offset="1" stop-color="#DC7A4F" stop-opacity="0.02"/>
+    </linearGradient>
+    <filter id="grain">
+      <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" stitchTiles="stitch"/>
+      <feColorMatrix type="saturate" values="0"/>
+      <feComponentTransfer><feFuncA type="linear" slope="0.045"/></feComponentTransfer>
+      <feComposite operator="over" in2="SourceGraphic"/>
+    </filter>
+  </defs>
+
+  <rect width="800" height="500" fill="url(#bg)"/>
+
+  <!-- panel -->
+  <rect x="40" y="40" width="720" height="420" rx="18" fill="#2b2621" stroke="#3a332c" stroke-width="1"/>
+
+  <!-- header row: metric tiles -->
+  <g fill="#F2EDE3">
+    <text x="72" y="92" font-size="13" fill="#a89e90" letter-spacing="0.5">VISITORS</text>
+    <text x="72" y="128" font-size="34" font-weight="700">718</text>
+
+    <text x="270" y="92" font-size="13" fill="#a89e90" letter-spacing="0.5">PAGE VIEWS</text>
+    <text x="270" y="128" font-size="34" font-weight="700">1,388</text>
+
+    <text x="500" y="92" font-size="13" fill="#a89e90" letter-spacing="0.5">ORGANIC SHARE</text>
+    <text x="500" y="128" font-size="34" font-weight="700" fill="#DC7A4F">68%</text>
+  </g>
+
+  <!-- timeframe pill -->
+  <rect x="620" y="70" width="112" height="30" rx="15" fill="#332d27" stroke="#453d34"/>
+  <text x="676" y="90" font-size="13" fill="#c9beac" text-anchor="middle">Last 7 Days</text>
+
+  <!-- chart grid -->
+  <g stroke="#3a332c" stroke-width="1">
+    <line x1="72" y1="180" x2="728" y2="180"/>
+    <line x1="72" y1="260" x2="728" y2="260"/>
+    <line x1="72" y1="340" x2="728" y2="340"/>
+    <line x1="72" y1="410" x2="728" y2="410"/>
+  </g>
+  <g fill="#8a8073" font-size="11" text-anchor="end">
+    <text x="64" y="184">600</text>
+    <text x="64" y="264">400</text>
+    <text x="64" y="344">200</text>
+    <text x="64" y="414">0</text>
+  </g>
+
+  <!-- hockey-stick area + line: flat then explosive -->
+  <path d="M72,406 L182,405 L292,404 L402,402 L512,398 L568,392 L624,340 L680,232 L728,150 L728,410 L72,410 Z" fill="url(#area)"/>
+  <polyline points="72,406 182,405 292,404 402,402 512,398 568,392 624,340 680,232 728,150"
+            fill="none" stroke="#DC7A4F" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
+
+  <!-- dashed projection tail -->
+  <polyline points="680,232 728,150" fill="none" stroke="#DC7A4F" stroke-width="3" stroke-dasharray="2 6" stroke-linecap="round" opacity="0.9"/>
+
+  <!-- endpoint dot -->
+  <circle cx="728" cy="150" r="5" fill="#F2EDE3" stroke="#DC7A4F" stroke-width="3"/>
+
+  <!-- x axis labels (generic days, no dates) -->
+  <g fill="#8a8073" font-size="11" text-anchor="middle">
+    <text x="72" y="432">D1</text>
+    <text x="182" y="432">D2</text>
+    <text x="292" y="432">D3</text>
+    <text x="402" y="432">D4</text>
+    <text x="512" y="432">D5</text>
+    <text x="624" y="432">D6</text>
+    <text x="728" y="432">D7</text>
+  </g>
+
+  <!-- caption -->
+  <text x="72" y="455" font-size="12" fill="#a89e90">Organic search launch · ~15 → ~600 visitors/day in one cycle</text>
+
+  <rect width="800" height="500" filter="url(#grain)" opacity="0.5" pointer-events="none"/>
+</svg>
