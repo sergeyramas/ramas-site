@@ -1,0 +1,75 @@
+<svg viewBox="0 0 800 500" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <filter id="grain">
+      <feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="2" stitchTiles="stitch"/>
+      <feColorMatrix values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0.05 0"/>
+    </filter>
+    <radialGradient id="pt_warmLight" cx="50%" cy="40%" r="65%">
+      <stop offset="0%" stop-color="#3A332C"/>
+      <stop offset="100%" stop-color="#2A2724"/>
+    </radialGradient>
+    <linearGradient id="pt_terra" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#E58A5F"/>
+      <stop offset="100%" stop-color="#C66A40"/>
+    </linearGradient>
+    <linearGradient id="pt_bone" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#F7F2E8"/>
+      <stop offset="100%" stop-color="#E0DACE"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="800" height="500" fill="url(#pt_warmLight)"/>
+
+  <!-- Subtle grid -->
+  <g stroke="white" stroke-width="1" opacity="0.025">
+    <line x1="80" y1="0" x2="80" y2="500"/>
+    <line x1="160" y1="0" x2="160" y2="500"/>
+    <line x1="240" y1="0" x2="240" y2="500"/>
+    <line x1="320" y1="0" x2="320" y2="500"/>
+    <line x1="400" y1="0" x2="400" y2="500"/>
+    <line x1="480" y1="0" x2="480" y2="500"/>
+    <line x1="560" y1="0" x2="560" y2="500"/>
+    <line x1="640" y1="0" x2="640" y2="500"/>
+    <line x1="720" y1="0" x2="720" y2="500"/>
+    <line x1="0" y1="100" x2="800" y2="100"/>
+    <line x1="0" y1="200" x2="800" y2="200"/>
+    <line x1="0" y1="300" x2="800" y2="300"/>
+    <line x1="0" y1="400" x2="800" y2="400"/>
+  </g>
+
+  <!-- Metaphor: many bloated lines collapsing into one clean line -->
+  <!-- The "before": stack of long dim bars (over-engineered code) -->
+  <g opacity="0.28">
+    <rect x="90" y="120" width="300" height="10" rx="5" fill="url(#pt_bone)"/>
+    <rect x="90" y="150" width="250" height="10" rx="5" fill="url(#pt_bone)"/>
+    <rect x="90" y="180" width="330" height="10" rx="5" fill="url(#pt_bone)"/>
+    <rect x="90" y="210" width="210" height="10" rx="5" fill="url(#pt_bone)"/>
+    <rect x="90" y="240" width="290" height="10" rx="5" fill="url(#pt_bone)"/>
+    <rect x="90" y="270" width="180" height="10" rx="5" fill="url(#pt_bone)"/>
+    <rect x="90" y="300" width="260" height="10" rx="5" fill="url(#pt_bone)"/>
+    <rect x="90" y="330" width="220" height="10" rx="5" fill="url(#pt_bone)"/>
+  </g>
+
+  <!-- collapse arrows -->
+  <g stroke="url(#pt_terra)" stroke-width="2" opacity="0.5" fill="none">
+    <path d="M 440 225 L 490 225" stroke-dasharray="4 5"/>
+    <path d="M 480 218 L 492 225 L 480 232"/>
+  </g>
+
+  <!-- The "after": one bold terracotta line (the one-liner) -->
+  <rect x="520" y="218" width="190" height="16" rx="8" fill="url(#pt_terra)"/>
+
+  <!-- ponytail knot mark: a simple looped tie above the one line -->
+  <g fill="none" stroke="url(#pt_terra)" stroke-width="7" stroke-linecap="round">
+    <path d="M 585 150 C 585 120, 645 120, 645 150 C 645 175, 605 175, 615 200"/>
+  </g>
+  <circle cx="615" cy="150" r="9" fill="url(#pt_bone)"/>
+
+  <!-- Wordmark -->
+  <text x="90" y="415" font-family="Georgia, 'Times New Roman', serif" font-size="52" font-weight="700" fill="url(#pt_bone)">Ponytail</text>
+  <text x="92" y="450" font-family="ui-monospace, 'SF Mono', Menlo, monospace" font-size="17" fill="#C66A40" letter-spacing="1">the laziest senior dev in the room</text>
+
+  <!-- Grain overlay -->
+  <rect width="800" height="500" filter="url(#grain)" opacity="0.5"/>
+</svg>
