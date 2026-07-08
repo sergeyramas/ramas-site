@@ -1,0 +1,55 @@
+<svg viewBox="0 0 800 500" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <filter id="grain5">
+      <feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="2" stitchTiles="stitch"/>
+      <feColorMatrix values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0.05 0"/>
+    </filter>
+    <radialGradient id="warmLight5" cx="50%" cy="40%" r="65%">
+      <stop offset="0%" stop-color="#3A332C"/>
+      <stop offset="100%" stop-color="#2A2724"/>
+    </radialGradient>
+    <linearGradient id="terracottaShade5" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#E58A5F"/>
+      <stop offset="100%" stop-color="#C66A40"/>
+    </linearGradient>
+    <linearGradient id="boneShade5" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#F7F2E8"/>
+      <stop offset="100%" stop-color="#E0DACE"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="800" height="500" fill="url(#warmLight5)"/>
+
+  <g stroke="white" stroke-width="1" opacity="0.025">
+    <line x1="80" y1="0" x2="80" y2="500"/>
+    <line x1="160" y1="0" x2="160" y2="500"/>
+    <line x1="240" y1="0" x2="240" y2="500"/>
+    <line x1="320" y1="0" x2="320" y2="500"/>
+    <line x1="400" y1="0" x2="400" y2="500"/>
+    <line x1="480" y1="0" x2="480" y2="500"/>
+    <line x1="560" y1="0" x2="560" y2="500"/>
+    <line x1="640" y1="0" x2="640" y2="500"/>
+    <line x1="720" y1="0" x2="720" y2="500"/>
+  </g>
+
+  <!-- five ascending rings: effort ladder low -> max -->
+  <g>
+    <circle cx="220" cy="330" r="34" fill="url(#boneShade5)" opacity="0.55"/>
+    <circle cx="320" cy="300" r="40" fill="url(#boneShade5)" opacity="0.7"/>
+    <circle cx="420" cy="260" r="48" fill="url(#boneShade5)" opacity="0.85"/>
+    <circle cx="530" cy="210" r="58" fill="url(#terracottaShade5)"/>
+    <circle cx="650" cy="150" r="70" fill="url(#terracottaShade5)"/>
+    <path d="M 640 118 L 660 150 L 640 182" stroke="#2A2724" stroke-width="8" fill="none" stroke-linecap="round" stroke-linejoin="round" opacity="0.85"/>
+  </g>
+
+  <text x="80" y="90" font-family="Georgia, serif" font-size="34" fill="#F2EDE3" opacity="0.92">Fable 5</text>
+  <text x="80" y="122" font-family="Georgia, serif" font-size="17" fill="#E0DACE" opacity="0.6">как ставить задачи</text>
+
+  <rect width="800" height="500" filter="url(#grain5)"/>
+
+  <radialGradient id="vignette5" cx="50%" cy="50%" r="75%">
+    <stop offset="60%" stop-color="#000" stop-opacity="0"/>
+    <stop offset="100%" stop-color="#000" stop-opacity="0.55"/>
+  </radialGradient>
+  <rect width="800" height="500" fill="url(#vignette5)"/>
+</svg>
