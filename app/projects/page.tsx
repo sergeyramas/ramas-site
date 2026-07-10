@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { allByKind } from "@/lib/content";
 import { FilteredGrid } from "@/components/FilteredGrid";
 import { PageHeader } from "@/components/PageHeader";
@@ -18,6 +19,13 @@ export default function ProjectsPage() {
         subtitle="Что-то — под клиентов агентства. Что-то — мои собственные продукты, на которых учусь и зарабатываю."
         count={items.length}
       />
+      <Link
+        href="/collections/gap-to-launch"
+        className="mb-10 sm:mb-14 inline-flex items-center gap-2 font-mono text-xs uppercase tracking-widest text-accent hover:opacity-80 transition-opacity"
+      >
+        Подборка · От GAP-анализа до супер-сайта: как взрываем нишу
+        <span aria-hidden>→</span>
+      </Link>
       <FilteredGrid items={items} />
     </div>
   );
