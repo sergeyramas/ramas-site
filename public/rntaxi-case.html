@@ -131,10 +131,26 @@
   }
   @media(max-width:440px){.g4,.g3,.g2{grid-template-columns:1fr}}
   @media (prefers-reduced-motion:reduce){.dot{animation:none}*{scroll-behavior:auto}}
+
+  /* переход на сайт автора */
+  .sitenav{position:fixed;top:16px;right:16px;z-index:30;display:inline-flex;align-items:center;gap:8px;
+    padding:9px 15px;border-radius:999px;font-size:.82rem;font-weight:650;text-decoration:none;
+    color:var(--ink);background:color-mix(in srgb,var(--panel) 84%,transparent);
+    border:1px solid var(--line-strong);backdrop-filter:blur(8px);box-shadow:var(--shadow);
+    transition:transform .15s ease,border-color .15s ease,color .15s ease}
+  .sitenav:hover{transform:translateY(-1px);border-color:var(--accent);color:var(--accent)}
+  .sitenav .arr{color:var(--accent);font-weight:700}
+  .footer-cta{display:inline-flex;align-items:center;gap:10px;margin-top:18px;padding:13px 22px;
+    border-radius:12px;font-weight:700;text-decoration:none;border-bottom:none;color:#04140E;
+    background:var(--accent);box-shadow:var(--shadow);transition:transform .15s ease,opacity .15s ease}
+  .footer-cta:hover{transform:translateY(-1px);opacity:.93;border-bottom:none}
+  @media(max-width:520px){.sitenav{top:10px;right:10px;padding:7px 12px;font-size:.76rem}}
 </style>
 
 </head>
 <body>
+<a class="sitenav" href="https://sergeyramas.vercel.app" target="_blank" rel="noopener">Sergey&nbsp;Ramas<span class="arr">↗</span></a>
+
 <header class="hero">
   <canvas id="sig" aria-hidden="true"></canvas>
   <div class="hero-grad"></div>
@@ -240,6 +256,7 @@
     <div class="wrap">
       Источники: лендинг <a href="https://rntaxi.ru" target="_blank" rel="noopener">rntaxi.ru</a> · карточка RuStore <span class="mono">com.nmtaxi.app</span>. Раздел «проверено» — данные магазина и сайта; раздел «заявлено» — слова разработчика (студия FUTURAAI), внешне не подтверждены.<br>
       Собрано для обсуждения с Андреем · 2026-07-10.
+      <div><a class="footer-cta" href="https://sergeyramas.vercel.app" target="_blank" rel="noopener">Больше работ на sergeyramas.vercel.app →</a></div>
     </div>
   </footer>
 </main>
