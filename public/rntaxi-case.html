@@ -1,0 +1,280 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>RN taxi — кейс FUTURAAI · разбор для Андрея</title>
+<style>
+  :root{
+    --ground:#F4F3EE; --panel:#FBFAF6; --ink:#141A17; --ink-soft:#3A443F;
+    --muted:#6E7C76; --line:#E0DED4; --line-strong:#CFCDC0;
+    --accent:#0EA372; --accent-ink:#065F44; --amber:#C67A12;
+    --shadow:0 1px 2px rgba(20,26,23,.05),0 8px 30px rgba(20,26,23,.06);
+    --grid:rgba(20,26,23,.05);
+  }
+  @media (prefers-color-scheme:dark){
+    :root{
+      --ground:#0B120F; --panel:#111A16; --ink:#E9F0EC; --ink-soft:#B3C1BA;
+      --muted:#7E8F87; --line:#1E2A24; --line-strong:#2A3A32;
+      --accent:#18E39A; --accent-ink:#8FF7D2; --amber:#F0AE4A;
+      --shadow:0 1px 0 rgba(255,255,255,.02),0 20px 50px rgba(0,0,0,.5);
+      --grid:rgba(230,240,236,.045);
+    }
+  }
+  :root[data-theme="light"]{
+    --ground:#F4F3EE; --panel:#FBFAF6; --ink:#141A17; --ink-soft:#3A443F;
+    --muted:#6E7C76; --line:#E0DED4; --line-strong:#CFCDC0;
+    --accent:#0EA372; --accent-ink:#065F44; --amber:#C67A12;
+    --shadow:0 1px 2px rgba(20,26,23,.05),0 8px 30px rgba(20,26,23,.06);
+    --grid:rgba(20,26,23,.05);
+  }
+  :root[data-theme="dark"]{
+    --ground:#0B120F; --panel:#111A16; --ink:#E9F0EC; --ink-soft:#B3C1BA;
+    --muted:#7E8F87; --line:#1E2A24; --line-strong:#2A3A32;
+    --accent:#18E39A; --accent-ink:#8FF7D2; --amber:#F0AE4A;
+    --shadow:0 1px 0 rgba(255,255,255,.02),0 20px 50px rgba(0,0,0,.5);
+    --grid:rgba(230,240,236,.045);
+  }
+
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  body{
+    margin:0;background:var(--ground);color:var(--ink);
+    font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+    line-height:1.6;-webkit-font-smoothing:antialiased;
+    font-feature-settings:"kern";
+  }
+  .mono{font-family:ui-monospace,"SF Mono","JetBrains Mono","Roboto Mono",Menlo,monospace;font-variant-numeric:tabular-nums}
+  .wrap{max-width:1060px;margin:0 auto;padding:0 24px}
+  section{padding:64px 0;border-top:1px solid var(--line)}
+  h2{font-size:clamp(1.5rem,3.4vw,2.15rem);line-height:1.15;letter-spacing:-.02em;margin:0 0 12px;text-wrap:balance;font-weight:800}
+  p{margin:0 0 14px;color:var(--ink-soft);max-width:64ch}
+  .eyebrow{font-family:ui-monospace,"SF Mono",Menlo,monospace;font-size:.72rem;letter-spacing:.22em;text-transform:uppercase;color:var(--muted);margin:0 0 18px}
+  .accent{color:var(--accent)}
+  strong{color:var(--ink)}
+
+  /* HERO */
+  .hero{position:relative;overflow:hidden;border-top:none;padding:0}
+  #sig{position:absolute;inset:0;width:100%;height:100%;display:block}
+  .hero-grad{position:absolute;inset:0;background:
+    radial-gradient(120% 90% at 78% -10%,transparent 40%,var(--ground) 78%),
+    linear-gradient(180deg,transparent 55%,var(--ground) 100%);pointer-events:none}
+  .hero-inner{position:relative;padding:96px 0 76px;z-index:2}
+  .hero h1{font-size:clamp(2.1rem,5.6vw,4rem);line-height:1.04;letter-spacing:-.035em;margin:0 0 22px;max-width:16ch;font-weight:850;text-wrap:balance}
+  .hero p.lede{font-size:clamp(1.02rem,1.7vw,1.22rem);max-width:56ch;color:var(--ink-soft)}
+  .badge{display:inline-flex;align-items:center;gap:8px;padding:6px 13px;border:1px solid var(--line-strong);
+    border-radius:999px;font-size:.76rem;color:var(--ink-soft);background:color-mix(in srgb,var(--panel) 70%,transparent);backdrop-filter:blur(6px)}
+  .dot{width:7px;height:7px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 0 var(--accent);animation:pulse 2.4s ease-out infinite}
+  @keyframes pulse{0%{box-shadow:0 0 0 0 color-mix(in srgb,var(--accent) 60%,transparent)}70%{box-shadow:0 0 0 10px transparent}100%{box-shadow:0 0 0 0 transparent}}
+
+  .kpis{display:flex;flex-wrap:wrap;gap:10px;margin-top:34px}
+  .kpi{flex:1 1 120px;min-width:120px;background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:16px 18px}
+  .kpi .n{font-size:clamp(1.5rem,3.2vw,2.1rem);font-weight:800;letter-spacing:-.02em;line-height:1}
+  .kpi .l{font-size:.74rem;color:var(--muted);margin-top:7px;letter-spacing:.02em}
+
+  /* CONSOLE (verified) */
+  .lbl{display:inline-flex;align-items:center;gap:7px;font-family:ui-monospace,Menlo,monospace;font-size:.7rem;letter-spacing:.16em;text-transform:uppercase;padding:5px 10px;border-radius:6px}
+  .lbl-ok{color:var(--accent-ink);background:color-mix(in srgb,var(--accent) 16%,transparent);border:1px solid color-mix(in srgb,var(--accent) 34%,transparent)}
+  .lbl-claim{color:var(--amber);background:color-mix(in srgb,var(--amber) 14%,transparent);border:1px solid color-mix(in srgb,var(--amber) 32%,transparent)}
+  .grid{display:grid;gap:14px;margin-top:26px}
+  .g2{grid-template-columns:repeat(2,1fr)}
+  .g3{grid-template-columns:repeat(3,1fr)}
+  .g4{grid-template-columns:repeat(4,1fr)}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:20px;box-shadow:var(--shadow)}
+  .card .t{font-family:ui-monospace,Menlo,monospace;font-size:.72rem;letter-spacing:.06em;color:var(--muted);text-transform:uppercase;margin-bottom:10px}
+  .card .v{font-size:1.28rem;font-weight:750;letter-spacing:-.01em;line-height:1.15}
+  .card .s{font-size:.86rem;color:var(--muted);margin-top:6px}
+
+  .note{font-size:.82rem;color:var(--muted);margin-top:16px}
+
+  /* insight callout */
+  .callout{margin-top:24px;padding:22px 24px;border-left:3px solid var(--accent);
+    background:color-mix(in srgb,var(--accent) 8%,var(--panel));border-radius:0 14px 14px 0}
+  .callout .big{font-size:clamp(1.15rem,2.3vw,1.5rem);font-weight:750;color:var(--ink);letter-spacing:-.01em;max-width:36ch}
+
+  .split{display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:start}
+
+  /* feature list */
+  .feat{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:24px}
+  .feat .f{display:flex;gap:13px;padding:15px 16px;background:var(--panel);border:1px solid var(--line);border-radius:12px}
+  .feat .f .m{flex:0 0 auto;width:30px;height:30px;border-radius:8px;display:grid;place-items:center;
+    background:color-mix(in srgb,var(--accent) 14%,transparent);color:var(--accent);font-size:.9rem}
+  .feat .f b{display:block;font-size:.95rem;color:var(--ink);font-weight:650}
+  .feat .f span{font-size:.83rem;color:var(--muted)}
+
+  /* bridge rows */
+  .bridge{margin-top:24px;border:1px solid var(--line);border-radius:14px;overflow:hidden}
+  .brow{display:grid;grid-template-columns:1fr 1fr;gap:0}
+  .brow>div{padding:16px 20px;border-top:1px solid var(--line)}
+  .brow:first-child>div{border-top:none}
+  .brow .l{color:var(--muted);font-size:.9rem;background:color-mix(in srgb,var(--panel) 60%,transparent)}
+  .brow .r{color:var(--ink);font-size:.95rem;font-weight:600;border-left:1px solid var(--line)}
+  .bhead{display:grid;grid-template-columns:1fr 1fr;font-family:ui-monospace,Menlo,monospace;font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+  .bhead>div{padding:12px 20px}
+  .bhead>div:last-child{border-left:1px solid var(--line);color:var(--accent)}
+
+  .close{margin-top:28px;padding:24px;border:1px dashed var(--line-strong);border-radius:16px;background:var(--panel)}
+  .close b{color:var(--ink)}
+
+  footer{border-top:1px solid var(--line);padding:36px 0 56px;color:var(--muted);font-size:.82rem}
+  footer a{color:var(--accent);text-decoration:none;border-bottom:1px solid color-mix(in srgb,var(--accent) 40%,transparent)}
+  footer a:hover{border-bottom-color:var(--accent)}
+
+  a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:4px}
+
+  @media(max-width:760px){
+    section{padding:48px 0}
+    .g4,.g3{grid-template-columns:repeat(2,1fr)}
+    .split{grid-template-columns:1fr;gap:24px}
+    .feat{grid-template-columns:1fr}
+    .brow,.bhead{grid-template-columns:1fr 1fr}
+  }
+  @media(max-width:440px){.g4,.g3,.g2{grid-template-columns:1fr}}
+  @media (prefers-reduced-motion:reduce){.dot{animation:none}*{scroll-behavior:auto}}
+</style>
+
+</head>
+<body>
+<header class="hero">
+  <canvas id="sig" aria-hidden="true"></canvas>
+  <div class="hero-grad"></div>
+  <div class="wrap hero-inner">
+    <span class="badge"><span class="dot"></span>Кейс для разбора · студия FUTURAAI</span>
+    <h1>Один человек и Claude Code собрали рабочее&nbsp;такси за месяц.</h1>
+    <p class="lede">Не студия. Не полгода. Не миллионы. Приложение уже в RuStore. Ниже — что здесь <strong>правда</strong>, где <strong>маркетинг</strong>, и почему это <span class="accent">напрямую про нас</span>.</p>
+    <div class="kpis">
+      <div class="kpi"><div class="n mono">1<span style="font-size:.5em"> </span>мес</div><div class="l">от идеи до RuStore</div></div>
+      <div class="kpi"><div class="n mono">1</div><div class="l">человек + ИИ</div></div>
+      <div class="kpi"><div class="n mono">51,6<span style="font-size:.5em"> </span>МБ</div><div class="l">одно приложение на 2 роли</div></div>
+      <div class="kpi"><div class="n">Live</div><div class="l">опубликовано в RuStore</div></div>
+    </div>
+  </div>
+</header>
+
+<main>
+  <section>
+    <div class="wrap">
+      <span class="lbl lbl-ok">● Проверено · RuStore + сайт</span>
+      <h2 style="margin-top:16px">Что подтверждается независимо</h2>
+      <p>Это не с чужих слов — вытащено из карточки RuStore (<span class="mono">com.nmtaxi.app</span>) и лендинга rntaxi.ru.</p>
+      <div class="grid g3">
+        <div class="card"><div class="t">Формат</div><div class="v">Одно приложение</div><div class="s">Пассажир и водитель в одном, переключение роли. 51,6 МБ.</div></div>
+        <div class="card"><div class="t">Живость</div><div class="v">v1.0.8 · 7 июля</div><div class="s">Свежие апдейты — продукт активно доводят, а не заброшен.</div></div>
+        <div class="card"><div class="t">География</div><div class="v">4 города РТ</div><div class="s">Бугульма, Лениногорск, Азнакаево, Бавлы + межгород до Казани.</div></div>
+        <div class="card"><div class="t">Устройства</div><div class="v">Android 7+, наличные</div><div class="s">Расчёт на дешёвые телефоны и оффлайн-оплату. Лин-подход.</div></div>
+        <div class="card"><div class="t">Фичи в листинге</div><div class="v">Женский экипаж, предзаказ</div><div class="s">Мультистоп, живая карта, история — подтверждены магазином.</div></div>
+        <div class="card"><div class="t">Тяга</div><div class="v">≤1000 · 0 отзывов</div><div class="s">Запущено — но рынком ещё не доказано. Держим это честно в голове.</div></div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <span class="eyebrow">Главное — не в кнопках</span>
+      <h2>Клонировали Максим, а не Яндекс — и это умно</h2>
+      <div class="split">
+        <div>
+          <p>В малых городах правит не Яндекс, а <strong>Максим</strong>: привычный и дешёвый. Копировать Яндекс там бесполезно — у людей уже есть паттерн, и «дорогой» дизайн вызывает отторжение. Поэтому взяли знакомый интерфейс и сделали <strong>то же, но лучше</strong>.</p>
+          <p>Отсюда трезвый вывод: <strong>новизны в интерфейсе нет</strong> — это осознанная копия. Реальный прорыв в другом.</p>
+        </div>
+        <div>
+          <div class="card" style="border-color:color-mix(in srgb,var(--accent) 30%,var(--line))">
+            <div class="t">Где настоящая новизна</div>
+            <div class="v" style="margin-bottom:14px">Обвал цены сборки</div>
+            <div class="s" style="color:var(--ink-soft)">Solo + Claude Code → месяц, почти бесплатно. Классическая студия — 4–6 месяцев и несколько миллионов ₽.</div>
+            <div class="v" style="margin:16px 0 0">Заход в щель</div>
+            <div class="s" style="color:var(--ink-soft)">Малые города, где гиганты слабы, и клон инструмента, которым там уже пользуются.</div>
+          </div>
+        </div>
+      </div>
+      <div class="callout"><div class="big">«Проливает болото» не новый экран, а новая <span class="accent">цена и скорость производства</span>.</div></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <span class="lbl lbl-claim">▲ Заявлено разработчиком</span>
+      <h2 style="margin-top:16px">Масштаб продукта — со слов автора</h2>
+      <p>Снаружи не проверить, но 51,6 МБ и Android 7+ косвенно бьются с заявкой «полноценный продукт, а не кнопка».</p>
+      <div class="grid g4">
+        <div class="card"><div class="v mono" style="font-size:2rem">61</div><div class="s">экран</div></div>
+        <div class="card"><div class="v mono" style="font-size:2rem">~40k</div><div class="s">строк кода + бэкенд с админкой</div></div>
+        <div class="card"><div class="v mono" style="font-size:2rem">99</div><div class="s">переиспользуемых модулей</div></div>
+        <div class="card"><div class="v mono" style="font-size:2rem">20+</div><div class="s">ключевых функций · 2 роли</div></div>
+      </div>
+
+      <h2 style="margin-top:44px;font-size:1.3rem">Фичи, которыми хвалятся</h2>
+      <div class="feat">
+        <div class="f"><span class="m">◷</span><div><b>Предзаказ + напоминание</b><span>Водителю пуш за 30 минут до подачи.</span></div></div>
+        <div class="f"><span class="m">⇢</span><div><b>Маршрут с остановками</b><span>Несколько точек в одной поездке.</span></div></div>
+        <div class="f"><span class="m">◎</span><div><b>Умная подача</b><span>«Еду» за 1 км, «На месте» за 300 м.</span></div></div>
+        <div class="f"><span class="m">⤴</span><div><b>Заказы «по пути»</b><span>Водителю подкидывают заказы в радиусе 1 км — не гонять пустым.</span></div></div>
+        <div class="f"><span class="m">♀</span><div><b>Женский экипаж</b><span>Такие заказы уходят только женщинам-водителям.</span></div></div>
+        <div class="f"><span class="m">₽</span><div><b>Кошелёк водителя</b><span>Комиссия, смены, бонусы — прямо в приложении.</span></div></div>
+        <div class="f"><span class="m">⌖</span><div><b>Авто-город по GPS</b><span>Пуш при пересечении границы города даже в фоне.</span></div></div>
+        <div class="f"><span class="m">✱</span><div><b>Диспетчер + чат</b><span>Связь и поддержка внутри приложения.</span></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <span class="eyebrow">Зачем я это показываю</span>
+      <h2>Почему этот кейс — про Рынок Маркет</h2>
+      <p>Форма их продукта почти один-в-один с нашим приложением доставки. То, что они уже сделали руками одного человека — ровно наш план.</p>
+      <div class="bridge">
+        <div class="bhead"><div>У них (RN taxi)</div><div>У нас (Рынок Маркет)</div></div>
+        <div class="brow"><div class="l">Единое приложение на 2 роли</div><div class="r">Заказчик + водитель в одном</div></div>
+        <div class="brow"><div class="l">Заказы «по пути», радиус 1 км</div><div class="r">Попутные заказы (backhaul) — рычаг маржи рейса</div></div>
+        <div class="brow"><div class="l">RuStore-first, дешёвые Android</div><div class="r">Мультиканал без завязки на Telegram</div></div>
+        <div class="brow"><div class="l">Клон привычного (Максим)</div><div class="r">Знакомый UX доставки + сесть на API служб</div></div>
+        <div class="brow"><div class="l">Свой флот водителей такси</div><div class="r">Чужие «Газели» через API (Яндекс Доставка, Достависта) — DaaS</div></div>
+      </div>
+      <div class="close">
+        <p style="margin:0"><b>Что кейс доказывает:</b> что <b>мы можем это построить</b> — дёшево, быстро, силами человека + Claude Code. <br><b>Чего не доказывает:</b> что победа автоматическая. У RN taxi пока ноль тяги. Выигрывают потом — дистрибуцией и поставщиками. Строить дёшево — уже решено. Осталось выиграть рынок.</p>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="wrap">
+      Источники: лендинг <a href="https://rntaxi.ru" target="_blank" rel="noopener">rntaxi.ru</a> · карточка RuStore <span class="mono">com.nmtaxi.app</span>. Раздел «проверено» — данные магазина и сайта; раздел «заявлено» — слова разработчика (студия FUTURAAI), внешне не подтверждены.<br>
+      Собрано для обсуждения с Андреем · 2026-07-10.
+    </div>
+  </footer>
+</main>
+
+<script>
+(function(){
+  var c=document.getElementById('sig');if(!c)return;
+  var reduce=window.matchMedia&&window.matchMedia('(prefers-reduced-motion:reduce)').matches;
+  var ctx=c.getContext('2d'),W,H,DPR=Math.min(window.devicePixelRatio||1,2),nodes=[],t=0;
+  function accent(){return getComputedStyle(document.documentElement).getPropertyValue('--accent').trim()||'#18E39A'}
+  function grid(){return getComputedStyle(document.documentElement).getPropertyValue('--grid').trim()||'rgba(230,240,236,.045)'}
+  function size(){W=c.clientWidth;H=c.clientHeight;c.width=W*DPR;c.height=H*DPR;ctx.setTransform(DPR,0,0,DPR,0,0);build()}
+  function build(){nodes=[];var n=Math.max(10,Math.round(W/90));for(var i=0;i<n;i++){nodes.push({x:Math.random()*W,y:Math.random()*H,vx:(Math.random()-.5)*.18,vy:(Math.random()-.5)*.18,p:Math.random()*Math.PI*2})}}
+  function draw(){
+    ctx.clearRect(0,0,W,H);
+    var step=46,gc=grid();ctx.strokeStyle=gc;ctx.lineWidth=1;
+    for(var x=0;x<W;x+=step){ctx.beginPath();ctx.moveTo(x,0);ctx.lineTo(x,H);ctx.stroke()}
+    for(var y=0;y<H;y+=step){ctx.beginPath();ctx.moveTo(0,y);ctx.lineTo(W,y);ctx.stroke()}
+    var a=accent();
+    for(var i=0;i<nodes.length;i++){for(var j=i+1;j<nodes.length;j++){
+      var dx=nodes[i].x-nodes[j].x,dy=nodes[i].y-nodes[j].y,d=Math.sqrt(dx*dx+dy*dy);
+      if(d<150){ctx.globalAlpha=(1-d/150)*.28;ctx.strokeStyle=a;ctx.lineWidth=1;
+        ctx.beginPath();ctx.moveTo(nodes[i].x,nodes[i].y);ctx.lineTo(nodes[j].x,nodes[j].y);ctx.stroke()}
+    }}
+    ctx.globalAlpha=1;
+    for(var k=0;k<nodes.length;k++){var nd=nodes[k],pr=(Math.sin(t*.03+nd.p)+1)/2;
+      ctx.globalAlpha=.5+pr*.5;ctx.fillStyle=a;ctx.beginPath();ctx.arc(nd.x,nd.y,1.6+pr*1.6,0,Math.PI*2);ctx.fill();
+      nd.x+=nd.vx;nd.y+=nd.vy;if(nd.x<0||nd.x>W)nd.vx*=-1;if(nd.y<0||nd.y>H)nd.vy*=-1;}
+    ctx.globalAlpha=1;
+  }
+  function loop(){t++;draw();requestAnimationFrame(loop)}
+  size();window.addEventListener('resize',size);
+  if(reduce){draw()}else{loop()}
+})();
+</script>
+
+</body>
+</html>
