@@ -13,9 +13,13 @@ const statusLabel: Record<string, string> = {
 
 export function Card({ item, dense = false, large = false }: { item: Item; dense?: boolean; large?: boolean }) {
   // Solutions always open their own internal step-doc page; external URL is shown
-  // there as a "full guide" CTA. Projects/ideas keep their existing behaviour.
-  const useInternal = item.kind === "solution" || !item.isExternal;
-  const href = useInternal ? `/${item.kind}s/${item.slug}` : item.url;
+  // there as a "full guide" CTA. Projects fall back to their internal page.
+  // Ideas have no /ideas/[slug] route — without an externalUrl they are not linkable.
+  const useInternal =
+    item.kind === "solution" || (item.kind === "project" && !item.isExternal);
+  // Not item.url: velite fills it with `/${kind}s/${slug}` even for ideas, which
+  // have no such route (see velite.config.ts). Trust externalUrl only.
+  const externalHref = item.isExternal ? item.url : null;
   const showExternalIndicator = item.isExternal;
 
   const inner = (
@@ -91,12 +95,21 @@ export function Card({ item, dense = false, large = false }: { item: Item; dense
     </article>
   );
 
-  return useInternal ? (
-    <Link href={href} className="group block h-full">
-      {inner}
-    </Link>
-  ) : (
-    <a href={href} target="_blank" rel="noopener noreferrer" className="group block h-full">
+  if (useInternal) {
+    return (
+      <Link href={`/${item.kind}s/${item.slug}`} className="group block h-full">
+        {inner}
+      </Link>
+    );
+  }
+
+  // No "group" class: without a link there must be no hover-lift pretending to be clickable.
+  if (!externalHref) {
+    return <div className="block h-full">{inner}</div>;
+  }
+
+  return (
+    <a href={externalHref} target="_blank" rel="noopener noreferrer" className="group block h-full">
       {inner}
     </a>
   );

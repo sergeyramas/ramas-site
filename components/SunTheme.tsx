@@ -1,42 +1,52 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { useTheme } from "next-themes";
 
-const STORAGE_KEY = "theme";
-const SUN_APPLIED_KEY = "ramas-sun-applied";
+const MANUAL_KEY = "ramas-theme-manual";
+
+/** Called by ThemeToggle: records that the user picked a theme by hand. */
+export function markThemeManual() {
+  try {
+    window.localStorage.setItem(MANUAL_KEY, "1");
+  } catch {
+    /* ignore */
+  }
+}
+
+function pickedManually() {
+  try {
+    return window.localStorage.getItem(MANUAL_KEY) === "1";
+  } catch {
+    return false;
+  }
+}
 
 /**
  * On first mount, ask /api/sun for the appropriate theme (based on Vercel-geo
- * sunrise/sunset) and switch — but only if the user has not picked a theme
- * manually. We respect explicit user choice forever; sun-mode is only the
- * default for first-time visitors.
+ * sunrise/sunset) and switch — but only if the user has never picked a theme
+ * manually. An explicit choice is respected forever; sun-mode is only the
+ * default for visitors who have not touched the toggle.
  */
 export function SunTheme() {
   const { setTheme } = useTheme();
+  // Runs once per mount. Without this guard the effect re-fires when setTheme
+  // changes identity and clobbers the theme the user just picked.
+  const ranRef = useRef(false);
 
   useEffect(() => {
-    // If the user has manually selected a theme, next-themes wrote a value
-    // into localStorage. We only auto-switch when no manual choice exists.
-    const stored = typeof window !== "undefined" ? window.localStorage.getItem(STORAGE_KEY) : null;
-    const sunApplied = typeof window !== "undefined" ? window.localStorage.getItem(SUN_APPLIED_KEY) : null;
+    if (ranRef.current) return;
+    ranRef.current = true;
 
-    // Manual choice present → respect it, do nothing.
-    if (stored && stored !== "system" && sunApplied !== "1") {
-      return;
-    }
+    if (pickedManually()) return;
 
     let cancelled = false;
     fetch("/api/sun", { cache: "force-cache" })
       .then((r) => (r.ok ? r.json() : null))
       .then((data: { theme?: "light" | "dark" } | null) => {
         if (cancelled || !data?.theme) return;
+        if (pickedManually()) return;
         setTheme(data.theme);
-        try {
-          window.localStorage.setItem(SUN_APPLIED_KEY, "1");
-        } catch {
-          /* ignore */
-        }
       })
       .catch(() => {
         /* silent — fall through to next-themes default */
