@@ -1,7 +1,7 @@
 import Link from "next/link";
 import type { CSSProperties } from "react";
 
-export const metadata = { title: "Themes preview" };
+export const metadata = { title: "Themes preview", robots: { index: false, follow: false } };
 
 type Palette = {
   letter: "A" | "B" | "C";
