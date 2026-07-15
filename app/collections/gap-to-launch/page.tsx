@@ -96,7 +96,7 @@ export default function GapToLaunchPage() {
                   <div className="grid grid-cols-2 gap-3">
                     <div className="relative aspect-[4/3] overflow-hidden rounded-xl bg-bg">
                       <Image
-                        src="/covers/projects/logika-before.png"
+                        src="/covers/projects/logika-before.webp"
                         alt="Логика ИТП — сайт до"
                         fill
                         sizes="(min-width: 1024px) 25vw, 50vw"
