@@ -16,6 +16,7 @@ export function Nav() {
   const links = [
     { href: "/solutions", label: t("nav.solutions") },
     { href: "/projects", label: t("nav.projects") },
+    { href: "/gaps", label: t("nav.gaps") },
     { href: "/ideas", label: t("nav.ideas") },
     { href: "/about", label: t("nav.about") },
   ];
