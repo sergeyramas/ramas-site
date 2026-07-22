@@ -1,0 +1,92 @@
+<svg viewBox="0 0 800 500" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Pain-driven research: a wall of customer quote cards with one empty slot marking the market gap">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#141414"/>
+      <stop offset="0.55" stop-color="#1f2325"/>
+      <stop offset="1" stop-color="#33201a"/>
+    </linearGradient>
+    <linearGradient id="paper" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#f3eee4"/>
+      <stop offset="1" stop-color="#dbd0c0"/>
+    </linearGradient>
+    <filter id="grain">
+      <feTurbulence type="fractalNoise" baseFrequency="0.78" numOctaves="3" stitchTiles="stitch"/>
+      <feColorMatrix values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0.03 0"/>
+    </filter>
+    <filter id="softShadow" x="-30%" y="-30%" width="160%" height="160%">
+      <feDropShadow dx="0" dy="14" stdDeviation="15" flood-color="#000000" flood-opacity="0.34"/>
+    </filter>
+    <filter id="gapGlow" x="-40%" y="-40%" width="180%" height="180%">
+      <feGaussianBlur stdDeviation="14" result="b"/>
+      <feColorMatrix in="b" values="1 0 0 0 0.86  0 1 0 0 0.48  0 0 1 0 0.31  0 0 0 0.5 0"/>
+    </filter>
+  </defs>
+
+  <rect width="800" height="500" fill="url(#bg)"/>
+  <rect width="800" height="500" filter="url(#grain)" opacity="0.9"/>
+
+  <g transform="translate(64 72)">
+    <text x="0" y="0" fill="#dc7a4f" font-family="Menlo, Monaco, monospace" font-size="12" letter-spacing="3">VERBATIM BUYER PAINS</text>
+    <text x="0" y="52" fill="#f2ede3" font-family="Georgia, serif" font-size="46">What nobody</text>
+    <text x="0" y="98" fill="#f2ede3" font-family="Georgia, serif" font-size="46">in the niche says</text>
+  </g>
+
+  <!-- wall of quote cards -->
+  <g filter="url(#softShadow)">
+    <g transform="translate(64 200)">
+      <rect width="152" height="86" rx="6" fill="url(#paper)"/>
+      <rect x="16" y="18" width="18" height="18" rx="3" fill="#dc7a4f"/>
+      <rect x="44" y="21" width="88" height="8" rx="4" fill="#5b544b" opacity="0.5"/>
+      <rect x="16" y="50" width="118" height="7" rx="3.5" fill="#5b544b" opacity="0.32"/>
+      <rect x="16" y="66" width="84" height="7" rx="3.5" fill="#5b544b" opacity="0.32"/>
+    </g>
+    <g transform="translate(232 200)">
+      <rect width="152" height="86" rx="6" fill="url(#paper)"/>
+      <rect x="16" y="18" width="18" height="18" rx="3" fill="#dc7a4f"/>
+      <rect x="44" y="21" width="70" height="8" rx="4" fill="#5b544b" opacity="0.5"/>
+      <rect x="16" y="50" width="104" height="7" rx="3.5" fill="#5b544b" opacity="0.32"/>
+      <rect x="16" y="66" width="120" height="7" rx="3.5" fill="#5b544b" opacity="0.32"/>
+    </g>
+    <g transform="translate(400 200)">
+      <rect width="152" height="86" rx="6" fill="url(#paper)"/>
+      <rect x="16" y="18" width="18" height="18" rx="3" fill="#dc7a4f"/>
+      <rect x="44" y="21" width="94" height="8" rx="4" fill="#5b544b" opacity="0.5"/>
+      <rect x="16" y="50" width="92" height="7" rx="3.5" fill="#5b544b" opacity="0.32"/>
+      <rect x="16" y="66" width="112" height="7" rx="3.5" fill="#5b544b" opacity="0.32"/>
+    </g>
+    <g transform="translate(64 302)">
+      <rect width="152" height="86" rx="6" fill="url(#paper)"/>
+      <rect x="16" y="18" width="18" height="18" rx="3" fill="#dc7a4f"/>
+      <rect x="44" y="21" width="80" height="8" rx="4" fill="#5b544b" opacity="0.5"/>
+      <rect x="16" y="50" width="120" height="7" rx="3.5" fill="#5b544b" opacity="0.32"/>
+      <rect x="16" y="66" width="70" height="7" rx="3.5" fill="#5b544b" opacity="0.32"/>
+    </g>
+    <g transform="translate(400 302)">
+      <rect width="152" height="86" rx="6" fill="url(#paper)"/>
+      <rect x="16" y="18" width="18" height="18" rx="3" fill="#dc7a4f"/>
+      <rect x="44" y="21" width="86" height="8" rx="4" fill="#5b544b" opacity="0.5"/>
+      <rect x="16" y="50" width="98" height="7" rx="3.5" fill="#5b544b" opacity="0.32"/>
+      <rect x="16" y="66" width="118" height="7" rx="3.5" fill="#5b544b" opacity="0.32"/>
+    </g>
+  </g>
+
+  <!-- the gap: the one empty slot -->
+  <rect x="232" y="302" width="152" height="86" rx="6" fill="#dc7a4f" opacity="0.5" filter="url(#gapGlow)"/>
+  <rect x="232" y="302" width="152" height="86" rx="6" fill="none" stroke="#dc7a4f" stroke-width="2.4" stroke-dasharray="9 7"/>
+  <text x="308" y="352" fill="#dc7a4f" text-anchor="middle" font-family="Menlo, Monaco, monospace" font-size="15" letter-spacing="4">GAP</text>
+
+  <!-- niche palette strip -->
+  <g transform="translate(600 200)">
+    <rect width="136" height="188" rx="6" fill="#1a1c1d" stroke="#f2ede3" stroke-opacity="0.14"/>
+    <rect x="18" y="22" width="100" height="26" rx="4" fill="#dc7a4f"/>
+    <rect x="18" y="56" width="100" height="26" rx="4" fill="#2d6a4f"/>
+    <rect x="18" y="90" width="100" height="26" rx="4" fill="#716a5f"/>
+    <rect x="18" y="124" width="100" height="26" rx="4" fill="#f2ede3"/>
+    <text x="18" y="172" fill="#f2ede3" opacity="0.6" font-family="Menlo, Monaco, monospace" font-size="10">NICHE PALETTE</text>
+  </g>
+
+  <g transform="translate(64 448)">
+    <circle cx="6" cy="-4" r="5" fill="#dc7a4f"/>
+    <text x="22" y="0" fill="#f2ede3" font-family="Menlo, Monaco, monospace" font-size="12">reviews -&gt; pains -&gt; gaps -&gt; wireframe -&gt; copy</text>
+  </g>
+</svg>
