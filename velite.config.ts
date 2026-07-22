@@ -12,6 +12,7 @@ const items = defineCollection({
       cover: s.string().optional(),
       preview: s.string().optional(),
       externalUrl: s.string().url().nullable().optional(),
+      gapUrl: s.string().optional(),
       tags: s.array(s.string()).default([]),
       status: s.enum(["live", "wip", "archived", "concept"]).default("live"),
       tier: s.enum(["free", "paid"]).default("free"),

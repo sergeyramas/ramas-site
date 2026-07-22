@@ -51,6 +51,7 @@ export function Card({ item, dense = false, large = false }: { item: Item; dense
           <span className="eyebrow">
             {item.kind === "solution" ? "Solution" : item.kind === "project" ? "Project" : "Idea"}
             <span className="text-subtle"> · {statusLabel[item.status] ?? item.status}</span>
+            {item.tier === "paid" && <span className="text-accent"> · по подписке</span>}
           </span>
           <h3
             className={cn(
@@ -95,22 +96,32 @@ export function Card({ item, dense = false, large = false }: { item: Item; dense
     </article>
   );
 
-  if (useInternal) {
-    return (
-      <Link href={`/${item.kind}s/${item.slug}`} className="group block h-full">
-        {inner}
-      </Link>
-    );
-  }
-
-  // No "group" class: without a link there must be no hover-lift pretending to be clickable.
-  if (!externalHref) {
-    return <div className="block h-full">{inner}</div>;
-  }
-
-  return (
+  const card = useInternal ? (
+    <Link href={`/${item.kind}s/${item.slug}`} className="group block h-full">
+      {inner}
+    </Link>
+  ) : externalHref ? (
     <a href={externalHref} target="_blank" rel="noopener noreferrer" className="group block h-full">
       {inner}
     </a>
+  ) : (
+    // No "group" class: without a link there must be no hover-lift pretending to be clickable.
+    <div className="block h-full">{inner}</div>
+  );
+
+  // ponytail: the GAP link is a sibling, not a child — nesting <a> inside <a> is invalid HTML.
+  if (!item.gapUrl) return card;
+
+  return (
+    <div className="flex h-full flex-col">
+      <div className="flex-1">{card}</div>
+      <a
+        href={item.gapUrl}
+        className="mt-3 inline-flex items-center gap-1.5 font-mono text-[11px] uppercase tracking-widest text-muted hover:text-accent transition-colors"
+      >
+        GAP-анализ ниши
+        <span aria-hidden>→</span>
+      </a>
+    </div>
   );
 }
