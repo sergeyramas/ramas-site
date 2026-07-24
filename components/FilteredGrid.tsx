@@ -4,6 +4,8 @@ import { useMemo, useState } from "react";
 import { Grid } from "./Grid";
 import type { Item } from "@/lib/content";
 
+const VISIBLE_TAG_COUNT = 7;
+
 export function FilteredGrid({
   items,
   dense = false,
@@ -12,6 +14,7 @@ export function FilteredGrid({
   dense?: boolean;
 }) {
   const [active, setActive] = useState<string | null>(null);
+  const [expanded, setExpanded] = useState(false);
 
   // Aggregate tags with counts so we can show useful labels and sort by frequency.
   const tags = useMemo(() => {
@@ -31,6 +34,13 @@ export function FilteredGrid({
     [items, active],
   );
 
+  // Auto-expand if the active tag is hidden in the overflow, so it never disappears.
+  const hiddenActive =
+    active !== null && tags.slice(VISIBLE_TAG_COUNT).some(([t]) => t === active);
+  const showAll = expanded || hiddenActive;
+  const visibleTags = showAll ? tags : tags.slice(0, VISIBLE_TAG_COUNT);
+  const hiddenCount = tags.length - VISIBLE_TAG_COUNT;
+
   return (
     <div className="filtered-grid-layout">
       <div className="filter-bar" role="tablist" aria-label="Фильтр по тегам">
@@ -44,7 +54,7 @@ export function FilteredGrid({
           Все
           <span className="filter-count">{items.length}</span>
         </button>
-        {tags.map(([t, n]) => (
+        {visibleTags.map(([t, n]) => (
           <button
             key={t}
             type="button"
@@ -57,6 +67,16 @@ export function FilteredGrid({
             <span className="filter-count">{n}</span>
           </button>
         ))}
+        {hiddenCount > 0 && (
+          <button
+            type="button"
+            className="filter-btn"
+            aria-expanded={showAll}
+            onClick={() => setExpanded((v) => !v)}
+          >
+            {showAll ? "Свернуть ↑" : `Показать ещё ${hiddenCount} →`}
+          </button>
+        )}
       </div>
 
       <div className="filtered-grid-content">

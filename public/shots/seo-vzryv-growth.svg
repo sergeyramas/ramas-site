@@ -1,0 +1,68 @@
+<svg viewBox="0 0 1000 440" xmlns="http://www.w3.org/2000/svg" font-family="-apple-system, Segoe UI, Roboto, sans-serif">
+  <defs>
+    <linearGradient id="area" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#2E6BE6" stop-opacity="0.20"/>
+      <stop offset="1" stop-color="#2E6BE6" stop-opacity="0.02"/>
+    </linearGradient>
+  </defs>
+
+  <rect x="1" y="1" width="998" height="438" rx="16" fill="#ffffff" stroke="#E6E6EA"/>
+
+  <!-- header stats -->
+  <text x="34" y="40" font-size="15" fill="#6B7280">Визиты</text>
+  <text x="34" y="72" font-size="30" font-weight="700" fill="#111827">37 769</text>
+  <text x="240" y="40" font-size="15" fill="#6B7280">Просмотры</text>
+  <text x="240" y="72" font-size="30" font-weight="700" fill="#111827">66 212</text>
+  <text x="470" y="40" font-size="15" fill="#6B7280">Отказы</text>
+  <text x="470" y="72" font-size="30" font-weight="700" fill="#111827">68%</text>
+
+  <!-- gridlines + y labels -->
+  <g stroke="#EFEFF2" stroke-width="1">
+    <line x1="70" y1="360" x2="960" y2="360"/>
+    <line x1="70" y1="267.7" x2="960" y2="267.7"/>
+    <line x1="70" y1="175.4" x2="960" y2="175.4"/>
+    <line x1="70" y1="83.1" x2="960" y2="83.1"/>
+  </g>
+  <g font-size="12" fill="#9CA3AF">
+    <text x="58" y="364" text-anchor="end">0</text>
+    <text x="58" y="271.7" text-anchor="end">2K</text>
+    <text x="58" y="179.4" text-anchor="end">4K</text>
+    <text x="58" y="87.1" text-anchor="end">6K</text>
+  </g>
+
+  <!-- area -->
+  <path fill="url(#area)" d="M70,360 L134,360 L230,360 L325,359 L357,356 L389,341.5 L420,323 L452,267.7 L484,263 L516,263 L548,318.5 L580,290.8 L611,267.7 L643,247 L675,240 L707,249 L739,280 L771,290.8 L803,297.7 L834,272 L866,279 L898,295.4 L930,221.5 L960,74 L960,360 Z"/>
+
+  <!-- solid line up to Jul 23 -->
+  <polyline fill="none" stroke="#2E6BE6" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"
+    points="70,360 134,360 230,360 325,359 357,356 389,341.5 420,323 452,267.7 484,263 516,263 548,318.5 580,290.8 611,267.7 643,247 675,240 707,249 739,280 771,290.8 803,297.7 834,272 866,279 898,295.4 930,221.5"/>
+  <!-- exponential final spike (dashed, like the live projection) -->
+  <line x1="930" y1="221.5" x2="960" y2="74" stroke="#2E6BE6" stroke-width="2.5" stroke-dasharray="5 4" stroke-linecap="round"/>
+  <circle cx="960" cy="74" r="4.5" fill="#2E6BE6"/>
+
+  <!-- Jul 17 marker -->
+  <line x1="739" y1="60" x2="739" y2="360" stroke="#111827" stroke-width="1"/>
+  <circle cx="739" cy="280" r="4.5" fill="#2E6BE6" stroke="#fff" stroke-width="1.5"/>
+  <g>
+    <rect x="752" y="255" width="150" height="40" rx="7" fill="#fff" stroke="#E6E6EA"/>
+    <circle cx="768" cy="272" r="4" fill="#2E6BE6"/>
+    <text x="780" y="270" font-size="12.5" fill="#374151">Визиты 1 733</text>
+    <text x="780" y="287" font-size="11.5" fill="#9CA3AF">17 июля · пт</text>
+  </g>
+
+  <!-- geometric-growth callout on the spike -->
+  <g>
+    <text x="948" y="150" text-anchor="end" font-size="13" font-weight="700" fill="#E0554E">геометрический рост</text>
+    <text x="948" y="168" text-anchor="end" font-size="12" fill="#B4483F">×4 за неделю</text>
+    <path d="M948,176 C956,196 958,205 958,214" fill="none" stroke="#E0554E" stroke-width="1.5"/>
+    <path d="M954,206 L958,215 L962,206" fill="none" stroke="#E0554E" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+
+  <!-- x labels -->
+  <g font-size="12" fill="#9CA3AF" text-anchor="middle">
+    <text x="134" y="384">28 июн</text>
+    <text x="357" y="384">5 июл</text>
+    <text x="580" y="384">12 июл</text>
+    <text x="803" y="384">19 июл</text>
+  </g>
+</svg>

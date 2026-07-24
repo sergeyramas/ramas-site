@@ -49,26 +49,31 @@ export default function AboutPage() {
         }}
       />
 
-      <div className="rise rise-2 mt-6 mb-10 w-40 h-48 sm:w-48 sm:h-60 overflow-hidden rounded-2xl border border-border">
-        <Image
-          src="/portraits/sergey-rama.webp"
-          alt="Сергей Рамас — портрет"
-          width={480}
-          height={600}
-          className="w-full h-full object-cover"
-          priority
-        />
+      <div className="rise rise-2 mt-8 flex flex-col sm:flex-row gap-6 sm:gap-8 sm:items-stretch">
+        <div className="shrink-0 w-40 h-52 sm:w-56 sm:h-auto overflow-hidden rounded-2xl border border-border bg-card shadow-sm">
+          <Image
+            src="/portraits/sergey-rama.webp"
+            alt="Сергей Рамас — портрет"
+            width={480}
+            height={600}
+            className="w-full h-full object-cover"
+            priority
+          />
+        </div>
+
+        <div className="relative flex-1 overflow-hidden rounded-2xl border border-border bg-card px-7 py-8 sm:px-10 sm:py-10 shadow-sm">
+          <span aria-hidden className="absolute inset-y-0 left-0 w-1 bg-accent" />
+          <p className="eyebrow text-accent">Founder · AI Operations Architect</p>
+          <h1 className="display mt-4 text-4xl sm:text-6xl leading-[1.05]">
+            Сергей <span className="display-italic text-accent">Рамас</span>.
+          </h1>
+          <p className="mt-6 text-base sm:text-lg text-muted leading-relaxed">
+            Веду агентство по внедрению AI-систем в бизнес-процессы и сложным кастомным AI-разработкам, а также разработке сайтов и Яндекс.Директу.
+            Под капотом — мульти-агентные системы, которые закрывают рутину быстрее людей. Параллельно
+            строю в США полностью автоматизированный reseller-бизнес на eBay.
+          </p>
+        </div>
       </div>
-
-      <h1 className="display rise rise-2 mt-6 text-5xl sm:text-7xl">
-        Сергей <span className="display-italic text-accent">Рамас</span>.
-      </h1>
-
-      <p className="rise rise-3 mt-8 text-lg sm:text-xl text-muted leading-relaxed">
-        Веду агентство по Яндекс.Директу, разработке сайтов и внедрению AI-систем в бизнес-процессы.
-        Под капотом — мульти-агентные системы, которые закрывают рутину быстрее людей. Параллельно
-        строю в США полностью автоматизированный reseller-бизнес на eBay.
-      </p>
 
       <dl className="rise rise-4 mt-14 grid grid-cols-1 sm:grid-cols-3 gap-8 border-y border-border py-8">
         {facts.map((f) => (

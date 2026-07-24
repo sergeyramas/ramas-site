@@ -1,0 +1,92 @@
+<svg viewBox="0 0 800 500" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Мастер настройки AI-бота BetaLine: пять шагов визарда и веерное подключение каналов — сайт, Telegram, WhatsApp, VK">
+  <defs>
+    <filter id="grain">
+      <feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="2" stitchTiles="stitch"/>
+      <feColorMatrix values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0.03 0"/>
+    </filter>
+  </defs>
+
+  <rect width="800" height="500" fill="#15120D"/>
+
+  <g stroke="#ffffff" stroke-width="1" opacity="0.04">
+    <line x1="80" y1="0" x2="80" y2="500"/><line x1="160" y1="0" x2="160" y2="500"/>
+    <line x1="240" y1="0" x2="240" y2="500"/><line x1="320" y1="0" x2="320" y2="500"/>
+    <line x1="400" y1="0" x2="400" y2="500"/><line x1="480" y1="0" x2="480" y2="500"/>
+    <line x1="560" y1="0" x2="560" y2="500"/><line x1="640" y1="0" x2="640" y2="500"/>
+    <line x1="720" y1="0" x2="720" y2="500"/>
+    <line x1="0" y1="80" x2="800" y2="80"/><line x1="0" y1="160" x2="800" y2="160"/>
+    <line x1="0" y1="240" x2="800" y2="240"/><line x1="0" y1="320" x2="800" y2="320"/>
+    <line x1="0" y1="400" x2="800" y2="400"/><line x1="0" y1="480" x2="800" y2="480"/>
+  </g>
+
+  <text x="64" y="64" fill="#5BC0B0" opacity="0.55" font-family="JetBrains Mono, ui-monospace, monospace" font-size="12" letter-spacing="3">NO-CODE BOT WIZARD</text>
+
+  <!-- Step 1-5 wizard row -->
+  <line x1="160" y1="120" x2="640" y2="120" stroke="#5BC0B0" stroke-width="2"/>
+  <g font-family="JetBrains Mono, ui-monospace, monospace" font-size="13" text-anchor="middle">
+    <circle cx="160" cy="120" r="16" fill="#15120D" stroke="#5BC0B0" stroke-width="2"/>
+    <text x="160" y="125" fill="#5BC0B0">1</text>
+    <circle cx="280" cy="120" r="16" fill="#15120D" stroke="#5BC0B0" stroke-width="2"/>
+    <text x="280" y="125" fill="#5BC0B0">2</text>
+    <circle cx="400" cy="120" r="16" fill="#15120D" stroke="#5BC0B0" stroke-width="2"/>
+    <text x="400" y="125" fill="#5BC0B0">3</text>
+    <circle cx="520" cy="120" r="16" fill="#15120D" stroke="#5BC0B0" stroke-width="2"/>
+    <text x="520" y="125" fill="#5BC0B0">4</text>
+    <circle cx="640" cy="120" r="16" fill="#15120D" stroke="#5BC0B0" stroke-width="2"/>
+    <text x="640" y="125" fill="#5BC0B0">5</text>
+  </g>
+  <g font-family="JetBrains Mono, ui-monospace, monospace" font-size="9" letter-spacing="1" fill="#F2EDE3" opacity="0.45" text-anchor="middle">
+    <text x="160" y="150">PERSONA</text>
+    <text x="280" y="150">KB</text>
+    <text x="400" y="150">CHANNELS</text>
+    <text x="520" y="150">TEST</text>
+    <text x="640" y="150">PUBLISH</text>
+  </g>
+
+  <!-- Elbow connector: step 5 -> hub -->
+  <polyline points="640,136 640,196 400,196 400,238" fill="none" stroke="#5BC0B0" stroke-width="2"/>
+  <circle cx="400" cy="250" r="12" fill="#15120D" stroke="#5BC0B0" stroke-width="2"/>
+
+  <!-- Fan-out to channels -->
+  <g stroke="#5BC0B0" stroke-width="2" fill="none">
+    <line x1="400" y1="250" x2="190" y2="372"/>
+    <line x1="400" y1="250" x2="330" y2="372"/>
+    <line x1="400" y1="250" x2="470" y2="372"/>
+    <line x1="400" y1="250" x2="610" y2="372"/>
+  </g>
+
+  <!-- SITE -->
+  <g stroke="#5BC0B0" stroke-width="2" fill="none">
+    <rect x="168" y="380" width="44" height="38" rx="3"/>
+    <line x1="168" y1="392" x2="212" y2="392" stroke-width="1.5"/>
+  </g>
+
+  <!-- TG: paper plane in ring -->
+  <g stroke="#5BC0B0" stroke-width="2" fill="none">
+    <circle cx="330" cy="400" r="22"/>
+    <path d="M316,411 L345,391 L331,411 L323,401 Z" stroke-width="1.6" stroke-linejoin="round"/>
+  </g>
+
+  <!-- WA: chat bubble with tail -->
+  <g stroke="#5BC0B0" stroke-width="2" fill="none">
+    <rect x="448" y="382" width="44" height="30" rx="10"/>
+    <path d="M457,412 L457,423 L468,412" stroke-width="1.6" stroke-linejoin="round"/>
+  </g>
+
+  <!-- VK: tile with chevron -->
+  <g stroke="#5BC0B0" stroke-width="2" fill="none">
+    <rect x="588" y="378" width="44" height="44" rx="10"/>
+    <path d="M602,389 L613,400 L602,411" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+
+  <g font-family="JetBrains Mono, ui-monospace, monospace" font-size="11" letter-spacing="1" fill="#F2EDE3" opacity="0.5" text-anchor="middle">
+    <text x="190" y="440">SITE</text>
+    <text x="330" y="440">TG</text>
+    <text x="470" y="440">WA</text>
+    <text x="610" y="440">VK</text>
+  </g>
+
+  <text x="64" y="460" fill="#5BC0B0" opacity="0.55" font-family="JetBrains Mono, ui-monospace, monospace" font-size="13" letter-spacing="2">5 steps -&gt; N channels</text>
+
+  <rect width="800" height="500" filter="url(#grain)" opacity="0.03"/>
+</svg>
