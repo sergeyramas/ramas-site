@@ -32,7 +32,7 @@ const dict: Record<Lang, Record<string, string>> = {
 
     "founder.role": "Founder · AI Operations Architect",
     "founder.bio":
-      "Веду агентство по Яндекс.Директу, разработке сайтов и внедрению AI-систем в бизнес-процессы. Под капотом — мульти-агентные системы, которые закрывают рутину быстрее людей. Параллельно строю в США полностью автоматизированный reseller-бизнес на eBay. Здесь, на хабе — упакованные решения, гайды и стэки. Бери и внедряй.",
+      "Веду агентство по внедрению AI-систем в бизнес-процессы и сложным кастомным AI-разработкам, а также разработке сайтов и Яндекс.Директу. Под капотом — мульти-агентные системы, которые закрывают рутину быстрее людей. Параллельно строю в США полностью автоматизированный reseller-бизнес на eBay. Здесь, на хабе — упакованные решения, гайды и стэки. Бери и внедряй.",
     "founder.stat.solutions": "решения, проекта и идеи",
     "founder.stat.products": "товаров на Next.js",
     "founder.stat.stores": "магазина на eBay автоматизированы",
@@ -72,7 +72,7 @@ const dict: Record<Lang, Record<string, string>> = {
 
     "founder.role": "Founder · AI Operations Architect",
     "founder.bio":
-      "I run an agency for Yandex.Direct, website development and AI integrations in business processes. Under the hood — multi-agent systems that close routine faster than humans. In parallel I'm building a fully-automated reseller business on eBay (US). On this hub — packaged solutions, guides and stacks. Grab and ship.",
+      "I run an agency for AI integrations into business processes and complex custom AI development, plus website development and Yandex.Direct. Under the hood — multi-agent systems that close routine faster than humans. In parallel I'm building a fully-automated reseller business on eBay (US). On this hub — packaged solutions, guides and stacks. Grab and ship.",
     "founder.stat.solutions": "solutions, projects and ideas",
     "founder.stat.products": "products migrated to Next.js",
     "founder.stat.stores": "automated eBay stores",

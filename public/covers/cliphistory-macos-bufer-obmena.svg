@@ -1,0 +1,63 @@
+<svg viewBox="0 0 800 500" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="ClipHistory — стопка карточек истории буфера обмена и клавиши command shift V">
+  <defs>
+    <filter id="grain">
+      <feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="2" stitchTiles="stitch"/>
+      <feColorMatrix values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.03 0"/>
+    </filter>
+  </defs>
+
+  <rect width="800" height="500" fill="#15120D"/>
+
+  <g stroke="#ffffff" stroke-width="1" opacity="0.04">
+    <line x1="80" y1="0" x2="80" y2="500"/>
+    <line x1="160" y1="0" x2="160" y2="500"/>
+    <line x1="240" y1="0" x2="240" y2="500"/>
+    <line x1="320" y1="0" x2="320" y2="500"/>
+    <line x1="400" y1="0" x2="400" y2="500"/>
+    <line x1="480" y1="0" x2="480" y2="500"/>
+    <line x1="560" y1="0" x2="560" y2="500"/>
+    <line x1="640" y1="0" x2="640" y2="500"/>
+    <line x1="720" y1="0" x2="720" y2="500"/>
+    <line x1="0" y1="80" x2="800" y2="80"/>
+    <line x1="0" y1="160" x2="800" y2="160"/>
+    <line x1="0" y1="240" x2="800" y2="240"/>
+    <line x1="0" y1="320" x2="800" y2="320"/>
+    <line x1="0" y1="400" x2="800" y2="400"/>
+    <line x1="0" y1="480" x2="800" y2="480"/>
+  </g>
+
+  <!-- motif: fanned stack of clipboard-history cards -->
+  <g fill="#15120D" stroke="#7FB8C8" stroke-linejoin="round">
+    <rect x="235" y="150" width="290" height="72" rx="12" stroke-width="2" opacity="0.35"/>
+    <rect x="252" y="172" width="290" height="72" rx="12" stroke-width="2" opacity="0.55"/>
+    <rect x="269" y="194" width="290" height="72" rx="12" stroke-width="2" opacity="0.8"/>
+    <rect x="286" y="216" width="290" height="76" rx="12" stroke-width="2.5" opacity="1"/>
+  </g>
+
+  <!-- text-preview lines on the top card -->
+  <g stroke="#7FB8C8" stroke-width="2" stroke-linecap="round">
+    <line x1="316" y1="240" x2="512" y2="240" opacity="0.9"/>
+    <line x1="316" y1="258" x2="462" y2="258" opacity="0.6"/>
+    <line x1="316" y1="276" x2="422" y2="276" opacity="0.4"/>
+  </g>
+
+  <!-- quick-select index badge (1-9 shortcut) -->
+  <circle cx="303" cy="230" r="12" fill="#15120D" stroke="#7FB8C8" stroke-width="2"/>
+  <text x="303" y="235" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="13" font-weight="600" fill="#7FB8C8">1</text>
+
+  <!-- pin glyph (pinned item) -->
+  <circle cx="546" cy="232" r="5" fill="#7FB8C8"/>
+  <line x1="546" y1="238" x2="546" y2="251" stroke="#7FB8C8" stroke-width="2" stroke-linecap="round"/>
+
+  <!-- key-combo badge: command-shift-V -->
+  <g transform="translate(560 312)">
+    <rect x="-92" y="-32" width="184" height="64" rx="16" fill="#15120D" stroke="#7FB8C8" stroke-width="2"/>
+    <text x="0" y="12" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="32" font-weight="600" fill="#7FB8C8">⌘⇧V</text>
+  </g>
+
+  <!-- monotype label -->
+  <text x="60" y="432" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="14" letter-spacing="3" fill="#7FB8C8" opacity="0.55">CLIPHISTORY</text>
+  <text x="60" y="452" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="11" letter-spacing="2" fill="#A89F92" opacity="0.5">MACOS · CLIPBOARD MANAGER</text>
+
+  <rect width="800" height="500" filter="url(#grain)" opacity="0.5"/>
+</svg>

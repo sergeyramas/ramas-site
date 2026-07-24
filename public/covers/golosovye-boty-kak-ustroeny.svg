@@ -1,0 +1,104 @@
+<svg viewBox="0 0 800 500" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Голосовой AI-конвейер: телефон, распознавание речи, языковая модель, синтез голоса и возврат в линию">
+  <defs>
+    <filter id="grain">
+      <feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="2" stitchTiles="stitch"/>
+      <feColorMatrix values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0.03 0"/>
+    </filter>
+  </defs>
+
+  <rect width="800" height="500" fill="#15120D"/>
+
+  <!-- faint grid -->
+  <g stroke="#ffffff" stroke-width="1" opacity="0.04">
+    <line x1="80" y1="0" x2="80" y2="500"/><line x1="160" y1="0" x2="160" y2="500"/>
+    <line x1="240" y1="0" x2="240" y2="500"/><line x1="320" y1="0" x2="320" y2="500"/>
+    <line x1="400" y1="0" x2="400" y2="500"/><line x1="480" y1="0" x2="480" y2="500"/>
+    <line x1="560" y1="0" x2="560" y2="500"/><line x1="640" y1="0" x2="640" y2="500"/>
+    <line x1="720" y1="0" x2="720" y2="500"/>
+    <line x1="0" y1="80" x2="800" y2="80"/><line x1="0" y1="160" x2="800" y2="160"/>
+    <line x1="0" y1="240" x2="800" y2="240"/><line x1="0" y1="320" x2="800" y2="320"/>
+    <line x1="0" y1="400" x2="800" y2="400"/><line x1="0" y1="480" x2="800" y2="480"/>
+  </g>
+
+  <!-- ambient dots -->
+  <g fill="#E0607E" opacity="0.2">
+    <circle cx="180" cy="100" r="2"/>
+    <circle cx="240" cy="130" r="2.5"/>
+    <circle cx="600" cy="95" r="2"/>
+    <circle cx="670" cy="140" r="2.5"/>
+    <circle cx="420" cy="110" r="2"/>
+  </g>
+
+  <!-- return path: TTS output looping back into the phone ("обратно в линию") -->
+  <path d="M726,230 Q772,230 772,310 Q772,390 692,390 L124,390 Q88,390 88,352 L88,300"
+        fill="none" stroke="#E0607E" stroke-width="2" stroke-dasharray="6 5" opacity="0.4"/>
+  <!-- arrowhead into phone -->
+  <g stroke="#E0607E" stroke-width="2" stroke-linecap="round" opacity="0.55">
+    <line x1="80" y1="308" x2="88" y2="298"/>
+    <line x1="96" y1="308" x2="88" y2="298"/>
+  </g>
+
+  <!-- phone glyph -->
+  <g stroke="#E0607E" stroke-width="2" fill="none">
+    <rect x="64" y="175" width="56" height="110" rx="10"/>
+    <line x1="82" y1="187" x2="102" y2="187" stroke-linecap="round"/>
+    <circle cx="92" cy="270" r="5"/>
+  </g>
+
+  <!-- waveform: phone -> ASR -->
+  <g stroke="#E0607E" stroke-width="3" stroke-linecap="round" opacity="0.85">
+    <line x1="140" y1="225" x2="140" y2="235"/>
+    <line x1="148" y1="221" x2="148" y2="239"/>
+    <line x1="156" y1="217" x2="156" y2="243"/>
+    <line x1="164" y1="223" x2="164" y2="237"/>
+    <line x1="172" y1="215" x2="172" y2="245"/>
+    <line x1="180" y1="220" x2="180" y2="240"/>
+    <line x1="188" y1="217" x2="188" y2="243"/>
+    <line x1="196" y1="224" x2="196" y2="236"/>
+    <line x1="204" y1="222" x2="204" y2="238"/>
+  </g>
+
+  <!-- ASR node -->
+  <rect x="216" y="200" width="96" height="60" rx="8" stroke="#E0607E" stroke-width="2" fill="none"/>
+  <text x="264" y="236" text-anchor="middle" font-family="JetBrains Mono, ui-monospace, monospace" font-size="16" letter-spacing="2" fill="#E0607E">ASR</text>
+
+  <!-- arrow ASR -> LLM -->
+  <line x1="312" y1="230" x2="352" y2="230" stroke="#E0607E" stroke-width="2"/>
+  <g stroke="#E0607E" stroke-width="2" stroke-linecap="round">
+    <line x1="346" y1="222" x2="354" y2="230"/>
+    <line x1="346" y1="238" x2="354" y2="230"/>
+  </g>
+
+  <!-- LLM node (larger — the "brain") -->
+  <rect x="364" y="185" width="112" height="90" rx="10" stroke="#E0607E" stroke-width="2" fill="none"/>
+  <text x="420" y="236" text-anchor="middle" font-family="JetBrains Mono, ui-monospace, monospace" font-size="17" letter-spacing="2" fill="#E0607E">LLM</text>
+
+  <!-- arrow LLM -> TTS -->
+  <line x1="476" y1="230" x2="516" y2="230" stroke="#E0607E" stroke-width="2"/>
+  <g stroke="#E0607E" stroke-width="2" stroke-linecap="round">
+    <line x1="510" y1="222" x2="518" y2="230"/>
+    <line x1="510" y1="238" x2="518" y2="230"/>
+  </g>
+
+  <!-- TTS node -->
+  <rect x="530" y="200" width="96" height="60" rx="8" stroke="#E0607E" stroke-width="2" fill="none"/>
+  <text x="578" y="236" text-anchor="middle" font-family="JetBrains Mono, ui-monospace, monospace" font-size="16" letter-spacing="2" fill="#E0607E">TTS</text>
+
+  <!-- waveform: TTS -> line -->
+  <g stroke="#E0607E" stroke-width="3" stroke-linecap="round" opacity="0.85">
+    <line x1="646" y1="223" x2="646" y2="237"/>
+    <line x1="654" y1="218" x2="654" y2="242"/>
+    <line x1="662" y1="225" x2="662" y2="235"/>
+    <line x1="670" y1="216" x2="670" y2="244"/>
+    <line x1="678" y1="221" x2="678" y2="239"/>
+    <line x1="686" y1="219" x2="686" y2="241"/>
+    <line x1="694" y1="226" x2="694" y2="234"/>
+    <line x1="702" y1="220" x2="702" y2="240"/>
+    <line x1="710" y1="224" x2="710" y2="236"/>
+  </g>
+
+  <!-- monotype label -->
+  <text x="64" y="446" font-family="JetBrains Mono, ui-monospace, monospace" font-size="14" letter-spacing="3" fill="#E0607E" opacity="0.55">VOICE BOTS / BETALINE</text>
+
+  <rect width="800" height="500" filter="url(#grain)" opacity="0.03"/>
+</svg>
