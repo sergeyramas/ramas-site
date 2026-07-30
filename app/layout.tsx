@@ -8,6 +8,7 @@ import { CustomCursorLazy } from "@/components/CustomCursorLazy";
 import { Nav } from "@/components/Nav";
 import { Footer } from "@/components/Footer";
 import { ContactCTA } from "@/components/ContactCTA";
+import { YandexMetrika } from "@/components/YandexMetrika";
 import "./globals.css";
 
 const inter = Inter({ subsets: ["latin", "cyrillic"], variable: "--font-inter" });
@@ -81,6 +82,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <ContactCTA />
             <Footer />
             <Analytics />
+            <YandexMetrika />
           </I18nProvider>
         </ThemeProvider>
       </body>
