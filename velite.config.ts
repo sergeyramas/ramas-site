@@ -1,4 +1,6 @@
 import { defineConfig, defineCollection, s } from "velite";
+import rehypeSlug from "rehype-slug";
+import rehypeAutolinkHeadings from "rehype-autolink-headings";
 
 const items = defineCollection({
   name: "Item",
@@ -54,7 +56,13 @@ const articles = defineCollection({
       faq: s.array(s.object({ q: s.string(), a: s.string() })).default([]),
       schema_extra: s.record(s.string(), s.any()).optional(),
       pipeline_article_id: s.number(),
-      body: s.mdx(),
+      // rehype-slug + autolink: заголовки статьи получают id и кликабельный якорь (#).
+      body: s.mdx({
+        rehypePlugins: [
+          rehypeSlug,
+          [rehypeAutolinkHeadings, { behavior: "wrap", properties: { className: "heading-anchor" } }],
+        ],
+      }),
     })
     .transform((data) => ({ ...data, url: `/blog/${data.slug}` })),
 });
