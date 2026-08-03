@@ -1,0 +1,67 @@
+<svg viewBox="0 0 800 500" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="t d">
+  <title id="t">Агентные системы: OpenClaw и Hermes</title>
+  <desc id="d">Два контрастных агентных узла на тёмной сетке: простой рабочий контур OpenClaw слева и оркестратор Hermes с cron-циклом и сторожем справа.</desc>
+  <defs>
+    <filter id="g">
+      <feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="2" stitchTiles="stitch"/>
+      <feColorMatrix values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0.03 0"/>
+    </filter>
+    <marker id="a" markerWidth="8" markerHeight="8" refX="5" refY="4" orient="auto">
+      <path d="M0,0 L6,4 L0,8 Z" fill="#B98BE0" opacity="0.75"/>
+    </marker>
+  </defs>
+
+  <rect width="800" height="500" fill="#15120D"/>
+
+  <!-- grid -->
+  <g stroke="#fff" stroke-width="1" opacity="0.04">
+    <path d="M80 0V500M160 0V500M240 0V500M320 0V500M400 0V500M480 0V500M560 0V500M640 0V500M720 0V500"/>
+    <path d="M0 80H800M0 160H800M0 240H800M0 320H800M0 400H800"/>
+  </g>
+
+  <!-- center divider: plain vs orchestrated -->
+  <line x1="400" y1="70" x2="400" y2="430" stroke="#B98BE0" stroke-width="1" stroke-dasharray="2 8" opacity="0.22"/>
+
+  <!-- eyebrow -->
+  <text x="64" y="58" fill="#B98BE0" font-family="ui-monospace,'SF Mono',Menlo,monospace" font-size="13" letter-spacing="4" opacity="0.55">AGENT RUNTIME &#183; ORCHESTRATION</text>
+
+  <!-- bridge: OpenClaw idea carried up into Hermes -->
+  <path d="M296,196 C 336,138 424,138 468,182" fill="none" stroke="#B98BE0" stroke-width="1.5" stroke-dasharray="4 6" opacity="0.32" marker-end="url(#a)"/>
+
+  <!-- LEFT: OpenClaw — plain workspace box -->
+  <g transform="translate(140,180)">
+    <rect x="0" y="0" width="160" height="120" rx="6" fill="none" stroke="#B98BE0" stroke-width="2"/>
+    <line x1="24" y1="34" x2="110" y2="34" stroke="#B98BE0" stroke-width="2" opacity="0.55"/>
+    <line x1="24" y1="56" x2="136" y2="56" stroke="#B98BE0" stroke-width="2" opacity="0.55"/>
+    <line x1="24" y1="78" x2="90" y2="78" stroke="#B98BE0" stroke-width="2" opacity="0.55"/>
+    <rect x="24" y="95" width="10" height="15" fill="#B98BE0" opacity="0.85"/>
+    <text x="80" y="160" text-anchor="middle" fill="#EFE7DC" font-family="ui-monospace,'SF Mono',Menlo,monospace" font-size="15" font-weight="700" letter-spacing="2" opacity="0.85">OPENCLAW</text>
+    <text x="80" y="180" text-anchor="middle" fill="#EFE7DC" font-family="ui-monospace,'SF Mono',Menlo,monospace" font-size="11" letter-spacing="2" opacity="0.4">workspace</text>
+  </g>
+
+  <!-- RIGHT: Hermes — orchestrator with cron cycle + watchdog -->
+  <g transform="translate(480,180)">
+    <g fill="none" stroke="#B98BE0" stroke-width="1.5" opacity="0.6">
+      <path d="M80,-34 A94,94 0 0 1 174,60" marker-end="url(#a)"/>
+      <path d="M174,60 A94,94 0 0 1 80,154" marker-end="url(#a)"/>
+      <path d="M80,154 A94,94 0 0 1 -14,60" marker-end="url(#a)"/>
+      <path d="M-14,60 A94,94 0 0 1 80,-34" marker-end="url(#a)"/>
+    </g>
+    <circle cx="80" cy="-34" r="6" fill="#15120D" stroke="#B98BE0" stroke-width="2"/>
+    <circle cx="174" cy="60" r="6" fill="#15120D" stroke="#B98BE0" stroke-width="2"/>
+    <circle cx="80" cy="154" r="6" fill="#15120D" stroke="#B98BE0" stroke-width="2"/>
+    <circle cx="-14" cy="60" r="6" fill="#15120D" stroke="#B98BE0" stroke-width="2"/>
+
+    <rect x="0" y="0" width="160" height="120" rx="6" fill="none" stroke="#B98BE0" stroke-width="2"/>
+    <!-- watchdog eye -->
+    <path d="M38,60 Q80,38 122,60 Q80,82 38,60 Z" fill="none" stroke="#B98BE0" stroke-width="2"/>
+    <circle cx="80" cy="60" r="6" fill="#B98BE0"/>
+    <text x="80" y="160" text-anchor="middle" fill="#EFE7DC" font-family="ui-monospace,'SF Mono',Menlo,monospace" font-size="15" font-weight="700" letter-spacing="2" opacity="0.85">HERMES</text>
+    <text x="80" y="180" text-anchor="middle" fill="#EFE7DC" font-family="ui-monospace,'SF Mono',Menlo,monospace" font-size="11" letter-spacing="2" opacity="0.4">orchestrator</text>
+  </g>
+
+  <!-- footer tag -->
+  <text x="736" y="452" text-anchor="end" fill="#EFE7DC" font-family="ui-monospace,'SF Mono',Menlo,monospace" font-size="12" letter-spacing="2" opacity="0.3">SELF-HOSTED &#183; 24/7</text>
+
+  <rect width="800" height="500" filter="url(#g)" opacity="0.5"/>
+</svg>
