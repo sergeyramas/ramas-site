@@ -21,7 +21,6 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
       title: item.title,
       description: item.summary,
       type: "article",
-      publishedTime: new Date(item.date).toISOString(),
       images: item.cover ? [{ url: item.cover }] : undefined,
     },
   };
@@ -42,7 +41,6 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
             "@type": "Article",
             headline: item.title,
             description: item.summary,
-            datePublished: new Date(item.date).toISOString(),
             author: {
               "@type": "Person",
               name: "Сергей Рамас",
