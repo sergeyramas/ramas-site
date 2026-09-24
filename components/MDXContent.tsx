@@ -36,7 +36,7 @@ function ResizableIframe(props: React.IframeHTMLAttributes<HTMLIFrameElement>) {
   );
 }
 
-const sharedComponents = { iframe: ResizableIframe };
+const sharedComponents = { ResizableIframe };
 
 function getMDXComponent(code: string) {
   const fn = new Function(code);

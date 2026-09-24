@@ -149,7 +149,10 @@ document.getElementById('kpis').innerHTML=[0,2,3,4,6,8].map(i=>{const[l,b,a,fm,h
 // ---- сообщить родительскому окну (iframe) актуальную высоту контента ----
 (()=>{
   function post(){
-    var h=document.documentElement.scrollHeight;
+    // body.scrollHeight (not documentElement.scrollHeight) — the latter is
+    // floored at the current viewport height, which would create a feedback
+    // loop with the parent iframe resizing to match.
+    var h=document.body.scrollHeight;
     try{window.parent.postMessage({type:'opus-report-resize',height:h},'*')}catch(e){}
   }
   window.addEventListener('load',function(){post();setTimeout(post,300);setTimeout(post,1000);setTimeout(post,2000)});
