@@ -1,0 +1,161 @@
+<!doctype html><html lang="ru" data-theme="light"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Opus 5.5: до и после</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+:root{--bg:#F5F7FA;--card:#FFFFFF;--ink:#172033;--muted:#5B6578;--line:#DDE2EA;--before:#A3ACBB;--after:#1E6BD6;--fable:#B5651D;--good:#1A8A55;--bad:#C2410C;--warn:#B7791F;}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--bg:#11151C;--card:#181E28;--ink:#E6EAF1;--muted:#98A2B3;--line:#2A3342;--before:#5E6878;--after:#5A9BF0;--fable:#E0955A;--good:#4CC38A;--bad:#F08A5D;--warn:#E3B34F;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#11151C;--card:#181E28;--ink:#E6EAF1;--muted:#98A2B3;--line:#2A3342;--before:#5E6878;--after:#5A9BF0;--fable:#E0955A;--good:#4CC38A;--bad:#F08A5D;--warn:#E3B34F;color-scheme:dark}
+body{background:var(--bg);color:var(--ink);font:15px/1.55 "IBM Plex Sans",system-ui,sans-serif}
+.wrap{max-width:980px;margin:0 auto;padding-inline:16px;padding-block:32px 56px;display:grid;gap:28px}
+h1{font-size:30px;line-height:1.15;margin:0;font-weight:600;text-wrap:balance}
+h2{font-size:18px;margin:0 0 4px;font-weight:600;text-wrap:balance}
+.sub{color:var(--muted);max-width:70ch;margin:6px 0 0}
+.mono,.num{font-family:"IBM Plex Mono",ui-monospace,monospace;font-variant-numeric:tabular-nums}
+.legend{display:flex;flex-wrap:wrap;gap:8px 18px;font-size:13px;color:var(--muted)}
+.dot{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:6px;vertical-align:-1px}
+.verdict{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:18px 20px}
+.verdict ul{margin:8px 0 0;padding-left:18px;display:grid;gap:6px}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px}
+.kpi{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:14px 16px;display:grid;gap:4px}
+.kpi .l{font-size:12px;color:var(--muted);letter-spacing:.02em}
+.kpi .v{font-size:22px;font-weight:500}
+.kpi .from{font-size:12px;color:var(--muted)}
+.chip{font-size:12px;font-weight:600;padding:1px 7px;border-radius:99px;justify-self:start}
+.up{color:var(--good);background:color-mix(in srgb,var(--good) 12%,transparent)}
+.down{color:var(--bad);background:color-mix(in srgb,var(--bad) 12%,transparent)}
+.neu{color:var(--warn);background:color-mix(in srgb,var(--warn) 14%,transparent)}
+section{display:grid;gap:10px}
+.panel{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:16px;overflow-x:auto}
+svg text{fill:var(--muted);font:11px "IBM Plex Mono",monospace}
+table{border-collapse:collapse;width:100%;min-width:620px;font-size:13px}
+th,td{padding:7px 10px;border-bottom:1px solid var(--line);text-align:right}
+th:first-child,td:first-child{text-align:left}
+th{color:var(--muted);font-weight:500;font-size:12px}
+td.best{color:var(--good);font-weight:600}
+.notes{color:var(--muted);font-size:13px;display:grid;gap:6px;max-width:75ch}
+.notes b{color:var(--ink);font-weight:500}
+.part{border-top:1px solid var(--line);padding-top:24px}
+</style>
+
+<div class="wrap">
+<header>
+  <h1>Opus 5.5: что изменилось в работе</h1>
+  <p class="sub">Цифры взяты из локальных транскриптов Claude Code по всем проектам. Стоимость посчитана по API-прайсу за 1M токенов. Opus 5.5: $4 вход, $20 выход. Opus 5: $5 / $25. Fable 5.1: $10 / $50. Sonnet 5: $3 / $15. Haiku 4.5: $1 / $5. Кэш-чтение стоит 10% от входа. Ходы с контекстом больше 200k стоят вдвое дороже. На подписке Max доллары не списываются, это эквивалент доли лимита.</p>
+</header>
+
+<div class="verdict">
+  <h2>Коротко</h2>
+  <ul>
+    <li><b>По цене Opus 5.5 — самая выгодная модель для основной работы.</b> Вызов инструмента стоит $0,21, у Opus 5 — $0,29 (−27%), у Fable 5.1 — $0,73. На $1 выходит 2 887 токенов ответа: на 56% больше, чем у Opus 5, и на 70% больше, чем у Fable.</li>
+    <li><b>Средний запрос дешевле:</b> медианная цена одного вашего запроса — $1,67. У Opus 5 — $2,38, у Fable — $5,44.</li>
+    <li><b>Текст стал «человечнее», но не короче.</b> Средняя фраза — 13,5 слова против 17 у Opus 5 и Fable, заголовков меньше. Однако медианный финальный ответ длиннее: 1 770 знаков против 1 489 у Opus 5, и списков втрое больше. То есть вместо стены текста — короткие фразы и пункты.</li>
+    <li><b>До и после переключения:</b> по всему стеку, включая сабагентов, вызов инструмента подешевел на 33%, правка файла — тоже на 33%. На один запрос агент делает на 80% больше работы.</li>
+    <li><b>Проблема:</b> 21 автосжатие контекста за 18 часов (за неделю до — 1). Это следствие порога 40%, выставленного сегодня, а не модели.</li>
+  </ul>
+</div>
+
+<section class="part">
+  <h2>Opus 5.5, Opus 5 и Fable 5.1</h2>
+  <p class="sub">Период 01.09–23.09, только ходы самой модели. Opus 5.5 работает с 22.09 23:03, у него 60 финальных ответов. У Opus 5 — 323, у Fable 5.1 — 83. Сравнение стиля по 60 ответам предварительное.</p>
+  <div class="legend">
+    <span><i class="dot" style="background:var(--after)"></i>Opus 5.5</span>
+    <span><i class="dot" style="background:var(--before)"></i>Opus 5</span>
+    <span><i class="dot" style="background:var(--fable)"></i>Fable 5.1</span>
+  </div>
+  <div class="panel"><svg id="models" viewBox="0 0 900 420" width="100%" role="img" aria-label="Сравнение трёх моделей по ключевым метрикам, лучшая модель = 100"></svg></div>
+  <p class="notes">Каждая строка нормирована на максимум по трём моделям, число справа — реальное значение. Для цены меньше — лучше.</p>
+  <div class="panel"><table id="mtbl"></table></div>
+</section>
+
+<section class="part">
+  <h2>До и после переключения, весь стек</h2>
+  <div class="legend">
+    <span><i class="dot" style="background:var(--before)"></i>До: 7 дней, 15.09 23:03 → 22.09 23:03 · 404 запроса</span>
+    <span><i class="dot" style="background:var(--after)"></i>После: 18 ч, 22.09 23:03 → 23.09 16:51 · 143 запроса</span>
+  </div>
+  <div class="kpis" id="kpis"></div>
+  <div class="panel"><svg id="idx" viewBox="0 0 900 290" width="100%" role="img" aria-label="Индекс метрик после относительно до"></svg></div>
+</section>
+
+<section>
+  <h2>По дням: вызовы инструментов и стоимость</h2>
+  <div class="panel"><svg id="daily" viewBox="0 0 900 300" width="100%" role="img" aria-label="Дневные вызовы инструментов и стоимость"></svg></div>
+  <p class="notes">Столбцы — вызовы инструментов за день, линия — стоимость в долларах. Синим отмечены дни с Opus 5.5: 22.09 — только вечер, 23.09 — до 16:51.</p>
+</section>
+
+<section class="notes part">
+  <h2 style="color:var(--ink)">Оговорки</h2>
+  <div><b>Разные задачи.</b> Модели работали над разными задачами. Fable чаще брал тяжёлое, а у Opus 5.5 за эти сутки было много аналитики и отчётов. Поэтому длина ответов отчасти зависит от задачи, а не от модели.</div>
+  <div><b>Прайс Fable 5.1</b> я принял равным прайсу Fable 5 ($10 / $50), отдельно не сверял.</div>
+  <div><b>Смешаны эффекты.</b> Одновременно сменилась модель, окно выросло до 1M со сжатием на 40%, а сабагентов стало больше: их доля выросла с 36% до 61% ходов.</div>
+  <div><b>Лимит.</b> За 18 часов вы ни разу не упёрлись в лимит, за неделю до — 4 раза. Сам размер 5-часового окна в транскриптах не виден.</div>
+</section>
+</div>
+
+<script>
+const f=(x,d=1)=>x.toLocaleString('ru-RU',{maximumFractionDigits:d,minimumFractionDigits:d});
+const NS='http://www.w3.org/2000/svg';
+function el(p,t,a,txt){const e=document.createElementNS(NS,t);for(const k in a)e.setAttribute(k,a[k]);if(txt!=null)e.textContent=txt;p.appendChild(e);return e}
+// ---- models ----
+const MD={o55:{name:"Opus 5.5",c:"var(--after)",cpt:.209,cpe:6.14,opd:2887,tcm:1.671,tools:11.77,ctx:186,long:34.9,rc:1770,p90:2843,sl:13.5,bul:6.37,hdr:.48,bold:6.3,n:60,cost:270.1},
+ o5:{name:"Opus 5",c:"var(--before)",cpt:.288,cpe:7.43,opd:1855,tcm:2.378,tools:18.33,ctx:225,long:40.5,rc:1489,p90:2403,sl:17.08,bul:2.21,hdr:.65,bold:4.67,n:323,cost:5970.3},
+ f51:{name:"Fable 5.1",c:"var(--fable)",cpt:.729,cpe:17.33,opd:1694,tcm:5.441,tools:20.49,ctx:245,long:41.8,rc:1566,p90:4162,sl:17.56,bul:4.63,hdr:1.06,bold:8.08,n:83,cost:1369.3}};
+// [label,key,fmt,lowerIsBetter]
+const MR=[["$ за вызов инструмента","cpt",v=>"$"+f(v,3),true],["Медианная цена запроса","tcm",v=>"$"+f(v,2),true],["Токенов ответа на $1","opd",v=>f(v,0),false],
+ ["Средний контекст хода","ctx",v=>f(v,0)+"k",true],["Доля ходов > 200k","long",v=>f(v,1)+"%",true],["Знаков в финальном ответе (медиана)","rc",v=>f(v,0),null],
+ ["Слов во фразе","sl",v=>f(v,1),true],["Пунктов списка на ответ","bul",v=>f(v,1),null],["Заголовков на ответ","hdr",v=>f(v,2),null]];
+(()=>{const s=document.getElementById('models'),ks=["o55","o5","f51"],L=270,R=820,T=6,rh=45;
+ MR.forEach(([l,k,fm],i)=>{const y=T+i*rh,mx=Math.max(...ks.map(m=>MD[m][k]));
+  el(s,'text',{x:L-10,y:y+rh/2+2,'text-anchor':'end',style:'fill:var(--ink);font-family:IBM Plex Sans,sans-serif;font-size:12px'},l);
+  ks.forEach((m,j)=>{const v=MD[m][k],w=(R-L)*v/mx;el(s,'rect',{x:L,y:y+4+j*12,width:w,height:10,fill:MD[m].c,rx:2});el(s,'text',{x:L+w+6,y:y+13+j*12},fm(v))});
+  el(s,'line',{x1:L-4,x2:R+60,y1:y+rh-2,y2:y+rh-2,stroke:'var(--line)'});});})();
+(()=>{const ks=["o55","o5","f51"];const rows=[...MR,["$ за правку файла","cpe",v=>"$"+f(v,2),true],["Вызовов инструментов на запрос","tools",v=>f(v,1),null],["90-й перцентиль длины ответа","p90",v=>f(v,0),true],["Выделений жирным на ответ","bold",v=>f(v,1),null],["Всего потрачено (01–23.09)","cost",v=>"$"+f(v,0),null],["Финальных ответов в выборке","n",v=>f(v,0),null]];
+ document.getElementById('mtbl').innerHTML='<tr><th>Метрика</th>'+ks.map(k=>`<th>${MD[k].name}</th>`).join('')+'</tr>'+rows.map(([l,k,fm,low])=>{const vals=ks.map(m=>MD[m][k]);const best=low===true?Math.min(...vals):low===false?Math.max(...vals):null;
+  return `<tr><td>${l}</td>${vals.map(v=>`<td class="num${v===best?' best':''}">${fm(v)}</td>`).join('')}</tr>`}).join('');})();
+// ---- before/after ----
+const B={prompts:404,tools:4499,edits:238,out:1832438,cost:837.46,ah:75,ctx:166511,long:803,main:3002,comp:1,lim:4};
+const A={prompts:143,tools:2882,edits:153,out:911004,cost:359.2,ah:14,ctx:186765,long:379,main:1035,comp:21,lim:0};
+const M=[["Вызовов инструментов на запрос",B.tools/B.prompts,A.tools/A.prompts,v=>f(v),true],
+ ["Токенов ответа на запрос",B.out/B.prompts,A.out/A.prompts,v=>f(v,0),true],
+ ["$ за вызов инструмента",B.cost/B.tools,A.cost/A.tools,v=>"$"+f(v,3),false],
+ ["$ за правку файла",B.cost/B.edits,A.cost/A.edits,v=>"$"+f(v,2),false],
+ ["Токенов ответа на $1",B.out/B.cost,A.out/A.cost,v=>f(v,0),true],
+ ["Средний контекст хода, k",B.ctx/1e3,A.ctx/1e3,v=>f(v,0)+"k",false],
+ ["Доля ходов > 200k",B.long/B.main*100,A.long/A.main*100,v=>f(v,0)+"%",false],
+ ["Упоров в лимит",B.lim,A.lim,v=>f(v,0),false],
+ ["Автосжатий контекста",B.comp,A.comp,v=>f(v,0),false]];
+document.getElementById('kpis').innerHTML=[0,2,3,4,6,8].map(i=>{const[l,b,a,fm,hb]=M[i];const d=b?(a/b-1)*100:0;const good=hb?d>0:d<0;
+ return `<div class="kpi"><span class="l">${l}</span><span class="v num">${fm(a)}</span><span class="from num">было ${fm(b)}</span><span class="chip ${Math.abs(d)<1?'neu':good?'up':'down'}">${(d>0?'+':'')+f(d,0)}%</span></div>`}).join('');
+(()=>{const s=document.getElementById('idx');const rows=[0,1,2,3,4,5,6];const L=250,R=860,T=14,rh=36,max=200;const x=v=>L+(Math.min(v,max)/max)*(R-L);
+ [0,50,100,150,200].forEach(v=>{el(s,'line',{x1:x(v),x2:x(v),y1:T,y2:T+rows.length*rh,stroke:v===100?'var(--muted)':'var(--line)','stroke-dasharray':v===100?'4 3':''});el(s,'text',{x:x(v),y:T+rows.length*rh+16,'text-anchor':'middle'},v)});
+ rows.forEach((i,k)=>{const[l,b,a,,hb]=M[i];const v=a/b*100,y=T+k*rh;const good=hb?v>100:v<100;
+  el(s,'text',{x:L-10,y:y+rh/2+4,'text-anchor':'end',style:'fill:var(--ink);font-family:IBM Plex Sans,sans-serif;font-size:12px'},l);
+  el(s,'rect',{x:L,y:y+7,width:x(100)-L,height:9,fill:'var(--before)',rx:2});
+  el(s,'rect',{x:L,y:y+18,width:x(v)-L,height:9,fill:'var(--after)',rx:2});
+  el(s,'text',{x:x(v)+6,y:y+26,style:`fill:${good?'var(--good)':'var(--bad)'}`},f(v,0));});
+ el(s,'text',{x:L,y:T+rows.length*rh+32},'индекс: до = 100');})();
+(()=>{const D={"12.09":[882,172.8],"13.09":[1978,201.7],"14.09":[114,29.8],"15.09":[364,88.3],"16.09":[1641,339],"17.09":[627,130.2],"18.09":[382,65.6],"19.09":[143,20.5],"20.09":[11,1],"21.09":[872,163],"22.09":[1109,159.4],"23.09":[2596,317.9]};
+ const s=document.getElementById('daily');const k=Object.keys(D);const L=50,R=850,T=16,H=240,tmax=2800,cmax=400,bw=(R-L)/k.length;
+ const y=v=>T+H-v/tmax*H, yc=v=>T+H-v/cmax*H;
+ [0,700,1400,2100,2800].forEach(v=>{el(s,'line',{x1:L,x2:R,y1:y(v),y2:y(v),stroke:'var(--line)'});el(s,'text',{x:L-6,y:y(v)+4,'text-anchor':'end'},v)});
+ [0,100,200,300,400].forEach(v=>el(s,'text',{x:R+6,y:yc(v)+4},'$'+v));
+ let pts=[];k.forEach((d,i)=>{const[t,c]=D[d];const cx=L+i*bw+bw/2;
+  el(s,'rect',{x:L+i*bw+bw*.18,y:y(t),width:bw*.64,height:T+H-y(t),fill:i>=10?'var(--after)':'var(--before)',rx:2});
+  el(s,'text',{x:cx,y:T+H+16,'text-anchor':'middle'},d.slice(0,2));pts.push([cx,yc(c)]);});
+ el(s,'polyline',{points:pts.map(p=>p.join(',')).join(' '),fill:'none',stroke:'var(--ink)','stroke-width':1.5});
+ pts.forEach(p=>el(s,'circle',{cx:p[0],cy:p[1],r:2.5,fill:'var(--ink)'}));
+ el(s,'text',{x:L,y:T+H+32},'сентябрь · столбцы — вызовы (левая ось), линия — $ (правая ось)');})();
+
+// ---- сообщить родительскому окну (iframe) актуальную высоту контента ----
+(()=>{
+  function post(){
+    var h=document.documentElement.scrollHeight;
+    try{window.parent.postMessage({type:'opus-report-resize',height:h},'*')}catch(e){}
+  }
+  window.addEventListener('load',function(){post();setTimeout(post,300);setTimeout(post,1000);setTimeout(post,2000)});
+  window.addEventListener('resize',post);
+  if(window.ResizeObserver){new ResizeObserver(post).observe(document.body)}
+  if(document.fonts&&document.fonts.ready){document.fonts.ready.then(post)}
+})();
+</script>
+</html>
