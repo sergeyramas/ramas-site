@@ -8,6 +8,9 @@
 
 ## Recently Completed
 
+- [2026-09-27] **cursor-cloud** — topic: `sitemap-live-urls` — DONE (SHA `7f91793`)
+  Sitemap больше не включает внешние project без страницы (404: betaline-ai, betaline-saas-deploy, logika-itp, piratebay-landing, gowindoit-landing, rockmesh). Набор slug совпадает с `generateStaticParams`. Добавлен `/gaps`. Lint/build чисто, локально все URL карты отдают 200. Прод не деплоился.
+
 - [2026-09-27] **cursor-cloud** — topic: `blog-template-seo` — DONE (SHA `9c67d6f`)
   Шаблон статей: FAQ без сырого HTML, один H1, валидный Article/BreadcrumbList, og:image с запасной обложкой, связанные «Читайте также», WebP схемы бэкапа, имя автора «Сергей Рамас». RSS `/rss.xml`, `/llms.txt`. Метрика и GA4 только из env. Прод не деплоился.
 
