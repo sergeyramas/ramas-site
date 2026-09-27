@@ -4,7 +4,9 @@ import { MDXContent } from "@/components/MDXContent";
 import { ArticleCover } from "@/components/ArticleCover";
 import { ArticleGrid } from "@/components/ArticleGrid";
 import { articles } from "#site/content";
-import { relatedArticles, formatDate } from "@/lib/blog";
+import { FaqAnswer } from "@/components/FaqAnswer";
+import { htmlToText } from "@/lib/faq";
+import { relatedArticles, formatDate, coverFor, authorName, absoluteAsset, PUBLIC_AUTHOR, SITE_ORIGIN } from "@/lib/blog";
 
 function bySlug(slug: string) {
   return articles.find((a) => a.slug === slug);
@@ -18,6 +20,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const { slug } = await params;
   const post = bySlug(slug);
   if (!post) return {};
+  const image = coverFor(post) ?? "/og-default.png";
   return {
     title: post.title,
     description: post.description,
@@ -29,7 +32,13 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
       type: "article",
       publishedTime: post.date,
       modifiedTime: post.updated,
-      images: post.cover ? [{ url: post.cover }] : undefined,
+      images: [{ url: image, alt: post.title }],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: post.title,
+      description: post.description,
+      images: [image],
     },
   };
 }
@@ -39,7 +48,10 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
   const post = bySlug(slug);
   if (!post) notFound();
 
-  // JSON-LD: Article всегда, FAQPage — только если во frontmatter есть вопросы.
+  const name = authorName(post.author.name);
+  const image = absoluteAsset(coverFor(post));
+  // schema_extra.breadcrumb / person не раскладываем в Article: конвейер кладёт
+  // массив строк и вложенный Person, для Article это невалидные поля.
   const jsonLd: Record<string, unknown>[] = [
     {
       "@context": "https://schema.org",
@@ -48,9 +60,32 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
       description: post.description,
       datePublished: post.date,
       dateModified: post.updated,
-      author: { "@type": "Person", name: post.author.name, url: post.author.url },
-      mainEntityOfPage: post.canonical_url,
-      ...post.schema_extra,
+      author: {
+        "@type": "Person",
+        name,
+        url: post.author.url ?? `${SITE_ORIGIN}/about`,
+        ...(post.author.photo_url ? { image: post.author.photo_url } : {}),
+      },
+      publisher: {
+        "@type": "Organization",
+        name: PUBLIC_AUTHOR,
+        url: SITE_ORIGIN,
+        logo: {
+          "@type": "ImageObject",
+          url: `${SITE_ORIGIN}/og-default.png`,
+        },
+      },
+      ...(image ? { image: [image] } : {}),
+      mainEntityOfPage: { "@type": "WebPage", "@id": post.canonical_url },
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      itemListElement: [
+        { "@type": "ListItem", position: 1, name: "Главная", item: `${SITE_ORIGIN}/` },
+        { "@type": "ListItem", position: 2, name: "Блог", item: `${SITE_ORIGIN}/blog` },
+        { "@type": "ListItem", position: 3, name: post.title, item: post.canonical_url },
+      ],
     },
   ];
   if (post.faq.length > 0) {
@@ -60,7 +95,7 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
       mainEntity: post.faq.map((f) => ({
         "@type": "Question",
         name: f.q,
-        acceptedAnswer: { "@type": "Answer", text: f.a },
+        acceptedAnswer: { "@type": "Answer", text: htmlToText(f.a) },
       })),
     });
   }
@@ -98,10 +133,10 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
             {" · "}
             {post.author.url ? (
               <Link href={post.author.url} className="hover:text-accent">
-                {post.author.name}
+                {name}
               </Link>
             ) : (
-              post.author.name
+              name
             )}
           </p>
           <p className="mt-6 text-base sm:text-lg text-muted max-w-2xl leading-relaxed">
@@ -120,7 +155,7 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
               {post.faq.map((f) => (
                 <div key={f.q} className="bg-card border border-border rounded-xl p-5 sm:p-6">
                   <dt className="font-medium">{f.q}</dt>
-                  <dd className="mt-2 text-muted leading-relaxed">{f.a}</dd>
+                  <FaqAnswer answer={f.a} />
                 </div>
               ))}
             </dl>

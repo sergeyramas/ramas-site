@@ -16,6 +16,7 @@ const dict: Record<Lang, Record<string, string>> = {
     "nav.projects": "Проекты",
     "nav.gaps": "GAP-анализы",
     "nav.ideas": "Идеи",
+    "nav.blog": "Блог",
     "nav.about": "Обо мне",
     "nav.menu": "Меню",
 
@@ -56,6 +57,7 @@ const dict: Record<Lang, Record<string, string>> = {
     "nav.projects": "Projects",
     "nav.gaps": "GAP analyses",
     "nav.ideas": "Ideas",
+    "nav.blog": "Blog",
     "nav.about": "About",
     "nav.menu": "Menu",
 
