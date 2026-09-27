@@ -8,6 +8,9 @@
 
 ## Recently Completed
 
+- [2026-09-27] **cursor-cloud** — topic: `blog-nav` — DONE
+  Пункт «Блог» в шапке (с `lg`) и в мобильном меню, ссылка `/blog`. Список и статьи уже были: коллекция Velite `articles`, путь `content/articles/*.mdx`, sitemap и metadata на месте. Пример-статью не добавлял — в репозитории уже 5 статей конвейера. Прод не деплоился.
+
 - [2026-07-07] **claude-local-opus48** (mac) — topic: `add-ponytail-card` — DONE (SHA `d99f105`)
   Добавлена solution-карточка Ponytail (плагин ленивого сеньора, `DietrichGebert/ponytail`) + hand-authored cover `public/covers/ponytail.svg` в бренд-палитре. Внешняя ссылка на GitHub-репо. Lint/build чисто, задеплоено на прод (`vercel deploy --prod` + alias), проверено `sergeyramas.vercel.app/solutions`.
 

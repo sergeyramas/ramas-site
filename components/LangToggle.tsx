@@ -9,7 +9,7 @@ export function LangToggle() {
       type="button"
       onClick={() => setLang(lang === "ru" ? "en" : "ru")}
       aria-label={lang === "ru" ? "Switch to English" : "Переключить на русский"}
-      className="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-md text-xs font-mono uppercase tracking-wider border border-border hover:border-accent hover:bg-elevated transition-colors min-w-[58px] justify-center"
+      className="inline-flex items-center gap-1 px-2 py-1.5 rounded-md text-xs font-mono uppercase tracking-wide border border-border hover:border-accent hover:bg-elevated transition-colors justify-center"
     >
       <span className={lang === "en" ? "text-accent font-bold" : "text-muted"}>EN</span>
       <span aria-hidden className="text-subtle">·</span>

@@ -18,6 +18,7 @@ export function Nav() {
     { href: "/projects", label: t("nav.projects") },
     { href: "/gaps", label: t("nav.gaps") },
     { href: "/ideas", label: t("nav.ideas") },
+    { href: "/blog", label: t("nav.blog") },
     { href: "/about", label: t("nav.about") },
   ];
 
@@ -65,7 +66,7 @@ export function Nav() {
 
   return (
     <header className="sticky top-0 z-20 backdrop-blur-md bg-bg/75 border-b border-border">
-      <div className="max-w-6xl mx-auto px-6 sm:px-8 h-20 flex items-center justify-between gap-3">
+      <div className="max-w-6xl mx-auto px-3 sm:px-8 h-20 flex items-center justify-between gap-2">
         {/* BIG LOGO */}
         <Link
           href="/"
@@ -92,7 +93,7 @@ export function Nav() {
             <Link
               key={l.href}
               href={l.href}
-              className="hidden sm:inline-block px-3 py-1.5 rounded-md text-sm text-muted hover:text-fg hover:bg-elevated transition-colors"
+              className="hidden lg:inline-block px-3 py-1.5 rounded-md text-sm text-muted hover:text-fg hover:bg-elevated transition-colors"
             >
               {l.label}
             </Link>
@@ -101,7 +102,7 @@ export function Nav() {
           <button
             ref={buttonRef}
             type="button"
-            className="inline-flex sm:hidden items-center justify-center w-11 h-11 rounded-md text-fg hover:bg-elevated transition-colors"
+            className="inline-flex lg:hidden items-center justify-center w-11 h-11 rounded-md text-fg hover:bg-elevated transition-colors"
             aria-expanded={menuOpen}
             aria-controls="mobile-menu"
             aria-label={t("nav.menu")}
@@ -114,15 +115,15 @@ export function Nav() {
             href="https://t.me/Sergeyramas"
             target="_blank"
             rel="noopener noreferrer"
-            className="ml-1 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md text-xs font-mono uppercase tracking-wider text-fg border border-border hover:border-accent hover:text-accent hover:bg-elevated transition-colors"
+            className="sm:ml-1 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md text-xs font-mono uppercase tracking-wider text-fg border border-border hover:border-accent hover:text-accent hover:bg-elevated transition-colors"
           >
             <span aria-hidden>tg</span>
             <span className="hidden sm:inline">@Sergeyramas</span>
           </Link>
-          <span className="ml-1">
+          <span className="sm:ml-1">
             <LangToggle />
           </span>
-          <span className="ml-1">
+          <span className="sm:ml-1">
             <ThemeToggle />
           </span>
         </nav>
@@ -133,7 +134,7 @@ export function Nav() {
           id="mobile-menu"
           ref={panelRef}
           role="menu"
-          className="sm:hidden border-b border-border bg-bg/95 backdrop-blur-md"
+          className="lg:hidden border-b border-border bg-bg/95 backdrop-blur-md"
         >
           <div className="max-w-6xl mx-auto px-6 py-2 flex flex-col">
             {links.map((l) => (
