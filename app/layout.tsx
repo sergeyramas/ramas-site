@@ -9,7 +9,13 @@ import { Nav } from "@/components/Nav";
 import { Footer } from "@/components/Footer";
 import { ContactCTA } from "@/components/ContactCTA";
 import { YandexMetrika } from "@/components/YandexMetrika";
+import { GoogleAnalytics } from "@/components/GoogleAnalytics";
 import "./globals.css";
+
+function envMeta(name: string): string | undefined {
+  const value = process.env[name]?.trim();
+  return value ? value : undefined;
+}
 
 const inter = Inter({ subsets: ["latin", "cyrillic"], variable: "--font-inter" });
 const serif = Playfair_Display({ subsets: ["latin", "cyrillic"], weight: ["400", "500", "600"], style: ["normal", "italic"], variable: "--font-serif" });
@@ -30,8 +36,8 @@ export const metadata: Metadata = {
   publisher: "Сергей Рамас",
   alternates: { canonical: "/" },
   verification: {
-    google: process.env.GOOGLE_SITE_VERIFICATION,
-    yandex: process.env.YANDEX_VERIFICATION,
+    google: envMeta("GOOGLE_SITE_VERIFICATION"),
+    yandex: envMeta("YANDEX_VERIFICATION"),
   },
   openGraph: {
     type: "website",
@@ -49,6 +55,9 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="ru" suppressHydrationWarning className={`${inter.variable} ${serif.variable} ${unbounded.variable} ${jetbrains.variable}`}>
+      <head>
+        <link rel="alternate" type="application/rss+xml" title="Блог — Сергей Рамас" href="https://sergeyramas.vercel.app/rss.xml" />
+      </head>
       <body className="min-h-screen flex flex-col">
         <script
           type="application/ld+json"
@@ -83,6 +92,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <Footer />
             <Analytics />
             <YandexMetrika />
+            <GoogleAnalytics />
           </I18nProvider>
         </ThemeProvider>
       </body>

@@ -4,7 +4,8 @@ import Script from "next/script";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef } from "react";
 
-const ID = process.env.NEXT_PUBLIC_YM_ID;
+const RAW_ID = process.env.NEXT_PUBLIC_YANDEX_METRIKA_ID;
+const ID = RAW_ID && /^\d+$/.test(RAW_ID) ? RAW_ID : undefined;
 
 declare global {
   interface Window {
@@ -29,13 +30,22 @@ export function YandexMetrika() {
   if (!ID) return null; // ponytail: нет id — нет тега, локальная разработка не мусорит в счётчик
 
   return (
-    // id НЕ должен быть "ym": элемент с id создаёт window.ym, счётчик тогда
-    // не инициализируется (m[i] = m[i] || ... подхватывает <script> вместо заглушки).
+    <>
+    {/* id НЕ должен быть "ym": элемент с id создаёт window.ym, счётчик тогда
+        не инициализируется (m[i] = m[i] || ... подхватывает <script> вместо заглушки). */}
     <Script id="yandex-metrika" strategy="afterInteractive">{`
 (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
 m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
 (window,document,'script','https://mc.yandex.ru/metrika/tag.js?id=${ID}','ym');
 ym(${ID},'init',{webvisor:true,clickmap:true,accurateTrackBounce:true,trackLinks:true});
     `}</Script>
+    <noscript>
+      <div>
+        {/* Пиксель Метрики в noscript: next/image здесь не грузится без JS. */}
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img src={`https://mc.yandex.ru/watch/${ID}`} style={{ position: "absolute", left: "-9999px" }} alt="" />
+      </div>
+    </noscript>
+    </>
   );
 }
