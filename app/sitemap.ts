@@ -1,7 +1,23 @@
 import type { MetadataRoute } from "next";
-import { items, articles } from "#site/content";
+import { articles } from "#site/content";
+import { allInternalSlugs, allSlugs, bySlug, type Kind } from "@/lib/content";
 
 const BASE = "https://sergeyramas.vercel.app";
+
+function itemPages(kind: Extract<Kind, "solution" | "project">, slugs: string[]): MetadataRoute.Sitemap {
+  return slugs.flatMap((slug) => {
+    const item = bySlug(kind, slug);
+    if (!item) return [];
+    return [
+      {
+        url: `${BASE}/${kind}s/${item.slug}`,
+        lastModified: new Date(item.date),
+        changeFrequency: "monthly" as const,
+        priority: item.featured ? 0.7 : 0.5,
+      },
+    ];
+  });
+}
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date();
@@ -11,6 +27,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${BASE}/solutions`, changeFrequency: "weekly",  priority: 0.8, lastModified: now },
     { url: `${BASE}/projects`,  changeFrequency: "weekly",  priority: 0.8, lastModified: now },
     { url: `${BASE}/collections/gap-to-launch`, changeFrequency: "monthly", priority: 0.7, lastModified: now },
+    { url: `${BASE}/gaps`,      changeFrequency: "monthly", priority: 0.7, lastModified: now },
     { url: `${BASE}/ideas`,     changeFrequency: "monthly", priority: 0.6, lastModified: now },
     { url: `${BASE}/about`,     changeFrequency: "monthly", priority: 0.7, lastModified: now },
     { url: `${BASE}/blog`,      changeFrequency: "weekly",  priority: 0.7, lastModified: now },
@@ -24,16 +41,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.6,
   }));
 
-  // Dynamic pages: every solution gets its own URL (all of them have an internal page),
-  // and every project too. Skip ideas — there are no /ideas/[slug] routes.
-  const dynamic: MetadataRoute.Sitemap = items
-    .filter((i) => i.kind === "solution" || i.kind === "project")
-    .map((i) => ({
-      url: `${BASE}/${i.kind}s/${i.slug}`,
-      lastModified: new Date(i.date),
-      changeFrequency: "monthly" as const,
-      priority: i.featured ? 0.7 : 0.5,
-    }));
+  // Те же наборы slug, что и generateStaticParams: у каждой solution есть страница,
+  // внешние project (externalUrl → isExternal) отдают notFound() и в карту не входят.
+  const dynamic: MetadataRoute.Sitemap = [
+    ...itemPages("solution", allSlugs("solution")),
+    ...itemPages("project", allInternalSlugs("project")),
+  ];
 
   return [...fixed, ...posts, ...dynamic];
 }
