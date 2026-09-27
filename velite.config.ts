@@ -1,6 +1,53 @@
+import { existsSync } from "node:fs";
+import { join } from "node:path";
 import { defineConfig, defineCollection, s } from "velite";
 import rehypeSlug from "rehype-slug";
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
+
+const FALLBACK_COVER = "/blog-covers/blog-default.webp";
+
+type HastNode = {
+  type?: string;
+  tagName?: string;
+  properties?: Record<string, unknown>;
+  children?: HastNode[];
+};
+
+function publicAssetExists(src: string): boolean {
+  if (!src.startsWith("/") || src.startsWith("//")) return true;
+  let pathname = src.split("?")[0].split("#")[0];
+  try {
+    pathname = decodeURIComponent(pathname);
+  } catch {
+    return false;
+  }
+  if (pathname.includes("\0") || pathname.split("/").includes("..")) return false;
+  return existsSync(join(process.cwd(), "public", pathname));
+}
+
+// Генератор начинает тело с `# Заголовок` — на странице H1 уже есть в шаблоне.
+// Битый локальный src (файл не закоммичен) меняем на запасную обложку.
+function rehypeArticleBody() {
+  return (tree: HastNode) => {
+    const children = tree.children ?? [];
+    const first = children.find((node) => node.type === "element");
+    if (first?.tagName === "h1") {
+      tree.children = children.filter((node) => node !== first);
+    }
+
+    const walk = (node: HastNode) => {
+      if (node.type === "element" && node.tagName === "h1") node.tagName = "h2";
+      if (node.type === "element" && node.tagName === "img") {
+        const src = node.properties?.src;
+        if (typeof src === "string" && src.startsWith("/") && !publicAssetExists(src)) {
+          node.properties = { ...node.properties, src: FALLBACK_COVER };
+        }
+      }
+      for (const child of node.children ?? []) walk(child);
+    };
+    for (const child of tree.children ?? []) walk(child);
+  };
+}
 
 const items = defineCollection({
   name: "Item",
@@ -59,6 +106,7 @@ const articles = defineCollection({
       // rehype-slug + autolink: заголовки статьи получают id и кликабельный якорь (#).
       body: s.mdx({
         rehypePlugins: [
+          rehypeArticleBody,
           rehypeSlug,
           [rehypeAutolinkHeadings, { behavior: "wrap", properties: { className: "heading-anchor" } }],
         ],

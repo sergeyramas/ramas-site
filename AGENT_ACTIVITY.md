@@ -8,6 +8,9 @@
 
 ## Recently Completed
 
+- [2026-09-27] **cursor-cloud** — topic: `blog-template-seo` — DONE
+  Шаблон статей: FAQ без сырого HTML, один H1, валидный Article/BreadcrumbList, og:image с запасной обложкой, связанные «Читайте также», WebP схемы бэкапа, имя автора «Сергей Рамас». RSS `/rss.xml`, `/llms.txt`. Метрика и GA4 только из env. Прод не деплоился.
+
 - [2026-09-27] **cursor-cloud** — topic: `blog-nav` — DONE (SHA `09b321b`)
   Пункт «Блог» в шапке (с `lg`) и в мобильном меню, ссылка `/blog`. Список и статьи уже были: коллекция Velite `articles`, путь `content/articles/*.mdx`, sitemap и metadata на месте. Пример-статью не добавлял — в репозитории уже 5 статей конвейера. Прод не деплоился.
 

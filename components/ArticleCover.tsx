@@ -24,7 +24,7 @@ export function ArticleCover({
         fill
         sizes={sizes}
         className="object-cover"
-        unoptimized
+        unoptimized={src.startsWith("http://") || src.startsWith("https://")}
         priority={priority}
       />
     );
