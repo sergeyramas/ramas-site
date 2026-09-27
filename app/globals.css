@@ -386,6 +386,20 @@ header, main, footer { position: relative; z-index: 1; }
   content: "";
 }
 
+.faq-answer p + p,
+.faq-answer ul,
+.faq-answer ol {
+  margin-top: 0.75rem;
+}
+.faq-answer ul,
+.faq-answer ol {
+  padding-left: 1.25rem;
+}
+.faq-answer ul { list-style: disc; }
+.faq-answer ol { list-style: decimal; }
+.faq-answer li + li { margin-top: 0.25rem; }
+.faq-answer strong { color: var(--fg); font-weight: 600; }
+
 /* === Mastodont-style hero effects === */
 
 .display-mega {
