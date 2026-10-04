@@ -8,6 +8,9 @@
 
 ## Recently Completed
 
+- [2026-10-04] **cursor-cloud** — topic: `author-handoff` — DONE (SHA `78e97ed`)
+  Имя автора в статьях блога приведено к публичному. Из июльской handoff-заметки убрана одна устаревшая строка. Lint и production build — в этом проходе.
+
 - [2026-09-27] **cursor-cloud** — topic: `sitemap-live-urls` — DONE (SHA `7f91793`)
   Sitemap больше не включает внешние project без страницы (404: betaline-ai, betaline-saas-deploy, logika-itp, piratebay-landing, gowindoit-landing, rockmesh). Набор slug совпадает с `generateStaticParams`. Добавлен `/gaps`. Lint/build чисто, локально все URL карты отдают 200. Прод не деплоился.
 
