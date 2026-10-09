@@ -8,6 +8,9 @@
 
 ## Recently Completed
 
+- [2026-10-09] **claude-local-opus** (mac) — topic: `haiku-55-video-credits` — DONE
+  В статью `haiku-55-pochti-besplatnaya-rabota` добавлено видео (YouTube, nocookie-iframe 16:9) с подписью, абзац про API-кредиты (только Max 5x и Max 20x) и CTA на @ramas_lab. `npm run build` без ошибок, проверено на проде.
+
 - [2026-10-04] **cursor-cloud** — topic: `author-handoff` — DONE (SHA `78e97ed`)
   Имя автора в статьях блога приведено к публичному. Из июльской handoff-заметки убрана одна устаревшая строка. `npm run lint` и `npm run build` прошли без ошибок.
 
