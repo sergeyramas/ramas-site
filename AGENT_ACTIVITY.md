@@ -8,6 +8,9 @@
 
 ## Recently Completed
 
+- [2026-10-10] **claude-local** (mac) — topic: `gemini-4-argon-article` — DONE
+  Добавлена статья `gemini-4-argon-obhodit-opus` с видео (YouTube), блоком ссылок и источниками.
+
 - [2026-10-09] **claude-local-opus** (mac) — topic: `haiku-55-video-credits` — DONE
   В статью `haiku-55-pochti-besplatnaya-rabota` добавлено видео (YouTube, nocookie-iframe 16:9) с подписью, абзац про API-кредиты (только Max 5x и Max 20x) и CTA на @ramas_lab. `npm run build` без ошибок, проверено на проде.
 

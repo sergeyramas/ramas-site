@@ -1,0 +1,105 @@
+---
+title: "Gemini 4 Argon обходит Opus 5.5 на бумаге, но запустить её почти никто не может"
+description: "Разбор Gemini 4 Argon: где модель сильнее Claude, где проигрывает, что показали независимые замеры, сколько она стоит за задачу и что я с ней делаю уже сегодня."
+slug: gemini-4-argon-obhodit-opus
+date: 2026-10-10
+updated: 2026-10-10
+intent: informational
+author:
+  name: Сергей Рамас
+  bio: Строю агентные системы и автоматизирую продажи
+  url: https://sergeyramas.vercel.app/about
+canonical_url: https://sergeyramas.vercel.app/blog/gemini-4-argon-obhodit-opus
+tags:
+  - gemini
+  - claude
+  - агенты
+reading_time: 5
+faq:
+  - q: Можно ли сейчас пользоваться Gemini 4 Argon?
+    a: Почти нет. На 10.10.2026 ранний доступ есть только у кибербез-программы Fairwind и доверенных тестеров. Следующими Google обещает платных клиентов API и подписчиков Google AI Ultra, даты нет.
+  - q: Argon лучше Claude Opus 5.5?
+    a: Зависит от задачи. По данным Google, в автоматизации бизнес-софта у Argon 51.3 против 42.5 у Opus 5.5, но в терминальных задачах агентов Opus впереди (66.4 против 57.4). На Arena WebDev Argon на 9-м месте (на 08.10.2026).
+  - q: Сколько стоит Gemini 4 Argon?
+    a: На старте $2 за миллион входных токенов и $10 за миллион выходных, потом $4 и $20. Но по замеру Artificial Analysis одна задача выходит на $1.99 против $1.08 у Sonnet 5.5.
+pipeline_article_id: 0
+---
+
+<div style={{position:"relative",width:"100%",aspectRatio:"16 / 9",margin:"0 0 0.5rem"}}>
+  <iframe
+    src="https://www.youtube-nocookie.com/embed/mF6HQtZ0DSc"
+    title="Gemini 4 Argon: модель, которую почти никто не может запустить"
+    style={{position:"absolute",inset:0,width:"100%",height:"100%",border:0,borderRadius:"12px"}}
+    loading="lazy"
+    allow="accelerometer; encrypted-media; gyroscope; picture-in-picture"
+    allowFullScreen
+  ></iframe>
+</div>
+
+*Видео-версия: ролик целиком собрали ИИ-агенты, голос — мой клон в ElevenLabs.*
+
+30 сентября Google показала Gemini 4 Argon. Это первая большая модель компании за семь месяцев, и на бумаге она обходит Claude Opus 5.5. Только попробовать её почти никто не может. Ниже разбираю, где Argon сильнее, где проигрывает, сколько стоит за задачу и что я делаю с этим сегодня.
+
+Все цифры с пометкой «по данным Google» — это заявления самой компании, независимо они не проверены.
+
+## Что вышло и какой статус
+
+Argon анонсирована 30.09.2026. Максимальная длина ответа выросла до миллиона токенов, раньше было 64 тысячи.
+
+Статус на 10.10.2026: доступ есть только у кибербез-программы Fairwind и доверенных тестеров. Следующими Google обещает платных клиентов API и подписчиков Google AI Ultra, но даты нет. В Gemini CLI модели тоже пока нет: запрос на поддержку открыт на GitHub (issue 29689).
+
+## Где Argon сильна
+
+Google делает упор на офисную работу: бизнес-софт, финансы, юристы, длинные документы и видео.
+
+По данным Google, на AutomationBench (автоматизация софта) у Argon 51.3 против 42.5 у Claude Opus 5.5. Там же у GPT-6 Astra около 41.
+
+## Где проигрывает
+
+- Терминальные задачи агентов, Terminal-Bench: 57.4 у Argon против 66.4 у Opus 5.5 (по данным Google).
+- Веб-разработка: на Arena WebDev Argon на 9-м месте (на 08.10.2026).
+- Реальный код. По пересказу Bloomberg на Implicator, часть сотрудников Google считает, что в реальном коде модель слабее своих тестов. Google это называет неточным.
+
+## Что показал независимый замер
+
+Здесь есть плюс, которого я не ждал. По Artificial Analysis, Argon выдумывает факты в 15% случаев, у GPT-6 Astra около 51%.
+
+Оговорка: эта метрика считается только на вопросах, где модель не знала ответ. Это не «15% всех ответов».
+
+## Цена: за токен и за задачу
+
+На старте по данным Google: $2 за миллион входных токенов и $10 за миллион выходных. Потом цена вдвое выше: $4 и $20. Срок вводного периода не назван.
+
+Но считать надо цену за задачу. По Artificial Analysis, задача на Argon стоит $1.99, на Sonnet 5.5 — $1.08. То есть Argon дороже почти вдвое, хотя за токен дешевле.
+
+## Доступ
+
+| Канал | Статус на 10.10.2026 |
+| --- | --- |
+| Кибербез-программа Fairwind | открыто |
+| Платный API и Google AI Ultra | обещано, даты нет |
+| Gemini CLI | пока нет, запрос открыт (issue 29689) |
+
+## Что я делаю
+
+Ничего не переключаю. Код и рутина остаются на Claude, длинное видео — на Gemini Flash. Когда Argon откроют, прогоню её на наших задачах и покажу цену за задачу, а не за токен.
+
+Цифры и сравнения, которые не поместились в ролик, выкладываю в Telegram-канале.
+
+## Ссылки
+
+- Telegram-канал «Рамас. Лаборатория»: [t.me/ramas_lab](https://t.me/ramas_lab)
+- YouTube: [подписаться на канал](https://www.youtube.com/channel/UCOYItDm8PUlbO70v7NsKOMw?sub_confirmation=1)
+- Instagram: [instagram.com/sergeyramas](https://www.instagram.com/sergeyramas)
+- GitHub: [github.com/sergeyramas](https://github.com/sergeyramas)
+
+## Источники
+
+- [Анонс Google](https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-4-argon/)
+- [Бенчмарки Google DeepMind](https://deepmind.google/models/gemini/)
+- [Artificial Analysis: модель](https://artificialanalysis.ai/models/gemini-4-argon)
+- [Artificial Analysis: статья](https://artificialanalysis.ai/articles/gemini-4-argon-google-top-three-labs)
+- [Arena, рейтинги](https://arena.ai/leaderboard/text) (WebDev — на 08.10.2026)
+- [Reuters](https://www.reuters.com/legal/litigation/google-announces-gemini-4-flagship-ai-model-after-months-delays-2026-09-30/)
+- [Implicator: сомнения сотрудников по коду](https://www.implicator.ai/google-gemini-4-argon-staff-doubt-coding/)
+- [Gemini CLI, поддержка Argon (issue 29689)](https://github.com/google-gemini/gemini-cli/issues/29689)
