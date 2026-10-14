@@ -67,6 +67,9 @@ const items = defineCollection({
       tier: s.enum(["free", "paid"]).default("free"),
       date: s.isodate(),
       featured: s.boolean().default(false),
+      // Связанные материалы: пути страниц сайта ("/solutions/x", "/projects/y", "/blog/z").
+      // Проверяются при сборке (scripts/check-links.mjs) и в lib/related.ts.
+      related: s.array(s.string()).default([]),
       body: s.mdx(),
     })
     .transform((data) => ({
@@ -102,6 +105,8 @@ const articles = defineCollection({
       reading_time: s.number().optional(),
       faq: s.array(s.object({ q: s.string(), a: s.string() })).default([]),
       schema_extra: s.record(s.string(), s.any()).optional(),
+      // Необязательно: пути связанных страниц сайта ("/solutions/x", "/blog/z"). Конвейер поле не задаёт.
+      related: s.array(s.string()).default([]),
       pipeline_article_id: s.number(),
       // rehype-slug + autolink: заголовки статьи получают id и кликабельный якорь (#).
       body: s.mdx({

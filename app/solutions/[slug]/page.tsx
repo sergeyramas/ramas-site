@@ -3,6 +3,8 @@ import { MDXContent } from "@/components/MDXContent";
 import { ExternalPreview } from "@/components/ExternalPreview";
 import { bySlug, allSlugs } from "@/lib/content";
 import Link from "next/link";
+import { RelatedLinks } from "@/components/RelatedLinks";
+import { resolveRelated } from "@/lib/related";
 
 export function generateStaticParams() {
   return allSlugs("solution").map((slug) => ({ slug }));
@@ -93,6 +95,8 @@ export default async function SolutionPage({ params }: { params: Promise<{ slug:
       {!hasBody && !item.externalUrl && (
         <p className="mt-10 text-muted">Скоро появится подробное описание.</p>
       )}
+
+      <RelatedLinks entries={resolveRelated(item.related, `/solutions/${item.slug}`)} />
     </article>
   );
 }

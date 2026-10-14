@@ -4,10 +4,11 @@
   "private": true,
   "scripts": {
     "dev": "velite --watch & next dev --turbopack",
-    "build": "velite && next build",
+    "build": "velite && node scripts/check-links.mjs && next build",
     "start": "next start",
     "lint": "eslint",
-    "content": "velite"
+    "content": "velite",
+    "check:links": "node scripts/check-links.mjs"
   },
   "dependencies": {
     "@vercel/analytics": "^2.0.1",

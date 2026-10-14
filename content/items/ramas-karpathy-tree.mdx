@@ -10,11 +10,16 @@ preview: /previews/ramas-karpathy-tree.png
 status: live
 date: 2026-05-01
 featured: true
+related:
+  - /solutions/karpathy-wiki-bundle
+  - /solutions/session-handoff
+  - /blog/claude-code-v-3-raza-deshevle
+  - /solutions/notebooklm-claude-memory
 ---
 
 ## Зачем нужен ещё один слой памяти
 
-Глобальная память (Anthropic auto-memory) хорошо помнит факты о тебе. Wiki хорошо хранит общую базу знаний. Между ними дыра: знания **конкретного проекта** — где лежат файлы, какие команды работают, что уже пробовал. Tree эту дыру закрывает.
+Глобальная память (Anthropic auto-memory) хорошо помнит факты о тебе. [Wiki хорошо хранит общую базу знаний](/solutions/karpathy-wiki-bundle). Между ними дыра: знания **конкретного проекта** — где лежат файлы, какие команды работают, что уже пробовал. Tree эту дыру закрывает.
 
 ## Архитектура в одной картинке
 
@@ -22,7 +27,7 @@ featured: true
 * Ветви — пер-проектные `project_*.md` рядом
 * `cwd-router` — хук, выбирает правильную ветвь по текущему рабочему каталогу
 * `pre-filter` — режет токены, грузит только релевантную для запроса часть
-* `haiku-flush` — раз в N сессий пробегает по ветвям и сжимает старое через Haiku
+* `haiku-flush` — раз в N сессий пробегает по ветвям и [сжимает старое через Haiku](/blog/claude-code-v-3-raza-deshevle)
 
 ## Установка
 
