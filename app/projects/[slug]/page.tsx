@@ -2,6 +2,8 @@ import { notFound } from "next/navigation";
 import { MDXContent } from "@/components/MDXContent";
 import { bySlug, allInternalSlugs } from "@/lib/content";
 import { PageHeader } from "@/components/PageHeader";
+import { RelatedLinks } from "@/components/RelatedLinks";
+import { resolveRelated } from "@/lib/related";
 import Link from "next/link";
 
 export function generateStaticParams() {
@@ -58,6 +60,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
       <div className="prose prose-neutral dark:prose-invert max-w-none">
         <MDXContent code={item.body} />
       </div>
+      <RelatedLinks entries={resolveRelated(item.related, `/projects/${item.slug}`)} />
     </article>
   );
 }

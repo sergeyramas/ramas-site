@@ -5,6 +5,8 @@ import { ArticleCover } from "@/components/ArticleCover";
 import { ArticleGrid } from "@/components/ArticleGrid";
 import { articles } from "#site/content";
 import { FaqAnswer } from "@/components/FaqAnswer";
+import { RelatedLinks } from "@/components/RelatedLinks";
+import { resolveRelated } from "@/lib/related";
 import { htmlToText } from "@/lib/faq";
 import { relatedArticles, formatDate, coverFor, authorName, absoluteAsset, PUBLIC_AUTHOR, SITE_ORIGIN } from "@/lib/blog";
 
@@ -100,7 +102,13 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
     });
   }
 
-  const related = relatedArticles(post, 3);
+  // Вручную заданные связи (related во frontmatter) показываем блоком «Связанное»;
+  // автоподборку «Читайте также» не дублируем теми же статьями.
+  const manualRelated = resolveRelated(post.related, `/blog/${post.slug}`);
+  const manualHrefs = new Set(manualRelated.map((e) => e.href));
+  const related = relatedArticles(post, 3 + manualHrefs.size)
+    .filter((a) => !manualHrefs.has(`/blog/${a.slug}`))
+    .slice(0, 3);
 
   return (
     <article className="pt-12 sm:pt-16 pb-24">
@@ -161,6 +169,8 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
             </dl>
           </section>
         )}
+
+        <RelatedLinks entries={manualRelated} />
 
         <div className="mt-20 border-t border-border pt-10">
           <Link

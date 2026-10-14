@@ -9,11 +9,16 @@ tags: [skills, claude-code, codex, openai]
 status: live
 date: 2026-06-16
 featured: false
+related:
+  - /solutions/connect-gemini
+  - /solutions/ralph-loop-setup
+  - /solutions/claude-code-deepseek
+  - /solutions/start-goal
 ---
 
 ## Что делает
 
-Скилл вшивает официальный плагин OpenAI Codex CLI в Claude Code, чтобы внутри одной сессии работали два LLM-агента. Claude предлагает, Codex ревьюит — diff-review, adversarial-критика плана, rescue-делегирование. Аутентификация идёт через подписку ChatGPT Plus/Pro/Business, отдельный API-ключ не нужен.
+Скилл вшивает официальный плагин OpenAI Codex CLI в Claude Code, чтобы внутри одной сессии [работали два LLM-агента](/solutions/connect-gemini). Claude предлагает, Codex ревьюит — diff-review, adversarial-критика плана, rescue-делегирование. Аутентификация идёт через подписку ChatGPT Plus/Pro/Business, отдельный API-ключ не нужен.
 
 Шесть проверенных шагов: установить Codex CLI, пройти `codex login`, добавить маркетплейс `openai/codex-plugin-cc`, поставить плагин `codex@openai-codex`, перезапустить Claude Code, проверить `/codex:status`.
 
