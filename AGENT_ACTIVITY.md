@@ -8,6 +8,9 @@
 
 ## Recently Completed
 
+- [2026-10-30] **claude-local-sonnet55** (mac) — topic: `youtube-ai-video-checklist` — DONE
+  Добавлена solution-карточка «ИИ-видео без бана» (`youtube-ai-video-checklist`) + cover `public/covers/youtube-ai-video-checklist.svg` + PDF-гайд `public/guides/ai-video-bez-bana.pdf` (8 стр.). Опубликовано из изолированного worktree от origin/main. Lint/build чисто.
+
 - [2026-10-10] **claude-local** (mac) — topic: `gemini-4-argon-article` — DONE
   Добавлена статья `gemini-4-argon-obhodit-opus` с видео (YouTube), блоком ссылок и источниками.
 

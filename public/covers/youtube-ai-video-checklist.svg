@@ -1,0 +1,26 @@
+<svg viewBox="0 0 800 500" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="t d">
+  <title id="t">ИИ-видео без бана</title>
+  <desc id="d">Планшет с кнопкой play и чек-листом из галочек: правила YouTube для роликов с нейросетью.</desc>
+  <rect width="800" height="500" fill="#F4F3EE"/>
+  <g stroke="#E0DED4" stroke-width="1">
+    <path d="M0 62.5H800M0 125H800M0 187.5H800M0 250H800M0 312.5H800M0 375H800M0 437.5H800"/>
+    <path d="M100 0V500M200 0V500M300 0V500M400 0V500M500 0V500M600 0V500M700 0V500"/>
+  </g>
+  <text x="64" y="92" fill="#0E7A63" font-family="ui-monospace,monospace" font-size="15" letter-spacing="5">YOUTUBE · ПРАВИЛА 2026</text>
+  <text x="62" y="180" fill="#14181A" font-family="'SF Pro Display',system-ui,sans-serif" font-size="62" font-weight="800" letter-spacing="-2">ИИ-видео</text>
+  <text x="62" y="240" fill="#0E7A63" font-family="'SF Pro Display',system-ui,sans-serif" font-size="46" font-weight="800" letter-spacing="-1">без бана</text>
+  <text x="64" y="300" fill="#14181A" font-family="system-ui,sans-serif" font-size="19" opacity=".72">6 запретов, метка ИИ, чек-лист</text>
+  <text x="64" y="328" fill="#14181A" font-family="system-ui,sans-serif" font-size="19" opacity=".72">и промпт проверки канала</text>
+  <g transform="translate(500,70)">
+    <rect x="0" y="22" width="220" height="330" rx="18" fill="#14181A"/>
+    <rect x="18" y="62" width="184" height="272" rx="8" fill="#FFFFFF"/>
+    <rect x="68" y="0" width="84" height="48" rx="12" fill="#0E7A63"/>
+    <rect x="90" y="14" width="40" height="14" rx="7" fill="#14181A"/>
+    <path d="M78 96 L78 168 L146 132 Z" fill="#0E7A63"/>
+    <g stroke="#0E7A63" stroke-width="7" fill="none" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M40 206l9 9 18-20"/><path d="M40 244l9 9 18-20"/><path d="M40 282l9 9 18-20"/>
+      <circle cx="53" cy="314" r="11"/>
+    </g>
+    <g fill="#14181A"><rect x="86" y="200" width="100" height="12" rx="6"/><rect x="86" y="238" width="80" height="12" rx="6"/><rect x="86" y="276" width="92" height="12" rx="6"/><rect x="86" y="308" width="60" height="12" rx="6"/></g>
+  </g>
+</svg>
