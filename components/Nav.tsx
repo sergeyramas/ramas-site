@@ -19,6 +19,7 @@ export function Nav() {
     { href: "/gaps", label: t("nav.gaps") },
     { href: "/ideas", label: t("nav.ideas") },
     { href: "/blog", label: t("nav.blog") },
+    { href: "/news", label: t("nav.news") },
     { href: "/about", label: t("nav.about") },
   ];
 

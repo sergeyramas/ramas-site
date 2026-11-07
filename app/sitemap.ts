@@ -1,6 +1,7 @@
 import type { MetadataRoute } from "next";
 import { articles } from "#site/content";
 import { allInternalSlugs, allSlugs, bySlug, type Kind } from "@/lib/content";
+import { allIssues } from "@/lib/news";
 
 const BASE = "https://sergeyramas.vercel.app";
 
@@ -31,7 +32,15 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${BASE}/ideas`,     changeFrequency: "monthly", priority: 0.6, lastModified: now },
     { url: `${BASE}/about`,     changeFrequency: "monthly", priority: 0.7, lastModified: now },
     { url: `${BASE}/blog`,      changeFrequency: "weekly",  priority: 0.7, lastModified: now },
+    { url: `${BASE}/news`,      changeFrequency: "daily",   priority: 0.9, lastModified: now },
   ];
+
+  const news: MetadataRoute.Sitemap = allIssues().map((i) => ({
+    url: `${BASE}/news/${i.date}`,
+    lastModified: new Date(i.generatedAt),
+    changeFrequency: "daily" as const,
+    priority: 0.6,
+  }));
 
   // Статьи конвейера: post_check движка требует, чтобы опубликованный URL был в sitemap.
   const posts: MetadataRoute.Sitemap = articles.map((a) => ({
@@ -48,5 +57,5 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...itemPages("project", allInternalSlugs("project")),
   ];
 
-  return [...fixed, ...posts, ...dynamic];
+  return [...fixed, ...news, ...posts, ...dynamic];
 }
