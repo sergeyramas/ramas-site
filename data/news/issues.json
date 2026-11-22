@@ -1,6 +1,166 @@
 {
   "issues": [
     {
+      "date": "2026-11-21",
+      "generatedAt": "2026-11-21T13:44:23+04:00",
+      "title": "Сводка дня",
+      "standfirst": "Искусственный интеллект · Криптовалюты · Главное в мире",
+      "ticker": [
+        {
+          "label": "BTC",
+          "value": "$57 837",
+          "change": "−6.08%",
+          "dir": "down"
+        },
+        {
+          "label": "ETH",
+          "value": "$1 634.49",
+          "change": "−6.28%",
+          "dir": "down"
+        },
+        {
+          "label": "SOL",
+          "value": "$67.89",
+          "change": "−5.80%",
+          "dir": "down"
+        }
+      ],
+      "sections": [
+        {
+          "id": "ai",
+          "kicker": "Искусственный интеллект",
+          "items": [
+            {
+              "title": "ИИ заявил о решении гипотезы Римана",
+              "summary": "Заявлено, что ИИ предложил решение гипотезы Римана, которой 167 лет. Математики впечатлены последним результатом, полученным с помощью ИИ. При этом появилось и конкурирующее решение от человека.",
+              "source": "TechCrunch",
+              "time": "14 часов назад",
+              "url": "https://techcrunch.com/2026/11/20/ai-claimed-a-solution-to-the-167-year-old-riemann-hypothesis-and-a-human-did-too/",
+              "image": "/news/2026-11-21/d6bff5841b.jpg"
+            },
+            {
+              "title": "Дэниел Эк поддержал термоядерный стартап",
+              "summary": "Основатель Spotify Дэниел Эк поддерживает Europa Fusion — термоядерный стартап, основанный исследователем в области ИИ.",
+              "source": "TechCrunch",
+              "time": "14 часов назад",
+              "url": "https://techcrunch.com/2026/11/20/daniel-ek-backs-ai-researchers-fusion-power-startup-heres-what-theyre-building/",
+              "image": "/news/2026-11-21/340614cb1d.webp"
+            },
+            {
+              "title": "Финансирование космических чипов под вопросом",
+              "summary": "Кредиторы не хотят, чтобы SpaceX отправляла их залог на орбиту. Это ставит вопросы перед проектами космических дата-центров.",
+              "source": "TechCrunch",
+              "time": "16 часов назад",
+              "url": "https://techcrunch.com/2026/11/20/chips-can-survive-the-space-environment-can-their-financing/",
+              "image": "/news/2026-11-21/0793739563.webp"
+            },
+            {
+              "title": "Последствия скандала вокруг Дженсена Хуана",
+              "summary": "На фоне последствий отстранения CEO Дженсена Хуана Nvidia представила свежий отчёт с ростом и обещаниями, что хорошие времена продолжатся.",
+              "source": "TechCrunch",
+              "time": "19 часов назад",
+              "url": "https://techcrunch.com/podcast/the-fallout-from-nvidias-jensen-huang-scandal-continues/",
+              "image": "/news/2026-11-21/92c1cc867c.jpg"
+            }
+          ]
+        },
+        {
+          "id": "crypto",
+          "kicker": "Криптовалюты",
+          "items": [
+            {
+              "title": "Биткоин ниже $57 000",
+              "summary": "В субботу распродажа биткоина усилилась: цена опустилась ниже $57 000 до двухлетнего минимума.",
+              "source": "CoinDesk",
+              "time": "6 часов назад",
+              "url": "https://www.coindesk.com/markets/2026/11/21/bitcoin-tanks-below-usd57-000-for-the-first-time-in-two-years-and-its-not-alone",
+              "image": "/news/2026-11-21/36a7607862.jpg"
+            },
+            {
+              "title": "XRP упал на 10%",
+              "summary": "Токен обновил ноябрьские минимумы на субботней распродаже; большинство ликвидаций XRP пришлось на длинные позиции. Технические индикаторы указывают на дальнейшую слабость, а активы ETF опустились ниже $1 млрд.",
+              "source": "CoinDesk",
+              "time": "4 часа назад",
+              "url": "https://www.coindesk.com/markets/2026/11/21/xrp-falls-10-as-long-bets-unwind-and-etf-assets-slip-below-usd1-billion",
+              "image": "/news/2026-11-21/59cd1d5801.jpg"
+            },
+            {
+              "title": "ИИ нашёл баг в коде Bitcoin",
+              "summary": "Bitcoin Core выпустил в пятницу исправления для ошибки, которую выявил Loupe — открытый сканер от Block's Spiral, использующий AI-агентов для анализа кода биткоина. Уязвимость, по описанию, могла останавливать ноды при повторении одного ID 50 000 раз.",
+              "source": "CoinDesk",
+              "time": "3 часа назад",
+              "url": "https://www.coindesk.com/markets/2026/11/21/bitcoin-nodes-could-be-stalled-by-repeating-one-id-50-000-times-ai-found-the-bug",
+              "image": "/news/2026-11-21/5c48c1a28f.jpg"
+            },
+            {
+              "title": "Kalshi оспаривает возможный запрет в Нью-Йорке",
+              "summary": "Американская платформа прогнозных рынков попросила суд Нью-Йорка дать ей возможность возразить против готовящегося судебного запрета. Это связано с новым поражением в суде.",
+              "source": "CoinDesk",
+              "time": "11 часов назад",
+              "url": "https://www.coindesk.com/policy/2026/11/20/kalshi-races-to-get-ahead-of-new-york-order-that-could-shut-down-exchange",
+              "image": "/news/2026-11-21/28d9ad4767.jpg"
+            }
+          ]
+        },
+        {
+          "id": "world",
+          "kicker": "Главное в мире",
+          "numbered": true,
+          "items": [
+            {
+              "title": "Зеленский назвал Путина «убийцей»",
+              "summary": "Зеленский назвал Путина «убийцей» после того, как Трамп назвал российского лидера другом. На этой неделе Трамп приветствовал Путина перед встречей в Китае и заявил, что у них «прекрасные отношения».",
+              "source": "BBC",
+              "time": "2 часа назад",
+              "url": "https://www.bbc.co.uk/news/articles/cxnv4zvmdy0jo?at_medium=RSS&at_campaign=rss",
+              "image": "/news/2026-11-21/633d3b37de.jpg"
+            },
+            {
+              "title": "COP31 в тупике из-за ископаемого топлива",
+              "summary": "Почти 200 стран застряли в споре и не могут согласовать новое глобальное климатическое соглашение.",
+              "source": "BBC",
+              "time": "2 часа назад",
+              "url": "https://www.bbc.co.uk/news/articles/c6ly5w40eg07o?at_medium=RSS&at_campaign=rss"
+            },
+            {
+              "title": "Распродажа технологических акций обвалила рынки",
+              "summary": "Давление на американские рынки усилилось: S&P 500 и Dow Jones Industrial Average ушли в коррекцию. Акции Anthropic также снижаются.",
+              "source": "BBC",
+              "time": "11 часов назад",
+              "url": "https://www.bbc.co.uk/news/articles/c6808ym10vzgo?at_medium=RSS&at_campaign=rss",
+              "image": "/news/2026-11-21/7abcb9e67a.jpg"
+            },
+            {
+              "title": "Житель Лос-Анджелеса осуждён за поджог Palisades",
+              "summary": "30-летнего жителя Лос-Анджелеса признали виновным в поджоге, который привёл к лесным пожарам. Они унесли жизни 12 человек и уничтожили более 6 800 зданий.",
+              "source": "BBC",
+              "time": "5 часов назад",
+              "url": "https://www.bbc.co.uk/news/articles/c64gn0gy8rj3o?at_medium=RSS&at_campaign=rss"
+            }
+          ]
+        }
+      ],
+      "numbers": [
+        {
+          "label": "BTC",
+          "value": "$57 837"
+        },
+        {
+          "label": "ETH",
+          "value": "$1 634.49"
+        },
+        {
+          "label": "SOL",
+          "value": "$67.89"
+        }
+      ],
+      "sources": [
+        "BBC",
+        "CoinDesk",
+        "TechCrunch"
+      ]
+    },
+    {
       "date": "2026-11-07",
       "generatedAt": "2026-11-07T10:45:00+04:00",
       "title": "Сводка дня",

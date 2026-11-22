@@ -13,6 +13,7 @@ from __future__ import annotations
 
 import argparse
 import datetime as dt
+import hashlib
 import html
 import json
 import os
@@ -64,6 +65,60 @@ def parse_dt(value: str | None) -> dt.datetime | None:
     return None
 
 
+def rss_image(node) -> str | None:
+    """Картинка из RSS: media:content / media:thumbnail / enclosure / <img> в описании."""
+    best = None
+    for ch in node.iter():
+        tag = ch.tag.split("}")[-1].lower()
+        attrs = {k.lower(): v for k, v in (ch.attrib or {}).items()}
+        url = attrs.get("url")
+        if not url:
+            continue
+        if tag in ("content", "thumbnail") and "ichef.bbci.co.uk" in url:
+            url = re.sub(r"/\d{2,4}/", "/800/", url)
+        if tag in ("content", "thumbnail", "enclosure"):
+            kind = attrs.get("type", "") or attrs.get("medium", "")
+            if "image" in kind or re.search(r"\.(jpe?g|png|webp)(\?|$)", url, re.I):
+                if not best or tag == "content":
+                    best = url
+    if best:
+        return html.unescape(best)
+    desc = node.findtext("description") or ""
+    m = re.search(r'<img[^>]+src=["\']([^"\']+)["\']', desc)
+    return html.unescape(m.group(1)) if m else None
+
+
+def og_image(page_url: str) -> str | None:
+    """Fallback: og:image со страницы статьи."""
+    try:
+        raw = get(page_url, timeout=20).decode("utf-8", "ignore")
+    except Exception:
+        return None
+    m = re.search(r'<meta[^>]+(?:property|name)=["\'](?:og:image|twitter:image)["\'][^>]+content=["\']([^"\']+)', raw, re.I)
+    if not m:
+        m = re.search(r'<meta[^>]+content=["\']([^"\']+)["\'][^>]+(?:property|name)=["\'](?:og:image|twitter:image)', raw, re.I)
+    return html.unescape(m.group(1)) if m else None
+
+
+def download_image(img_url: str, date: str, key: str) -> str | None:
+    """Скачивает картинку в public/news/<date>/ и возвращает веб-путь."""
+    try:
+        req = urllib.request.Request(img_url, headers={"User-Agent": UA, "Referer": img_url})
+        with urllib.request.urlopen(req, timeout=25) as r:
+            blob = r.read(4_000_000)
+            ctype = r.headers.get("Content-Type", "")
+    except Exception:
+        return None
+    if not ctype.startswith("image/") or len(blob) < 4000:
+        return None
+    ext = "jpg" if "jpeg" in ctype or "jpg" in ctype else ctype.split("/")[-1].split(";")[0][:4]
+    name = hashlib.sha1(key.encode()).hexdigest()[:10]
+    folder = REPO / "public" / "news" / date
+    folder.mkdir(parents=True, exist_ok=True)
+    (folder / f"{name}.{ext}").write_bytes(blob)
+    return f"/news/{date}/{name}.{ext}"
+
+
 def fetch_feed(bucket: str, source: str, url: str, max_age_h: int) -> list[dict]:
     try:
         root = ET.fromstring(get(url))
@@ -90,6 +145,7 @@ def fetch_feed(bucket: str, source: str, url: str, max_age_h: int) -> list[dict]
             "url": link,
             "summary": desc,
             "age": hours,
+            "img": rss_image(node),
         })
         if len(items) >= 12:
             break
@@ -135,7 +191,7 @@ PROMPT = """Ты редактор ежедневной новостной сво
 - Никакого маркдауна, только JSON.
 
 Формат ответа (строго):
-{"sections":[{"id":"ai","kicker":"Искусственный интеллект","items":[{"title":"...","summary":"...","source":"TechCrunch","time":"сегодня","url":"https://..."}]},{"id":"crypto","kicker":"Криптовалюты","items":[...]},{"id":"world","kicker":"Главное в мире","numbered":true,"items":[...]}]}
+{"glance":["5 коротких фактов дня, по одному предложению каждый"],"sections":[{"id":"ai","kicker":"Искусственный интеллект","items":[{"title":"...","summary":"...","source":"TechCrunch","time":"сегодня","url":"https://..."}]},{"id":"crypto","kicker":"Криптовалюты","items":[...]},{"id":"world","kicker":"Главное в мире","numbered":true,"items":[...]}]}
 
 Материалы:
 """
@@ -172,6 +228,12 @@ def ask_llm(items: list[dict]) -> dict | None:
         print(f"! JSON не разобрался: {e}", file=sys.stderr)
         return None
 
+    glance = payload.get("glance")
+    if isinstance(glance, list):
+        payload["glance"] = [str(g).strip() for g in glance if str(g).strip()][:6]
+    else:
+        payload.pop("glance", None)
+
     sections = payload.get("sections")
     if not isinstance(sections, list) or len(sections) < 2:
         print("! в ответе нет секций", file=sys.stderr)
@@ -186,6 +248,24 @@ def ask_llm(items: list[dict]) -> dict | None:
             if not it.get("url", "").startswith("http"):
                 it.pop("url", None)
     return payload
+
+
+def attach_images(payload: dict, by_url: dict[str, dict], date: str) -> int:
+    """Проставляет item['image'] (скачанный локально) для выбранных материалов."""
+    got = 0
+    for section in payload["sections"]:
+        for item in section["items"]:
+            url = item.get("url")
+            if not url:
+                continue
+            candidate = (by_url.get(url) or {}).get("img") or og_image(url)
+            if not candidate:
+                continue
+            web_path = download_image(candidate, date, url)
+            if web_path:
+                item["image"] = web_path
+                got += 1
+    return got
 
 
 def fallback(items: list[dict]) -> dict:
@@ -228,6 +308,9 @@ def main() -> int:
         return 1
 
     payload = ask_llm(items) or fallback(items)
+    by_url = {i["url"]: i for i in items}
+    with_images = attach_images(payload, by_url, args.date)
+    print(f"· картинок: {with_images}")
     ticker = prices()
 
     issue = {
@@ -263,16 +346,22 @@ def main() -> int:
 
     env = {**os.environ, "GIT_AUTHOR_NAME": "news-bot", "GIT_AUTHOR_EMAIL": "news@ramas.dev",
            "GIT_COMMITTER_NAME": "news-bot", "GIT_COMMITTER_EMAIL": "news@ramas.dev"}
-    cmds = [
-        ["git", "-C", str(REPO), "add", "data/news/issues.json"],
-        ["git", "-C", str(REPO), "commit", "-m", f"news: выпуск {issue['date']}"],
-        ["git", "-C", str(REPO), "push", "origin", "HEAD"],
-    ]
-    for cmd in cmds:
-        r = subprocess.run(cmd, capture_output=True, text=True, env=env)
-        if r.returncode != 0:
-            print(f"! {cmd[3] if len(cmd) > 3 else cmd[0]} -> {r.stderr.strip()[:300]}", file=sys.stderr)
-            return 1
+    def run(*args, check=True):
+        r = subprocess.run(["git", "-C", str(REPO), *args], capture_output=True, text=True, env=env)
+        if check and r.returncode != 0:
+            print(f"! git {args[0]} -> {r.stderr.strip()[:300]}", file=sys.stderr)
+        return r
+
+    run("fetch", "origin", "main", check=False)
+    run("rebase", "origin/main", check=False)
+    run("add", "data/news/issues.json", "public/news")
+    commit = run("commit", "-m", f"news: выпуск {issue['date']}", check=False)
+    if commit.returncode != 0 and "nothing to commit" not in commit.stdout:
+        print(f"! commit -> {commit.stderr.strip()[:200]}", file=sys.stderr)
+        return 1
+    push = run("push", "origin", "HEAD:main")
+    if push.returncode != 0:
+        return 1
     print("✓ запушено")
     return 0
 

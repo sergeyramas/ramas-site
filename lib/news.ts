@@ -13,6 +13,7 @@ export type NewsItem = {
   source: string;
   time?: string;
   url?: string;
+  image?: string;
 };
 
 export type NewsSection = {
@@ -28,6 +29,7 @@ export type NewsIssue = {
   kicker?: string;
   title: string;
   standfirst?: string;
+  glance?: string[];
   ticker: NewsTicker[];
   sections: NewsSection[];
   numbers?: { label: string; value: string }[];
