@@ -1,6 +1,166 @@
 {
   "issues": [
     {
+      "date": "2026-11-22",
+      "generatedAt": "2026-11-22T15:06:29+04:00",
+      "title": "Сводка дня",
+      "standfirst": "Искусственный интеллект · Криптовалюты · Главное в мире",
+      "ticker": [
+        {
+          "label": "BTC",
+          "value": "$60 835",
+          "change": "+5.16%",
+          "dir": "up"
+        },
+        {
+          "label": "ETH",
+          "value": "$1 709.39",
+          "change": "+4.36%",
+          "dir": "up"
+        },
+        {
+          "label": "SOL",
+          "value": "$70.65",
+          "change": "+3.97%",
+          "dir": "up"
+        }
+      ],
+      "sections": [
+        {
+          "id": "ai",
+          "kicker": "Искусственный интеллект",
+          "items": [
+            {
+              "title": "Signal ограничил скриншоты в приложениях",
+              "summary": "Signal ограничивает пользователям возможность делать скриншоты в приложениях для Android и iOS. Ограничение касается обеих мобильных платформ. В TechCrunch это описывают как шаг на фоне «экзистенциальной угрозы» ИИ-слежки.",
+              "source": "TechCrunch",
+              "time": "13 часов назад",
+              "url": "https://techcrunch.com/2026/11/21/signal-restricts-mobile-screenshots-as-it-confronts-existential-threat-of-ai-surveillance/",
+              "image": "/news/2026-11-22/8d54d4add3.jpg"
+            },
+            {
+              "title": "Две картины Nvidia",
+              "summary": "TechCrunch пишет о двух разных картинах Nvidia: последнем отчёте о прибыли и призывах топ-менеджеров вернуть Дженсена Хуана.",
+              "source": "TechCrunch",
+              "time": "14 часов назад",
+              "url": "https://techcrunch.com/2026/11/21/a-tale-of-two-nvidias/",
+              "image": "/news/2026-11-22/127326b87b.webp"
+            },
+            {
+              "title": "ИИ-агенты в текстовых сообщениях",
+              "summary": "TechCrunch составил список заметных ИИ-агентов, которые могут жить в текстовых сообщениях — от общих ассистентов до агентов для семей, путешествий и работы.",
+              "source": "TechCrunch",
+              "time": "18 часов назад",
+              "url": "https://techcrunch.com/2026/11/21/all-the-ai-agents-that-can-live-in-your-text-messages/",
+              "image": "/news/2026-11-22/01945f6a90.webp"
+            },
+            {
+              "title": "Актёр продал ИИ-версию лица для микродрам",
+              "summary": "Актёр лицензировал своё лицо стартапу в сфере микродрам — тренд, уже популярный в Китае. Эксперты сомневаются в долгосрочных последствиях, если это распространится и на Голливуд.",
+              "source": "TechCrunch",
+              "time": "19 часов назад",
+              "url": "https://techcrunch.com/2026/11/21/is-selling-an-ai-version-of-your-face-to-this-microdrama-startup-the-future-of-hollywood/",
+              "image": "/news/2026-11-22/89298d3b7f.webp"
+            }
+          ]
+        },
+        {
+          "id": "crypto",
+          "kicker": "Криптовалюты",
+          "items": [
+            {
+              "title": "Биткоин вернулся выше $60 000",
+              "summary": "После падения до двухлетнего минимума биткоин отскочил примерно на 9% и вернулся выше $60 000, сообщает CoinDesk. Волна ликвидаций уничтожила $1,8 млрд плечевых криптопозиций, в основном ставок на рост.",
+              "source": "CoinDesk",
+              "time": "17 часов назад",
+              "url": "https://www.coindesk.com/markets/2026/11/21/bitcoin-bounces-9-from-two-year-low-to-retake-usd60-000-as-traders-eye-monday-s-stock-open",
+              "image": "/news/2026-11-22/50a435182d.jpg"
+            },
+            {
+              "title": "FLIP упал на 30% после утечки из хранилища",
+              "summary": "Токен FLIP кросс-чейн-протокола Chainflip упал на 30% после предполагаемого вывода $4,86 млн из хранилища. По данным Onchain Lens, у транзакции была действительная подпись, что указывает на возможную компрометацию ключа валидаторов для одобрения выплат.",
+              "source": "CoinDesk",
+              "time": "18 часов назад",
+              "url": "https://www.coindesk.com/business/2026/11/21/cross-chain-protocol-chainflip-s-flip-tanks-30-after-suspected-usd4-86-million-vault-drain",
+              "image": "/news/2026-11-22/c1d289258c.jpg"
+            },
+            {
+              "title": "BTCS предупредила SEC о риске ликвидации",
+              "summary": "BTCS предупредила SEC, что её кредит Aave на $54 млн может быть ликвидирован. За десять дней компания сократила заявленный долг примерно на $10 млн, но падение цен на ether давит на залог.",
+              "source": "CoinDesk",
+              "time": "23 часа назад",
+              "url": "https://www.coindesk.com/markets/2026/11/21/ether-treasury-firm-btcs-warns-sec-its-usd54-million-aave-loan-could-be-liquidated",
+              "image": "/news/2026-11-22/6082857bd2.jpg"
+            },
+            {
+              "title": "В Bitcoin Core закрыли найденный ИИ баг",
+              "summary": "Bitcoin Core выпустил в пятницу исправления для бага, который нашёл Loupe — открытый сканер Block’s Spiral, использующий ИИ-агентов для проверки кода биткоина. Уязвимость могла остановить узлы при повторении одного ID 50 000 раз.",
+              "source": "CoinDesk",
+              "time": "29 часов назад",
+              "url": "https://www.coindesk.com/markets/2026/11/21/bitcoin-nodes-could-be-stalled-by-repeating-one-id-50-000-times-ai-found-the-bug",
+              "image": "/news/2026-11-22/5c48c1a28f.jpg"
+            }
+          ]
+        },
+        {
+          "id": "world",
+          "kicker": "Главное в мире",
+          "numbered": true,
+          "items": [
+            {
+              "title": "Министр образования Южной Кореи ушёл в отставку",
+              "summary": "Министр образования Южной Кореи ушёл в отставку, признав, что срочные меры против читерства с помощью ИИ на вступительном экзамене вызвали хаос.",
+              "source": "BBC",
+              "time": "2 часа назад",
+              "url": "https://www.bbc.co.uk/news/articles/cw3dgk29d37no?at_medium=RSS&at_campaign=rss",
+              "image": "/news/2026-11-22/3d97e0803e.jpg"
+            },
+            {
+              "title": "Пожар на фабрике в Индонезии: трое погибших",
+              "summary": "При пожаре на кондитерской фабрике в Индонезии погибли как минимум три человека. Ещё 36 человек числятся пропавшими без вести.",
+              "source": "BBC",
+              "time": "5 часов назад",
+              "url": "https://www.bbc.co.uk/news/articles/cw8dvg5pgm0eo?at_medium=RSS&at_campaign=rss"
+            },
+            {
+              "title": "В Мексике задержали наркобарона из списка ФБР",
+              "summary": "В Мексике после перестрелки с властями задержан Фаусто Исидро «Чапо Идисро» Меса Флорес, входивший в список десяти самых разыскиваемых ФБР. Его обвиняют в наркоторговле и пытках.",
+              "source": "BBC",
+              "time": "10 часов назад",
+              "url": "https://www.bbc.co.uk/news/articles/ckz749ey0r75o?at_medium=RSS&at_campaign=rss"
+            },
+            {
+              "title": "Судно в Финском заливе атаковано дроном",
+              "summary": "Финские силы обороны сообщили, что судно, направлявшееся в Россию, было атаковано дроном в Финском заливе. По их оценке, за атакой, вероятно, стояла Украина.",
+              "source": "BBC",
+              "time": "16 часов назад",
+              "url": "https://www.bbc.co.uk/news/articles/cj752ddve27ko?at_medium=RSS&at_campaign=rss",
+              "image": "/news/2026-11-22/86c4e81769.jpg"
+            }
+          ]
+        }
+      ],
+      "numbers": [
+        {
+          "label": "BTC",
+          "value": "$60 835"
+        },
+        {
+          "label": "ETH",
+          "value": "$1 709.39"
+        },
+        {
+          "label": "SOL",
+          "value": "$70.65"
+        }
+      ],
+      "sources": [
+        "BBC",
+        "CoinDesk",
+        "TechCrunch"
+      ]
+    },
+    {
       "date": "2026-11-21",
       "generatedAt": "2026-11-21T13:44:23+04:00",
       "title": "Сводка дня",
