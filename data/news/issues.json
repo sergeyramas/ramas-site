@@ -1,6 +1,167 @@
 {
   "issues": [
     {
+      "date": "2026-11-23",
+      "generatedAt": "2026-11-23T08:01:54+04:00",
+      "title": "Сводка дня",
+      "standfirst": "Искусственный интеллект · Криптовалюты · Главное в мире",
+      "ticker": [
+        {
+          "label": "BTC",
+          "value": "$61 221",
+          "change": "+3.10%",
+          "dir": "up"
+        },
+        {
+          "label": "ETH",
+          "value": "$1 730.74",
+          "change": "+4.11%",
+          "dir": "up"
+        },
+        {
+          "label": "SOL",
+          "value": "$71.33",
+          "change": "+2.62%",
+          "dir": "up"
+        }
+      ],
+      "sections": [
+        {
+          "id": "ai",
+          "kicker": "Искусственный интеллект",
+          "items": [
+            {
+              "title": "Крупные инвесторы сделали ставку на Anthropic до IPO",
+              "summary": "Три значимых инвестора Anthropic — Notable Capital, GIC и Baillie Gifford — поделились аргументами, которые дали им уверенность сделать многомиллиардную ставку на компанию до её IPO. TechCrunch называет их крупными бэккерами. Материал посвящён тому, почему они пошли на такую ставку.",
+              "source": "TechCrunch",
+              "time": "3 часа назад",
+              "url": "https://techcrunch.com/2026/11/22/how-notable-capital-gic-and-baillie-gifford-bet-big-on-anthropic-before-its-ipo/",
+              "image": "/news/2026-11-23/04504f1c47.webp"
+            },
+            {
+              "title": "В OpenAI обсуждают ограничение развития ИИ",
+              "summary": "Главный научный сотрудник OpenAI размышляет о том, как ограничить развитие ИИ. Для установления «лимита скорости» нужно договориться, как измерять скорость.",
+              "source": "TechCrunch",
+              "time": "7 часов назад",
+              "url": "https://techcrunch.com/2026/11/22/openais-chief-scientist-has-thoughts-on-how-to-limit-ai-development/",
+              "image": "/news/2026-11-23/716c53fa8f.jpg"
+            },
+            {
+              "title": "Дата-центры стали центром недовольства Big Tech",
+              "summary": "Журналист Paris Marx рассказывает о своей новой книге Hyperscale. В центре внимания — дата-центры и волна недовольства Big Tech.",
+              "source": "TechCrunch",
+              "time": "10 часов назад",
+              "url": "https://techcrunch.com/2026/11/22/why-data-centers-are-at-the-center-of-the-big-tech-backlash/",
+              "image": "/news/2026-11-23/74f939e081.jpg"
+            },
+            {
+              "title": "В Сан-Франциско опасаются ИИ-перегрева",
+              "summary": "В Сан-Франциско, эпицентре ИИ-индустрии, сотрудники обеспокоены перегревом сектора. На фоне бума растут опасения краха.",
+              "source": "BBC",
+              "time": "4 часа назад",
+              "url": "https://www.bbc.co.uk/news/articles/cqe9k09j9jv4o?at_medium=RSS&at_campaign=rss",
+              "image": "/news/2026-11-23/8fce329df4.jpg"
+            }
+          ]
+        },
+        {
+          "id": "crypto",
+          "kicker": "Криптовалюты",
+          "items": [
+            {
+              "title": "Конгресс расширяет надзор за администрацией",
+              "summary": "Новые письма показывают, что президентскую администрацию будут проверять всё больше комитетов Конгресса.",
+              "source": "CoinDesk",
+              "time": "9 часов назад",
+              "url": "https://www.coindesk.com/",
+              "image": "/news/2026-11-23/940e55205b.jpg"
+            },
+            {
+              "title": "Крипто-залог может попасть под проверки",
+              "summary": "CoinDesk отмечает, что расширяющиеся проверки Конгресса могут затронуть крипто-залог.",
+              "source": "CoinDesk",
+              "time": "9 часов назад",
+              "url": "https://www.coindesk.com/",
+              "image": "/news/2026-11-23/940e55205b.jpg"
+            },
+            {
+              "title": "Квантовая угроза для Bitcoin",
+              "summary": "Квантовые компьютеры пока не могут взломать безопасность сети Bitcoin, но угроза затрагивает мосты, кастодианов и миллионы монет.",
+              "source": "CoinDesk",
+              "time": "14 часов назад",
+              "url": "https://www.coindesk.com/tech/2026/11/22/bitcoin-s-quantum-security-challenge-extends-to-bridges-custodians-and-millions-of-coins",
+              "image": "/news/2026-11-23/ffae009bc0.jpg"
+            },
+            {
+              "title": "Обновление Bitcoin может затянуться",
+              "summary": "Лео Фан предупреждает, что модернизация Bitcoin и перевод средств могут занять больше времени, чем ожидается.",
+              "source": "CoinDesk",
+              "time": "14 часов назад",
+              "url": "https://www.coindesk.com/tech/2026/11/22/bitcoin-s-quantum-security-challenge-extends-to-bridges-custodians-and-millions-of-coins",
+              "image": "/news/2026-11-23/ffae009bc0.jpg"
+            }
+          ]
+        },
+        {
+          "id": "world",
+          "kicker": "Главное в мире",
+          "numbered": true,
+          "items": [
+            {
+              "title": "COP31 завершился без крупной климатической сделки",
+              "summary": "Надежды на соглашение по борьбе с изменением климата рухнули после спора об упоминании ископаемого топлива. Переговоры выявили глубокие разногласия.",
+              "source": "BBC",
+              "time": "3 часа назад",
+              "url": "https://www.bbc.co.uk/news/articles/cqwy06zrd26lo?at_medium=RSS&at_campaign=rss",
+              "image": "/news/2026-11-23/ca50e27920.jpg"
+            },
+            {
+              "title": "В Украине спасли 7-летнего мальчика из-под завалов",
+              "summary": "После российского удара по жилому дому в Украине спасли 7-летнего мальчика. По данным спасателей, погибли девять человек, поиски продолжаются.",
+              "source": "BBC",
+              "time": "1 час назад",
+              "url": "https://www.bbc.co.uk/news/articles/cqdr15l32d3go?at_medium=RSS&at_campaign=rss",
+              "image": "/news/2026-11-23/b0eaad06d0.jpg"
+            },
+            {
+              "title": "Демократы получили крупнейшее большинство с 1992 года",
+              "summary": "После победы в Северной Каролине демократы получили как минимум 258 мест в Палате представителей. У республиканцев — как минимум 173 места.",
+              "source": "BBC",
+              "time": "3 часа назад",
+              "url": "https://www.bbc.co.uk/news/articles/c6vg29g7dlyno?at_medium=RSS&at_campaign=rss"
+            },
+            {
+              "title": "Судно РФ в Ливии поражено дроном",
+              "summary": "Власти восточной Ливии заявили, что взрыв на российском судне в порту вызван предполагаемой атакой дрона. Судно заходило за топливом и припасами на пути обратно в Россию.",
+              "source": "BBC",
+              "time": "1 час назад",
+              "url": "https://www.bbc.co.uk/news/articles/cr894gjz0j0yo?at_medium=RSS&at_campaign=rss",
+              "image": "/news/2026-11-23/2b24000153.jpg"
+            }
+          ]
+        }
+      ],
+      "numbers": [
+        {
+          "label": "BTC",
+          "value": "$61 221"
+        },
+        {
+          "label": "ETH",
+          "value": "$1 730.74"
+        },
+        {
+          "label": "SOL",
+          "value": "$71.33"
+        }
+      ],
+      "sources": [
+        "BBC",
+        "CoinDesk",
+        "TechCrunch"
+      ]
+    },
+    {
       "date": "2026-11-22",
       "generatedAt": "2026-11-22T15:08:34+04:00",
       "title": "Сводка дня",
