@@ -1,6 +1,166 @@
 {
   "issues": [
     {
+      "date": "2026-11-24",
+      "generatedAt": "2026-11-24T08:27:34+04:00",
+      "title": "Сводка дня",
+      "standfirst": "Искусственный интеллект · Криптовалюты · Главное в мире",
+      "ticker": [
+        {
+          "label": "BTC",
+          "value": "$60 422",
+          "change": "−1.45%",
+          "dir": "down"
+        },
+        {
+          "label": "ETH",
+          "value": "$1 697.35",
+          "change": "−1.97%",
+          "dir": "down"
+        },
+        {
+          "label": "SOL",
+          "value": "$71.68",
+          "change": "+0.38%",
+          "dir": "up"
+        }
+      ],
+      "sections": [
+        {
+          "id": "ai",
+          "kicker": "Искусственный интеллект",
+          "items": [
+            {
+              "title": "Anthropic запустила Claude Ship для проверки кода ИИ-агентами",
+              "summary": "Anthropic представила Claude Ship — инструменты для разработчиков, которые позволяют ИИ-агентам проверять, исправлять и одобрять изменения кода. Компания рассчитывает, что агенты возьмут на себя рутинные одобрения на фоне роста объёмов кода, сгенерированного ИИ. Об этом сообщает TechCrunch.",
+              "source": "TechCrunch",
+              "time": "6 часов назад",
+              "url": "https://techcrunch.com/2026/11/23/anthropic-launches-claude-ship-letting-ai-agents-review-fix-and-approve-code-changes/",
+              "image": "/news/2026-11-24/27065c561f.webp"
+            },
+            {
+              "title": "Supertake привлекла $20 млн на портфели по прогнозам",
+              "summary": "Стартап Supertake привлек $20 млн, чтобы ИИ-агенты превращали рыночные прогнозы пользователей в портфели акций. Сервис позволяет вкладывать деньги в идеи о рынке без самостоятельного выбора акций.",
+              "source": "TechCrunch",
+              "time": "6 часов назад",
+              "url": "https://techcrunch.com/2026/11/23/supertake-raises-20m-to-let-ai-agents-turn-your-market-predictions-into-stock-portfolios/",
+              "image": "/news/2026-11-24/0d63fb1e6c.webp"
+            },
+            {
+              "title": "AI-режим Google Search подключили к Drive и Wallet",
+              "summary": "AI Mode в Google Search теперь может обращаться к Drive и Wallet для более персонализированных ответов. Google распространяет Personal Intelligence в AI Mode на Drive, Wallet и приложение Gemini.",
+              "source": "TechCrunch",
+              "time": "9 часов назад",
+              "url": "https://techcrunch.com/2026/11/23/google-searchs-ai-mode-can-now-tap-into-drive-and-wallet-for-more-personalized-responses/",
+              "image": "/news/2026-11-24/7601f68fa2.webp"
+            },
+            {
+              "title": "Amazon купила AI-оптимизацию Decart за $7,5 млрд",
+              "summary": "Amazon приобретает технологию AI-оптимизации Decart и её исследовательскую команду в рамках сделки на $7,5 млрд. Компания готовится продавать чипы Trainium.",
+              "source": "TechCrunch",
+              "time": "11 часов назад",
+              "url": "https://techcrunch.com/2026/11/23/amazon-snaps-up-decart-s-ai-optimization-tech-for-7-5b-as-it-prepares-to-sell-trainium-chips/"
+            }
+          ]
+        },
+        {
+          "id": "crypto",
+          "kicker": "Криптовалюты",
+          "items": [
+            {
+              "title": "CFTC установила правила по данным event-контрактов",
+              "summary": "CFTC США выпустила правило о раскрытии данных по контрактам на события. Регулятор также дал новые указания о том, как криптоактивы могут использоваться для выполнения нормативных требований.",
+              "source": "CoinDesk",
+              "time": "4 часа назад",
+              "url": "https://www.coindesk.com/policy/2026/11/23/u-s-cftc-sets-policies-on-event-contract-data-using-crypto-to-check-financial-boxes",
+              "image": "/news/2026-11-24/3deb6d38d1.jpg"
+            },
+            {
+              "title": "Суд Нью-Йорка не стал блокировать Kalshi",
+              "summary": "Судья Мелисса Крейн на слушаниях в понедельник не остановила работу Kalshi в Нью-Йорке. Она попросила стороны ускорить представление полных аргументов.",
+              "source": "CoinDesk",
+              "time": "10 часов назад",
+              "url": "https://www.coindesk.com/policy/2026/11/23/new-york-judge-declines-to-block-kalshi-from-operating-in-the-state-for-now",
+              "image": "/news/2026-11-24/f3b5a30b97.jpg"
+            },
+            {
+              "title": "Хакеры Binance провели $247 млн через запутывающие транзакции",
+              "summary": "Хакеры Binance провели через транзакции, предназначенные для сокрытия источника, около $247 млн. Elliptic обнаружила, что почти все микширующие транзакции coinjoin координировала структура Kruw в фиксированные часы, что может указывать на передачу китайским отмывателям.",
+              "source": "CoinDesk",
+              "time": "13 часов назад",
+              "url": "https://www.coindesk.com/business/2026/11/23/binance-hackers-push-usd247-million-through-transactions-designed-to-cloud-the-source",
+              "image": "/news/2026-11-24/c7f455eb1f.jpg"
+            },
+            {
+              "title": "American Bitcoin взяла кредит на $150 млн под биткоин",
+              "summary": "American Bitcoin, поддерживаемая Эриком Трампом, получила кредит на $150 млн под залог своих биткоинов. Nasdaq-майнер может занимать без продажи резервов или выпуска новых акций, но падение BTC может вынудить внести больше залога.",
+              "source": "CoinDesk",
+              "time": "13 часов назад",
+              "url": "https://www.coindesk.com/business/2026/11/23/eric-trump-backed-american-bitcoin-secures-usd150-million-loan-against-its-bitcoin",
+              "image": "/news/2026-11-24/3f2e061650.jpg"
+            }
+          ]
+        },
+        {
+          "id": "world",
+          "kicker": "Главное в мире",
+          "numbered": true,
+          "items": [
+            {
+              "title": "НАТО пообещала защиту от космической угрозы",
+              "summary": "Глава НАТО пообещал оборону от космической угрозы после сообщений о российском спутнике с ядерной боеголовкой. Немецкие СМИ писали, что Россия планировала запустить такой спутник в ближайшие недели.",
+              "source": "BBC",
+              "time": "2 часа назад",
+              "url": "https://www.bbc.co.uk/news/articles/c9x2er1ry2mzo?at_medium=RSS&at_campaign=rss"
+            },
+            {
+              "title": "Nvidia вернула Хуана на пост CEO",
+              "summary": "Nvidia восстановила Дженсена Хуана на посту CEO после скандала с романом с предполагаемой шпионкой. Дональд Трамп заявил: «Я заключил сделку», а возвращение Хуана помогло добавить $1 трлн к стоимости акций компании.",
+              "source": "BBC",
+              "time": "3 часа назад",
+              "url": "https://www.bbc.co.uk/news/articles/cq5y1k8ez407o?at_medium=RSS&at_campaign=rss",
+              "image": "/news/2026-11-24/8183f4f297.jpg"
+            },
+            {
+              "title": "США готовят чёрный список для Megaspeed",
+              "summary": "США намерены внести азиатскую ИИ-компанию Megaspeed в чёрный список после скандала вокруг Nvidia. Megaspeed обвиняют в переправке ИИ-чипов в Китай после того, как стал публичным роман бывшей руководительницы с Дженсеном Хуаном.",
+              "source": "BBC",
+              "time": "5 часов назад",
+              "url": "https://www.bbc.co.uk/news/articles/cv98xpg5dg5zo?at_medium=RSS&at_campaign=rss",
+              "image": "/news/2026-11-24/a3cfe28cbe.jpg"
+            },
+            {
+              "title": "Британия санкционировала военных лидеров Мьянмы",
+              "summary": "Великобритания ввела санкции против высших военных руководителей Мьянмы после решения ICJ о геноциде рохинджа. К ней присоединились несколько стран, признавших это решение.",
+              "source": "BBC",
+              "time": "7 часов назад",
+              "url": "https://www.bbc.co.uk/news/articles/c6wy4ng1rznxo?at_medium=RSS&at_campaign=rss",
+              "image": "/news/2026-11-24/91caada7b4.jpg"
+            }
+          ]
+        }
+      ],
+      "numbers": [
+        {
+          "label": "BTC",
+          "value": "$60 422"
+        },
+        {
+          "label": "ETH",
+          "value": "$1 697.35"
+        },
+        {
+          "label": "SOL",
+          "value": "$71.68"
+        }
+      ],
+      "sources": [
+        "BBC",
+        "CoinDesk",
+        "TechCrunch"
+      ]
+    },
+    {
       "date": "2026-11-23",
       "generatedAt": "2026-11-23T08:01:54+04:00",
       "title": "Сводка дня",
