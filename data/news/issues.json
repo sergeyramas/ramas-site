@@ -1,6 +1,167 @@
 {
   "issues": [
     {
+      "date": "2026-11-25",
+      "generatedAt": "2026-11-25T08:01:26+04:00",
+      "title": "Сводка дня",
+      "standfirst": "Искусственный интеллект · Криптовалюты · Главное в мире",
+      "ticker": [
+        {
+          "label": "BTC",
+          "value": "$59 322",
+          "change": "−1.57%",
+          "dir": "down"
+        },
+        {
+          "label": "ETH",
+          "value": "$1 661.42",
+          "change": "−1.95%",
+          "dir": "down"
+        },
+        {
+          "label": "SOL",
+          "value": "$69.18",
+          "change": "−2.98%",
+          "dir": "down"
+        }
+      ],
+      "sections": [
+        {
+          "id": "ai",
+          "kicker": "Искусственный интеллект",
+          "items": [
+            {
+              "title": "Сонненфельд предупредил о рисках возвращения Хуана в Nvidia",
+              "summary": "Йельский профессор Джеффри Сонненфельд предупредил, что поддержанное Белым домом возвращение Дженсена Хуана на должность CEO и в совет директоров Nvidia, которое рынок приветствовал в понедельник, может оказаться огромной ошибкой. По его словам, это может подвергнуть директоров «исторической» личной ответственности. Сонненфельд считает Nvidia скорее вредом для американской промышленной мощи, чем ее защитником.",
+              "source": "TechCrunch",
+              "time": "4 часа назад",
+              "url": "https://techcrunch.com/2026/11/24/yales-sonnenfeld-nvidia-is-a-detriment-to-u-s-industrial-might-not-a-champion/",
+              "image": "/news/2026-11-25/05f887d022.webp"
+            },
+            {
+              "title": "Хуан не хочет готовить преемника",
+              "summary": "Дженсен Хуан по-прежнему считает, что план преемственности создает ненужную иерархию. TechCrunch называет эту позицию примечательной для компании, которая две недели выясняла, что происходит без ее основателя.",
+              "source": "TechCrunch",
+              "time": "6 часов назад",
+              "url": "https://techcrunch.com/2026/11/24/jensen-huang-still-thinks-a-succession-plan-creates-unnecessary-hierarchy/",
+              "image": "/news/2026-11-25/7a5947019e.webp"
+            },
+            {
+              "title": "Anthropic ниже цены IPO",
+              "summary": "Акции Anthropic опустились ниже цены размещения после IPO. По оценке TechCrunch, это тревожный сигнал для AI-стартапов и может усилить давление на их оценки.",
+              "source": "TechCrunch",
+              "time": "9 часов назад",
+              "url": "https://techcrunch.com/2026/11/24/anthropic-shares-fall-below-ipo-price-a-worrying-sign-for-ai-startups/",
+              "image": "/news/2026-11-25/754f867302.webp"
+            },
+            {
+              "title": "AI-агенты спотыкаются о быт",
+              "summary": "Новый бенчмарк показал, что даже самые продвинутые AI-модели с трудом надежно и безопасно выполняют повседневные задачи. При этом миллионы людей уже пользуются персональными AI-ассистентами.",
+              "source": "TechCrunch",
+              "time": "6 часов назад",
+              "url": "https://techcrunch.com/2026/11/24/even-the-best-ai-agents-struggle-with-everyday-life/",
+              "image": "/news/2026-11-25/6e5f032fb0.webp"
+            }
+          ]
+        },
+        {
+          "id": "crypto",
+          "kicker": "Криптовалюты",
+          "items": [
+            {
+              "title": "Отток из биткоин-ETF достиг рекорда",
+              "summary": "В ноябре отток средств из спотовых биткоин-ETF вырос до рекордных $4,71 млрд. На этом фоне биткоин снижался.",
+              "source": "CoinDesk",
+              "time": "15 часов назад",
+              "url": "https://www.coindesk.com/daybook-us/2026/11/24/bitcoin-drops-as-november-spot-etf-outflows-increase-to-record-usd4-71-billion",
+              "image": "/news/2026-11-25/1684182ea7.jpg"
+            },
+            {
+              "title": "Биткоин снова ниже $60 000",
+              "summary": "Биткоин откатился ниже $60 000, а ралли на фондовом рынке угасло. По данным CoinDesk, на повестку снова вернулись тарифы: администрация Трампа может объявить о повышении пошлин против Китая, Японии, Южной Кореи и других стран уже на этой неделе.",
+              "source": "CoinDesk",
+              "time": "15 часов назад",
+              "url": "https://www.coindesk.com/tech/2026/11/24/live-updates-bitcoin-pulls-back-to-usd60-000-as-stock-rally-fails-to-budge-crypto",
+              "image": "/news/2026-11-25/cf5deb468b.png"
+            },
+            {
+              "title": "Южная Корея хочет снять запрет на ICO",
+              "summary": "Южная Корея предложила отменить запрет на ICO, введенный в 2017 году, чтобы поддержать рабочие места и инвестиции внутри страны. Эмитентам токенов придется раскрывать планы расходования средств, а за введение покупателей в заблуждение может грозить уголовная ответственность.",
+              "source": "CoinDesk",
+              "time": "13 часов назад",
+              "url": "https://www.coindesk.com/policy/2026/11/24/south-korea-proposes-ending-2017-ico-ban-to-boost-jobs-and-onshore-crypto-investment",
+              "image": "/news/2026-11-25/50444a7d0f.jpg"
+            },
+            {
+              "title": "Первые цифровые сделки с золотом в Лондоне",
+              "summary": "JPMorgan, HSBC и StoneX впервые провели в Лондоне сделки с цифровым золотом. Банки протестировали торговлю долями физических слитков и использование металла как залога без перемещения из хранилищ.",
+              "source": "CoinDesk",
+              "time": "16 часов назад",
+              "url": "https://www.coindesk.com/business/2026/11/24/jpmorgan-hsbc-and-stonex-complete-first-digital-gold-trades-in-london",
+              "image": "/news/2026-11-25/89114610e6.jpg"
+            }
+          ]
+        },
+        {
+          "id": "world",
+          "kicker": "Главное в мире",
+          "numbered": true,
+          "items": [
+            {
+              "title": "Генпрокурор США уклоняется от вопросов о Nvidia",
+              "summary": "Генеральный прокурор США уклоняется от вопросов о расследовании Nvidia. Акции компании упали на 7%, а законодатели требуют ответов о роли президента Дональда Трампа в возвращении Хуана.",
+              "source": "BBC",
+              "time": "сегодня",
+              "url": "https://www.bbc.co.uk/news/articles/crpdw1qx7jgxo?at_medium=RSS&at_campaign=rss",
+              "image": "/news/2026-11-25/ca6bd074c9.png"
+            },
+            {
+              "title": "Huawei признали виновной в краже секретов",
+              "summary": "Суд в Нью-Йорке признал Huawei виновной в краже торговых секретов, но оправдал по обвинению в рэкете. Вердикт вынесен после многомесячного процесса.",
+              "source": "BBC",
+              "time": "1 час назад",
+              "url": "https://www.bbc.co.uk/news/articles/cmy49ngydqzpo?at_medium=RSS&at_campaign=rss",
+              "image": "/news/2026-11-25/ad056cd737.jpg"
+            },
+            {
+              "title": "Саркози и Бруни предстанут перед судом",
+              "summary": "Бывший президент Франции Николя Саркози и его жена Карла Бруни предстанут перед судом. Это очередное дело с участием Саркози, который в прошлом году стал первым экс-президентом Франции, попавшим в тюрьму.",
+              "source": "BBC",
+              "time": "11 часов назад",
+              "url": "https://www.bbc.co.uk/news/articles/c65y17pwv1z7o?at_medium=RSS&at_campaign=rss",
+              "image": "/news/2026-11-25/1e044f2108.jpg"
+            },
+            {
+              "title": "Израильский удар убил главу внутренней безопасности ХАМАС в Газе",
+              "summary": "В результате израильского авиаудара в Газе погиб глава внутренней безопасности ХАМАС Наим Абу Нахель, занимавший пост два месяца. Сообщается, что всего во вторник в результате ударов погибли семь палестинцев.",
+              "source": "BBC",
+              "time": "12 часов назад",
+              "url": "https://www.bbc.co.uk/news/articles/c6rrg7ggq190o?at_medium=RSS&at_campaign=rss"
+            }
+          ]
+        }
+      ],
+      "numbers": [
+        {
+          "label": "BTC",
+          "value": "$59 322"
+        },
+        {
+          "label": "ETH",
+          "value": "$1 661.42"
+        },
+        {
+          "label": "SOL",
+          "value": "$69.18"
+        }
+      ],
+      "sources": [
+        "BBC",
+        "CoinDesk",
+        "TechCrunch"
+      ]
+    },
+    {
       "date": "2026-11-24",
       "generatedAt": "2026-11-24T08:27:34+04:00",
       "title": "Сводка дня",
