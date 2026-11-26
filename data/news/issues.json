@@ -1,6 +1,167 @@
 {
   "issues": [
     {
+      "date": "2026-11-26",
+      "generatedAt": "2026-11-26T08:02:29+04:00",
+      "title": "Сводка дня",
+      "standfirst": "Искусственный интеллект · Криптовалюты · Главное в мире",
+      "ticker": [
+        {
+          "label": "BTC",
+          "value": "$60 738",
+          "change": "+2.51%",
+          "dir": "up"
+        },
+        {
+          "label": "ETH",
+          "value": "$1 697.06",
+          "change": "+2.27%",
+          "dir": "up"
+        },
+        {
+          "label": "SOL",
+          "value": "$71.02",
+          "change": "+2.84%",
+          "dir": "up"
+        }
+      ],
+      "sections": [
+        {
+          "id": "ai",
+          "kicker": "Искусственный интеллект",
+          "items": [
+            {
+              "title": "S&P оценивает понижение рейтинга Nvidia",
+              "summary": "S&P рассматривает возможность понижения кредитного рейтинга Nvidia. Причиной названы риски корпоративного управления и зависимость от «ключевого человека». Рейтинг может быть снижен до AA- — четвёртого по высоте.",
+              "source": "TechCrunch",
+              "time": "5 часов назад",
+              "url": "https://techcrunch.com/2026/11/25/sp-considers-nvidia-credit-downgrade-over-governance-and-key-man-risks/",
+              "image": "/news/2026-11-26/707319c903.jpg"
+            },
+            {
+              "title": "OpenAI объединит Chat и Work с единым лимитом",
+              "summary": "OpenAI введёт единый счётчик использования в ChatGPT, объединяя Chat и Work. Компания предупреждает, что активные пользователи могут раньше достигать лимитов.",
+              "source": "TechCrunch",
+              "time": "8 часов назад",
+              "url": "https://techcrunch.com/2026/11/25/openai-says-heavy-chatgpt-users-may-hit-limits-sooner-as-it-merges-chat-and-work/",
+              "image": "/news/2026-11-26/dc85126b0a.webp"
+            },
+            {
+              "title": "Amodei отверг обвинения в передаче контроля ИИ",
+              "summary": "Глава Anthropic Дарьо Амодеи назвал абсурдными обвинения соперников в том, что он поддерживает передачу ИИ контроля над человеком. Это происходит на фоне автоматизации исследований и разработки моделей ведущими ИИ-компаниями.",
+              "source": "TechCrunch",
+              "time": "8 часов назад",
+              "url": "https://techcrunch.com/2026/11/25/anthropics-dario-amodei-calls-accusations-of-surrendering-human-control-to-ai-absurd/",
+              "image": "/news/2026-11-26/00d3c793ba.webp"
+            },
+            {
+              "title": "Нью-Йорк запретил ИИ-игрушки для детей",
+              "summary": "Нью-Йорк ввёл пятилетний запрет на игрушки с ИИ-чатботами. Новое исследование Common Sense Media выявило риски, включая доступ к неподобающему контенту и угрозы эмоциональному развитию.",
+              "source": "TechCrunch",
+              "time": "10 часов назад",
+              "url": "https://techcrunch.com/2026/11/25/want-to-buy-your-kid-an-ai-toy-this-christmas-not-in-new-york/",
+              "image": "/news/2026-11-26/4f0b7bfbd5.webp"
+            }
+          ]
+        },
+        {
+          "id": "crypto",
+          "kicker": "Криптовалюты",
+          "items": [
+            {
+              "title": "Сенат Франции заблокировал криптоналог и список кошельков",
+              "summary": "Французский сенат не пропустил новые меры по налогообложению крипты и составлению списка криптокошельков. Правительство возражало, ссылаясь на действующие правила ЕС по обмену данными и отсутствие статуса законного платёжного средства; бюджет 2027 года остаётся открытым.",
+              "source": "CoinDesk",
+              "time": "10 часов назад",
+              "url": "https://www.coindesk.com/business/2026/11/25/french-senate-blocks-new-crypto-tax-and-wallet-list-critics-called-a-kidnapping-risk",
+              "image": "/news/2026-11-26/d56d784a77.jpg"
+            },
+            {
+              "title": "Крипторынок ждёт дальнейшего падения биткоина",
+              "summary": "Настроения в криптосфере близки к минимуму, но Galaxy видит пространство для более глубокого падения. Даже давние быки осторожны с покупками на фоне опасений по поводу ИИ и квантовых вычислений.",
+              "source": "CoinDesk",
+              "time": "10 часов назад",
+              "url": "https://www.coindesk.com/markets/2026/11/25/this-time-actually-seems-different-crypto-veterans-brace-for-more-pain-as-bitcoin-tumbles",
+              "image": "/news/2026-11-26/a789f667ba.jpg"
+            },
+            {
+              "title": "Украина приняла закон о криптоналоге",
+              "summary": "Украинские законодатели приняли закон о налогообложении и регулировании криптовалют. Депутат Ярослав Железняк ожидает около $330 млн (15 млрд гривен) дополнительных доходов бюджета, но сроки остаются неясными.",
+              "source": "CoinDesk",
+              "time": "12 часов назад",
+              "url": "https://www.coindesk.com/business/2026/11/25/ukrainian-lawmakers-pass-crypto-tax-and-regulation-bill-expected-to-bring-in-usd330-million",
+              "image": "/news/2026-11-26/61c247b514.jpg"
+            },
+            {
+              "title": "EBA призвала к правилам ЕС для DeFi-кредитования",
+              "summary": "Европейская банковская служба вновь призвала Еврокомиссию предложить правила для криптофирм, дающих клиентам доступ к DeFi. Особое внимание уделено кредитным протоколам.",
+              "source": "CoinDesk",
+              "time": "12 часов назад",
+              "url": "https://www.coindesk.com/policy/2026/11/25/eu-bank-watchdog-seeks-european-commission-rules-for-crypto-firms-offering-defi-lending",
+              "image": "/news/2026-11-26/d1314fa3e0.jpg"
+            }
+          ]
+        },
+        {
+          "id": "world",
+          "kicker": "Главное в мире",
+          "numbered": true,
+          "items": [
+            {
+              "title": "США вводят новые тарифы для Китая и ЕС",
+              "summary": "США объявили новые тарифы для ряда стран, включая многих крупнейших торговых партнёров. Под меры подпадают, в частности, Китай и Евросоюз.",
+              "source": "BBC",
+              "time": "1 час назад",
+              "url": "https://www.bbc.co.uk/news/articles/c893r9ke5p97o?at_medium=RSS&at_campaign=rss",
+              "image": "/news/2026-11-26/7940036035.jpg"
+            },
+            {
+              "title": "В Каире при крушении бензовоза погиб 31 человек",
+              "summary": "На оживлённой кольцевой дороге в Каире бензовоз, по сообщениям, перевернулся, вызвав крупный пожар. Погиб 31 человек, ещё 21 получил ранения.",
+              "source": "BBC",
+              "time": "6 часов назад",
+              "url": "https://www.bbc.co.uk/news/articles/cqy7rn30v314o?at_medium=RSS&at_campaign=rss",
+              "image": "/news/2026-11-26/f1f30c98b1.jpg"
+            },
+            {
+              "title": "Судьи в Израиле советуют снять главные обвинения с Нетаньяху",
+              "summary": "Израильские судьи рекомендовали отказаться от большинства самых серьёзных обвинений против премьер-министра Биньямина Нетаньяху. Он заявил, что его процесс должен завершиться после того, как судьи указали на малую вероятность осуждения по одному из трёх дел.",
+              "source": "BBC",
+              "time": "8 часов назад",
+              "url": "https://www.bbc.co.uk/news/articles/cxj05mv723r2o?at_medium=RSS&at_campaign=rss",
+              "image": "/news/2026-11-26/01c5afa572.jpg"
+            },
+            {
+              "title": "Калифорния предупреждает о наводнениях из-за King Tides",
+              "summary": "Власти Калифорнии предупредили о наводнениях на пике King Tides в период Дня благодарения. Штормы и наводнения могут затронуть и часть канадской провинции Британская Колумбия, пока миллионы людей отправляются в поездки на праздник.",
+              "source": "BBC",
+              "time": "3 часа назад",
+              "url": "https://www.bbc.co.uk/news/articles/ckn806qq760po?at_medium=RSS&at_campaign=rss"
+            }
+          ]
+        }
+      ],
+      "numbers": [
+        {
+          "label": "BTC",
+          "value": "$60 738"
+        },
+        {
+          "label": "ETH",
+          "value": "$1 697.06"
+        },
+        {
+          "label": "SOL",
+          "value": "$71.02"
+        }
+      ],
+      "sources": [
+        "BBC",
+        "CoinDesk",
+        "TechCrunch"
+      ]
+    },
+    {
       "date": "2026-11-25",
       "generatedAt": "2026-11-25T08:01:26+04:00",
       "title": "Сводка дня",
