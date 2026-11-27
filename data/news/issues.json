@@ -1,6 +1,168 @@
 {
   "issues": [
     {
+      "date": "2026-11-27",
+      "generatedAt": "2026-11-27T08:01:08+04:00",
+      "title": "Сводка дня",
+      "standfirst": "Искусственный интеллект · Криптовалюты · Главное в мире",
+      "ticker": [
+        {
+          "label": "BTC",
+          "value": "$61 349",
+          "change": "+1.00%",
+          "dir": "up"
+        },
+        {
+          "label": "ETH",
+          "value": "$1 725.94",
+          "change": "+1.76%",
+          "dir": "up"
+        },
+        {
+          "label": "SOL",
+          "value": "$72.65",
+          "change": "+2.28%",
+          "dir": "up"
+        }
+      ],
+      "sections": [
+        {
+          "id": "ai",
+          "kicker": "Искусственный интеллект",
+          "items": [
+            {
+              "title": "Nvidia приостанавливает поставки чипов в Юго-Восточную Азию",
+              "summary": "Nvidia распорядилась приостановить серверные поставки в Малайзию, Сингапур, Таиланд и Индонезию. Компания сообщила об этом партнёрам-производителям. Решение принято на фоне ужесточения усилий США по недопущению ИИ-чипов в Китай.",
+              "source": "TechCrunch",
+              "time": "8 часов назад",
+              "url": "https://techcrunch.com/2026/11/26/nvidia-hits-pause-on-chip-shipments-to-southeast-asia/",
+              "image": "/news/2026-11-27/94305b427e.webp"
+            },
+            {
+              "title": "GTA VI как довод против культа эффективности",
+              "summary": "В день выхода Anthropic на публичный рынок трудоёмкая человеческая видеоигра стала одним из самых успешных развлекательных запусков в истории.",
+              "source": "TechCrunch",
+              "time": "12 часов назад",
+              "url": "https://techcrunch.com/2026/11/26/as-anthropic-ipos-grand-theft-auto-vi-proves-why-efficiency-isnt-a-virtue/",
+              "image": "/news/2026-11-27/e5c5d86324.webp"
+            },
+            {
+              "title": "S&P изучает снижение рейтинга Nvidia",
+              "summary": "Агентство может понизить кредитный рейтинг Nvidia до AA- — четвёртой по высоте оценки. Причины — риски корпоративного управления и зависимости от ключевой фигуры.",
+              "source": "TechCrunch",
+              "time": "29 часов назад",
+              "url": "https://techcrunch.com/2026/11/25/sp-considers-nvidia-credit-downgrade-over-governance-and-key-man-risks/",
+              "image": "/news/2026-11-27/707319c903.jpg"
+            },
+            {
+              "title": "Ограничения по чипам давят на ИИ-акции",
+              "summary": "Экспортные ограничения США остановили серверные поставки Nvidia в четыре страны Юго-Восточной Азии. Под пересмотром оказались миллиарды долларов финансирования дата-центров.",
+              "source": "CoinDesk",
+              "time": "17 часов назад",
+              "url": "https://www.coindesk.com/markets/2026/11/26/nvidia-shipment-freeze-and-u-s-chip-curbs-put-ai-stocks-under-pressure",
+              "image": "/news/2026-11-27/4fae0ccc95.jpg"
+            }
+          ]
+        },
+        {
+          "id": "crypto",
+          "kicker": "Криптовалюты",
+          "items": [
+            {
+              "title": "Суд в Нью-Йорке взыскал $1,4 млрд с основателей NovaTech",
+              "summary": "Генпрокуратура Нью-Йорка добилась решения против основателей NovaTech Синтии и Эдди Петион. Их обязали выплатить $1,37 млрд после мошенничества в отношении сотен тысяч человек, включая 11 тыс. жителей Нью-Йорка.",
+              "source": "CoinDesk",
+              "time": "17 часов назад",
+              "url": "https://www.coindesk.com/policy/2026/11/26/new-york-attorney-general-wins-usd1-4-billion-ruling-against-founders-of-crypto-trading-firm-novatech",
+              "image": "/news/2026-11-27/deee04713a.jpg"
+            },
+            {
+              "title": "Малый платёж раскрывает IP-адрес биткоин-кошелька",
+              "summary": "Разработчик Bitcoin Core выяснил, что привычка кошелька повторно отправлять зависшие платежи позволяет связать адрес с компьютером, который за ним наблюдает. Стоимость такой операции — менее 35 центов.",
+              "source": "CoinDesk",
+              "time": "11 часов назад",
+              "url": "https://www.coindesk.com/tech/2026/11/26/a-tiny-payment-can-expose-the-ip-address-behind-a-bitcoin-wallet-developer-finds",
+              "image": "/news/2026-11-27/7c4c0f4cf7.jpg"
+            },
+            {
+              "title": "Испания разрешила замораживать криптосчета без суда",
+              "summary": "Подразделение по борьбе с отмыванием Sepblac получило право замораживать криптосчета без решения судьи. Ранее по действующим правилам оно могло приостанавливать счета только по запросу иностранного финансового разведподразделения.",
+              "source": "CoinDesk",
+              "time": "14 часов назад",
+              "url": "https://www.coindesk.com/business/2026/11/26/spain-gives-anti-laundering-unit-power-to-freeze-crypto-accounts-without-a-judge",
+              "image": "/news/2026-11-27/b908de63b7.jpg"
+            },
+            {
+              "title": "Zodia Custody сообщила об утечке данных клиентов",
+              "summary": "Утечка затронула контактные данные клиентов и сотрудников криптокастодиана Standard Chartered. Компания заявила, что несанкционированных транзакций не было.",
+              "source": "CoinDesk",
+              "time": "15 часов назад",
+              "url": "https://www.coindesk.com/tech/2026/11/26/standard-chartered-s-zodia-custody-suffers-data-breach-exposing-client-information",
+              "image": "/news/2026-11-27/81c108513d.jpg"
+            }
+          ]
+        },
+        {
+          "id": "world",
+          "kicker": "Главное в мире",
+          "numbered": true,
+          "items": [
+            {
+              "title": "Зеленский: США недостаточно давят на Россию",
+              "summary": "Президент Украины заявил BBC, что Вашингтон слишком сосредоточен на Ближнем Востоке и недостаточно давит на Россию. Он также назвал «странным» то, что Трамп называл Владимира Путина другом.",
+              "source": "BBC",
+              "time": "5 часов назад",
+              "url": "https://www.bbc.co.uk/news/articles/c820q9wgrpyyo?at_medium=RSS&at_campaign=rss",
+              "image": "/news/2026-11-27/15078c8b6a.jpg"
+            },
+            {
+              "title": "Штормы в США: подтопления и задержки рейсов",
+              "summary": "Почти миллион клиентов в США остались без электричества вечером в четверг, когда штормы обрушились на оба побережья. Они принесли порывы ветра, сильный дождь и подтопления.",
+              "source": "BBC",
+              "time": "3 часа назад",
+              "url": "https://www.bbc.co.uk/news/articles/ckm2mz3prq77o?at_medium=RSS&at_campaign=rss",
+              "image": "/news/2026-11-27/94d2e60bc9.jpg"
+            },
+            {
+              "title": "Правящая коалиция Новой Зеландии недобрала одно место",
+              "summary": "Правоцентристский блок во главе с National Party не получил большинства, необходимого для управления. Коалиции не хватило одного места в парламенте.",
+              "source": "BBC",
+              "time": "1 час назад",
+              "url": "https://www.bbc.co.uk/news/articles/c670278qk879o?at_medium=RSS&at_campaign=rss",
+              "image": "/news/2026-11-27/585b336a14.jpg"
+            },
+            {
+              "title": "Дизельный танкер перевернулся у Ибицы, погиб один человек",
+              "summary": "Танкер с грузом до 7 тыс. тонн дизеля перевернулся возле Ибицы; погиб один человек. Ущерб окружающей среде ещё оценивает морская спасательная служба Испании.",
+              "source": "BBC",
+              "time": "6 часов назад",
+              "url": "https://www.bbc.co.uk/news/articles/c9gklryvj24do?at_medium=RSS&at_campaign=rss",
+              "image": "/news/2026-11-27/f12611ab34.jpg"
+            }
+          ]
+        }
+      ],
+      "numbers": [
+        {
+          "label": "BTC",
+          "value": "$61 349"
+        },
+        {
+          "label": "ETH",
+          "value": "$1 725.94"
+        },
+        {
+          "label": "SOL",
+          "value": "$72.65"
+        }
+      ],
+      "sources": [
+        "BBC",
+        "CoinDesk",
+        "TechCrunch"
+      ]
+    },
+    {
       "date": "2026-11-26",
       "generatedAt": "2026-11-26T08:02:29+04:00",
       "title": "Сводка дня",
